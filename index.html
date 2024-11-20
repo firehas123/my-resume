@@ -37,6 +37,20 @@
     .links a:hover {
       text-decoration: underline;
     }
+    .download-button {
+      margin-top: 20px;
+    }
+    .download-button a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #0077b5;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    .download-button a:hover {
+      background-color: #005a8b;
+    }
 
     /* Responsive CSS for small screens (iPhone and similar devices) */
     @media (max-width: 768px) {
@@ -51,6 +65,10 @@
         font-size: 16px;
         margin: 0 10px;
       }
+      .download-button a {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -64,6 +82,10 @@
       .links a {
         font-size: 14px;
         margin: 0 5px;
+      }
+      .download-button a {
+        font-size: 14px;
+        padding: 6px 12px;
       }
     }
   </style>
@@ -80,6 +102,10 @@
   <div class="links">
     <a href="https://www.linkedin.com/in/muhammad-hassan-852827189/" target="_blank">LinkedIn</a>
     <a href="https://github.com/firehas123" target="_blank">GitHub</a>
+  </div>
+
+  <div class="download-button">
+    <a href="./resume.pdf" download>Download Resume</a>
   </div>
 </body>
 </html>
