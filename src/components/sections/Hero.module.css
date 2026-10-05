@@ -1,0 +1,97 @@
+.hero {
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 56px;
+  padding-block: 120px 112px;
+}
+
+.text {
+  flex: 999 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.location {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.title {
+  font-size: clamp(44px, 8.2vw, 108px);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.line {
+  display: block;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.pitch {
+  max-width: 26em;
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+/* Space reserved for the 3D object, so nothing jumps when it loads. */
+.object {
+  flex: 1 1 300px;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+}
+
+/* Phones and small tablets: no 3D object (saves data and battery). */
+@media (max-width: 899px) {
+  .object {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-block: 72px 80px;
+  }
+
+  .pitch {
+    font-size: 20px;
+  }
+}
+
+/* When the intro plays, the headline rises into place as the intro lifts.
+   Transform only (no fading): the text is painted from the very first frame,
+   which keeps the Largest Contentful Paint fast. */
+:global(html[data-intro]) .line {
+  animation: rise 600ms var(--ease-out) 1000ms both;
+}
+
+:global(html[data-intro]) .line + .line {
+  animation-delay: 1080ms;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(0.4em);
+  }
+}

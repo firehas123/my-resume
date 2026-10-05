@@ -1,0 +1,89 @@
+/* Timeline (1.4s in total):
+   0.00 - 0.50s  M draws
+   0.30 - 0.75s  H draws   (slightly overlapping)
+   0.55 - 1.00s  C draws
+   0.00 - 1.00s  accent progress line fills
+   1.00 - 1.40s  the screen fades and lifts away */
+
+.intro {
+  display: none;
+}
+
+:global(html[data-intro]) .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--text);
+  pointer-events: none;
+  animation: lift 400ms var(--ease-out) 1000ms forwards;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.m,
+.h,
+.c {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 450ms var(--ease-out) forwards;
+}
+
+.m {
+  animation-duration: 500ms;
+}
+
+.h {
+  animation-delay: 300ms;
+}
+
+.c {
+  animation-delay: 550ms;
+}
+
+.progress {
+  display: block;
+  width: 120px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: fill 1000ms var(--ease-out) forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes lift {
+  to {
+    opacity: 0;
+    transform: translateY(-48px);
+    visibility: hidden;
+  }
+}
+
+/* The pre-paint script already skips the intro with reduced motion; this is
+   a second safety net in case the setting changes mid-session. */
+@media (prefers-reduced-motion: reduce) {
+  :global(html[data-intro]) .intro {
+    display: none;
+  }
+}

@@ -1,0 +1,50 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.large {
+  min-height: 56px;
+  padding: 0 32px;
+  font-size: 18px;
+}
+
+.small {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.primary,
+.primary:hover {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+}
+
+.primary:hover {
+  background: color-mix(in srgb, var(--btn-bg) 86%, var(--bg));
+}
+
+.outline,
+.outline:hover {
+  border: 1.5px solid var(--btn-outline);
+  color: var(--text);
+}
+
+.outline:hover {
+  border-color: var(--text);
+}
+
+.pill:active {
+  transform: translateY(1px);
+}

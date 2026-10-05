@@ -1,0 +1,96 @@
+.header {
+  position: relative;
+  z-index: 50;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Sticky only on larger screens; on phones it would take too much space. */
+@media (min-width: 900px) {
+  .header {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding-block: 10px;
+  min-height: var(--header-height);
+}
+
+.logo,
+.logo:hover {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text);
+}
+
+.nav {
+  margin-left: auto;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.themeToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--btn-outline);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.themeToggle:hover {
+  border-color: var(--text);
+}
+
+/* Phones: logo + actions on the first row, section links on the second. */
+@media (max-width: 640px) {
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .links {
+    justify-content: space-between;
+    gap: 0 16px;
+  }
+}

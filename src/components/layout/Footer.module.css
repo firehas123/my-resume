@@ -1,0 +1,38 @@
+.footer {
+  background: var(--band-black);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding-block: 24px 40px;
+}
+
+.note {
+  margin-right: auto;
+}
+
+.legal {
+  display: flex;
+  gap: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+}
+
+.legal a:hover {
+  color: var(--text);
+}

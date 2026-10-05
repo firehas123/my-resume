@@ -1,0 +1,278 @@
+/* ==========================================================================
+   Design tokens
+   Every colour on the site comes from these variables. Components never use
+   hex values directly, so both themes stay consistent.
+   ========================================================================== */
+
+:root {
+  /* The two accents. Changing either one is a one-line change here. */
+  --accent-bright: #5be3a8; /* dark theme and the black bands */
+  --accent-deep: #0b7a54; /* light theme and the light Experience band */
+
+  /* Layout */
+  --container: 1120px;
+  --gutter: 24px;
+  --radius-card: 28px;
+  --radius-pill: 999px;
+  --header-height: 64px;
+
+  /* Motion: soft ease-out curves, 300 to 700ms */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 300ms;
+  --dur-slow: 700ms;
+}
+
+/* Dark theme (the default). `.band-dark` reuses the same values so the black
+   sections (About, Get in touch, footer) look identical in the light theme. */
+:root,
+:root[data-theme="dark"],
+.band-dark {
+  color-scheme: dark;
+  --bg: #000000;
+  --bg-alt: #0a0a0c;
+  --card: #141417;
+  --card-border: transparent;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --line: #1f1f24;
+  --accent: var(--accent-bright);
+  --on-accent: #000000; /* text placed on an accent fill */
+  --btn-bg: #f4f4f5;
+  --btn-text: #000000;
+  --btn-outline: #3f3f46;
+  --header-bg: #0a0a0c;
+  --pill-bg: #17171b;
+  --pill-border: transparent;
+  --track-bg: #141417;
+  --media-bg: #1b1b20;
+  --lift-shadow: 0 16px 40px rgb(0 0 0 / 0.45);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f7f7f8;
+  --bg-alt: #efeff1;
+  --card: #ffffff;
+  --card-border: #e2e2e6;
+  --text: #0b0b0d;
+  --muted: #55555e;
+  --line: #e2e2e6;
+  --accent: var(--accent-deep);
+  --on-accent: #ffffff;
+  --btn-bg: #0b0b0d;
+  --btn-text: #ffffff;
+  --btn-outline: #c4c4cc;
+  --header-bg: #ffffff;
+  --pill-bg: #ffffff;
+  --pill-border: #e2e2e6;
+  --track-bg: #e9e9ec;
+  --media-bg: #ededf0;
+  --lift-shadow: 0 16px 40px rgb(11 11 13 / 0.07);
+}
+
+/* Background of the closing "Get in touch" band and the footer. Kept out of
+   the shared list above so the bands themselves inherit the theme's value. */
+:root {
+  --band-black: #000000;
+}
+
+:root[data-theme="light"] {
+  --band-black: #0a0a0c;
+}
+
+/* Inside a black band, keep dark colours even in the light theme. */
+.band-dark {
+  color-scheme: dark;
+}
+
+/* The Experience section is a light band in both themes. */
+.band-light {
+  color-scheme: light;
+  --bg: #f1f2f4;
+  --card: #ffffff;
+  --card-border: transparent;
+  --text: #0a0a0c;
+  --muted: #52525b;
+  --line: #e2e2e6;
+  --accent: var(--accent-deep);
+  --on-accent: #ffffff;
+  --btn-bg: #0a0a0c;
+  --btn-text: #ffffff;
+  --btn-outline: #c4c4cc;
+  --lift-shadow: 0 16px 40px rgb(10 10 12 / 0.07);
+}
+
+/* Hover shade of the accent, derived so it follows the accent automatically. */
+:root,
+.band-dark,
+.band-light {
+  --accent-hover: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Visible keyboard focus everywhere, in the accent colour. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Theme switch: colours cross-fade for ~250ms. The class is added only while
+   switching, so it never slows down other animations. */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 250ms ease-out,
+    color 250ms ease-out,
+    border-color 250ms ease-out,
+    fill 250ms ease-out,
+    stroke 250ms ease-out !important;
+}
+
+/* ==========================================================================
+   Shared helpers
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 12px;
+  color: var(--btn-text);
+}
+
+/* Section headings shared by most sections */
+.section-title {
+  font-size: clamp(40px, 5.6vw, 72px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.eyebrow {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Visible TODO markers for information that is still missing. */
+.todo {
+  font-weight: 700;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-radius: 6px;
+  padding: 0 6px;
+}
+
+/* Scroll reveal: elements start slightly lower and transparent, and the
+   Reveal component animates them in. The `js` class is set by the pre-paint
+   script, so without JavaScript nothing is ever hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
