@@ -1,7 +1,7 @@
 # Review: resume site rebuild
 
-Everything below is on the branch **`redesign/nextjs-site`**, pushed to GitHub, with a
-pull request into `main`. See **"Publishing"** at the end: there is one Vercel step
+Everything below is on the branch **`redesign/nextjs-site`**, pushed to GitHub and ready
+to merge into `main`. See **"Publishing"** at the end: there is one Vercel step
 only you can do.
 
 > **Important:** your old Vercel address (my-resume-seven-coral.vercel.app) already
@@ -110,8 +110,7 @@ the same `next build` Vercel runs.
 **Process**
 1. **Pushing.** `claude-code-prompt.txt` says "do not push" and "do not deploy", but
    your chat message asked me to push progress in stages. I followed the chat
-   message, but pushed to a **separate branch** with a pull request, not straight to
-   `main`. That way nothing reaches production until you merge. I did not deploy
+   message, but pushed to a **separate branch**, not straight to `main`. That way nothing reaches production until you merge. I did not deploy
    anything, and I could not have: Vercel needs your login.
 2. Added `vercel.json` with `"framework": "nextjs"`. Your Vercel project was created
    for a static HTML page, and this guarantees it builds as Next.js without
@@ -241,8 +240,10 @@ For local testing: `cp .env.example .env.local`, fill in the value, restart `npm
 
 ## Publishing (the steps left for you)
 
-1. **Review and merge the pull request** `redesign/nextjs-site` → `main` on GitHub
-   (`gh pr view --web` opens it). Merging updates `main`. It does not deploy anything
+1. **Open and merge a pull request** from `redesign/nextjs-site` into `main`. Your
+   GitHub token is not allowed to create pull requests, so I could not open it. Use
+   https://github.com/firehas123/my-resume/compare/main...redesign/nextjs-site?expand=1
+   then "Create pull request" → "Merge". Merging updates `main`. It does not deploy anything
    by itself while Vercel is disconnected.
 2. **Connect the repo to Vercel** (about 2 minutes):
    - Go to https://vercel.com/new and sign in with GitHub.
