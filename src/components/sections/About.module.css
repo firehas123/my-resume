@@ -1,0 +1,77 @@
+.about {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-alt);
+  color: var(--text);
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+}
+
+/* The photo is 16:9 with me right of centre and empty dark space on the
+   left. Anchoring it to the left edge means that when the band is narrower
+   than 16:9, the crop happens on the right and I move away from the text. */
+.image {
+  object-fit: cover;
+  object-position: 0% 20%;
+}
+
+.inner {
+  position: relative; /* above the photo */
+  display: flex;
+  align-items: center;
+  min-height: 640px;
+  padding-block: 112px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 440px;
+}
+
+.lead {
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1.14;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.body {
+  max-width: 30em;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Medium screens: keep the text clear of the face. */
+@media (max-width: 1100px) {
+  .text {
+    max-width: 42%;
+  }
+}
+
+/* Phones and tablets: photo on top, text below. */
+@media (max-width: 899px) {
+  .photo {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .image {
+    object-position: 68% 25%;
+  }
+
+  .inner {
+    min-height: 0;
+    padding-block: 48px 80px;
+  }
+
+  .text {
+    max-width: none;
+  }
+}

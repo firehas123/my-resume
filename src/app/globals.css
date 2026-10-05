@@ -45,6 +45,7 @@
   --pill-border: transparent;
   --track-bg: #141417;
   --media-bg: #1b1b20;
+  --error: #ff9a8f;
   --lift-shadow: 0 16px 40px rgb(0 0 0 / 0.45);
 }
 
@@ -67,6 +68,7 @@
   --pill-border: #e2e2e6;
   --track-bg: #e9e9ec;
   --media-bg: #ededf0;
+  --error: #b42318;
   --lift-shadow: 0 16px 40px rgb(11 11 13 / 0.07);
 }
 

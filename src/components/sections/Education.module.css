@@ -1,0 +1,98 @@
+/* Continues the Skills band's background, as in the design reference. */
+.education {
+  background: var(--bg-alt);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-block: 16px 112px;
+}
+
+.title {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.grid {
+  display: grid;
+  /* Two columns on wide screens, one on narrow ones. min() keeps a single
+     column from overflowing on very small phones. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+}
+
+.cell {
+  min-width: 0;
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--lift-shadow);
+}
+
+.meta {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.heading {
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.muted {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+.itemName {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-bottom: 80px;
+  }
+
+  .card {
+    padding: 32px 24px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+}
