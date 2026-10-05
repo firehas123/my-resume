@@ -1,0 +1,161 @@
+.page {
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 880px;
+  padding-block: 64px 112px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 44px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.language {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.meta {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.topics li {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--media-bg);
+}
+
+.mediaImage {
+  object-fit: cover;
+}
+
+.note {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+  color: var(--muted);
+}
+
+/* Styles for the Markdown write-up */
+.writeup {
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.writeup > * + * {
+  margin-top: 1em;
+}
+
+.writeup h2,
+.writeup h3 {
+  margin-top: 1.6em;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.writeup h2 {
+  font-size: 30px;
+}
+
+.writeup h3 {
+  font-size: 22px;
+}
+
+.writeup ul,
+.writeup ol {
+  padding-left: 1.4em;
+}
+
+.writeup code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-size: 0.9em;
+}
+
+.writeup pre {
+  overflow-x: auto;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.writeup pre code {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.writeup img {
+  border-radius: 16px;
+}
+
+.writeup a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

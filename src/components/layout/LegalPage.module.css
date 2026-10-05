@@ -1,0 +1,62 @@
+.page {
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 800px;
+  padding-block: 96px 120px;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.body h2 {
+  margin-top: 16px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 1.3em;
+}
+
+.body strong {
+  color: var(--text);
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1.5px solid var(--accent);
+  background: var(--card);
+  color: var(--text);
+}
+
+.todoTitle {
+  font-weight: 800;
+  color: var(--accent);
+}
