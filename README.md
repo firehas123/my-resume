@@ -141,5 +141,5 @@ shade, which is mixed from it automatically. Keep the deep accent dark enough fo
 ## Deployment
 
 Vercel builds the site with its default Next.js settings (`vercel.json` only pins the
-framework). Every push to `main` deploys to production, and pushes to other branches
-get preview URLs.
+framework). Once the repository is imported in Vercel, every push to `main` deploys to
+production and pushes to other branches get preview URLs. See REVIEW.md, "Publishing".

@@ -1,7 +1,13 @@
 # Review: resume site rebuild
 
-Everything below is on the branch **`redesign/nextjs-site`**, pushed to GitHub.
-**Nothing is on `main` yet, so your live site is unchanged.** See "Publishing" at the end.
+Everything below is on the branch **`redesign/nextjs-site`**, pushed to GitHub, with a
+pull request into `main`. See **"Publishing"** at the end: there is one Vercel step
+only you can do.
+
+> **Important:** your old Vercel address (my-resume-seven-coral.vercel.app) already
+> returns Vercel's `DEPLOYMENT_NOT_FOUND`, and GitHub shows no Vercel deployment of this
+> repo since November 2024. The Vercel project seems to have been deleted or disconnected
+> from GitHub, so **pushing does not deploy anything right now**, not even to `main`.
 
 ## What was built
 
@@ -61,8 +67,8 @@ npm run lint
    (for example `sudo ufw allow 3000/tcp` if ufw is active). If the IP has changed,
    find it with `hostname -I`, and also update `allowedDevOrigins` in `next.config.ts`.
 
-Each branch push also gets a Vercel **preview URL**, which you can open from any device.
-Find it in the Vercel dashboard or on the pull request.
+Once the repo is connected to Vercel again (see "Publishing"), every branch push also
+gets a **preview URL** that you can open from any device.
 
 ## What I verified
 
@@ -95,18 +101,18 @@ Find it in the Vercel dashboard or on the pull request.
   the mobile LCP is 2.5s, right at the "good" limit. The LCP element is the hero pitch
   text, and the delay comes from loading CSS and fonts, not from the intro or 3D.
 
-Not verified: real devices (iPhone/Mac Safari) and the real Vercel build, which runs
-when the branch is pushed. Please open the preview URL once.
+Not verified: real devices (iPhone and Mac Safari), and a build on Vercel's own servers.
+Vercel is not connected (see the note at the top). The local production build is
+the same `next build` Vercel runs.
 
 ## Every decision I made for you
 
 **Process**
 1. **Pushing.** `claude-code-prompt.txt` says "do not push" and "do not deploy", but
    your chat message asked me to push progress in stages. I followed the chat
-   message, but pushed to a **separate branch**, not `main`. This repo deploys to
-   production from `main` (my-resume-seven-coral.vercel.app), so pushing half-built
-   commits there overnight would have broken your live site. The branch gets Vercel
-   preview builds instead.
+   message, but pushed to a **separate branch** with a pull request, not straight to
+   `main`. That way nothing reaches production until you merge. I did not deploy
+   anything, and I could not have: Vercel needs your login.
 2. Added `vercel.json` with `"framework": "nextjs"`. Your Vercel project was created
    for a static HTML page, and this guarantees it builds as Next.js without
    touching dashboard settings.
@@ -233,13 +239,26 @@ when the branch is pushed. Please open the preview URL once.
 
 For local testing: `cp .env.example .env.local`, fill in the value, restart `npm run dev`.
 
-## Publishing (the one step left for you)
+## Publishing (the steps left for you)
 
-1. Open the pull request from `redesign/nextjs-site` into `main` on GitHub and click
-   the Vercel **preview** link on it. Check it on your phone and your Mac.
-2. When you're happy, **merge the PR**. Vercel builds `main` and your production URL
-   switches to the new site.
-3. Optional, any time: set `NEXT_PUBLIC_FORM_ENDPOINT` (above) and add your logos.
+1. **Review and merge the pull request** `redesign/nextjs-site` → `main` on GitHub
+   (`gh pr view --web` opens it). Merging updates `main`. It does not deploy anything
+   by itself while Vercel is disconnected.
+2. **Connect the repo to Vercel** (about 2 minutes):
+   - Go to https://vercel.com/new and sign in with GitHub.
+   - Under "Import Git Repository", choose `firehas123/my-resume` → **Import**.
+     If it isn't listed, use "Adjust GitHub App Permissions" to give Vercel access.
+   - Framework preset: Next.js is detected automatically (`vercel.json` pins it).
+     Leave the build settings at their defaults.
+   - Optional now, or later via Settings: add `NEXT_PUBLIC_FORM_ENDPOINT` (see above).
+   - Click **Deploy**. When it finishes you get a `*.vercel.app` address. Open it on
+     your phone and your Mac.
+   - If you previously had a custom domain, add it under Settings → Domains.
+3. From then on, every push to `main` deploys to production automatically, and other
+   branches get preview URLs.
 
-If anything looks wrong after merging, revert the merge commit on GitHub and the old
-page comes back on the next deploy.
+Alternative without the dashboard: `npx vercel login` and then `npx vercel --prod` in
+this folder (asks a few setup questions the first time).
+
+If anything looks wrong after merging, revert the merge commit on GitHub. The old
+single-page site comes back on the next deploy.
