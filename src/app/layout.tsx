@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -11,7 +11,7 @@ import { VisitTracker } from "@/components/analytics/VisitTracker";
 import { isProductionDeployment, statsEnabled } from "@/lib/env";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
-import { PRE_PAINT_SCRIPT } from "@/lib/theme";
+import { PRE_PAINT_SCRIPT, THEME_COLORS } from "@/lib/theme";
 import "./globals.css";
 
 // One font family for the whole site. Next downloads it at build time and
@@ -32,25 +32,17 @@ export const metadata: Metadata = {
     template: `%s · ${profile.shortName}`,
   },
   description,
+  // The preview image comes from src/app/opengraph-image.tsx (1200x630).
   openGraph: {
     type: "website",
     title: `${profile.name} · Software engineer`,
     description,
-    images: [{ url: profile.previewImage, width: 1200, height: 1200, alt: profile.name }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `${profile.name} · Software engineer`,
     description,
-    images: [profile.previewImage],
   },
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-    { media: "(prefers-color-scheme: light)", color: "#F7F7F8" },
-  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -60,6 +52,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // script changes attributes on <html> before React loads.
     <html lang="en" data-theme="dark" className={manrope.variable} suppressHydrationWarning>
       <head>
+        {/* Browser bar colour; the pre-paint script and the theme switch
+            keep it matching the active theme (see THEME_COLORS). */}
+        <meta name="theme-color" content={THEME_COLORS.dark} />
         <script dangerouslySetInnerHTML={{ __html: PRE_PAINT_SCRIPT }} />
       </head>
       <body>

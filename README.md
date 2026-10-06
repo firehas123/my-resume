@@ -88,6 +88,16 @@ Which repos are shown:
   work, so they are not shown. Add a `summary` or `demo` in `overrides.json`, or edit the
   fork's description on GitHub.
 - A repo's GitHub "Website" field becomes its **Live demo** link.
+- Each repo's **README** is read too. Its first real paragraph becomes the card summary
+  when the repo has no GitHub description; its opening sections (intro, features…,
+  without badges, raw HTML and install/usage/licence boilerplate) become the overview on
+  the project page. READMEs left exactly as a generator wrote them (Create React App,
+  Next.js, Vite) are ignored, and so is a fork's README while it is identical to the
+  original's.
+- The first meaningful **README image** (not a badge) is downloaded to
+  `public/projects/readme/` and used as the preview. Projects without one get a
+  generated abstract tile (dots and lines from the repo name, in the site's colours).
+  A manual screenshot in `public/projects/` always wins.
 
 ### How projects are grouped into tabs
 
@@ -107,8 +117,11 @@ each repo's **full language breakdown** instead:
    **Other**.
 5. A `"group"` set in `overrides.json` **always wins** over the automatic choice.
 
-Any other language becomes its own group (for example Java, or Go). There is one tab
-for every group that has at least one project. Tab order: **C / C++, Python, Java,
+Any other language becomes its own group (for example Java, or Go), but it only gets
+its own **tab** if it is a mainstream programming language or has at least two
+projects; otherwise its projects go under **Other** (the list and the minimum are in
+`src/data/language-groups.json`). There is one tab for every group that has at least
+one project. Tab order: **C / C++, Python, Java,
 JavaScript / TypeScript**, then any others A–Z, and **Other** last. Groups without
 projects get no tab.
 

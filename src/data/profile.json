@@ -20,8 +20,6 @@
     "downloadName": "Muhammad-Hassan-Chattha-CV.pdf"
   },
 
-  "previewImage": "/images/headshot-calm.jpg",
-
   "showStatsLink": false,
 
   "contactAccessKey": "97fa0758-d57d-4e96-ab27-03a4b41e29ff",
@@ -106,6 +104,7 @@
   "education": [
     {
       "degree": "Master's, Artificial Intelligence",
+      "short": "M.Sc. AI at FAU",
       "school": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
       "start": "2024-04",
       "end": "present"
@@ -138,7 +137,6 @@
     { "name": "C/C++", "size": 3, "logos": ["c-original", "cplusplus-plain"] },
     { "name": "JavaScript", "size": 2, "logos": ["javascript-plain"] },
     { "name": "Spring Boot", "size": 3, "logos": ["spring-original"] },
-    { "name": "Spring", "size": 1, "logos": ["spring-original"] },
     { "name": "FastAPI", "size": 2, "logos": ["fastapi-plain"] },
     { "name": "React.js", "size": 2, "logos": ["react-original"] },
     { "name": "JavaFX", "size": 1 },

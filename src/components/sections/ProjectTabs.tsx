@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { LiftCard } from "@/components/ui/LiftCard";
+import { ProjectTile } from "@/components/ui/ProjectTile";
 import { Reveal } from "@/components/ui/Reveal";
 import styles from "./Projects.module.css";
 
@@ -103,11 +104,13 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
 function ProjectCard({ project }: { project: ProjectCardData }) {
   return (
     <LiftCard className={styles.card}>
-      {project.image && (
-        <div className={styles.media}>
+      <div className={styles.media}>
+        {project.image ? (
           <Image src={project.image} alt="" fill sizes="(max-width: 960px) 100vw, 540px" className={styles.mediaImage} />
-        </div>
-      )}
+        ) : (
+          <ProjectTile name={project.slug} />
+        )}
+      </div>
       <div className={styles.body}>
         <p className={styles.language}>{project.group}</p>
         <h3 className={styles.title}>{project.title}</h3>

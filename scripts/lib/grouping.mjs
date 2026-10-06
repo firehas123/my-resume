@@ -71,7 +71,30 @@ export function createGrouping(rules) {
     return { group: auto.group, auto: auto.group, reason: auto.reason };
   }
 
-  return { compareGroups, autoGroup, decideGroup };
+  /**
+   * A group gets its own tab only if it is a mainstream language or has at
+   * least `minProjectsForOwnTab` projects; otherwise its projects move to the
+   * fallback ("Other"). Groups set in overrides.json are never moved.
+   * @param {{ name: string, group: string, reason: string, forced?: boolean, hidden?: boolean }[]} decisions
+   */
+  function applyTabRule(decisions) {
+    const mainstream = new Set(rules.mainstream ?? []);
+    const minimum = rules.minProjectsForOwnTab ?? 1;
+    const counts = new Map();
+    for (const d of decisions) if (!d.hidden) counts.set(d.group, (counts.get(d.group) ?? 0) + 1);
+    return decisions.map((d) => {
+      if (d.forced || d.group === rules.fallback || mainstream.has(d.group)) return d;
+      const count = counts.get(d.group) ?? 0;
+      if (count >= minimum) return d;
+      return {
+        ...d,
+        group: rules.fallback,
+        reason: `${d.reason}; ${d.group} has only ${count} project${count === 1 ? "" : "s"} and is not a mainstream language, so it goes under ${rules.fallback}`,
+      };
+    });
+  }
+
+  return { compareGroups, autoGroup, decideGroup, applyTabRule };
 }
 
 /** gh's "languages" field -> [{ name, bytes, share }] sorted largest first. */

@@ -11,6 +11,9 @@
 export type Theme = "dark" | "light";
 
 export const THEME_STORAGE_KEY = "theme"; // localStorage
+
+/** Browser bar colour per theme: the header's background (--header-bg). */
+export const THEME_COLORS = { dark: "#0a0a0c", light: "#ffffff" } as const;
 export const INTRO_STORAGE_KEY = "intro-seen"; // sessionStorage
 
 // Plain old JavaScript in a string: it runs before any bundling or React.
@@ -26,6 +29,8 @@ export const PRE_PAINT_SCRIPT = `(function () {
     else if (window.matchMedia("(prefers-color-scheme: light)").matches) theme = "light";
   } catch (e) {}
   root.setAttribute("data-theme", theme);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute("content", theme === "light" ? "${THEME_COLORS.light}" : "${THEME_COLORS.dark}");
   try {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduce && !sessionStorage.getItem("${INTRO_STORAGE_KEY}")) {
@@ -45,6 +50,7 @@ export function applyTheme(theme: Theme, remember: boolean) {
   const root = document.documentElement;
   root.classList.add("theme-transition");
   root.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[theme]);
   // Remove the transition class once the 250ms cross-fade is done.
   window.setTimeout(() => root.classList.remove("theme-transition"), 300);
   if (remember) {

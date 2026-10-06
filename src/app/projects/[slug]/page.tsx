@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 
 import { ArrowLeftIcon, ExternalIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
+import { ProjectTile } from "@/components/ui/ProjectTile";
+import { profile } from "@/lib/profile";
 import { formatLanguage, getProject, getProjects, getWriteupHtml } from "@/lib/projects";
 import styles from "./page.module.css";
 
@@ -19,9 +21,14 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const description = project.summary || `${project.title}, a ${project.group} project on GitHub.`;
+  // Own title and description in link previews; the image is the site's
+  // generated share image (src/app/opengraph-image.tsx).
   return {
     title: project.title,
-    description: project.summary || `${project.title}, a ${project.group} project on GitHub.`,
+    description,
+    openGraph: { type: "article", title: `${project.title} · ${profile.shortName}`, description },
+    twitter: { card: "summary_large_image", title: `${project.title} · ${profile.shortName}`, description },
   };
 }
 
@@ -79,11 +86,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </div>
         </header>
 
-        {project.image && (
-          <div className={styles.media}>
+        <div className={styles.media}>
+          {project.image ? (
             <Image src={project.image} alt={`Screenshot of ${project.title}`} fill sizes="(max-width: 1120px) 100vw, 1072px" className={styles.mediaImage} />
-          </div>
-        )}
+          ) : (
+            <ProjectTile name={project.slug} />
+          )}
+        </div>
 
         {writeup ? (
           // The write-up is my own Markdown from content/projects/, converted at build time.

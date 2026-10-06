@@ -99,6 +99,38 @@
   transform: translateY(2px) rotate(-135deg);
 }
 
+.hideLabel,
+.details[open] .showLabel {
+  display: none;
+}
+
+.details[open] .hideLabel {
+  display: inline;
+}
+
+/* Smooth height: browsers that support animating to "auto" height open and
+   close the details smoothly; others simply open and close. */
+@media (prefers-reduced-motion: no-preference) {
+  .details {
+    interpolate-size: allow-keywords;
+  }
+
+  .details::details-content {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      height var(--dur-standard) var(--ease-out),
+      opacity var(--dur-standard) var(--ease-out),
+      content-visibility var(--dur-standard) allow-discrete;
+  }
+
+  .details[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+
 .details ul {
   display: flex;
   flex-direction: column;

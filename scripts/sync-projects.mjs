@@ -25,14 +25,20 @@
 // Vercel (or any host) never needs gh installed.
 
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createGrouping, formatShare, languageBreakdown } from "./lib/grouping.mjs";
+import { readmeContent, readmeImage } from "./lib/readme.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const projectsFile = join(root, "src", "data", "projects.json");
 const reportFile = join(root, "SYNC-REPORT.md");
+// Preview images found in READMEs are downloaded here, so the site never
+// depends on GitHub being reachable. Manual screenshots in public/projects/
+// always win over these.
+const readmeImageDir = join(root, "public", "projects", "readme");
+const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const rules = readJson(join(root, "src", "data", "language-groups.json"));
 const overrides = readJson(join(root, "src", "data", "overrides.json"));
 
@@ -53,7 +59,7 @@ const FIELDS = [
   "defaultBranchRef",
 ].join(",");
 
-const { compareGroups, autoGroup, decideGroup } = createGrouping(rules);
+const { compareGroups, autoGroup, decideGroup, applyTabRule } = createGrouping(rules);
 
 function readJson(file) {
   return JSON.parse(readFileSync(file, "utf8"));
@@ -133,6 +139,34 @@ function decideFork(repo) {
   return { ...base, show: false, reason: `no commits of my own beyond ${forkOf}` };
 }
 
+/** The README of a repo as text, or "" when there is none. */
+function fetchReadme(fullName) {
+  try {
+    const data = ghApi(`repos/${fullName}/readme`);
+    return Buffer.from(data.content ?? "", data.encoding === "base64" ? "base64" : "utf8").toString("utf8");
+  } catch {
+    return "";
+  }
+}
+
+/** Downloads a README image into public/projects/readme/. Returns the site path or null. */
+async function downloadImage(url, name) {
+  try {
+    const response = await fetch(url, { redirect: "follow", signal: AbortSignal.timeout(20_000) });
+    const type = response.headers.get("content-type") ?? "";
+    if (!response.ok || !type.startsWith("image/") || type.includes("svg")) return null;
+    const bytes = Buffer.from(await response.arrayBuffer());
+    if (bytes.length < 2_000 || bytes.length > MAX_IMAGE_BYTES) return null; // tiny icons or huge files
+    const ext = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/gif": "gif" }[type.split(";")[0]];
+    if (!ext) return null;
+    mkdirSync(readmeImageDir, { recursive: true });
+    writeFileSync(join(readmeImageDir, `${name}.${ext}`), bytes);
+    return `/projects/readme/${name}.${ext}`;
+  } catch {
+    return null;
+  }
+}
+
 function fetchRepos() {
   const stdout = execFileSync("gh", ["repo", "list", "--limit", "200", "--json", FIELDS], {
     encoding: "utf8",
@@ -175,11 +209,52 @@ const forkDecisions = new Map(nonEmpty.filter((repo) => repo.isFork).map((repo) 
 const skippedForks = nonEmpty.filter((repo) => repo.isFork && !forkDecisions.get(repo.name).show);
 const selected = nonEmpty.filter((repo) => !repo.isFork || forkDecisions.get(repo.name).show);
 
-const rows = selected.map((repo) => {
+const firstPass = selected.map((repo) => {
   const languages = languageBreakdown(repo.languages);
   const decision = decideGroup(languages, overrideFor(repo.name));
   return { repo, languages, ...decision };
 });
+
+// A language gets its own tab only if it is mainstream or has at least two
+// projects; otherwise it moves to "Other". Groups forced in overrides.json stay.
+const tabbed = applyTabRule(
+  firstPass.map((row) => ({
+    name: row.repo.name,
+    group: row.group,
+    reason: row.reason,
+    forced: Boolean(overrideFor(row.repo.name).group),
+    hidden: overrideFor(row.repo.name).hide === true,
+  })),
+);
+const rows = firstPass.map((row, i) => ({
+  ...row,
+  group: tabbed[i].group,
+  reason: tabbed[i].reason,
+  auto: tabbed[i].forced ? row.auto : tabbed[i].group,
+}));
+
+// READMEs: summary, overview and preview image. A fork's README is only used
+// if it differs from its original's (an unchanged one describes the original).
+const readmes = new Map();
+for (const { repo } of rows) {
+  const markdown = fetchReadme(repo.nameWithOwner);
+  const parentName = repo.isFork ? forkDecisions.get(repo.name).forkOf : null;
+  const inheritedReadme = Boolean(parentName && markdown && markdown === fetchReadme(parentName));
+  const content = inheritedReadme ? { summary: "", overview: "" } : readmeContent(markdown);
+  const imageUrl = inheritedReadme
+    ? null
+    : readmeImage(markdown, { owner: repo.nameWithOwner.split("/")[0], repo: repo.name, branch: repo.defaultBranchRef?.name ?? "main" });
+  readmes.set(repo.name, { ...content, imageUrl, inheritedReadme });
+}
+const readmeImages = new Map();
+for (const [name, info] of readmes) {
+  if (info.imageUrl) readmeImages.set(name, await downloadImage(info.imageUrl, name));
+}
+// Remove downloaded images that are no longer used.
+if (existsSync(readmeImageDir)) {
+  const keep = new Set([...readmeImages.values()].filter(Boolean).map((p) => p.split("/").pop()));
+  for (const file of readdirSync(readmeImageDir)) if (!keep.has(file)) rmSync(join(readmeImageDir, file));
+}
 
 const inheritedFrom = (repo) => (repo.isFork ? forkDecisions.get(repo.name).inherited : { description: false, homepage: false });
 
@@ -190,6 +265,9 @@ const projects = rows
     // The automatic group. A "group" in overrides.json is applied on top by the site.
     group: auto,
     languages: languages.map((l) => ({ name: l.name, share: Math.round(l.share * 10) / 10 })),
+    readmeSummary: readmes.get(repo.name)?.summary ?? "",
+    readmeOverview: readmes.get(repo.name)?.overview ?? "",
+    readmeImage: readmeImages.get(repo.name) ?? null,
     isFork: repo.isFork,
     forkOf: repo.isFork ? forkDecisions.get(repo.name).forkOf : null,
     url: repo.url,
@@ -229,6 +307,15 @@ const forkRows = skippedForks
   .map((repo) => ({ repo, languages: languageBreakdown(repo.languages) }))
   .map((f) => ({ ...f, wouldBe: autoGroup(f.languages).group, why: forkDecisions.get(f.repo.name).reason }))
   .sort((a, b) => a.repo.name.localeCompare(b.repo.name));
+
+/** What the site uses from a repo's README, in words. */
+function readmeNote(name) {
+  const info = readmes.get(name);
+  if (!info) return "";
+  if (info.inheritedReadme) return "README unchanged from the original, not used";
+  const used = [info.summary && "summary", info.overview && "overview", readmeImages.get(name) && "image"].filter(Boolean);
+  return used.length ? used.join(", ") : "nothing usable (generated tile instead)";
+}
 
 // Console version: aligned plain-text columns.
 function printTable(headers, data) {
@@ -279,13 +366,13 @@ const report = [
   "",
   "Percentages are shares of all code in the repo, as measured by GitHub.",
   "",
-  "| Repo | Top languages | Group | Reason |",
-  "| --- | --- | --- | --- |",
+  "| Repo | Top languages | Group | Reason | From README |",
+  "| --- | --- | --- | --- | --- |",
   ...sortedRows.map(
     (r) =>
       `| [${md(r.repo.name)}](${r.repo.url}) | ${md(topLanguages(r.languages))} | ${md(r.group)} | ${md(
         r.reason + hiddenNote(r.repo.name) + forkNote(r.repo),
-      )} |`,
+      )} | ${md(readmeNote(r.repo.name))} |`,
   ),
   "",
   "## Forks skipped",

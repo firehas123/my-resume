@@ -11,37 +11,36 @@ Last run: 2026-10-06.
 | Python | 1 |
 | Java | 6 |
 | JavaScript / TypeScript | 8 |
-| ImageJ Macro | 1 |
-| Other | 3 |
+| Other | 4 |
 
 ## Projects
 
 Percentages are shares of all code in the repo, as measured by GitHub.
 
-| Repo | Top languages | Group | Reason |
-| --- | --- | --- | --- |
-| [Advanced-Account-Management-System](https://github.com/firehas123/Advanced-Account-Management-System) | C++ 100% | C / C++ | C / C++ is 100% of the project code |
-| [Comprehensive-C-MCQ-Platform-for-Educational-Assessment](https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment) | C++ 100% | C / C++ | C / C++ is 100% of the project code |
-| [Employee-Management-System](https://github.com/firehas123/Employee-Management-System) | C 100% | C / C++ | C / C++ is 100% of the project code |
-| [made-project-ws2024](https://github.com/firehas123/made-project-ws2024) | Jupyter Notebook 94%, Python 4%, TeX 2% | Python | Python is 100% of the project code; Jupyter Notebook counted as Python; TeX and Shell ignored (fork shown: 43 commits of my own that jvalue/made-template does not have; description and website inherited from the original, not shown) |
-| [Admin-Patient-GUI](https://github.com/firehas123/Admin-Patient-GUI) | Java 100% | Java | Java is 100% of the project code |
-| [Chat-Java](https://github.com/firehas123/Chat-Java) | Java 100% | Java | Java is 100% of the project code |
-| [Hockey-proj-JSP](https://github.com/firehas123/Hockey-proj-JSP) | Java 91%, HTML 9% | Java | Java is 100% of the project code; HTML ignored |
-| [JAVA-EDITOR-RUN](https://github.com/firehas123/JAVA-EDITOR-RUN) | Java 100% | Java | Java is 100% of the project code |
-| [keyLogger](https://github.com/firehas123/keyLogger) | Java 100% | Java | Java is 100% of the project code |
-| [UnitConverter](https://github.com/firehas123/UnitConverter) | Java 100% | Java | Java is 100% of the project code |
-| [Dots-Game](https://github.com/firehas123/Dots-Game) | JavaScript 74%, CSS 17%, HTML 9% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored |
-| [Dynamic-Country-Explorer](https://github.com/firehas123/Dynamic-Country-Explorer) | JavaScript 76%, HTML 16%, CSS 7% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
-| [E-Commerce-Clothing](https://github.com/firehas123/E-Commerce-Clothing) | JavaScript 89%, CSS 10%, HTML 1% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored |
-| [Fintech-Lending-Application](https://github.com/firehas123/Fintech-Lending-Application) | JavaScript 98%, CSS 1%, HTML <1% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored |
-| [google-app-script-sheet-data-dumping](https://github.com/firehas123/google-app-script-sheet-data-dumping) | JavaScript 100% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code |
-| [INFO-VIZ](https://github.com/firehas123/INFO-VIZ) | JavaScript 88%, CSS 10%, HTML 2% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored |
-| [MHC-Solutions](https://github.com/firehas123/MHC-Solutions) | JavaScript 42%, HTML 38%, CSS 20% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
-| [my-resume](https://github.com/firehas123/my-resume) | TypeScript 49%, HTML 22%, CSS 19% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
-| [Medizintechnik-II-Final-Project](https://github.com/firehas123/Medizintechnik-II-Final-Project) | ImageJ Macro 44%, TeX 19%, Java 19% | ImageJ Macro | ImageJ Macro is 54% of the project code; TeX ignored |
-| [GitHub-Essentials-Guide](https://github.com/firehas123/GitHub-Essentials-Guide) | HTML 100% | Other | only HTML, which is not counted as project code |
-| [my-tralive-netlifyapp](https://github.com/firehas123/my-tralive-netlifyapp) | HTML 100% | Other | only HTML, which is not counted as project code |
-| [SLU](https://github.com/firehas123/SLU) | HTML 100% | Other | only HTML, which is not counted as project code |
+| Repo | Top languages | Group | Reason | From README |
+| --- | --- | --- | --- | --- |
+| [Advanced-Account-Management-System](https://github.com/firehas123/Advanced-Account-Management-System) | C++ 100% | C / C++ | C / C++ is 100% of the project code | summary, overview |
+| [Comprehensive-C-MCQ-Platform-for-Educational-Assessment](https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment) | C++ 100% | C / C++ | C / C++ is 100% of the project code | summary, overview |
+| [Employee-Management-System](https://github.com/firehas123/Employee-Management-System) | C 100% | C / C++ | C / C++ is 100% of the project code | nothing usable (generated tile instead) |
+| [made-project-ws2024](https://github.com/firehas123/made-project-ws2024) | Jupyter Notebook 94%, Python 4%, TeX 2% | Python | Python is 100% of the project code; Jupyter Notebook counted as Python; TeX and Shell ignored (fork shown: 43 commits of my own that jvalue/made-template does not have; description and website inherited from the original, not shown) | summary, overview |
+| [Admin-Patient-GUI](https://github.com/firehas123/Admin-Patient-GUI) | Java 100% | Java | Java is 100% of the project code | summary, overview |
+| [Chat-Java](https://github.com/firehas123/Chat-Java) | Java 100% | Java | Java is 100% of the project code | summary, overview |
+| [Hockey-proj-JSP](https://github.com/firehas123/Hockey-proj-JSP) | Java 91%, HTML 9% | Java | Java is 100% of the project code; HTML ignored | summary, overview |
+| [JAVA-EDITOR-RUN](https://github.com/firehas123/JAVA-EDITOR-RUN) | Java 100% | Java | Java is 100% of the project code | summary, overview |
+| [keyLogger](https://github.com/firehas123/keyLogger) | Java 100% | Java | Java is 100% of the project code | summary, overview |
+| [UnitConverter](https://github.com/firehas123/UnitConverter) | Java 100% | Java | Java is 100% of the project code | summary, overview |
+| [Dots-Game](https://github.com/firehas123/Dots-Game) | JavaScript 74%, CSS 17%, HTML 9% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored | nothing usable (generated tile instead) |
+| [Dynamic-Country-Explorer](https://github.com/firehas123/Dynamic-Country-Explorer) | JavaScript 76%, HTML 16%, CSS 7% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored | summary, overview |
+| [E-Commerce-Clothing](https://github.com/firehas123/E-Commerce-Clothing) | JavaScript 89%, CSS 10%, HTML 1% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored | summary, overview |
+| [Fintech-Lending-Application](https://github.com/firehas123/Fintech-Lending-Application) | JavaScript 98%, CSS 1%, HTML <1% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored | nothing usable (generated tile instead) |
+| [google-app-script-sheet-data-dumping](https://github.com/firehas123/google-app-script-sheet-data-dumping) | JavaScript 100% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code | summary, overview |
+| [INFO-VIZ](https://github.com/firehas123/INFO-VIZ) | JavaScript 88%, CSS 10%, HTML 2% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored | nothing usable (generated tile instead) |
+| [MHC-Solutions](https://github.com/firehas123/MHC-Solutions) | JavaScript 42%, HTML 38%, CSS 20% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored | nothing usable (generated tile instead) |
+| [my-resume](https://github.com/firehas123/my-resume) | TypeScript 57%, CSS 16%, HTML 14% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored | summary, overview |
+| [GitHub-Essentials-Guide](https://github.com/firehas123/GitHub-Essentials-Guide) | HTML 100% | Other | only HTML, which is not counted as project code | summary, overview |
+| [Medizintechnik-II-Final-Project](https://github.com/firehas123/Medizintechnik-II-Final-Project) | ImageJ Macro 44%, TeX 19%, Java 19% | Other | ImageJ Macro is 54% of the project code; TeX ignored; ImageJ Macro has only 1 project and is not a mainstream language, so it goes under Other | summary, overview |
+| [my-tralive-netlifyapp](https://github.com/firehas123/my-tralive-netlifyapp) | HTML 100% | Other | only HTML, which is not counted as project code | summary, overview |
+| [SLU](https://github.com/firehas123/SLU) | HTML 100% | Other | only HTML, which is not counted as project code | summary, overview |
 
 ## Forks skipped
 

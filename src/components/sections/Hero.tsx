@@ -1,7 +1,7 @@
 import { DownloadIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
 import { HeroObjectSlot } from "@/components/three/HeroObjectSlot";
-import { profile } from "@/lib/profile";
+import { profile, statusLine } from "@/lib/profile";
 import styles from "./Hero.module.css";
 
 export function Hero() {
@@ -10,6 +10,10 @@ export function Hero() {
     <section id="top" className={styles.hero} aria-labelledby="hero-title">
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>
+          <p className={styles.status}>
+            <span className={styles.statusDot} aria-hidden="true" />
+            {statusLine()}
+          </p>
           <p className={styles.location}>{profile.location}</p>
           <h1 id="hero-title" className={styles.title}>
             <span className={styles.line}>{lineOne}</span>

@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { createGrouping, formatShare, languageBreakdown, listNames } from "./lib/grouping.mjs";
 
 const rules = JSON.parse(readFileSync(new URL("../src/data/language-groups.json", import.meta.url), "utf8"));
-const { autoGroup, decideGroup, compareGroups } = createGrouping(rules);
+const { autoGroup, decideGroup, compareGroups, applyTabRule } = createGrouping(rules);
 
 // Shorthand: langs({ Python: 100, HTML: 50 }) -> [{ name, bytes }, ...]
 const langs = (sizes) => Object.entries(sizes).map(([name, bytes]) => ({ name, bytes }));
@@ -87,4 +87,33 @@ test("helpers", () => {
   assert.equal(formatShare(0.4), "<1%");
   assert.equal(formatShare(53.4), "53%");
   assert.equal(listNames(["A", "B", "C"]), "A, B and C");
+});
+
+test("a niche language with one project goes under Other", () => {
+  const result = applyTabRule([
+    { name: "a", group: "ImageJ Macro", reason: "ImageJ Macro is 54% of the project code" },
+    { name: "b", group: "Java", reason: "Java is 100%" },
+  ]);
+  assert.equal(result[0].group, "Other");
+  assert.match(result[0].reason, /only 1 project and is not a mainstream language/);
+  assert.equal(result[1].group, "Java");
+});
+
+test("a niche language with two projects keeps its tab; mainstream always does", () => {
+  const result = applyTabRule([
+    { name: "a", group: "Haskell", reason: "" },
+    { name: "b", group: "Haskell", reason: "" },
+    { name: "c", group: "Go", reason: "" },
+  ]);
+  assert.deepEqual(result.map((r) => r.group), ["Haskell", "Haskell", "Go"]);
+});
+
+test("groups forced in overrides.json are never moved; hidden repos do not count", () => {
+  const result = applyTabRule([
+    { name: "a", group: "Elixir", reason: "", forced: true },
+    { name: "b", group: "Haskell", reason: "" },
+    { name: "c", group: "Haskell", reason: "", hidden: true },
+  ]);
+  assert.equal(result[0].group, "Elixir");
+  assert.equal(result[1].group, "Other");
 });

@@ -32,6 +32,8 @@ export type Job = {
 
 export type Education = {
   degree: string;
+  /** Short form for the hero status line, e.g. "M.Sc. AI at FAU". */
+  short?: string;
   school: string;
   start: string;
   end: string; // "YYYY-MM", or "present" while still studying
@@ -54,7 +56,6 @@ export type Profile = {
   intro: { headline: [string, string]; pitch: string };
   about: { lead: string; body: string; image: string; imageAlt: string };
   cv: { path: string; downloadName: string };
-  previewImage: string;
   /** When true, the footer shows a quiet "Site stats" link to /stats. */
   showStatsLink: boolean;
   /**
@@ -96,3 +97,34 @@ export function formatMonth(value: string): string {
 export function formatRange(start: string, end: string | null): string {
   return `${formatMonth(start)} to ${end === null ? "present" : formatMonth(end)}`;
 }
+
+/**
+ * Length of a job, counting both the first and the last month, the way
+ * LinkedIn does: "1 yr 6 mos", "3 mos", "2 yrs". A missing end means "until
+ * now" (the date the site was built).
+ */
+export function formatDuration(start: string, end: string | null, now = new Date()): string {
+  const [sy, sm] = start.split("-").map(Number);
+  const [ey, em] = end && /^\d{4}-\d{2}$/.test(end) ? end.split("-").map(Number) : [now.getUTCFullYear(), now.getUTCMonth() + 1];
+  const months = Math.max(1, ey * 12 + em - (sy * 12 + sm) + 1);
+  const years = Math.floor(months / 12);
+  const rest = months % 12;
+  const parts = [];
+  if (years) parts.push(`${years} yr${years === 1 ? "" : "s"}`);
+  if (rest) parts.push(`${rest} mo${rest === 1 ? "" : "s"}`);
+  return parts.join(" ");
+}
+
+/**
+ * "Working student at Zertificon · M.Sc. AI at FAU": the current job (no end
+ * date) and current studies ("present"), built from the data above.
+ */
+export function statusLine(): string {
+  const job = profile.experience.find((j) => j.end === null);
+  const study = profile.education.find((e) => e.end === "present");
+  const parts = [];
+  if (job) parts.push(`${job.role[0]}${job.role.slice(1).toLowerCase()} at ${job.company}`);
+  if (study) parts.push(study.short ?? study.degree);
+  return parts.join(" · ");
+}
+
