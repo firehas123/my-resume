@@ -1,5 +1,5 @@
 {
-  "_help": "Manual changes per GitHub repo name. Keys starting with _ are ignored. Fields (all optional): hide (true/false), title, summary, group (C++, Python or Other), demo (URL, or null to remove), featured (true/false), order (number, lower comes first). Overrides always win over the synced data.",
+  "_help": "Manual changes per GitHub repo name. Keys starting with _ are ignored. Fields (all optional): hide (true/false), include (true shows a fork, which is hidden by default; run npm run sync after changing it), title, summary, group (any tab name, e.g. 'Python' or 'C / C++'; always wins over the automatic group), demo (URL, or null to remove), featured (true/false), order (number, lower comes first). Overrides always win over the synced data.",
   "_example-repo-name": {
     "title": "A nicer title",
     "summary": "One line about what it does.",

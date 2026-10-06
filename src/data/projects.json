@@ -1,9 +1,51 @@
 [
   {
+    "name": "my-resume",
+    "description": "",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "TypeScript",
+        "share": 52.9
+      },
+      {
+        "name": "HTML",
+        "share": 24.5
+      },
+      {
+        "name": "CSS",
+        "share": 20.4
+      },
+      {
+        "name": "JavaScript",
+        "share": 2.2
+      }
+    ],
+    "isFork": false,
+    "url": "https://github.com/firehas123/my-resume",
+    "homepageUrl": "https://my-resume-seven-coral.vercel.app",
+    "topics": [],
+    "pushedAt": "2026-10-06T05:41:22Z"
+  },
+  {
     "name": "INFO-VIZ",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 88.1
+      },
+      {
+        "name": "CSS",
+        "share": 10.4
+      },
+      {
+        "name": "HTML",
+        "share": 1.6
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/INFO-VIZ",
     "homepageUrl": null,
     "topics": [],
@@ -12,8 +54,14 @@
   {
     "name": "SLU",
     "description": "",
-    "language": "HTML",
     "group": "Other",
+    "languages": [
+      {
+        "name": "HTML",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/SLU",
     "homepageUrl": null,
     "topics": [],
@@ -22,28 +70,46 @@
   {
     "name": "Fintech-Lending-Application",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 98.4
+      },
+      {
+        "name": "CSS",
+        "share": 1.4
+      },
+      {
+        "name": "HTML",
+        "share": 0.3
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Fintech-Lending-Application",
     "homepageUrl": null,
     "topics": [],
     "pushedAt": "2025-03-04T20:14:03Z"
   },
   {
-    "name": "my-resume",
-    "description": "",
-    "language": "HTML",
-    "group": "Other",
-    "url": "https://github.com/firehas123/my-resume",
-    "homepageUrl": "https://my-resume-seven-coral.vercel.app",
-    "topics": [],
-    "pushedAt": "2024-11-20T11:53:32Z"
-  },
-  {
     "name": "MHC-Solutions",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 41.9
+      },
+      {
+        "name": "HTML",
+        "share": 37.7
+      },
+      {
+        "name": "CSS",
+        "share": 20.4
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/MHC-Solutions",
     "homepageUrl": "https://mhc-solutions.vercel.app",
     "topics": [],
@@ -52,8 +118,14 @@
   {
     "name": "JAVA-EDITOR-RUN",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/JAVA-EDITOR-RUN",
     "homepageUrl": null,
     "topics": [],
@@ -62,8 +134,30 @@
   {
     "name": "Medizintechnik-II-Final-Project",
     "description": "",
-    "language": "ImageJ Macro",
-    "group": "Other",
+    "group": "ImageJ Macro",
+    "languages": [
+      {
+        "name": "ImageJ Macro",
+        "share": 44
+      },
+      {
+        "name": "TeX",
+        "share": 18.6
+      },
+      {
+        "name": "Java",
+        "share": 18.5
+      },
+      {
+        "name": "JavaScript",
+        "share": 12.6
+      },
+      {
+        "name": "Python",
+        "share": 6.4
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Medizintechnik-II-Final-Project",
     "homepageUrl": null,
     "topics": [],
@@ -72,8 +166,22 @@
   {
     "name": "E-Commerce-Clothing",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 88.9
+      },
+      {
+        "name": "CSS",
+        "share": 9.8
+      },
+      {
+        "name": "HTML",
+        "share": 1.3
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/E-Commerce-Clothing",
     "homepageUrl": null,
     "topics": [],
@@ -82,8 +190,14 @@
   {
     "name": "my-tralive-netlifyapp",
     "description": "",
-    "language": "HTML",
     "group": "Other",
+    "languages": [
+      {
+        "name": "HTML",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/my-tralive-netlifyapp",
     "homepageUrl": null,
     "topics": [],
@@ -92,8 +206,18 @@
   {
     "name": "Hockey-proj-JSP",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 91.5
+      },
+      {
+        "name": "HTML",
+        "share": 8.5
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Hockey-proj-JSP",
     "homepageUrl": null,
     "topics": [],
@@ -102,8 +226,14 @@
   {
     "name": "GitHub-Essentials-Guide",
     "description": "",
-    "language": "HTML",
     "group": "Other",
+    "languages": [
+      {
+        "name": "HTML",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/GitHub-Essentials-Guide",
     "homepageUrl": null,
     "topics": [],
@@ -112,8 +242,14 @@
   {
     "name": "UnitConverter",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/UnitConverter",
     "homepageUrl": null,
     "topics": [],
@@ -122,8 +258,14 @@
   {
     "name": "Advanced-Account-Management-System",
     "description": "",
-    "language": "C++",
-    "group": "C++",
+    "group": "C / C++",
+    "languages": [
+      {
+        "name": "C++",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Advanced-Account-Management-System",
     "homepageUrl": null,
     "topics": [],
@@ -132,8 +274,14 @@
   {
     "name": "keyLogger",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/keyLogger",
     "homepageUrl": null,
     "topics": [],
@@ -142,8 +290,14 @@
   {
     "name": "Chat-Java",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Chat-Java",
     "homepageUrl": null,
     "topics": [],
@@ -152,8 +306,14 @@
   {
     "name": "Comprehensive-C-MCQ-Platform-for-Educational-Assessment",
     "description": "",
-    "language": "C++",
-    "group": "C++",
+    "group": "C / C++",
+    "languages": [
+      {
+        "name": "C++",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment",
     "homepageUrl": null,
     "topics": [],
@@ -162,8 +322,22 @@
   {
     "name": "Dynamic-Country-Explorer",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 76.1
+      },
+      {
+        "name": "HTML",
+        "share": 16.5
+      },
+      {
+        "name": "CSS",
+        "share": 7.4
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Dynamic-Country-Explorer",
     "homepageUrl": null,
     "topics": [],
@@ -172,8 +346,14 @@
   {
     "name": "Admin-Patient-GUI",
     "description": "",
-    "language": "Java",
-    "group": "Other",
+    "group": "Java",
+    "languages": [
+      {
+        "name": "Java",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Admin-Patient-GUI",
     "homepageUrl": null,
     "topics": [],
@@ -182,8 +362,14 @@
   {
     "name": "google-app-script-sheet-data-dumping",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/google-app-script-sheet-data-dumping",
     "homepageUrl": null,
     "topics": [],
@@ -192,8 +378,22 @@
   {
     "name": "Dots-Game",
     "description": "",
-    "language": "JavaScript",
-    "group": "Other",
+    "group": "JavaScript / TypeScript",
+    "languages": [
+      {
+        "name": "JavaScript",
+        "share": 73.7
+      },
+      {
+        "name": "CSS",
+        "share": 17.3
+      },
+      {
+        "name": "HTML",
+        "share": 9
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Dots-Game",
     "homepageUrl": null,
     "topics": [],
@@ -202,8 +402,14 @@
   {
     "name": "Employee-Management-System",
     "description": "",
-    "language": "C",
-    "group": "C++",
+    "group": "C / C++",
+    "languages": [
+      {
+        "name": "C",
+        "share": 100
+      }
+    ],
+    "isFork": false,
     "url": "https://github.com/firehas123/Employee-Management-System",
     "homepageUrl": null,
     "topics": [],

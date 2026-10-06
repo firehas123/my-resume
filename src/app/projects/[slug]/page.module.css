@@ -53,6 +53,25 @@
   color: var(--muted);
 }
 
+/* Small, non-interactive language labels (same look as on the cards). */
+.languageTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.languageTags li {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--media-bg);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
 .topics {
   display: flex;
   flex-wrap: wrap;

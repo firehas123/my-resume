@@ -1,0 +1,23 @@
+{
+  "_help": "Rules that decide which tab a GitHub repo appears under. Used by scripts/sync-projects.mjs and by the site (tab order). See README.md, 'How projects are grouped'.",
+
+  "ignored": [
+    "HTML", "CSS", "SCSS", "Sass", "Less", "Stylus", "PostCSS",
+    "Makefile", "CMake", "Meson", "Dockerfile", "Procfile", "Nix",
+    "Shell", "Batchfile", "PowerShell",
+    "TeX", "Roff", "Markdown", "reStructuredText",
+    "Handlebars", "EJS", "Pug", "Jinja", "Twig", "Mustache", "Liquid"
+  ],
+
+  "merged": {
+    "Jupyter Notebook": "Python",
+    "C": "C / C++",
+    "C++": "C / C++",
+    "JavaScript": "JavaScript / TypeScript",
+    "TypeScript": "JavaScript / TypeScript"
+  },
+
+  "order": ["C / C++", "Python", "Java", "JavaScript / TypeScript"],
+
+  "fallback": "Other"
+}

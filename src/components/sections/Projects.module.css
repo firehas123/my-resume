@@ -19,16 +19,26 @@
 
 .tabs {
   display: flex;
-  flex-wrap: wrap;
   gap: 6px;
+  max-width: 100%;
   padding: 6px;
   border-radius: var(--radius-pill);
   background: var(--track-bg);
+  /* The number of tabs depends on the data. When they do not fit, the track
+     scrolls sideways instead of wrapping into an odd two-line pill. */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
+  flex-shrink: 0;
   min-height: 44px;
   padding: 0 24px;
+  white-space: nowrap;
   border: none;
   border-radius: var(--radius-pill);
   background: transparent;
@@ -44,6 +54,14 @@
 .tab[aria-pressed="true"] {
   background: var(--accent);
   color: var(--on-accent);
+}
+
+/* Inset focus ring: the scrolling track would clip an outer one. Text colour
+   so it also shows on the accent-filled active tab. */
+.tab:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -4px;
+  border-radius: var(--radius-pill);
 }
 
 .tab[aria-pressed="false"]:hover {
@@ -113,6 +131,25 @@
 .summary {
   font-size: 17px;
   color: var(--muted);
+}
+
+/* Small, non-interactive language labels. */
+.languageTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.languageTags li {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--media-bg);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .links {
