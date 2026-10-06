@@ -18,6 +18,17 @@
   object-position: 0% 20%;
 }
 
+/* The only overlay on the photo: a fade into the band's black on the left,
+   behind the text. It ends at 45% of the width; the face starts at about 50%,
+   so the face itself is never covered, filtered or blurred. */
+.photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--bg-alt) 0%, transparent 45%);
+  pointer-events: none;
+}
+
 .inner {
   position: relative; /* above the photo */
   display: flex;
@@ -64,6 +75,11 @@
 
   .image {
     object-position: 68% 25%;
+  }
+
+  /* Phones: the photo sits above the text, so no fade is needed. */
+  .photo::after {
+    display: none;
   }
 
   .inner {
