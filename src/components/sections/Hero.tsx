@@ -1,5 +1,6 @@
 import { DownloadIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
+import { Magnetic } from "@/components/motion/Magnetic";
 import { ScrollEaseBack } from "@/components/motion/ScrollEaseBack";
 import { HeroDotField } from "./HeroDotField";
 import { profile, statusLine } from "@/lib/profile";
@@ -23,13 +24,17 @@ export function Hero() {
           </h1>
           <p className={styles.pitch}>{profile.intro.pitch}</p>
           <div className={styles.buttons}>
-            <PillLink href={profile.cv.path} download={profile.cv.downloadName} track="cv">
-              <DownloadIcon />
-              Download CV
-            </PillLink>
-            <PillLink href="/#projects" variant="outline">
-              See projects
-            </PillLink>
+            <Magnetic>
+              <PillLink href={profile.cv.path} download={profile.cv.downloadName} track="cv">
+                <DownloadIcon nudge />
+                Download CV
+              </PillLink>
+            </Magnetic>
+            <Magnetic>
+              <PillLink href="/#projects" variant="outline">
+                See projects
+              </PillLink>
+            </Magnetic>
           </div>
         </ScrollEaseBack>
       </div>

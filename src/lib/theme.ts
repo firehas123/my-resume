@@ -45,14 +45,38 @@ export function readTheme(): Theme {
   return document.documentElement.dataset.theme === "light" ? "light" : "dark";
 }
 
-/** Applies a theme with a short colour cross-fade, and remembers the choice. */
-export function applyTheme(theme: Theme, remember: boolean) {
-  const root = document.documentElement;
-  root.classList.add("theme-transition");
-  root.dataset.theme = theme;
+/** Sets the theme attribute and the browser bar colour, nothing else. */
+function setTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[theme]);
-  // Remove the transition class once the 250ms cross-fade is done.
-  window.setTimeout(() => root.classList.remove("theme-transition"), 300);
+}
+
+/**
+ * Applies a theme and remembers the choice.
+ *
+ * With an `origin` (the switch's centre) and View Transitions available, the
+ * new theme spreads as a circle from that point over the old one. Otherwise
+ * (older browsers, reduced motion, system changes) colours cross-fade for
+ * ~250ms.
+ */
+export function applyTheme(theme: Theme, remember: boolean, origin?: { x: number; y: number }) {
+  const root = document.documentElement;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (origin && !reduce && typeof document.startViewTransition === "function") {
+    // Radius that reaches the farthest corner of the viewport.
+    const radius = Math.hypot(Math.max(origin.x, innerWidth - origin.x), Math.max(origin.y, innerHeight - origin.y));
+    root.style.setProperty("--theme-x", `${origin.x}px`);
+    root.style.setProperty("--theme-y", `${origin.y}px`);
+    root.style.setProperty("--theme-r", `${radius}px`);
+    root.classList.add("theme-switching");
+    const transition = document.startViewTransition(() => setTheme(theme));
+    transition.finished.finally(() => root.classList.remove("theme-switching"));
+  } else {
+    root.classList.add("theme-transition");
+    setTheme(theme);
+    // Remove the transition class once the 250ms cross-fade is done.
+    window.setTimeout(() => root.classList.remove("theme-transition"), 300);
+  }
   if (remember) {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);

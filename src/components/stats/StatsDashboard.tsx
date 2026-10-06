@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { DURATION } from "@/lib/motion";
 import { EXCLUDE_ME_KEY } from "@/components/analytics/VisitTracker";
 import type { Range, StatsSummary } from "@/lib/stats/summary";
 import type { WorldMap } from "@/lib/stats/worldMap";
@@ -168,10 +169,10 @@ function Dashboard({ data, map }: { data: StatsSummary; map: WorldMap }) {
   return (
     <>
       <section aria-label="Headline numbers" className={styles.headline}>
-        <Stat label="Visits" value={formatNumber(data.totals.visits)} />
-        <Stat label="Page views" value={formatNumber(data.totals.pageViews)} />
-        <Stat label="Countries reached" value={formatNumber(data.totals.countries)} />
-        <Stat label="All-time visits" value={formatNumber(data.allTime.visits)} />
+        <Stat label="Visits" count={data.totals.visits} />
+        <Stat label="Page views" count={data.totals.pageViews} />
+        <Stat label="Countries reached" count={data.totals.countries} />
+        <Stat label="All-time visits" count={data.allTime.visits} />
         <Stat label="Last viewed" value={data.lastViewed ? timeAgo(data.lastViewed) : "—"} text />
       </section>
 
@@ -245,14 +246,48 @@ function Dashboard({ data, map }: { data: StatsSummary; map: WorldMap }) {
   );
 }
 
-/** A headline number; `text` uses a smaller size for words like "3 minutes ago". */
-function Stat({ label, value, text }: { label: string; value: string; text?: boolean }) {
+/**
+ * A headline number. `count` counts up from zero when the panel first
+ * appears (later refreshes just show the new value); `value` is shown as is,
+ * in a smaller size, for words like "3 minutes ago".
+ */
+function Stat({ label, count, value, text }: { label: string; count?: number; value?: string; text?: boolean }) {
   return (
     <div className={styles.stat}>
       <p className={styles.statLabel}>{label}</p>
-      <p className={`${styles.statValue} ${text ? styles.statText : ""}`}>{value}</p>
+      <p className={`${styles.statValue} ${text ? styles.statText : ""}`}>{count !== undefined ? <CountUp value={count} /> : value}</p>
     </div>
   );
+}
+
+/** Counts from 0 to `value` once, on mount, with the shared slow ease-out. */
+function CountUp({ value }: { value: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const played = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || played.current) return;
+    played.current = true;
+    if (value === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const duration = DURATION.slow * 1000;
+    const start = performance.now();
+    let frame = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = formatNumber(Math.round(value * eased));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(frame);
+      el.textContent = formatNumber(value);
+    };
+  }, [value]);
+
+  // The real number is in the HTML; the effect only animates the text.
+  return <span ref={ref}>{formatNumber(value)}</span>;
 }
 
 function Panel({ title, children, wide }: { title: string; children: React.ReactNode; wide?: boolean }) {

@@ -3,7 +3,9 @@
    0.30 - 0.75s  H draws   (slightly overlapping)
    0.55 - 1.00s  C draws
    0.00 - 1.00s  accent progress line fills
-   1.00 - 1.40s  the screen fades and lifts away */
+   1.00 - 1.40s  the background fades while the logo travels into the
+                 header (IntroScreen.tsx measures where), then the header's
+                 own logo takes over */
 
 .intro {
   display: none;
@@ -16,13 +18,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
   color: var(--text);
   pointer-events: none;
-  animation: lift 400ms var(--ease-out) 1000ms forwards;
+  /* Hide the whole layer once everything has arrived. */
+  animation: done 1ms linear 1400ms forwards;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  animation: fade 400ms var(--ease-out) 1000ms forwards;
+}
+
+.mark {
+  display: block;
+  animation: travel 400ms var(--ease-out) 1000ms forwards;
+}
+
+.mark svg {
+  display: block;
 }
 
 .inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +76,9 @@
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: fill 1000ms var(--ease-out) forwards;
+  animation:
+    fill 1000ms var(--ease-out) forwards,
+    fade 250ms var(--ease-out) 1000ms forwards;
 }
 
 @keyframes draw {
@@ -72,10 +93,22 @@
   }
 }
 
-@keyframes lift {
+@keyframes fade {
   to {
     opacity: 0;
-    transform: translateY(-48px);
+  }
+}
+
+/* Fallback values (no measurement): lift a little and fade. */
+@keyframes travel {
+  to {
+    opacity: var(--travel-opacity, 0);
+    transform: translate(var(--travel-x, 0), var(--travel-y, -48px)) scale(var(--travel-scale, 1));
+  }
+}
+
+@keyframes done {
+  to {
     visibility: hidden;
   }
 }

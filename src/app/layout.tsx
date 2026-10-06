@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { IntroScreen } from "@/components/layout/IntroScreen";
+import { INTRO_TRAVEL_SCRIPT, IntroScreen } from "@/components/layout/IntroScreen";
 import { MotionProvider } from "@/components/ui/MotionProvider";
 import { VisitTracker } from "@/components/analytics/VisitTracker";
 import { isProductionDeployment, statsEnabled } from "@/lib/env";
@@ -64,6 +64,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <IntroScreen />
         <MotionProvider>
           <Header />
+          {/* Measures where the intro logo should land (see IntroScreen). */}
+          <script dangerouslySetInnerHTML={{ __html: INTRO_TRAVEL_SCRIPT }} />
           <main id="main">{children}</main>
           <Footer />
         </MotionProvider>

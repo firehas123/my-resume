@@ -21,7 +21,7 @@ export function Header() {
     // viewTransitionName: the header stays still during page transitions.
     <header className={styles.header} style={{ viewTransitionName: "site-header" }}>
       <div className={`container ${styles.bar}`}>
-        <Link href="/#top" className={styles.logo} aria-label={`${profile.shortName}, home`}>
+        <Link href="/#top" className={styles.logo} data-header-logo="" aria-label={`${profile.shortName}, home`}>
           <Logo height={26} />
         </Link>
         <nav aria-label="Sections" className={styles.nav}>

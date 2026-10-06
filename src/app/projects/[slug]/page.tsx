@@ -47,7 +47,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
     <PageTransition>
       <article className={styles.page}>
         <div className={`container ${styles.inner}`}>
-          <Link href={`/?tab=${encodeURIComponent(project.group)}#projects`} className={styles.back}>
+          <Link href={`/?tab=${encodeURIComponent(project.group)}#projects`} className={`u-link ${styles.back}`}>
             <ArrowLeftIcon size={18} />
             All projects
           </Link>

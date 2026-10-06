@@ -20,7 +20,7 @@ export function Footer() {
           <ul className={styles.legal}>
             <li>
               {/* A plain link to the top of the page content: works without JavaScript. */}
-              <a href="#main" className={styles.backToTop}>
+              <a href="#main" className={`u-link ${styles.backToTop}`}>
                 Back to top
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 19V5" />
@@ -29,15 +29,15 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <Link href="/impressum">Impressum</Link>
+              <Link href="/impressum" className="u-link">Impressum</Link>
             </li>
             <li>
-              <Link href="/datenschutz">Datenschutz</Link>
+              <Link href="/datenschutz" className="u-link">Datenschutz</Link>
             </li>
             {/* The stats page is unlisted unless switched on in profile.json. */}
             {profile.showStatsLink && (
               <li>
-                <Link href="/stats">Site stats</Link>
+                <Link href="/stats" className="u-link">Site stats</Link>
               </li>
             )}
           </ul>

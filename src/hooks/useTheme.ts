@@ -29,8 +29,9 @@ export function useTheme() {
     return () => query.removeEventListener("change", onSystemChange);
   }, []);
 
-  const toggle = useCallback(() => {
-    applyTheme(readTheme() === "dark" ? "light" : "dark", true);
+  /** Switches theme; `origin` is where the new theme spreads from. */
+  const toggle = useCallback((origin?: { x: number; y: number }) => {
+    applyTheme(readTheme() === "dark" ? "light" : "dark", true, origin);
   }, []);
 
   return { theme, toggle };

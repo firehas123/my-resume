@@ -14,6 +14,26 @@ const INTRO_MS = 1400;
 // finishes its own entrance before the flag is removed.
 const CLEANUP_MS = INTRO_MS + 300;
 
+/**
+ * Tells the CSS where the header logo is, so the intro logo can travel into
+ * its place. Inlined right after the header (see layout.tsx) so it runs
+ * during parsing, long before React hydrates. Without these values the
+ * logo simply fades out.
+ */
+export const INTRO_TRAVEL_SCRIPT = `(function () {
+  if (!document.documentElement.hasAttribute("data-intro")) return;
+  var mark = document.querySelector("[data-intro-mark]");
+  var target = document.querySelector("[data-header-logo] svg");
+  if (!mark || !target) return;
+  var from = mark.getBoundingClientRect();
+  var to = target.getBoundingClientRect();
+  if (!from.height || !to.height) return;
+  mark.style.setProperty("--travel-x", to.left + to.width / 2 - (from.left + from.width / 2) + "px");
+  mark.style.setProperty("--travel-y", to.top + to.height / 2 - (from.top + from.height / 2) + "px");
+  mark.style.setProperty("--travel-scale", String(to.height / from.height));
+  mark.style.setProperty("--travel-opacity", "1");
+})();`;
+
 export function IntroScreen() {
   useEffect(() => {
     const root = document.documentElement;
@@ -26,8 +46,12 @@ export function IntroScreen() {
   // underneath, for screen readers and search engines alike.
   return (
     <div className={styles.intro} aria-hidden="true">
+      <div className={styles.backdrop} />
       <div className={styles.inner}>
-        <Logo height={64} strokeClassNames={[styles.m, styles.h, styles.c]} />
+        {/* suppressHydrationWarning: INTRO_TRAVEL_SCRIPT adds inline styles. */}
+        <span className={styles.mark} data-intro-mark="" suppressHydrationWarning>
+          <Logo height={64} strokeClassNames={[styles.m, styles.h, styles.c]} />
+        </span>
         <span className={styles.progress} />
       </div>
     </div>

@@ -45,6 +45,7 @@
   border-color: var(--text);
 }
 
+/* Pressed: a slight compress (all pill buttons). */
 .pill:active {
-  transform: translateY(1px);
+  transform: scale(0.97);
 }

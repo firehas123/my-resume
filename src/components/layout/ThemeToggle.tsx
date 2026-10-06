@@ -10,7 +10,10 @@ export function ThemeToggle() {
   const next = theme === "dark" ? "light" : "dark";
 
   return (
-    <button type="button" className={styles.themeToggle} onClick={toggle} aria-label={`Switch to ${next} theme`}>
+    <button type="button" className={styles.themeToggle} onClick={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        toggle({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+      }} aria-label={`Switch to ${next} theme`}>
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>
   );

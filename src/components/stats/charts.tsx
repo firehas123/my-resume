@@ -17,6 +17,14 @@ function niceMax(value: number): number {
   return Math.ceil(value / step) * step;
 }
 
+/**
+ * Animation delay for the i-th of n bars: they grow in one after another,
+ * the whole row within ~400ms however many bars there are (see .grow).
+ */
+function stagger(i: number, n: number): React.CSSProperties {
+  return { "--delay": `${Math.round((i / Math.max(1, n)) * 400)}ms` } as React.CSSProperties;
+}
+
 /** The exact numbers behind a chart, as a table in a <details> element. */
 export function NumbersTable({ caption, columns, rows }: { caption: string; columns: string[]; rows: (string | number)[][] }) {
   return (
@@ -107,8 +115,8 @@ export function SeriesChart({ points, title }: { points: SeriesPoint[]; title: s
               <title>{`${p.label}: ${plural(p.visits, "visit")}, ${plural(p.pageViews, "page view")}`}</title>
               {/* invisible full-height target, so small bars are easy to hover */}
               <rect x={pad.left + i * slot} y={pad.top} width={slot} height={innerH} fill="transparent" />
-              {p.pageViews > 0 && <rect x={x} y={y(p.pageViews)} width={barW} height={pad.top + innerH - y(p.pageViews)} rx="2" className={styles.hollow} />}
-              {p.visits > 0 && <rect x={x + barW * 0.2} y={y(p.visits)} width={barW * 0.6} height={pad.top + innerH - y(p.visits)} rx="2" className={styles.solid} />}
+              {p.pageViews > 0 && <rect x={x} y={y(p.pageViews)} width={barW} height={pad.top + innerH - y(p.pageViews)} rx="2" className={`${styles.hollow} ${styles.grow}`} style={stagger(i, points.length)} />}
+              {p.visits > 0 && <rect x={x + barW * 0.2} y={y(p.visits)} width={barW * 0.6} height={pad.top + innerH - y(p.visits)} rx="2" className={`${styles.solid} ${styles.grow}`} style={stagger(i, points.length)} />}
               {i % labelEvery === 0 && (
                 <text x={x + barW / 2} y={height - 10} className={styles.axis} textAnchor="middle">
                   {p.label.replace("Week of ", "")}
@@ -170,7 +178,7 @@ export function ColumnChart({
             <g key={labels[i]}>
               <title>{`${labels[i]}: ${plural(v, unit)}`}</title>
               <rect x={pad.left + i * slot} y={pad.top} width={slot} height={innerH} fill="transparent" />
-              {v > 0 && <rect x={x} y={y(v)} width={barW} height={pad.top + innerH - y(v)} rx="2" className={styles.solid} />}
+              {v > 0 && <rect x={x} y={y(v)} width={barW} height={pad.top + innerH - y(v)} rx="2" className={`${styles.solid} ${styles.grow}`} style={stagger(i, values.length)} />}
               {i % labelEvery === 0 && (
                 <text x={x + barW / 2} y={height - 9} className={styles.axis} textAnchor="middle">
                   {labels[i]}
@@ -191,12 +199,12 @@ export function RankedList({ items, emptyText, label }: { items: { key: string; 
   if (items.every((i) => i.count === 0)) return <p className={styles.muted}>{emptyText}</p>;
   return (
     <ol className={styles.ranked} aria-label={label}>
-      {items.map((item) => (
+      {items.map((item, i) => (
         <li key={item.key}>
           <span className={styles.rankedLabel}>{item.label}</span>
           <span className={styles.rankedCount}>{formatNumber(item.count)}</span>
           <span className={styles.bar} aria-hidden="true">
-            <span style={{ width: `${(item.count / max) * 100}%` }} />
+            <span style={{ width: `${(item.count / max) * 100}%`, ...stagger(i, items.length) }} />
           </span>
         </li>
       ))}

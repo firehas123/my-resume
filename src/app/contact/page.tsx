@@ -29,7 +29,7 @@ export default function ContactPage() {
                 {visibleLinks.map((link, i) => (
                   <span key={link.id}>
                     {i > 0 && (i === visibleLinks.length - 1 ? " and " : ", ")}
-                    <a href={link.url} target="_blank" rel="noopener noreferrer" data-track={trackName(link.id)}>
+                    <a href={link.url} className="u-link" target="_blank" rel="noopener noreferrer" data-track={trackName(link.id)}>
                       {link.label}
                     </a>
                   </span>

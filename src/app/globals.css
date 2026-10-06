@@ -280,6 +280,53 @@ html.theme-transition *::after {
   color: var(--accent);
 }
 
+/* Small interaction details ------------------------------------------------ */
+
+/* Links: an underline that grows from left to right on hover. */
+.u-link {
+  position: relative;
+}
+
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.55em;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-standard) var(--ease-out);
+}
+
+.u-link:hover::after,
+.u-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Buttons compress a little when pressed. */
+  button:not(:disabled) {
+    transition-property: transform, background-color, border-color, color;
+    transition-duration: var(--dur-quick);
+    transition-timing-function: var(--ease-out);
+  }
+
+  button:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  /* The Download CV arrow nudges downward on hover. */
+  .nudge-arrow {
+    transition: transform var(--dur-quick) var(--ease-out);
+  }
+
+  a:hover .nudge-arrow {
+    transform: translateY(2px);
+  }
+}
+
 /* Colour blends between sections: instead of a hard edge where a dark band
    meets a light one, the top of the lower section fades in from the colour
    above it, so the background shifts smoothly while scrolling across.
@@ -354,6 +401,20 @@ html.theme-transition *::after {
   }
 }
 
+/* Intro (IntroScreen.tsx): the header logo waits until the intro's logo has
+   travelled into its place, then takes over. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-intro] [data-header-logo] {
+    animation: intro-arrive 1ms linear 1400ms both;
+  }
+}
+
+@keyframes intro-arrive {
+  from {
+    opacity: 0;
+  }
+}
+
 /* ==========================================================================
    Page transitions (React <ViewTransition>, see PageTransition.tsx)
    ========================================================================== */
@@ -404,6 +465,31 @@ html.theme-transition *::after {
 
 ::view-transition-new(site-header) {
   animation: none;
+}
+
+/* Theme switch (see applyTheme in lib/theme.ts): the whole page is one
+   snapshot, and the new theme grows as a circle from the switch. Other
+   transition names are dropped so the header and project elements are part
+   of that single snapshot. */
+html.theme-switching * {
+  view-transition-name: none !important;
+}
+
+html.theme-switching::view-transition-old(root) {
+  animation: none;
+}
+
+html.theme-switching::view-transition-new(root) {
+  animation: theme-circle var(--dur-slow) var(--ease-out);
+}
+
+@keyframes theme-circle {
+  from {
+    clip-path: circle(0 at var(--theme-x) var(--theme-y));
+  }
+  to {
+    clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+  }
 }
 
 /* Browsers without View Transitions: a simple fade instead of a hard cut. */

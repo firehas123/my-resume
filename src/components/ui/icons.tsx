@@ -23,11 +23,14 @@ function Svg({ size = 20, children }: IconProps & { children: React.ReactNode })
   );
 }
 
-export function DownloadIcon(props: IconProps) {
+/** `nudge`: the arrow moves down a little when its button is hovered (CSS). */
+export function DownloadIcon({ nudge, ...props }: IconProps & { nudge?: boolean }) {
   return (
     <Svg {...props}>
-      <path d="M12 4v11" />
-      <path d="M7 11l5 5 5-5" />
+      <g className={nudge ? "nudge-arrow" : undefined}>
+        <path d="M12 4v11" />
+        <path d="M7 11l5 5 5-5" />
+      </g>
       <path d="M5 20h14" />
     </Svg>
   );

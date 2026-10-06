@@ -47,6 +47,7 @@ export function WorldMapChart({ map, countries }: { map: WorldMap; countries: Co
               d={shape.d}
               className={styles.country}
               data-step={step}
+              style={step >= 0 ? ({ "--delay": `${step * 90}ms` } as React.CSSProperties) : undefined}
               data-active={(selected !== null && selected === shape.code) || undefined}
               tabIndex={interactive ? 0 : undefined}
               role={interactive ? "img" : undefined}

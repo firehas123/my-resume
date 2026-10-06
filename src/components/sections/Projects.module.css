@@ -51,9 +51,24 @@
     color var(--dur-quick) var(--ease-out);
 }
 
+.tab {
+  position: relative;
+}
+
 .tab[aria-pressed="true"] {
-  background: var(--accent);
   color: var(--on-accent);
+}
+
+/* The sliding highlight behind the active tab. */
+.tabHighlight {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}
+
+.tabLabel {
+  position: relative; /* above the highlight */
 }
 
 /* Inset focus ring: the scrolling track would clip an outer one. Text colour

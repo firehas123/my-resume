@@ -3,9 +3,9 @@
 import { DURATION, EASE_OUT } from "@/lib/motion";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useState, useSyncExternalStore, ViewTransition } from "react";
-import { LiftCard } from "@/components/ui/LiftCard";
+import { TiltCard } from "@/components/motion/TiltCard";
 import { ProjectTile } from "@/components/ui/ProjectTile";
 import { Reveal } from "@/components/ui/Reveal";
 import styles from "./Projects.module.css";
@@ -39,6 +39,13 @@ function readTabParam(): string | null {
   return new URLSearchParams(window.location.search).get("tab");
 }
 
+// Tab change: the cards cross-fade in, one shortly after another.
+const GRID = { show: { transition: { staggerChildren: 0.05 } } };
+const CELL = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: DURATION.standard, ease: EASE_OUT } },
+};
+
 // How many cards a tab shows before "Show all".
 const INITIAL_COUNT = 6;
 
@@ -48,6 +55,8 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
   // hydration; the server always renders the first tab.
   const tabFromUrl = useSyncExternalStore(subscribeToHistory, readTabParam, () => null);
   const [chosen, setChosen] = useState<string | null>(null);
+  const [switched, setSwitched] = useState(false);
+  const reduceMotion = useReducedMotion();
   const active = chosen ?? (tabFromUrl && groups.includes(tabFromUrl) ? tabFromUrl : groups[0]);
   const [showAll, setShowAll] = useState(false);
 
@@ -55,6 +64,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
   const visible = showAll ? inGroup : inGroup.slice(0, INITIAL_COUNT);
 
   function selectGroup(group: string) {
+    setSwitched(true);
     setChosen(group);
     setShowAll(false);
     const url = new URL(window.location.href);
@@ -75,7 +85,16 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
               aria-pressed={group === active}
               onClick={() => selectGroup(group)}
             >
-              {group}
+              {/* One highlight shared by all tabs: it slides from the old tab to the new one. */}
+              {group === active && (
+                <motion.span
+                  layoutId="project-tab-highlight"
+                  className={styles.tabHighlight}
+                  transition={{ duration: DURATION.standard, ease: EASE_OUT }}
+                  aria-hidden="true"
+                />
+              )}
+              <span className={styles.tabLabel}>{group}</span>
             </button>
           ))}
         </div>
@@ -86,18 +105,20 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
         {`${inGroup.length} ${active} ${inGroup.length === 1 ? "project" : "projects"}`}
       </p>
 
-      {/* `key` makes the grid re-mount, and fade in, whenever the tab changes. */}
+      {/* `key` re-mounts the grid when the tab changes; the new cards then
+          cross-fade in with a short stagger. Never on the first render, so the
+          cards are always in the server HTML and visible without JavaScript. */}
       <motion.div
         key={active}
         className={styles.grid}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: DURATION.standard, ease: EASE_OUT }}
+        variants={GRID}
+        initial={switched && !reduceMotion ? "hidden" : false}
+        animate="show"
       >
         {visible.map((project) => (
-          <div key={project.slug} className={styles.cell}>
+          <motion.div key={project.slug} className={styles.cell} variants={CELL}>
             <ProjectCard project={project} />
-          </div>
+          </motion.div>
         ))}
       </motion.div>
 
@@ -108,7 +129,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
           </button>
         )}
         {githubUrl && (
-          <a href={githubUrl} className={styles.moreLink} target="_blank" rel="noopener noreferrer">
+          <a href={githubUrl} className={`u-link ${styles.moreLink}`} target="_blank" rel="noopener noreferrer">
             All repositories on GitHub
           </a>
         )}
@@ -119,7 +140,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
 
 function ProjectCard({ project }: { project: ProjectCardData }) {
   return (
-    <LiftCard className={styles.card}>
+    <TiltCard className={styles.card}>
       {/* Shared with the project page: the image grows into its hero image. */}
       <ViewTransition name={`project-media-${project.slug}`} share="morph" default="none">
         <div className={styles.media}>
@@ -145,19 +166,19 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
           </ul>
         )}
         <div className={styles.links}>
-          <Link href={`/projects/${project.slug}`}>
+          <Link href={`/projects/${project.slug}`} className="u-link">
             Details<span className="visually-hidden"> about {project.title}</span>
           </Link>
-          <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">
+          <a href={project.codeUrl} className="u-link" target="_blank" rel="noopener noreferrer">
             Code<span className="visually-hidden"> of {project.title} on GitHub</span>
           </a>
           {project.demoUrl && (
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+            <a href={project.demoUrl} className="u-link" target="_blank" rel="noopener noreferrer">
               Live demo<span className="visually-hidden"> of {project.title}</span>
             </a>
           )}
         </div>
       </div>
-    </LiftCard>
+    </TiltCard>
   );
 }
