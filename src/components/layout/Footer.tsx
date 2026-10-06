@@ -17,6 +17,12 @@ export function Footer() {
             <li>
               <Link href="/datenschutz">Datenschutz</Link>
             </li>
+            {/* The stats page is unlisted unless switched on in profile.json. */}
+            {profile.showStatsLink && (
+              <li>
+                <Link href="/stats">Site stats</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

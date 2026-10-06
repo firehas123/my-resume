@@ -5,6 +5,8 @@
   "scripts": {
     "sync": "node scripts/sync-projects.mjs",
     "test": "node --test scripts/*.test.mjs",
+    "stats:backup": "node scripts/stats-backup.mjs",
+    "stats:restore": "node scripts/stats-restore.mjs",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
@@ -12,19 +14,29 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.1",
+    "@upstash/redis": "^1.39.0",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "d3-geo": "^3.1.1",
     "devicon": "^2.17.0",
+    "i18n-iso-countries": "^7.14.0",
     "marked": "^18.1.0",
     "motion": "^14.0.0",
     "next": "16.3.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "three": "^0.186.1"
+    "three": "^0.186.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
+    "@types/d3-geo": "^3.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.186.0",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
     "typescript": "^5"

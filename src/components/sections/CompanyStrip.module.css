@@ -44,6 +44,13 @@
   padding-inline: 40px;
 }
 
+/* The part the cursor pushes; a separate transform from the rolling track. */
+.item {
+  display: flex;
+  align-items: center;
+  will-change: transform;
+}
+
 /* All logos at the same visual height, in one colour that suits the theme:
    white on dark, black on light. The filter only flattens the logo's own
    colours to a single tone; its shape and proportions are untouched. */

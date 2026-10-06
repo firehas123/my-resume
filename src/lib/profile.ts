@@ -55,6 +55,8 @@ export type Profile = {
   about: { lead: string; body: string; image: string; imageAlt: string };
   cv: { path: string; downloadName: string };
   previewImage: string;
+  /** When true, the footer shows a quiet "Site stats" link to /stats. */
+  showStatsLink: boolean;
   links: Link[];
   companies: Company[];
   experience: Job[];
