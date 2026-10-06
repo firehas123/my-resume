@@ -11,6 +11,8 @@ type PillLinkProps = {
   size?: "small" | "large";
   /** Set to a file name to download instead of navigating (used for the CV). */
   download?: string;
+  /** Click name for the site's own statistics (see VisitTracker). */
+  track?: string;
   className?: string;
 };
 
@@ -24,6 +26,7 @@ export function PillLink({
   variant = "primary",
   size = "large",
   download,
+  track,
   className,
 }: PillLinkProps) {
   const classes = [styles.pill, styles[variant], styles[size], className].filter(Boolean).join(" ");
@@ -35,6 +38,7 @@ export function PillLink({
         href={href}
         className={classes}
         download={download}
+        data-track={track}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
       >
@@ -44,7 +48,7 @@ export function PillLink({
   }
 
   return (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} data-track={track}>
       {children}
     </Link>
   );

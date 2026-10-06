@@ -7,7 +7,8 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { IntroScreen } from "@/components/layout/IntroScreen";
 import { MotionProvider } from "@/components/ui/MotionProvider";
-import { isProductionDeployment } from "@/lib/env";
+import { VisitTracker } from "@/components/analytics/VisitTracker";
+import { isProductionDeployment, statsEnabled } from "@/lib/env";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import { PRE_PAINT_SCRIPT } from "@/lib/theme";
@@ -71,6 +72,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main">{children}</main>
           <Footer />
         </MotionProvider>
+        {/* The site's own privacy-friendly visit counter (production only). */}
+        <VisitTracker enabled={statsEnabled} />
         {/* Vercel Web Analytics and Speed Insights: only on the production
             deployment, never in previews or local development. */}
         {isProductionDeployment && (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { visibleLinks } from "@/lib/profile";
+import { trackName } from "@/lib/stats/track";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default function ContactPage() {
               {visibleLinks.map((link, i) => (
                 <span key={link.id}>
                   {i > 0 && (i === visibleLinks.length - 1 ? " and " : ", ")}
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" data-track={trackName(link.id)}>
                     {link.label}
                   </a>
                 </span>

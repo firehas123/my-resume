@@ -33,7 +33,7 @@ export function Header() {
         </nav>
         <div className={styles.actions}>
           <ThemeToggle />
-          <PillLink href={profile.cv.path} download={profile.cv.downloadName} size="small">
+          <PillLink href={profile.cv.path} download={profile.cv.downloadName} track="cv" size="small">
             Download CV
           </PillLink>
         </div>

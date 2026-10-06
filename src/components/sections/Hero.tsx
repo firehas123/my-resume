@@ -17,7 +17,7 @@ export function Hero() {
           </h1>
           <p className={styles.pitch}>{profile.intro.pitch}</p>
           <div className={styles.buttons}>
-            <PillLink href={profile.cv.path} download={profile.cv.downloadName}>
+            <PillLink href={profile.cv.path} download={profile.cv.downloadName} track="cv">
               <DownloadIcon />
               Download CV
             </PillLink>
