@@ -5,6 +5,8 @@
   "scripts": {
     "sync": "node scripts/sync-projects.mjs",
     "test": "node --test scripts/*.test.mjs",
+    "stats:backup": "node scripts/stats-backup.mjs",
+    "stats:restore": "node scripts/stats-restore.mjs",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
