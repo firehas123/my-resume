@@ -46,9 +46,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <p className={styles.language}>{project.group}</p>
           <h1 className={styles.title}>{project.title}</h1>
           {project.summary && <p className={styles.summary}>{project.summary}</p>}
-          <p className={styles.meta}>Last updated {dateFormat.format(new Date(project.pushedAt))}</p>
-          {project.languages.length > 0 && (
-            <ul className={styles.languageTags} aria-label="Languages">
+          <p className={styles.meta}>
+            {project.forkOf && <>Fork of {project.forkOf} · </>}
+            Last updated {dateFormat.format(new Date(project.pushedAt))}
+          </p>
+          {(project.forkOf || project.languages.length > 0) && (
+            <ul className={styles.languageTags} aria-label="Labels">
+              {project.forkOf && <li className={styles.forkTag}>Fork</li>}
               {project.languages.map((language) => (
                 <li key={language.name}>{formatLanguage(language)}</li>
               ))}

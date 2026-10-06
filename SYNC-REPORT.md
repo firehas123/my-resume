@@ -8,6 +8,7 @@ Last run: 2026-10-06.
 | Group | Projects |
 | --- | --- |
 | C / C++ | 3 |
+| Python | 1 |
 | Java | 6 |
 | JavaScript / TypeScript | 8 |
 | ImageJ Macro | 1 |
@@ -22,6 +23,7 @@ Percentages are shares of all code in the repo, as measured by GitHub.
 | [Advanced-Account-Management-System](https://github.com/firehas123/Advanced-Account-Management-System) | C++ 100% | C / C++ | C / C++ is 100% of the project code |
 | [Comprehensive-C-MCQ-Platform-for-Educational-Assessment](https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment) | C++ 100% | C / C++ | C / C++ is 100% of the project code |
 | [Employee-Management-System](https://github.com/firehas123/Employee-Management-System) | C 100% | C / C++ | C / C++ is 100% of the project code |
+| [made-project-ws2024](https://github.com/firehas123/made-project-ws2024) | Jupyter Notebook 94%, Python 4%, TeX 2% | Python | Python is 100% of the project code; Jupyter Notebook counted as Python; TeX and Shell ignored (fork shown: 43 commits of my own that jvalue/made-template does not have; description and website inherited from the original, not shown) |
 | [Admin-Patient-GUI](https://github.com/firehas123/Admin-Patient-GUI) | Java 100% | Java | Java is 100% of the project code |
 | [Chat-Java](https://github.com/firehas123/Chat-Java) | Java 100% | Java | Java is 100% of the project code |
 | [Hockey-proj-JSP](https://github.com/firehas123/Hockey-proj-JSP) | Java 91%, HTML 9% | Java | Java is 100% of the project code; HTML ignored |
@@ -35,7 +37,7 @@ Percentages are shares of all code in the repo, as measured by GitHub.
 | [google-app-script-sheet-data-dumping](https://github.com/firehas123/google-app-script-sheet-data-dumping) | JavaScript 100% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code |
 | [INFO-VIZ](https://github.com/firehas123/INFO-VIZ) | JavaScript 88%, CSS 10%, HTML 2% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; CSS and HTML ignored |
 | [MHC-Solutions](https://github.com/firehas123/MHC-Solutions) | JavaScript 42%, HTML 38%, CSS 20% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
-| [my-resume](https://github.com/firehas123/my-resume) | TypeScript 53%, HTML 25%, CSS 20% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
+| [my-resume](https://github.com/firehas123/my-resume) | TypeScript 49%, HTML 22%, CSS 19% | JavaScript / TypeScript | JavaScript / TypeScript is 100% of the project code; HTML and CSS ignored |
 | [Medizintechnik-II-Final-Project](https://github.com/firehas123/Medizintechnik-II-Final-Project) | ImageJ Macro 44%, TeX 19%, Java 19% | ImageJ Macro | ImageJ Macro is 54% of the project code; TeX ignored |
 | [GitHub-Essentials-Guide](https://github.com/firehas123/GitHub-Essentials-Guide) | HTML 100% | Other | only HTML, which is not counted as project code |
 | [my-tralive-netlifyapp](https://github.com/firehas123/my-tralive-netlifyapp) | HTML 100% | Other | only HTML, which is not counted as project code |
@@ -43,11 +45,10 @@ Percentages are shares of all code in the repo, as measured by GitHub.
 
 ## Forks skipped
 
-To show a fork on the site, add `"include": true` for it in `src/data/overrides.json` and run `npm run sync` again.
+A fork is shown when my copy has commits of my own that the original does not have. To force one
+either way, set `"include": true` or `"hide": true` for it in `src/data/overrides.json` and run `npm run sync` again.
 
-| Fork | Top languages | Would be in |
-| --- | --- | --- |
-| [made-project-ws2024](https://github.com/firehas123/made-project-ws2024) | Jupyter Notebook 94%, Python 4%, TeX 2% | Python |
+None.
 
 ## Other skipped repositories
 
