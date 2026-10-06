@@ -1,0 +1,85 @@
+.skills {
+  background: var(--bg-alt);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-block: 112px 96px;
+}
+
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px 16px;
+  margin: 0;
+  padding: 16px 0 24px;
+  list-style: none;
+  /* Tapping the cloud makes ripples; do not also trigger the grey tap flash. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* --offset is set per pill in SkillCloud.tsx for the loose cloud look. */
+.anchor {
+  --offset-scale: 1;
+  position: relative;
+  top: calc(var(--offset, 0) * var(--offset-scale) * 1px);
+}
+
+.pill {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  background: var(--pill-bg);
+  border: 1px solid var(--pill-border);
+  font-weight: 700;
+  white-space: nowrap;
+  will-change: transform;
+  user-select: none;
+}
+
+.small {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.medium {
+  padding: 12px 24px;
+  font-size: 19px;
+}
+
+.large {
+  padding: 14px 28px;
+  font-size: 22px;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-block: 80px 72px;
+  }
+
+  .cloud {
+    gap: 20px 10px;
+  }
+
+  .anchor {
+    --offset-scale: 0.5;
+  }
+
+  .small {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .medium {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .large {
+    padding: 12px 22px;
+    font-size: 18px;
+  }
+}

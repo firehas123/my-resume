@@ -1,0 +1,119 @@
+.strip {
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: 40px 48px;
+}
+
+.label {
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.viewport {
+  overflow: hidden;
+  /* Soft fade at both edges so logos slide in and out instead of being cut. */
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+}
+
+.list {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  height: 64px;
+  padding-inline: 32px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  will-change: transform;
+}
+
+/* Logos in one colour that suits the theme: black in light, white in dark. */
+.logo {
+  height: 28px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: brightness(0) invert(1);
+}
+
+:global(:root[data-theme="light"]) .logo {
+  filter: brightness(0);
+}
+
+.wordmark {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .slot {
+    min-width: 168px;
+    padding-inline: 20px;
+  }
+
+  .wordmark {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .track {
+    /* Moves by one copy (100% / 4 copies) and loops. */
+    animation: slide 40s linear infinite;
+  }
+
+  .viewport:hover .track {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+/* Reduced motion: no sliding; show one centred, wrapping row instead. */
+@media (prefers-reduced-motion: reduce) {
+  .viewport {
+    mask-image: none;
+  }
+
+  .track {
+    width: auto;
+    justify-content: center;
+  }
+
+  .list {
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-shrink: 1;
+  }
+
+  .list + .list {
+    display: none;
+  }
+}

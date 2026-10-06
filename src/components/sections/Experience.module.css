@@ -1,0 +1,121 @@
+.experience {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-block: 112px;
+}
+
+.grid {
+  display: grid;
+  /* Two columns on wide screens, one on narrow ones. min() keeps a single
+     column from overflowing on very small phones. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+}
+
+.cell {
+  min-width: 0;
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 40px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--lift-shadow);
+}
+
+.meta {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.company {
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.role {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.summary {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.details {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.details summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+}
+
+.details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A small chevron drawn with borders; rotates when open. */
+.details summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.details[open] summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.details ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0 0 20px;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-block: 80px;
+  }
+
+  .card {
+    padding: 32px 24px;
+  }
+
+  .company {
+    font-size: 30px;
+  }
+}

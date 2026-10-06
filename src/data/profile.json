@@ -1,0 +1,153 @@
+{
+  "name": "Muhammad Hassan Chattha",
+  "shortName": "Hassan Chattha",
+  "location": "Nuremberg, Germany",
+
+  "intro": {
+    "headline": ["Software engineer.", "Studying AI."],
+    "pitch": "Backend systems by trade, and a Master's in Artificial Intelligence at FAU Erlangen-Nürnberg."
+  },
+
+  "about": {
+    "lead": "Payment systems at i2c. Microservices for the Careem Super App. Secure email at Zertificon.",
+    "body": "Currently a Master's student in Artificial Intelligence, and a working student at Zertificon in Berlin.",
+    "image": "/images/about-wide-calm.jpg",
+    "imageAlt": "Black and white portrait of Hassan Chattha in a black T-shirt"
+  },
+
+  "cv": {
+    "path": "/files/resume.pdf",
+    "downloadName": "Muhammad-Hassan-Chattha-CV.pdf"
+  },
+
+  "previewImage": "/images/headshot-calm.jpg",
+
+  "links": [
+    { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/muhammad-hassan-852827189/", "show": true },
+    { "id": "github", "label": "GitHub", "url": "https://github.com/firehas123", "show": true },
+    { "id": "fiverr", "label": "Fiverr", "url": "https://www.fiverr.com/hassanchattha", "show": false }
+  ],
+
+  "companies": [
+    { "name": "Zertificon", "logo": "zertificon" },
+    { "name": "Careem", "logo": "careem" },
+    { "name": "i2c Inc", "logo": "i2c" },
+    { "name": "InfoTech", "logo": "infotech" }
+  ],
+
+  "experience": [
+    {
+      "company": "Zertificon",
+      "role": "Working Student",
+      "city": "Berlin",
+      "country": "Germany",
+      "start": "2024-12",
+      "end": null,
+      "summary": "Operates and monitors the secure mail pipeline (TLS, S/MIME and PGP gateways), renews X.509 certificates and rotates keys.",
+      "highlights": [
+        "Operate & monitor the secure mail pipeline – help keep our TLS, S/MIME / PGP gateways running smoothly.",
+        "Renew expiring X.509 certs, rotate keys, and push new cipher-suite settings to staging and production.",
+        "Build minimal test cases for product teams and validate them in a sandbox before rollout."
+      ]
+    },
+    {
+      "company": "Careem",
+      "role": "Software Engineer",
+      "city": "Lahore",
+      "country": "Pakistan",
+      "start": "2023-12",
+      "end": "2024-04",
+      "summary": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
+      "highlights": [
+        "Developed a scalable REST microservice for the Careem Super App, leveraging Vector Postgres for efficient data management and implemented JWT-based OAuth for secure user authentication.",
+        "Ensuring continuous operation with health check services like Grafana for monitoring, Kibana for logging, and Jaeger for tracing requests using OpenTelemetry.",
+        "Managed CI/CD pipelines using GitHub Actions, deploying dockerized service on AWS server.",
+        "Optimized prompt engineering to enhance accuracy of results with large language models (LLMs) like GPT."
+      ]
+    },
+    {
+      "company": "i2c Inc",
+      "role": "Software Engineer",
+      "city": "Lahore",
+      "country": "Pakistan",
+      "start": "2022-07",
+      "end": "2023-12",
+      "summary": "Moved payment services to an event-driven microservices architecture with Spring Boot and Kafka, and worked with the ISO 8583 standard.",
+      "highlights": [
+        "Pioneered the shift to an event-driven microservices architecture using Maven Spring Boot, significantly boosting system scalability and reducing maintenance overhead.",
+        "Integrated Kafka for efficient transaction handling, enhancing throughput and reducing latency.",
+        "Enforced rigorous testing for software reliability and performance, automating tests with bash scripts.",
+        "Streamlined application deployment and management using Docker, reducing deployment time and optimized server resource utilization, which enabled faster delivery of software solutions.",
+        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage by TODO (missing figure), ensuring thorough testing of critical functionalities.",
+        "Demonstrated expertise in ISO 8583 standards, ensuring compliance with industry regulations, safeguarding sensitive data, and fostering strong client confidence."
+      ]
+    },
+    {
+      "company": "InfoTech",
+      "legalName": "InfoTech Private Limited",
+      "role": "Intern",
+      "city": "Lahore",
+      "country": "Pakistan",
+      "start": "2021-07",
+      "end": "2021-09",
+      "summary": "Backend development with Java and JavaFX, working closely with the QA team.",
+      "highlights": [
+        "Spearheaded backend development using Java and JavaFX, improving application performance through optimized code structure and efficient resource management.",
+        "Reduced processing time for critical operations by utilizing advanced algorithms and data structures, enhancing software responsiveness.",
+        "Facilitated seamless collaboration between development and SQA teams, improving bug resolution times and significantly reducing post-release defects."
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Master's, Artificial Intelligence",
+      "school": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
+      "start": "2024-04",
+      "end": "TODO"
+    },
+    {
+      "degree": "Bachelor's, Information Technology",
+      "school": "University of the Punjab",
+      "start": "2018-07",
+      "end": "2022-07",
+      "note": "GPA 3.44"
+    }
+  ],
+
+  "certifications": [
+    { "name": "Machine Learning", "detail": "Achieved from LinkedIn" },
+    { "name": "Java", "detail": "Achieved 4-Star rating on HackerRank" },
+    { "name": "Problem Solving", "detail": "Achieved 4-Star rating on HackerRank" },
+    { "name": "SQL", "detail": "Achieved 4-Star rating on HackerRank" },
+    { "name": "Google Code Jam", "detail": "Participated in Google Code Jam competitions" }
+  ],
+
+  "languages": [
+    { "name": "German", "level": "TODO" },
+    { "name": "TODO: other spoken languages", "level": "TODO" }
+  ],
+
+  "skills": [
+    { "name": "Java", "size": 3 },
+    { "name": "Python", "size": 3 },
+    { "name": "C/C++", "size": 3 },
+    { "name": "JavaScript", "size": 2 },
+    { "name": "Spring Boot", "size": 3 },
+    { "name": "Spring", "size": 1 },
+    { "name": "FastAPI", "size": 2 },
+    { "name": "React.js", "size": 2 },
+    { "name": "JavaFX", "size": 1 },
+    { "name": "Apache Kafka", "size": 3 },
+    { "name": "Docker", "size": 3 },
+    { "name": "Kubernetes", "size": 2 },
+    { "name": "AWS", "size": 2 },
+    { "name": "Postgres", "size": 2 },
+    { "name": "MySQL", "size": 2 },
+    { "name": "InformixDB", "size": 1 },
+    { "name": "Linux/Unix", "size": 2 },
+    { "name": "Git", "size": 1 },
+    { "name": "HTML/CSS", "size": 1 },
+    { "name": "Data Structures & Algorithms", "size": 1 }
+  ]
+}

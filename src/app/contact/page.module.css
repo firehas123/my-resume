@@ -1,0 +1,61 @@
+.page {
+  background: var(--bg);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  gap: 56px 80px;
+  align-items: start;
+  padding-block: 96px 120px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-size: clamp(44px, 6vw, 80px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.lead {
+  font-size: 22px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.links {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.links a {
+  font-weight: 700;
+}
+
+.formWrap {
+  padding: 40px;
+  border-radius: var(--radius-card);
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-block: 64px 80px;
+  }
+
+  .formWrap {
+    padding: 28px 20px;
+  }
+}

@@ -1,0 +1,185 @@
+.projects {
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-block: 112px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--track-bg);
+}
+
+.tab {
+  min-height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.tab[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.tab[aria-pressed="false"]:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.grid {
+  display: grid;
+  /* Two columns on wide screens, one on narrow ones. min() keeps a single
+     column from overflowing on very small phones. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+}
+
+.cell {
+  min-width: 0;
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--lift-shadow);
+}
+
+.media {
+  position: relative;
+  height: 240px;
+  background: var(--media-bg);
+}
+
+.mediaImage {
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 32px;
+}
+
+.language {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.title {
+  font-size: 30px;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.footer:empty {
+  display: none;
+}
+
+.more {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--btn-outline);
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.more:hover {
+  border-color: var(--text);
+}
+
+.moreLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.empty {
+  font-size: 20px;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding-block: 80px;
+  }
+
+  .body {
+    padding: 28px 24px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}
