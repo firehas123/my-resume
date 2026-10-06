@@ -1,6 +1,6 @@
 import { DownloadIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
-import { HeroObjectSlot } from "@/components/three/HeroObjectSlot";
+import { HeroDotField } from "./HeroDotField";
 import { profile, statusLine } from "@/lib/profile";
 import styles from "./Hero.module.css";
 
@@ -8,6 +8,7 @@ export function Hero() {
   const [lineOne, lineTwo] = profile.intro.headline;
   return (
     <section id="top" className={styles.hero} aria-labelledby="hero-title">
+      <HeroDotField className={styles.dots} />
       <div className={`container ${styles.inner}`}>
         <div className={styles.text}>
           <p className={styles.status}>
@@ -30,7 +31,6 @@ export function Hero() {
             </PillLink>
           </div>
         </div>
-        <HeroObjectSlot className={styles.object} />
       </div>
     </section>
   );
