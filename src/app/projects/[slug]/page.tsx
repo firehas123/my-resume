@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 
 import { ArrowLeftIcon, ExternalIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
-import { getProject, getProjects, getWriteupHtml, languageLabel } from "@/lib/projects";
+import { formatLanguage, getProject, getProjects, getWriteupHtml } from "@/lib/projects";
 import styles from "./page.module.css";
 
 // Every project page is generated at build time. Unknown slugs return 404.
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   if (!project) return {};
   return {
     title: project.title,
-    description: project.summary || `${project.title}, a ${languageLabel(project)} project on GitHub.`,
+    description: project.summary || `${project.title}, a ${project.group} project on GitHub.`,
   };
 }
 
@@ -43,10 +43,17 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         </Link>
 
         <header className={styles.header}>
-          <p className={styles.language}>{languageLabel(project)}</p>
+          <p className={styles.language}>{project.group}</p>
           <h1 className={styles.title}>{project.title}</h1>
           {project.summary && <p className={styles.summary}>{project.summary}</p>}
           <p className={styles.meta}>Last updated {dateFormat.format(new Date(project.pushedAt))}</p>
+          {project.languages.length > 0 && (
+            <ul className={styles.languageTags} aria-label="Languages">
+              {project.languages.map((language) => (
+                <li key={language.name}>{formatLanguage(language)}</li>
+              ))}
+            </ul>
+          )}
           {project.topics.length > 0 && (
             <ul className={styles.topics} aria-label="Topics">
               {project.topics.map((topic) => (

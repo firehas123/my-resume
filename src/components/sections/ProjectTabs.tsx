@@ -12,8 +12,8 @@ export type ProjectCardData = {
   slug: string;
   title: string;
   summary: string;
-  language: string;
-  group: string;
+  group: string; // the tab it belongs to
+  languages: string[]; // top languages, largest first
   codeUrl: string;
   demoUrl: string | null;
   image: string | null;
@@ -21,6 +21,7 @@ export type ProjectCardData = {
 
 type ProjectTabsProps = {
   projects: ProjectCardData[];
+  /** One tab per group that has projects, already in display order. */
   groups: string[];
   heading: React.ReactNode;
   githubUrl?: string;
@@ -30,8 +31,8 @@ type ProjectTabsProps = {
 const INITIAL_COUNT = 6;
 
 export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTabsProps) {
-  // Start on the first tab that has something to show.
-  const [active, setActive] = useState(() => groups.find((g) => projects.some((p) => p.group === g)) ?? groups[0]);
+  // Every group passed in has at least one project, so start on the first.
+  const [active, setActive] = useState(groups[0]);
   const [showAll, setShowAll] = useState(false);
 
   const inGroup = projects.filter((p) => p.group === active);
@@ -66,24 +67,20 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
         {`${inGroup.length} ${active} ${inGroup.length === 1 ? "project" : "projects"}`}
       </p>
 
-      {inGroup.length === 0 ? (
-        <p className={styles.empty}>No public {active} projects on GitHub yet.</p>
-      ) : (
-        // `key` makes the grid re-mount, and fade in, whenever the tab changes.
-        <motion.div
-          key={active}
-          className={styles.grid}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {visible.map((project) => (
-            <div key={project.slug} className={styles.cell}>
-              <ProjectCard project={project} />
-            </div>
-          ))}
-        </motion.div>
-      )}
+      {/* `key` makes the grid re-mount, and fade in, whenever the tab changes. */}
+      <motion.div
+        key={active}
+        className={styles.grid}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {visible.map((project) => (
+          <div key={project.slug} className={styles.cell}>
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </motion.div>
 
       <div className={styles.footer}>
         {inGroup.length > INITIAL_COUNT && (
@@ -110,9 +107,16 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
         </div>
       )}
       <div className={styles.body}>
-        <p className={styles.language}>{project.language}</p>
+        <p className={styles.language}>{project.group}</p>
         <h3 className={styles.title}>{project.title}</h3>
         {project.summary && <p className={styles.summary}>{project.summary}</p>}
+        {project.languages.length > 0 && (
+          <ul className={styles.languageTags} aria-label="Languages">
+            {project.languages.map((name) => (
+              <li key={name}>{name}</li>
+            ))}
+          </ul>
+        )}
         <div className={styles.links}>
           <Link href={`/projects/${project.slug}`}>
             Details<span className="visually-hidden"> about {project.title}</span>
