@@ -41,10 +41,26 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--muted);
+  /* Keeps the dot field from showing through the text. */
+  background: var(--bg);
+}
+
+.statusPart {
+  white-space: nowrap;
+}
+
+/* Narrow phones: the line may wrap, so a rounded box instead of a pill. */
+@media (max-width: 480px) {
+  .status {
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
 }
 
 .statusDot {
   position: relative;
+  flex: none;
   width: 8px;
   height: 8px;
   border-radius: 50%;

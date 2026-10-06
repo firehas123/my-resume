@@ -8,5 +8,8 @@
     "featured": true,
     "order": 1,
     "hide": false
+  },
+  "my-resume": {
+    "summary": "This website: Next.js and TypeScript, projects synced from GitHub, a Web3Forms contact form, its own visit statistics and motion built on View Transitions."
   }
 }

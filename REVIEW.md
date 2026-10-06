@@ -14,18 +14,18 @@ only you can do.
 A Next.js 16 (App Router, TypeScript) site at the repo root, replacing the old
 single `index.html`.
 
-- **Home page**, sections in the requested order: header → hero (with lazy 3D
-  object) → sliding company strip → About (black band, photo background) →
+- **Home page**, sections in the requested order: header → hero (with a canvas
+  dot field) → sliding company strip → About (black band, photo background) →
   Experience (light band, large cards with expandable highlights) → Projects
   (one tab per language group) → Skills cloud → Education and certifications →
   "Get in touch." → footer.
 - **`/projects/[slug]`**: one statically generated page per public repo, with an
   optional Markdown write-up from `content/projects/<repo-name>.md`.
 - **`/contact`**: labelled form with validation, success/error states and a
-  honeypot. It posts to `NEXT_PUBLIC_FORM_ENDPOINT`, and while that is empty it shows
-  "not connected yet" and sends nothing.
-- **`/impressum`, `/datenschutz`**: placeholder pages with clearly visible TODOs,
-  linked from the footer.
+  honeypot. It sends through Web3Forms (public access key in `profile.json`,
+  overridable with `NEXT_PUBLIC_WEB3FORMS_KEY`); the email address is never shown.
+- **`/impressum`, `/datenschutz`**: name, Nuremberg, contact via the form, and the
+  privacy notes for hosting, the form and the visit counter; linked from the footer.
 - **Dark and light themes**: dark by default, follows the system setting until the
   switch is used, then remembered (localStorage). An inline pre-paint script means
   there is no flash of the wrong theme, and colours cross-fade in 250ms.
@@ -33,7 +33,8 @@ single `index.html`.
   header (26px, links to the top of the home page) and on the loading screen.
   Favicon from the provided artwork.
 - **Loading screen**: first visit per browser session only. M, then H, then C draw
-  with a thin accent line, then it fades and lifts away while the headline rises.
+  with a thin accent line, then the background fades while the logo travels into
+  its place in the header.
   It takes 1.4s and is pure CSS, so it never waits on JavaScript. It's skipped with
   reduced motion, and the real page is rendered underneath from the start.
 - **Cursor effect** (`src/hooks/usePushField.ts`): pills move away before the cursor
@@ -129,8 +130,8 @@ the same `next build` Vercel runs.
 6. Display names "InfoTech" (full "InfoTech Private Limited" kept in the data as
    `legalName`) and the Master's school as "Friedrich-Alexander-Universität
    Erlangen-Nürnberg", both as in the design reference.
-7. The Master's end date and spoken languages are TODO, as instructed, even though
-   the PDF says "April 2026" and "Languages: German". German is listed with level TODO.
+7. The Master's end date shows "present" and the languages are English and German
+   without levels, as instructed (see `TODO.md`).
 8. The skills cloud uses all 20 skills from the PDF. The three pill sizes (bigger =
    more central) are my judgement. Adjust `size` (1–3) in `profile.json`.
 9. Footer text says "Projects are pulled from GitHub" instead of the reference's
@@ -155,10 +156,9 @@ the same `next build` Vercel runs.
 14. Motion (`motion/react`, formerly Framer Motion) for scroll reveals, card hover
     lift and tab transitions. The cursor effect is hand-written (a spring simulation)
     because no library does "push away before touching".
-15. The 3D object is a slowly turning geodesic wireframe in the text colour with
-    accent-coloured vertices, leaning slightly toward the cursor. It loads only on
-    screens at least 900px wide, after the page is idle, with WebGL available and no
-    reduced motion. Phones never download three.js.
+15. The hero background is a canvas dot field (replaced the 3D object and three.js):
+    dots move away from the cursor and settle back, taps send a ripple, and it
+    sleeps when nothing moves or the hero is off screen.
 16. About: the photo is a real background anchored left, so on narrower screens the
     crop pushes you right and away from the text. On phones the photo sits above the
     text.
@@ -175,17 +175,10 @@ the same `next build` Vercel runs.
 22. Added a 404 page, a "Skip to content" link for keyboard users, `sitemap.xml` and
     `robots.txt`.
 
-## Every TODO (search the code for `TODO`)
+## Open items
 
-| Where | What is missing |
-| --- | --- |
-| `src/data/profile.json` → education | End date of the Master's (`"end": "TODO"`) |
-| `src/data/profile.json` → languages | Spoken languages and their levels (German level unknown; others unknown) |
-| `src/data/profile.json` → i2c highlights | The figure in "increasing test coverage by TODO (missing figure)" |
-| `src/app/impressum/page.tsx` | The whole Impressum (name, address, contact) |
-| `src/app/datenschutz/page.tsx` | Controller details, form service, rights; a technical outline is drafted |
-| GitHub / `overrides.json` | **None of the 21 repos has a description**, so cards show no summary. Add descriptions on GitHub and run `npm run sync`, or add `summary` in `overrides.json`. |
-| Vercel | `NEXT_PUBLIC_FORM_ENDPOINT` (see below) |
+All open items that need your input are listed in `TODO.md`. Nothing on the site
+shows a TODO marker any more.
 
 ## Things you should know
 
@@ -217,24 +210,16 @@ the same `next build` Vercel runs.
 - Nothing in the build failed. `npm audit` reports 5 "high" warnings, all inside dev
   tooling (ESLint), not in code that ships to visitors. I did not run
   `npm audit fix --force`, because it would downgrade or break packages.
-- R3F prints a harmless `THREE.Clock is deprecated` warning in the browser console.
+- three.js and React Three Fiber were removed together with the 3D object.
   It comes from inside the library.
 
-## Connecting the contact form (what you must do)
+## The contact form
 
-1. Sign up at a form service, for example **Formspree** (free tier is enough), and
-   create a form. Copy its endpoint, for example `https://formspree.io/f/abcdwxyz`.
-2. In **Vercel → your project → Settings → Environment Variables**, add:
-   - Name: `NEXT_PUBLIC_FORM_ENDPOINT`
-   - Value: the endpoint URL
-   - Environments: Production (and Preview if you want to test on previews)
-3. **Redeploy**: Deployments → latest → ⋯ → Redeploy. The value is built into the page,
-   so it only applies to new builds.
-4. Open `/contact` and send yourself a test message. In Formspree, confirm your email
-   the first time, then check that the message arrives.
-5. Then update the Datenschutz page with the service you chose.
-
-For local testing: `cp .env.example .env.local`, fill in the value, restart `npm run dev`.
+Connected through Web3Forms since 2026-10-06. The public access key is in
+`src/data/profile.json` (`contactAccessKey`); set `NEXT_PUBLIC_WEB3FORMS_KEY` in Vercel
+only to override it. Messages arrive at the email address registered with that key,
+with the visitor's address as reply-to. Send yourself one test message from the live
+site to confirm delivery.
 
 ## Publishing (the steps left for you)
 
@@ -249,7 +234,6 @@ For local testing: `cp .env.example .env.local`, fill in the value, restart `npm
      If it isn't listed, use "Adjust GitHub App Permissions" to give Vercel access.
    - Framework preset: Next.js is detected automatically (`vercel.json` pins it).
      Leave the build settings at their defaults.
-   - Optional now, or later via Settings: add `NEXT_PUBLIC_FORM_ENDPOINT` (see above).
    - Click **Deploy**. When it finishes you get a `*.vercel.app` address. Open it on
      your phone and your Mac.
    - If you previously had a custom domain, add it under Settings → Domains.
@@ -270,6 +254,21 @@ single-page site comes back on the next deploy.
   `npm run stats:backup` / `stats:restore`, updated `/datenschutz`.
   Details and the dashboard steps: README.md, "Visitor statistics".
 - Still to do in Vercel: enable Web Analytics and Speed Insights, create and connect the
-  Upstash Redis database, redeploy. New TODOs on `/datenschutz`: legal basis for the
-  analytics and the counter; check the Vercel descriptions against Vercel's current
-  privacy pages.
+  Upstash Redis database, redeploy. The legal bases are now on `/datenschutz`; a final review of that page
+  is listed in `TODO.md`.
+
+## Update 2026-10-06: content, contact form and motion
+
+- No visible TODOs; open items live in `TODO.md`.
+- Contact form via Web3Forms with validation, sending state, check-mark success and a
+  LinkedIn fallback on failure.
+- Project summaries, overviews and images from each README; generated tiles otherwise.
+  Tabs need a mainstream language or at least two projects, else "Other".
+- Motion: shared timing tokens, page transitions with shared elements, headline
+  reveals, band blends, hero ease-back, parallax, timeline, skill pop-in, letter
+  reveal, reading progress, active section link, hero dot field, sliding tabs, card
+  tilt, magnetic buttons, pressed buttons, growing underlines, theme circle, intro
+  logo travel, /stats entrance. Reduced motion turns it off; phones keep reveals and
+  page transitions only.
+- Experience durations and "Show details", hero status line, header Contact link,
+  footer "Back to top" and last-updated date, share images per page, theme-color.

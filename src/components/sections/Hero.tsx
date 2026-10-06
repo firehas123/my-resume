@@ -15,7 +15,17 @@ export function Hero() {
         <ScrollEaseBack className={styles.text}>
           <p className={styles.status}>
             <span className={styles.statusDot} aria-hidden="true" />
-            {statusLine()}
+            {/* Each part stays on one line; a narrow screen wraps at the "·". */}
+            <span>
+              {statusLine()
+                .split(" · ")
+                .map((part, i) => (
+                  <span key={part} className={styles.statusPart}>
+                    {i > 0 && " · "}
+                    {part}
+                  </span>
+                ))}
+            </span>
           </p>
           <p className={styles.location}>{profile.location}</p>
           <h1 id="hero-title" className={styles.title}>

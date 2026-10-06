@@ -1,8 +1,8 @@
 # Muhammad Hassan Chattha: resume and portfolio
 
 My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules
-with CSS variables, Motion for scroll and hover animation, and one optional
-React Three Fiber object in the hero.
+with CSS variables, Motion for scroll and hover animation, and a canvas dot field
+in the hero.
 
 ## Commands
 
@@ -53,8 +53,8 @@ src/app/globals.css        all colours (theme tokens), spacing and base styles
 
 ### Update my details
 
-Edit `src/data/profile.json`. Anything still marked `TODO` shows up highlighted on the
-site, so it is easy to spot.
+Edit `src/data/profile.json`. Open items that still need my input are listed in
+`TODO.md`.
 
 - **Switch the CV file:** put the new PDF in `public/files/` and change `"cv": { "path": ... }`,
   for example to `"/files/europass-cv.pdf"`. That one line updates every Download CV button.

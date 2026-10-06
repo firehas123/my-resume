@@ -340,15 +340,23 @@ html.theme-transition *::after {
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 96px;
-  background: linear-gradient(to bottom, var(--blend-from), transparent);
+  height: 160px;
+  /* Eased stops: a straight two-colour gradient reads as a dark smear. */
+  background: linear-gradient(
+    to bottom,
+    var(--blend-from) 0%,
+    color-mix(in srgb, var(--blend-from) 74%, transparent) 22%,
+    color-mix(in srgb, var(--blend-from) 42%, transparent) 46%,
+    color-mix(in srgb, var(--blend-from) 16%, transparent) 72%,
+    transparent 100%
+  );
   pointer-events: none;
   z-index: 1;
 }
 
 @media (max-width: 640px) {
   .blend-top::before {
-    height: 64px;
+    height: 96px;
   }
 }
 
