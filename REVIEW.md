@@ -261,3 +261,15 @@ this folder (asks a few setup questions the first time).
 
 If anything looks wrong after merging, revert the merge commit on GitHub. The old
 single-page site comes back on the next deploy.
+
+## Update 2026-10-06: analytics, visit counter and /stats
+
+- Vercel Web Analytics and Speed Insights in the root layout (production only).
+- Company logos now get a gentle cursor push while the strip keeps rolling.
+- Own visit counter (Upstash Redis), `/stats` page, JSON/CSV export,
+  `npm run stats:backup` / `stats:restore`, updated `/datenschutz`.
+  Details and the dashboard steps: README.md, "Visitor statistics".
+- Still to do in Vercel: enable Web Analytics and Speed Insights, create and connect the
+  Upstash Redis database, redeploy. New TODOs on `/datenschutz`: legal basis for the
+  analytics and the counter; check the Vercel descriptions against Vercel's current
+  privacy pages.
