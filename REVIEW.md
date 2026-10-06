@@ -17,7 +17,7 @@ single `index.html`.
 - **Home page**, sections in the requested order: header → hero (with lazy 3D
   object) → sliding company strip → About (black band, photo background) →
   Experience (light band, large cards with expandable highlights) → Projects
-  (C++ / Python / Other tabs) → Skills cloud → Education and certifications →
+  (one tab per language group) → Skills cloud → Education and certifications →
   "Get in touch." → footer.
 - **`/projects/[slug]`**: one statically generated page per public repo, with an
   optional Markdown write-up from `content/projects/<repo-name>.md`.
@@ -142,9 +142,9 @@ the same `next build` Vercel runs.
 
 **Projects**
 
-11. Language → tab mapping: **C and C++ → "C++"**, Python and Jupyter Notebook →
-    "Python", everything else → "Other". `Employee-Management-System` (C) is therefore
-    under C++, labelled "C".
+11. Language → tab mapping: replaced on 2026-10-06 by the full language-breakdown rules
+    in README.md ("How projects are grouped into tabs"). The current result is in
+    `SYNC-REPORT.md`.
 12. Card titles are the repo names with dashes turned into spaces (for example
     "Advanced Account Management System"). Override any title in `overrides.json`.
 13. No project screenshots exist, so cards have no image area (the reference's grey
@@ -198,10 +198,9 @@ the same `next build` Vercel runs.
   direct way to contact you, which is usually an email address. If the site counts as
   business-like (job seeking can be borderline), you may legally need one there. Please
   decide this yourself or check it; I did not add one.
-- **The Python tab is empty.** Your only Python-like repo (`made-project-ws2024`) is a
-  fork, so it is skipped. The tab says "No public Python projects on GitHub yet." For
-  someone studying AI, you may want to publish one, or move a project there with
-  `"group": "Python"` in `overrides.json`.
+- **There is no Python tab.** Your only Python repo (`made-project-ws2024`, notebooks)
+  is a fork, so it is skipped, and empty tabs are hidden. To show it, set
+  `"include": true` for it in `overrides.json` and run `npm run sync`.
 - **Repo choices are yours.** All 21 public non-fork repos are shown, including the
   old static `my-resume`, `my-tralive-netlifyapp` and `keyLogger`. A recruiter may read
   a repo named "keyLogger" the wrong way out of context. Hide anything with
