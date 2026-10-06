@@ -32,7 +32,7 @@
   border-radius: var(--radius-card);
   background: var(--card);
   border: 1px solid var(--card-border);
-  transition: box-shadow var(--dur-fast) var(--ease-out);
+  transition: box-shadow var(--dur-quick) var(--ease-out);
 }
 
 .card:hover {
@@ -40,6 +40,9 @@
 }
 
 .meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 15px;
   font-weight: 700;
   color: var(--muted);
@@ -92,11 +95,43 @@
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: translateY(-2px) rotate(45deg);
-  transition: transform var(--dur-fast) var(--ease-out);
+  transition: transform var(--dur-quick) var(--ease-out);
 }
 
 .details[open] summary::after {
   transform: translateY(2px) rotate(-135deg);
+}
+
+.hideLabel,
+.details[open] .showLabel {
+  display: none;
+}
+
+.details[open] .hideLabel {
+  display: inline;
+}
+
+/* Smooth height: browsers that support animating to "auto" height open and
+   close the details smoothly; others simply open and close. */
+@media (prefers-reduced-motion: no-preference) {
+  .details {
+    interpolate-size: allow-keywords;
+  }
+
+  .details::details-content {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      height var(--dur-standard) var(--ease-out),
+      opacity var(--dur-standard) var(--ease-out),
+      content-visibility var(--dur-standard) allow-discrete;
+  }
+
+  .details[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
 }
 
 .details ul {
@@ -119,3 +154,59 @@
     font-size: 30px;
   }
 }
+
+/* Timeline: a line down the left of the job cards, drawn by scrolling, and a
+   dot beside each job that lights up as its card comes into view. */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.line {
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.lineProgress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: top;
+}
+
+.dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--card);
+  transition:
+    background-color var(--dur-standard) var(--ease-out),
+    border-color var(--dur-standard) var(--ease-out),
+    transform var(--dur-standard) var(--ease-out);
+}
+
+[data-lit] > .dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.15);
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    padding-left: 24px;
+  }
+
+  .line {
+    left: 4px;
+  }
+}
+

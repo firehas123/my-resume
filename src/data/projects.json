@@ -6,27 +6,30 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 48.5
-      },
-      {
-        "name": "HTML",
-        "share": 22
+        "share": 57.3
       },
       {
         "name": "CSS",
-        "share": 19
+        "share": 16.3
+      },
+      {
+        "name": "HTML",
+        "share": 14.2
       },
       {
         "name": "JavaScript",
-        "share": 10.5
+        "share": 12.3
       }
     ],
+    "readmeSummary": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules with CSS variables, Motion for scroll and hover animation, and one optional React Three Fiber object in the hero.",
+    "readmeOverview": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules\nwith CSS variables, Motion for scroll and hover animation, and one optional\nReact Three Fiber object in the hero.\n\n## Commands\n\n| Command         | What it does                                                                 |\n| --------------- | ---------------------------------------------------------------------------- |\n| `npm install`   | Install dependencies (once, and after pulling changes to `package.json`).    |\n| `npm run dev`   | Development server on port 3000, reachable from other devices on the network. |\n| `npm run build` | Production build (this is what Vercel runs).                                  |\n| `npm run start` | Serve the production build locally.                                           |\n| `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |\n| `npm test`      | Test the rules that sort repos into language tabs.                            |\n| `npm run stats:backup` | Save all visit statistics to `data/stats-backup/.json`.          |\n| `npm run stats:restore ` | Load such a backup into an empty statistics database.          |\n| `npm run lint`  | Check the code with ESLint.                                                   |\n\nRequires Node.js 20.9 or newer.\n\n### Preview on another device (for example a Mac on the same Wi-Fi)\n\n`npm run dev` listens on all network interfaces. Open `http://:3000`\non the other device, for example `http://192.168.0.67:3000`. If the IP changes,\nalso update `allowedDevOrigins` in `next.config.ts`.\n\n### Update my details\n\nEdit `src/data/profile.json`. Anything still marked `TODO` shows up highlighted on the\nsite, so it is easy to spot.\n\n- **Switch the CV file:** put the new PDF in `public/files/` and change `\"cv\": { \"path\": ... }`,\n  for example to `\"/files/europass-cv.pdf\"`. That one line updates every Download CV button.\n- **Show or hide a profile link:** set `\"show\": true` or `false` on the link (Fiverr is\n  currently `false`).\n\n### Add a longer write-up to a project page\n\nCreate `content/projects/.md` with normal Markdown.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/my-resume",
     "homepageUrl": "https://my-resume-seven-coral.vercel.app",
     "topics": [],
-    "pushedAt": "2026-10-06T05:57:29Z"
+    "pushedAt": "2026-10-06T17:01:26Z"
   },
   {
     "name": "INFO-VIZ",
@@ -46,6 +49,9 @@
         "share": 1.6
       }
     ],
+    "readmeSummary": "",
+    "readmeOverview": "",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/INFO-VIZ",
@@ -63,6 +69,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "Open the classroom — live via GitHub Pages, no setup required.",
+    "readmeOverview": "A persistent, visual, clickable study map for Speech and Language\nUnderstanding exam prep (exam: **Sept 29, 2026**).\n\n**[Open the classroom](https://firehas123.github.io/SLU/slu_classroom.html)** — live via GitHub Pages, no setup required.\n\n## The problem this solves\n\nChat-based tutoring is great at teaching and terrible at remembering. Every\nnew session starts from zero, and an explanation that made something click\ndisappears into scrollback the moment the conversation moves on. As a slow\nlearner who needs to revisit material — not just read it once and move on —\nthat's a real problem, not a minor inconvenience.\n\nThis project is the fix. It's three connected pieces, not one:\n\n1. **Chat tutoring** — where the actual teaching happens: slow pacing,\n   restarts when something doesn't land, explanations adapted on the fly.\n2. **This classroom artifact** (`slu_classroom.html`) — a persistent,\n   visual, clickable map of everything taught so far, with diagrams built\n   from real worked numbers instead of decorative placeholders.\n3. **GitHub Pages** — turns the classroom into a permanent, always-available\n   webpage instead of something that only exists inside one chat session.\n\nThe chat does the teaching. The classroom is the memory. Pages is what\nmakes that memory outlive the conversation.\n\n## Current progress\n\n| Status | Topic |\n|---|---|\n| ✅ Done | Signals & systems basics |\n| ✅ Done | Frequency domain intuition + Fourier Series |\n| ✅ Done | Fourier Transform |\n| 🔵 Current | Source-filter model |\n| 🔒 Locked | MFCC pipeline |\n| 🔒 Locked | LPC |\n| 🔒 Locked | HMM |\n| 🔒 Locked | Word Recognition: Viterbi + ML Viterbi Training |\n| 🔒 Locked | Speaker ID |\n| 🔒 Locked | WFST |\n| 🔒 Locked | DL/CTC |\n| 🔒 Locked | 3 exercises |\n| 🔒 Locked | Mock exam |\n\nThis table is a snapshot — the live status lives inside\n`slu_classroom.html` itself and updates as topics get taught.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/SLU",
@@ -88,6 +97,9 @@
         "share": 0.3
       }
     ],
+    "readmeSummary": "",
+    "readmeOverview": "",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Fintech-Lending-Application",
@@ -117,6 +129,9 @@
         "share": 0.2
       }
     ],
+    "readmeSummary": "This repository investigates the relationship between air pollution and respiratory health outcomes in California. The analysis includes data extraction, transformation, and statistical modeling using state-of-the-art methods.",
+    "readmeOverview": "This repository investigates the relationship between air pollution and respiratory health outcomes in California. The analysis includes data extraction, transformation, and statistical modeling using state-of-the-art methods.\n\n## Project Plan\n\nFor a detailed description of the project, including data sources, methodology, and work packages, refer to the [Project Plan](./project/project-plan.md).",
+    "readmeImage": null,
     "isFork": true,
     "forkOf": "jvalue/made-template",
     "url": "https://github.com/firehas123/made-project-ws2024",
@@ -142,6 +157,9 @@
         "share": 20.4
       }
     ],
+    "readmeSummary": "",
+    "readmeOverview": "",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/MHC-Solutions",
@@ -159,6 +177,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "Java Editor Runner is a development environment aimed at providing Java developers with a robust platform for writing, editing, and running Java code efficiently.",
+    "readmeOverview": "## Description\n\nJava Editor Runner is a development environment aimed at providing Java developers with a robust platform for writing, editing, and running Java code efficiently. This tool integrates essential features that streamline the development process, offering a user-friendly interface for coding and debugging.\n\n## Features\n\n- Advanced text editing features tailored for Java development.\n- Integrated console for compiling and running Java applications directly within the editor.\n- Support for various Java libraries and frameworks.\n- Syntax highlighting and code completion to enhance coding efficiency.\n\n## Technologies Used\n\n- Java\n- Java Swing for the GUI\n\n## Project Demonstration\n\nHere’s a short [video demonstration](media/demo.mp4) of the project setup and key features:\n- **Setup:** Watch how to clone and build the project.\n- **Key Features:** See the core functionality in action.\n\n*If the video doesn't play, you can view it on [YouTube](https://youtu.be/mkjdhJLrhwY).*",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/JAVA-EDITOR-RUN",
@@ -169,7 +190,7 @@
   {
     "name": "Medizintechnik-II-Final-Project",
     "description": "",
-    "group": "ImageJ Macro",
+    "group": "Other",
     "languages": [
       {
         "name": "ImageJ Macro",
@@ -192,6 +213,9 @@
         "share": 6.4
       }
     ],
+    "readmeSummary": "This repository contains the code and documentation for a project focused on implementing and evaluating various image processing techniques.",
+    "readmeOverview": "## Overview\n\nThis repository contains the code and documentation for a project focused on implementing and evaluating various image processing techniques. The project is part of the Medizintechnik II course and is designed to enhance understanding of fundamental image processing methods, particularly in the context of medical imaging.\n\nThe project includes the following key components:\n- **Thresholding Techniques**: Implementation of basic and advanced thresholding methods, including Otsu's method.\n- **Edge Detection**: Application of edge detection filters such as Sobel, Scharr, Prewitt, and Canny.\n- **Segmentation Evaluation**: Analysis of segmentation results using metrics like sensitivity, specificity, Dice Coefficient, and Jaccard Index.\n- **User Interface**: A custom interface that allows users to select and apply different image processing techniques to grayscale images.\n\n### `src/`\n\nThis directory contains all Java source files that implement the image processing techniques, including thresholding, edge detection, and evaluation of segmentation. The `User_Interface.java` file provides a user-friendly interface for interacting with these techniques.\n\n### `latex-template/`\n\nThis directory contains the LaTeX source files for the project report. It includes:\n- `report.tex`: The main LaTeX document for the project report.\n- `bibliography.bib`: The BibTeX file containing references used in the report.\n- `figures/`: A folder containing the figures used in the report.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Medizintechnik-II-Final-Project",
@@ -217,6 +241,9 @@
         "share": 1.3
       }
     ],
+    "readmeSummary": "Chic Threads is a full-stack e-commerce platform designed for the modern retail landscape. This project leverages the power of MERN stack to deliver a seamless online shopping experience, allowing users to browse, select, and purchase…",
+    "readmeOverview": "## Description\n\nChic Threads is a full-stack e-commerce platform designed for the modern retail landscape. This project leverages the power of MERN stack to deliver a seamless online shopping experience, allowing users to browse, select, and purchase clothing items efficiently.\n\n## Features\n\n- User authentication and secure login.\n- Product browsing with detailed descriptions and images.\n- Cart functionality for item selection and checkout.\n- Responsive design for desktop and mobile users.\n- Admin panel for managing products and orders.\n\n## Technologies Used\n\n- MongoDB\n- Express.js\n- React\n- Node.js\n- CSS for styling\n- JavaScript for frontend and backend logic",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/E-Commerce-Clothing",
@@ -234,6 +261,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "Tralive is a web-based application designed to provide travelers with essential tools and resources for planning and enjoying their journeys.",
+    "readmeOverview": "## Description\n\nTralive is a web-based application designed to provide travelers with essential tools and resources for planning and enjoying their journeys. Hosted with Netlify, this project showcases a static web application built to enhance the travel experience with user-friendly features.\n\n## Features\n\n- Interactive interface for easy navigation.\n- Access to essential travel information.\n- Mobile-friendly design for on-the-go access.\n\n## Technologies Used\n\n- HTML\n- CSS\n- JavaScript\n- Hosted on Netlify\n\n## Live Demo\n\nExperience Tralive live here: [Tralive on Netlify](https://tralive.netlify.app)",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/my-tralive-netlifyapp",
@@ -255,6 +285,9 @@
         "share": 8.5
       }
     ],
+    "readmeSummary": "This JavaServer Pages (JSP) project creates a comprehensive hockey management system designed to handle player and game data effectively.",
+    "readmeOverview": "## Description\n\nThis JavaServer Pages (JSP) project creates a comprehensive hockey management system designed to handle player and game data effectively. Utilizing Tomcat and MySQL (XAMPP) for back-end operations, it provides robust functionality for adding, updating, viewing, and deleting player records.\n\n## Features\n\n- CRUD operations for player management.\n- Seamless interaction with a MySQL database.\n- Easy deployment on Apache Tomcat server.\n- Intuitive user interface built with HTML and JSP.\n\n## Technologies Used\n\n- JSP\n- HTML\n- MySQL\n- Apache Tomcat",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Hockey-proj-JSP",
@@ -272,6 +305,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This project serves as an interactive guide to GitHub, offering users step-by-step instructions on basic GitHub operations.",
+    "readmeOverview": "## Description\n\nThis project serves as an interactive guide to GitHub, offering users step-by-step instructions on basic GitHub operations. It's designed to help new users understand and master the essential functionalities of GitHub, such as creating and managing repositories.\n\n## Features\n\n- Step-by-step interactive HTML guide.\n- Instructions on basic GitHub functionalities.\n- Visual examples and direct links for hands-on practice.\n\n## Technologies Used\n\n- HTML\n- CSS\n\n## Live Demo\n\nAccess the live project here: [GitHub Essentials Guide Live](https://firehas123.github.io/GitHub-Essentials-Guide/)",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/GitHub-Essentials-Guide",
@@ -289,6 +325,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This application is a comprehensive unit conversion tool developed in Java, designed to facilitate the conversion of various units like length, weight, temperature, and more.",
+    "readmeOverview": "## Description\n\nThis application is a comprehensive unit conversion tool developed in Java, designed to facilitate the conversion of various units like length, weight, temperature, and more. It aims to provide a quick and accurate conversion solution for educational, scientific, and practical purposes.\n\n## Features\n\n- Supports multiple unit conversions including metric and imperial systems.\n- User-friendly interface for easy operation.\n- High accuracy in conversions.\n\n## Technologies Used\n\n- Java",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/UnitConverter",
@@ -306,6 +345,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "The Advanced Account Management System is a robust C++ application designed to handle the complexities of account management operations.",
+    "readmeOverview": "## Description\n\nThe Advanced Account Management System is a robust C++ application designed to handle the complexities of account management operations. It features comprehensive functionalities that cater to user account creation, modification, deletion, and retrieval, making it suitable for educational or small-scale commercial use.\n\n## Features\n\n- User account creation, modification, and deletion.\n- Retrieval of user account details.\n- Secure storage and access of user data.\n- Efficient management of multiple user accounts through an intuitive interface.\n\n## Technologies Used\n\n- C++",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Advanced-Account-Management-System",
@@ -323,6 +365,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This Java-based KeyLogger application is designed to capture keystrokes, providing a utility for monitoring keyboard activity. It is intended for educational purposes to demonstrate how key logging can be implemented using Java.",
+    "readmeOverview": "## Description\n\nThis Java-based KeyLogger application is designed to capture keystrokes, providing a utility for monitoring keyboard activity. It is intended for educational purposes to demonstrate how key logging can be implemented using Java.\n\n## Features\n\n- Captures all keystrokes and logs them to a file.\n- Runs in the background as a lightweight process.\n- Easy to start and stop the keylogger.\n\n## Technologies Used\n\n- Java\n\n## Disclaimer\n\nThis application is for educational use only. Improper use of this software, such as for spying on others without their consent, is not endorsed by the developer.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/keyLogger",
@@ -340,6 +385,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This Java Chat Application provides a platform for real-time messaging between users. It leverages Java's networking capabilities to facilitate communication over a network.",
+    "readmeOverview": "## Description\n\nThis Java Chat Application provides a platform for real-time messaging between users. It leverages Java's networking capabilities to facilitate communication over a network.\n\n## Features\n\n- Real-time text messaging between users.\n- Simple graphical user interface for easy interaction.\n- Ability to handle multiple users at the same time through server-client architecture.\n\n## Technologies Used\n\n- Java\n- Java Swing for the GUI\n- Networking libraries in Java",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Chat-Java",
@@ -357,6 +405,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This project is designed to facilitate educational assessments through multiple-choice questions (MCQs) in C++. It allows educators to create, administer, and grade tests directly through the console or by importing questions from external…",
+    "readmeOverview": "## Description\n\nThis project is designed to facilitate educational assessments through multiple-choice questions (MCQs) in C++. It allows educators to create, administer, and grade tests directly through the console or by importing questions from external files. The system handles student records, generating detailed reports and statistics for class performance.\n\n## Features\n\n- Secure login system for educators to manage tests.\n- Ability to input MCQs directly or load from pre-existing files.\n- Detailed class and individual student reports, which can be saved and reviewed.\n- Functionalities to edit or delete records.\n- Randomization of question order for each test attempt.\n\n## Technologies Used\n\n- C++\n- File Handling\n- Pointers\n\n## About the Project\n\nThis tool aims to support educators in assessing student understanding efficiently and effectively, enhancing the learning experience with technology.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment",
@@ -382,6 +433,9 @@
         "share": 7.4
       }
     ],
+    "readmeSummary": "The Dynamic Country Explorer is a single dynamic web page designed to allow users to explore various regions of the world and retrieve detailed information about countries within those regions.",
+    "readmeOverview": "## Overview\n\nThe Dynamic Country Explorer is a single dynamic web page designed to allow users to explore various regions of the world and retrieve detailed information about countries within those regions. The project utilizes jQuery and AJAX to enhance interactivity and retrieve data from a provided API.\n\n## Features\n\n- **Region Selection:** Users can select a region from a dropdown menu populated with data fetched from the API.\n- **Country Details Display:** Upon selecting a region, the web page dynamically displays detailed information about each country in that region in an HTML table. Information includes country code, flag, name, capital, population, area, and population density.\n- **Region Summary:** The web page also provides a summary of the selected region, including the total number of countries, the name of the largest country, and the name of the most populated country.\n- **Search Functionality:** Users can search for specific countries or capitals within the selected region using a search input textbox. The table dynamically updates to display only matching results, ignoring case sensitivity.\n\n## Design & Coding Quality\n\n- The HTML document (`xyz.html`) contains embedded CSS and JavaScript code.\n- CSS styling provides a user-friendly interface with appropriate color schemes and fonts.\n- Code is well-organized, with comments, indentation, and minimal duplication to ensure readability and maintainability.\n\n## API Endpoints\n\n- Region List API: [https://www.cs.kent.ac.uk/people/staff/yh/api/country-data/countries/regions](https://www.cs.kent.ac.uk/people/staff/yh/api/country-data/countries/regions)\n- Country Details API: [https://www.cs.kent.ac.uk/people/staff/yh/api/country-data/countries/region/{name}](https://www.cs.kent.ac.uk/people/staff/yh/api/country-data/countries/region/{name})",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Dynamic-Country-Explorer",
@@ -399,6 +453,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This is a basic GUI that features functionalities for both Admin and Patient.",
+    "readmeOverview": "This is a basic GUI that features functionalities for both Admin and Patient.\n\n## Creating Tables\n\nFollow the instructions in the `db.txt` file to create the necessary tables.\n\nIf you're using the Docker setup, you can use the following link to run the queries:\n\n[Database Query Interface](http://localhost:8080/index.php?route=/sql&db=test&table=users&pos=0)",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Admin-Patient-GUI",
@@ -416,6 +473,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "This is a basic auth example that fetches data from API and resultantly what we are doing is dumnping data into the active sheet. You should have a token key which acts as a user name.",
+    "readmeOverview": "This is a basic auth example that fetches data from API and resultantly what we are doing is dumnping data into the active sheet.\nYou should have a token key which acts as a user name.",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/google-app-script-sheet-data-dumping",
@@ -441,6 +501,9 @@
         "share": 9
       }
     ],
+    "readmeSummary": "",
+    "readmeOverview": "",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Dots-Game",
@@ -458,6 +521,9 @@
         "share": 100
       }
     ],
+    "readmeSummary": "",
+    "readmeOverview": "",
+    "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/Employee-Management-System",

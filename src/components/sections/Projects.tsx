@@ -2,6 +2,7 @@ import { findLink } from "@/lib/profile";
 import { getGroups, getProjects } from "@/lib/projects";
 import { ProjectTabs, type ProjectCardData } from "./ProjectTabs";
 import styles from "./Projects.module.css";
+import { RevealText } from "@/components/motion/RevealText";
 
 export function Projects() {
   const all = getProjects();
@@ -20,13 +21,16 @@ export function Projects() {
   const github = findLink("github");
 
   const heading = (
-    <h2 id="projects-title" className="section-title">
-      Things I’ve built.
-    </h2>
+    <RevealText id="projects-title" className="section-title" text="Things I’ve built." />
   );
 
   return (
-    <section id="projects" className={styles.projects} aria-labelledby="projects-title">
+    <section
+      id="projects"
+      className={`blend-top ${styles.projects}`}
+      style={{ "--blend-from": "var(--band-light-bg)" } as React.CSSProperties}
+      aria-labelledby="projects-title"
+    >
       <div className={`container ${styles.inner}`}>
         {projects.length > 0 ? (
           <ProjectTabs projects={projects} groups={getGroups(all)} heading={heading} githubUrl={github?.url} />

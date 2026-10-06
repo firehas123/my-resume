@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { usePushField } from "@/hooks/usePushField";
 import type { Skill } from "@/lib/profile";
 import type { SkillIcon } from "@/lib/skillIcons";
@@ -40,6 +40,29 @@ export function SkillCloud({ skills }: { skills: CloudSkill[] }) {
     ripple: true,
   });
 
+  // Pop in with a short stagger when the cloud enters, then float as usual.
+  useEffect(() => {
+    const el = cloud.current;
+    if (!el) return;
+    let timer = 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        el.setAttribute("data-in", "");
+        observer.disconnect();
+        // Once the pills have settled, let the push effect re-measure where
+        // they rest (it measured them mid-animation).
+        timer = window.setTimeout(() => window.dispatchEvent(new Event("resize")), 1400);
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <ul ref={cloud} className={styles.cloud} aria-label="Languages and tools">
       {skills.map((skill, i) => (
@@ -47,7 +70,7 @@ export function SkillCloud({ skills }: { skills: CloudSkill[] }) {
           key={skill.name}
           className={styles.anchor}
           data-push-anchor=""
-          style={{ "--offset": OFFSETS[i % OFFSETS.length] } as React.CSSProperties}
+          style={{ "--offset": OFFSETS[i % OFFSETS.length], "--i": i } as React.CSSProperties}
         >
           <span className={`${styles.pill} ${SIZE_CLASS[skill.size]}`} data-push-item="">
             {skill.icons.length > 0 && (

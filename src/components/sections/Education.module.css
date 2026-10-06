@@ -39,7 +39,7 @@
   border-radius: var(--radius-card);
   background: var(--card);
   border: 1px solid var(--card-border);
-  transition: box-shadow var(--dur-fast) var(--ease-out);
+  transition: box-shadow var(--dur-quick) var(--ease-out);
 }
 
 .card:hover {

@@ -16,10 +16,13 @@
   --radius-pill: 999px;
   --header-height: 64px;
 
-  /* Motion: soft ease-out curves, 300 to 700ms */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 300ms;
-  --dur-slow: 700ms;
+  /* Motion: one shared set of timings and easings for the whole site.
+     src/lib/motion.ts mirrors these for JavaScript animations; keep them equal. */
+  --dur-quick: 200ms;
+  --dur-standard: 450ms;
+  --dur-slow: 800ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* soft ease-out, the default */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* for things that move and stop */
 }
 
 /* Dark theme (the default). `.band-dark` reuses the same values so the black
@@ -76,10 +79,19 @@
    the shared list above so the bands themselves inherit the theme's value. */
 :root {
   --band-black: #000000;
+  /* The page's own backgrounds, also readable inside bands (which redefine
+     --bg): used by the colour blends between sections. */
+  --page-bg: #000000;
+  --page-bg-alt: #0a0a0c;
+  /* The two fixed bands, the same in both themes. */
+  --band-dark-bg: #0a0a0c; /* About */
+  --band-light-bg: #f1f2f4; /* Experience */
 }
 
 :root[data-theme="light"] {
   --band-black: #0a0a0c;
+  --page-bg: #f7f7f8;
+  --page-bg-alt: #efeff1;
 }
 
 /* Inside a black band, keep dark colours even in the light theme. */
@@ -90,7 +102,7 @@
 /* The Experience section is a light band in both themes. */
 .band-light {
   color-scheme: light;
-  --bg: #f1f2f4;
+  --bg: var(--band-light-bg);
   --card: #ffffff;
   --card-border: transparent;
   --text: #0a0a0c;
@@ -174,7 +186,7 @@ canvas {
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: color var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-quick) var(--ease-out);
 }
 
 a:hover {
@@ -268,13 +280,123 @@ html.theme-transition *::after {
   color: var(--accent);
 }
 
-/* Visible TODO markers for information that is still missing. */
-.todo {
-  font-weight: 700;
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-  border-radius: 6px;
-  padding: 0 6px;
+/* Small interaction details ------------------------------------------------ */
+
+/* Links: an underline that grows from left to right on hover. */
+.u-link {
+  position: relative;
+}
+
+.u-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.55em;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-standard) var(--ease-out);
+}
+
+.u-link:hover::after,
+.u-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Buttons compress a little when pressed. */
+  button:not(:disabled) {
+    transition-property: transform, background-color, border-color, color;
+    transition-duration: var(--dur-quick);
+    transition-timing-function: var(--ease-out);
+  }
+
+  button:not(:disabled):active {
+    transform: scale(0.97);
+  }
+
+  /* The Download CV arrow nudges downward on hover. */
+  .nudge-arrow {
+    transition: transform var(--dur-quick) var(--ease-out);
+  }
+
+  a:hover .nudge-arrow {
+    transform: translateY(2px);
+  }
+}
+
+/* Colour blends between sections: instead of a hard edge where a dark band
+   meets a light one, the top of the lower section fades in from the colour
+   above it, so the background shifts smoothly while scrolling across.
+   Set --blend-from on the section; the gradient stays inside its top padding. */
+.blend-top {
+  position: relative;
+  isolation: isolate;
+}
+
+.blend-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 160px;
+  /* Eased stops: a straight two-colour gradient reads as a dark smear. */
+  background: linear-gradient(
+    to bottom,
+    var(--blend-from) 0%,
+    color-mix(in srgb, var(--blend-from) 74%, transparent) 22%,
+    color-mix(in srgb, var(--blend-from) 42%, transparent) 46%,
+    color-mix(in srgb, var(--blend-from) 16%, transparent) 72%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .blend-top::before {
+    height: 96px;
+  }
+}
+
+/* Headline reveals (RevealText.tsx). Words keep their normal flow; each word
+   is a mask (overflow hidden) whose inner span rises into view. */
+.reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  /* Room for descenders (g, y) inside the mask without moving the layout. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+
+.reveal-inner,
+.reveal-letter {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal-text="lines"] .reveal-inner {
+    transform: translateY(110%);
+    transition: transform var(--dur-slow) var(--ease-out);
+    transition-delay: calc(var(--line, 0) * 90ms);
+  }
+
+  .js [data-reveal-text="letters"] .reveal-letter {
+    opacity: 0;
+    transform: translateY(60%);
+    transition:
+      transform var(--dur-standard) var(--ease-out),
+      opacity var(--dur-standard) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 45ms);
+  }
+
+  .js [data-reveal-text][data-in] .reveal-inner,
+  .js [data-reveal-text][data-in] .reveal-letter {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Scroll reveal: elements start slightly lower and transparent, and the
@@ -286,3 +408,119 @@ html.theme-transition *::after {
     transform: translateY(24px);
   }
 }
+
+/* Intro (IntroScreen.tsx): the header logo waits until the intro's logo has
+   travelled into its place, then takes over. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-intro] [data-header-logo] {
+    animation: intro-arrive 1ms linear 1400ms both;
+  }
+}
+
+@keyframes intro-arrive {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Page transitions (React <ViewTransition>, see PageTransition.tsx)
+   ========================================================================== */
+
+/* Clicks during a transition reach the live page. */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.page-exit) {
+  animation: page-out var(--dur-quick) var(--ease-out) both;
+}
+
+::view-transition-new(.page-enter) {
+  animation: page-in var(--dur-standard) var(--ease-out) 120ms both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* Shared elements (a project card's title and image growing into the project
+   page) morph with the standard timing. */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-standard);
+  animation-timing-function: var(--ease-out);
+}
+
+/* The header stays put while the page under it changes. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Theme switch (see applyTheme in lib/theme.ts): the whole page is one
+   snapshot, and the new theme grows as a circle from the switch. Other
+   transition names are dropped so the header and project elements are part
+   of that single snapshot. */
+html.theme-switching * {
+  view-transition-name: none !important;
+}
+
+html.theme-switching::view-transition-old(root) {
+  animation: none;
+}
+
+html.theme-switching::view-transition-new(root) {
+  animation: theme-circle var(--dur-slow) var(--ease-out);
+}
+
+@keyframes theme-circle {
+  from {
+    clip-path: circle(0 at var(--theme-x) var(--theme-y));
+  }
+  to {
+    clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+  }
+}
+
+/* Browsers without View Transitions: a simple fade instead of a hard cut. */
+@supports not (view-transition-name: none) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page {
+      animation: page-fade var(--dur-standard) var(--ease-out) both;
+    }
+  }
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+

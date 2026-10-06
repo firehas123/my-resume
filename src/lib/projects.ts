@@ -23,6 +23,9 @@ type SyncedRepo = {
   description: string;
   group: string; // chosen automatically by the sync script
   languages: LanguageShare[];
+  readmeSummary: string; // first real paragraph of the README ("" if none)
+  readmeOverview: string; // cleaned README sections as Markdown ("" if none)
+  readmeImage: string | null; // first meaningful README image, downloaded
   isFork: boolean;
   forkOf: string | null; // "owner/repo" of the original, for forks
   url: string;
@@ -46,7 +49,7 @@ export type Project = {
   name: string; // the GitHub repo name
   slug: string; // used in /projects/<slug>
   title: string;
-  summary: string; // may be empty when GitHub has no description
+  summary: string; // override, else GitHub description, else README summary; may be ""
   group: string; // the tab it appears under
   languages: LanguageShare[]; // its top languages, largest first
   forkOf: string | null; // set when the repo is a fork: "owner/repo" of the original
@@ -56,7 +59,7 @@ export type Project = {
   pushedAt: string;
   featured: boolean;
   order: number;
-  image: string | null; // optional screenshot in public/projects/
+  image: string | null; // manual screenshot, else README image; null = generated tile
 };
 
 const ROOT = process.cwd();
@@ -105,7 +108,7 @@ function toProject(repo: SyncedRepo): Project {
     name: repo.name,
     slug: repo.name.toLowerCase(),
     title: o.title ?? prettifyRepoName(repo.name),
-    summary: o.summary ?? repo.description,
+    summary: o.summary ?? (repo.description || repo.readmeSummary),
     // A group set in overrides.json always wins over the automatic one.
     group: o.group?.trim() || repo.group,
     languages: topLanguages(repo.languages),
@@ -117,7 +120,7 @@ function toProject(repo: SyncedRepo): Project {
     pushedAt: repo.pushedAt,
     featured: o.featured ?? false,
     order: o.order ?? Number.MAX_SAFE_INTEGER,
-    image: findImage(repo.name),
+    image: findImage(repo.name) ?? repo.readmeImage,
   };
 }
 
@@ -145,12 +148,24 @@ export function getProject(slug: string): Project | undefined {
   return getProjects().find((project) => project.slug === slug);
 }
 
-/** The optional Markdown write-up for a project, converted to HTML. */
+/**
+ * The longer text for a project page, as HTML: a hand-written write-up from
+ * content/projects/<repo>.md wins; otherwise the cleaned README overview.
+ */
 export async function getWriteupHtml(project: Project): Promise<string | null> {
   const file = join(ROOT, "content", "projects", `${project.name}.md`);
-  if (!existsSync(file)) return null;
-  // The Markdown is my own content from this repo, so rendering it as HTML is safe.
-  return marked.parse(readFileSync(file, "utf8"), { async: true });
+  if (existsSync(file)) {
+    // My own Markdown from this repo, so it is trusted as is.
+    return marked.parse(readFileSync(file, "utf8"), { async: true });
+  }
+  const repo = (synced as SyncedRepo[]).find((r) => r.name === project.name);
+  if (!repo?.readmeOverview) return null;
+  // README text comes from GitHub: raw HTML was already stripped by the sync;
+  // also drop links and images that are not plain http(s).
+  const html = await marked.parse(repo.readmeOverview, { async: true });
+  return html
+    .replace(/<(a|img)\b[^>]*\b(href|src)="(?!https?:\/\/|\/|#)[^"]*"[^>]*>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "");
 }
 
 /** "TypeScript 53%" (shares under 1% show as "<1%"). */

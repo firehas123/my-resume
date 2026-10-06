@@ -1,4 +1,5 @@
 import { findCompanyLogo } from "@/lib/logos";
+import { Reveal } from "@/components/ui/Reveal";
 import { profile } from "@/lib/profile";
 import { CompanyTrack, type StripCompany } from "./CompanyTrack";
 import styles from "./CompanyStrip.module.css";
@@ -14,12 +15,15 @@ export function CompanyStrip() {
 
   return (
     <section className={styles.strip} aria-labelledby="companies-title">
-      <div className="container">
-        <h2 id="companies-title" className={styles.label}>
-          Companies I’ve worked with
-        </h2>
-      </div>
-      <CompanyTrack companies={companies} />
+      {/* Arrives as the hero eases back. */}
+      <Reveal>
+        <div className="container">
+          <h2 id="companies-title" className={styles.label}>
+            Companies I’ve worked with
+          </h2>
+        </div>
+        <CompanyTrack companies={companies} />
+      </Reveal>
     </section>
   );
 }

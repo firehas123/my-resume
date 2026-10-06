@@ -20,9 +20,9 @@
     "downloadName": "Muhammad-Hassan-Chattha-CV.pdf"
   },
 
-  "previewImage": "/images/headshot-calm.jpg",
-
   "showStatsLink": false,
+
+  "contactAccessKey": "97fa0758-d57d-4e96-ab27-03a4b41e29ff",
 
   "links": [
     { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/muhammad-hassan-852827189/", "show": true },
@@ -80,7 +80,7 @@
         "Integrated Kafka for efficient transaction handling, enhancing throughput and reducing latency.",
         "Enforced rigorous testing for software reliability and performance, automating tests with bash scripts.",
         "Streamlined application deployment and management using Docker, reducing deployment time and optimized server resource utilization, which enabled faster delivery of software solutions.",
-        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage by TODO (missing figure), ensuring thorough testing of critical functionalities.",
+        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage, ensuring thorough testing of critical functionalities.",
         "Demonstrated expertise in ISO 8583 standards, ensuring compliance with industry regulations, safeguarding sensitive data, and fostering strong client confidence."
       ]
     },
@@ -104,9 +104,10 @@
   "education": [
     {
       "degree": "Master's, Artificial Intelligence",
+      "short": "M.Sc. AI at FAU",
       "school": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
       "start": "2024-04",
-      "end": "TODO"
+      "end": "present"
     },
     {
       "degree": "Bachelor's, Information Technology",
@@ -126,8 +127,8 @@
   ],
 
   "languages": [
-    { "name": "German", "level": "TODO" },
-    { "name": "TODO: other spoken languages", "level": "TODO" }
+    { "name": "English" },
+    { "name": "German" }
   ],
 
   "skills": [
@@ -136,7 +137,6 @@
     { "name": "C/C++", "size": 3, "logos": ["c-original", "cplusplus-plain"] },
     { "name": "JavaScript", "size": 2, "logos": ["javascript-plain"] },
     { "name": "Spring Boot", "size": 3, "logos": ["spring-original"] },
-    { "name": "Spring", "size": 1, "logos": ["spring-original"] },
     { "name": "FastAPI", "size": 2, "logos": ["fastapi-plain"] },
     { "name": "React.js", "size": 2, "logos": ["react-original"] },
     { "name": "JavaFX", "size": 1 },

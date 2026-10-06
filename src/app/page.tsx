@@ -6,11 +6,12 @@ import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 // The home page, sections in order. The header and footer come from layout.tsx.
 export default function HomePage() {
   return (
-    <>
+    <PageTransition>
       <Hero />
       <CompanyStrip />
       <About />
@@ -19,6 +20,6 @@ export default function HomePage() {
       <Skills />
       <Education />
       <ContactCall />
-    </>
+    </PageTransition>
   );
 }

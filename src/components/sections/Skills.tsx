@@ -1,8 +1,8 @@
-import { Reveal } from "@/components/ui/Reveal";
 import { profile } from "@/lib/profile";
 import { skillIcon } from "@/lib/skillIcons";
 import { SkillCloud, type CloudSkill } from "./SkillCloud";
 import styles from "./Skills.module.css";
+import { RevealText } from "@/components/motion/RevealText";
 
 export function Skills() {
   // Resolve each skill's logos here, on the server, so the browser only
@@ -16,11 +16,7 @@ export function Skills() {
   return (
     <section id="skills" className={styles.skills} aria-labelledby="skills-title">
       <div className={`container ${styles.inner}`}>
-        <Reveal>
-          <h2 id="skills-title" className="section-title">
-            What I work with.
-          </h2>
-        </Reveal>
+        <RevealText id="skills-title" className="section-title" text="What I work with." />
         <SkillCloud skills={skills} />
       </div>
     </section>

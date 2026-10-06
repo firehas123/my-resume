@@ -60,7 +60,7 @@
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out);
 }
 
 .range[aria-pressed="true"] {
@@ -271,7 +271,7 @@
 .country {
   stroke: var(--card);
   stroke-width: 0.6;
-  transition: fill var(--dur-fast) var(--ease-out);
+  transition: fill var(--dur-quick) var(--ease-out);
 }
 
 .country[data-step="0"], .swatch[data-step="0"] {
@@ -486,4 +486,45 @@
 
 .toolButton:hover {
   border-color: var(--text);
+}
+
+/* Entrance (first load and each range change; the one-minute refresh keeps
+   the same elements, so nothing replays). Transform and opacity only. */
+@media (prefers-reduced-motion: no-preference) {
+  .grow {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: grow-up var(--dur-slow) var(--ease-out) var(--delay, 0ms) both;
+  }
+
+  .bar span {
+    transform-origin: left center;
+    animation: grow-right var(--dur-slow) var(--ease-out) var(--delay, 0ms) both;
+  }
+
+  .country[data-step] {
+    animation: shade-in var(--dur-slow) var(--ease-out) var(--delay, 0ms) both;
+  }
+
+  .country[data-step="-1"] {
+    animation: none;
+  }
+}
+
+@keyframes grow-up {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes grow-right {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes shade-in {
+  from {
+    opacity: 0.2;
+  }
 }

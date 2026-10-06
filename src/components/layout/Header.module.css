@@ -52,8 +52,56 @@
   color: var(--muted);
 }
 
-.link:hover {
+/* Underline that grows from left to right on hover, and stays for the
+   section in view (aria-current). */
+.link {
+  position: relative;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-standard) var(--ease-out);
+}
+
+.link:hover,
+.link[aria-current] {
   color: var(--text);
+}
+
+.link:hover::after,
+.link[aria-current]::after {
+  transform: scaleX(1);
+}
+
+/* Reading progress: a thin accent line under the header. */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* Phones: the header does not stick, so the line sits at the top of the screen. */
+@media (max-width: 899px) {
+  .progress {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+    z-index: 60;
+  }
 }
 
 .actions {
@@ -74,7 +122,7 @@
   background: transparent;
   color: var(--text);
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-quick) var(--ease-out);
 }
 
 .themeToggle:hover {

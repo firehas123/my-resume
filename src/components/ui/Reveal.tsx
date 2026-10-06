@@ -1,5 +1,6 @@
 "use client";
 
+import { DURATION, EASE_OUT } from "@/lib/motion";
 import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 
@@ -22,7 +23,7 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
 
   useEffect(() => {
     if (!inView || reduceMotion || !ref.current) return;
-    animate(ref.current, { opacity: [0, 1], y: [24, 0] }, { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] });
+    animate(ref.current, { opacity: [0, 1], y: [24, 0] }, { duration: DURATION.slow, delay, ease: EASE_OUT });
   }, [inView, reduceMotion, delay]);
 
   return (

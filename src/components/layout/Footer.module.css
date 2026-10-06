@@ -36,3 +36,8 @@
 .legal a:hover {
   color: var(--text);
 }
+
+.backToTop {
+  gap: 6px;
+}
+

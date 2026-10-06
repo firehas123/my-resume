@@ -1,8 +1,8 @@
 # Muhammad Hassan Chattha: resume and portfolio
 
 My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules
-with CSS variables, Motion for scroll and hover animation, and one optional
-React Three Fiber object in the hero.
+with CSS variables, Motion for scroll and hover animation, and a canvas dot field
+in the hero.
 
 ## Commands
 
@@ -53,8 +53,8 @@ src/app/globals.css        all colours (theme tokens), spacing and base styles
 
 ### Update my details
 
-Edit `src/data/profile.json`. Anything still marked `TODO` shows up highlighted on the
-site, so it is easy to spot.
+Edit `src/data/profile.json`. Open items that still need my input are listed in
+`TODO.md`.
 
 - **Switch the CV file:** put the new PDF in `public/files/` and change `"cv": { "path": ... }`,
   for example to `"/files/europass-cv.pdf"`. That one line updates every Download CV button.
@@ -88,6 +88,16 @@ Which repos are shown:
   work, so they are not shown. Add a `summary` or `demo` in `overrides.json`, or edit the
   fork's description on GitHub.
 - A repo's GitHub "Website" field becomes its **Live demo** link.
+- Each repo's **README** is read too. Its first real paragraph becomes the card summary
+  when the repo has no GitHub description; its opening sections (intro, features…,
+  without badges, raw HTML and install/usage/licence boilerplate) become the overview on
+  the project page. READMEs left exactly as a generator wrote them (Create React App,
+  Next.js, Vite) are ignored, and so is a fork's README while it is identical to the
+  original's.
+- The first meaningful **README image** (not a badge) is downloaded to
+  `public/projects/readme/` and used as the preview. Projects without one get a
+  generated abstract tile (dots and lines from the repo name, in the site's colours).
+  A manual screenshot in `public/projects/` always wins.
 
 ### How projects are grouped into tabs
 
@@ -107,8 +117,11 @@ each repo's **full language breakdown** instead:
    **Other**.
 5. A `"group"` set in `overrides.json` **always wins** over the automatic choice.
 
-Any other language becomes its own group (for example Java, or Go). There is one tab
-for every group that has at least one project. Tab order: **C / C++, Python, Java,
+Any other language becomes its own group (for example Java, or Go), but it only gets
+its own **tab** if it is a mainstream programming language or has at least two
+projects; otherwise its projects go under **Other** (the list and the minimum are in
+`src/data/language-groups.json`). There is one tab for every group that has at least
+one project. Tab order: **C / C++, Python, Java,
 JavaScript / TypeScript**, then any others A–Z, and **Other** last. Groups without
 projects get no tab.
 
@@ -192,24 +205,21 @@ hover. A brand colour that would be hard to see on the pill (below 3:1 contrast,
 black Kafka on a dark pill or yellow JavaScript on a white one) is skipped, and that
 logo keeps the text colour.
 
-### Connect the contact form
+### Contact form
 
-The form posts to an external form service. Until it is connected, it shows a "not
-connected yet" notice and sends nothing.
+The form on `/contact` sends messages through [Web3Forms](https://web3forms.com): the
+visitor's browser posts the message to Web3Forms, which emails it to your Gmail. There
+is no server code, and your email address never appears in the site or its source.
 
-1. Create a free form at a form service, for example [Formspree](https://formspree.io).
-   It gives you an endpoint like `https://formspree.io/f/abcdwxyz`.
-2. In Vercel, open the project, go to **Settings → Environment Variables**, and add
-   `NEXT_PUBLIC_FORM_ENDPOINT` with that URL (for Production, and Preview if wanted).
-3. **Redeploy** (Deployments → ⋯ → Redeploy). The value is built into the page, so it
-   only takes effect after a new build.
-4. Send yourself a test message from `/contact`.
-
-For local testing, copy `.env.example` to `.env.local` and fill in the same value.
-
-The form sends JSON `{ name, email, message }` with `Accept: application/json`, which
-Formspree and most similar services accept. A hidden honeypot field (`_gotcha`) catches
-simple spam bots.
+- The Web3Forms access key is `"contactAccessKey"` in `src/data/profile.json`. It is a
+  public key by design (it can only deliver messages to your inbox).
+  `NEXT_PUBLIC_WEB3FORMS_KEY` overrides it if set (Vercel → Settings → Environment
+  Variables, then redeploy).
+- Each email has the subject "New message from your website", and its reply-to is
+  the visitor's address, so replying in Gmail answers them directly.
+- A hidden honeypot field is passed to Web3Forms' `botcheck`, so simple spam bots are
+  dropped.
+- To change where messages go, change the email address in your Web3Forms account.
 
 ### Visitor statistics
 

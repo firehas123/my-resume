@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { PillLink } from "@/components/ui/PillLink";
 import { profile } from "@/lib/profile";
+import { NavLinks } from "./NavLinks";
+import { ScrollProgress } from "./ScrollProgress";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.css";
 
@@ -11,25 +13,19 @@ const NAV = [
   { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
   { href: "/#skills", label: "Skills" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Header() {
   return (
-    <header className={styles.header}>
+    // viewTransitionName: the header stays still during page transitions.
+    <header className={styles.header} style={{ viewTransitionName: "site-header" }}>
       <div className={`container ${styles.bar}`}>
-        <Link href="/#top" className={styles.logo} aria-label={`${profile.shortName}, home`}>
+        <Link href="/#top" className={styles.logo} data-header-logo="" aria-label={`${profile.shortName}, home`}>
           <Logo height={26} />
         </Link>
         <nav aria-label="Sections" className={styles.nav}>
-          <ul className={styles.links}>
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={styles.link}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <NavLinks items={NAV} />
         </nav>
         <div className={styles.actions}>
           <ThemeToggle />
@@ -38,6 +34,7 @@ export function Header() {
           </PillLink>
         </div>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

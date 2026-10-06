@@ -3,18 +3,23 @@
 import { useRef, useState } from "react";
 import styles from "./ContactForm.module.css";
 
-// The contact form posts to an external form service (for example Formspree).
-// Its address comes from NEXT_PUBLIC_FORM_ENDPOINT; see README.md. While the
-// address is empty, the form says so and never pretends to send.
+// The contact form posts straight from the browser to Web3Forms
+// (https://web3forms.com), which emails the message to the site owner. There
+// is no server code here, and the owner's email address never appears in the
+// page: Web3Forms knows it from the public access key.
+
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+const SUBJECT = "New message from your website";
 
 type Fields = { name: string; email: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
 type Status = "idle" | "sending" | "sent" | "failed";
 
 const LIMITS = { name: 100, message: 5000 };
-// Deliberately simple: something@something.something. The form service and
-// my reply are the real check.
+// Deliberately simple: something@something.something. Web3Forms and the
+// reply are the real check.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMPTY: Fields = { name: "", email: "", message: "" };
 
 function validate(fields: Fields): Errors {
   const errors: Errors = {};
@@ -30,9 +35,15 @@ function validate(fields: Fields): Errors {
   return errors;
 }
 
-export function ContactForm({ endpoint }: { endpoint: string }) {
-  const connected = endpoint.length > 0;
-  const [fields, setFields] = useState<Fields>({ name: "", email: "", message: "" });
+type ContactFormProps = {
+  /** Web3Forms public access key (not a secret). */
+  accessKey: string;
+  /** Fallback when sending fails. */
+  linkedinUrl?: string;
+};
+
+export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
+  const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const honeypot = useRef<HTMLInputElement>(null);
@@ -45,8 +56,8 @@ export function ContactForm({ endpoint }: { endpoint: string }) {
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!connected || status === "sending") return;
+    event.preventDefault(); // never reload the page
+    if (status === "sending") return;
 
     const found = validate(fields);
     setErrors(found);
@@ -56,53 +67,55 @@ export function ContactForm({ endpoint }: { endpoint: string }) {
       return;
     }
 
-    // Spam bots fill in every field, including the hidden one. Act as if the
-    // message was sent, but do not send it.
-    if (honeypot.current?.value) {
-      setStatus("sent");
-      return;
-    }
-
     setStatus("sending");
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(WEB3FORMS_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
+          access_key: accessKey,
+          subject: SUBJECT,
+          from_name: "Resume website",
           name: fields.name.trim(),
           email: fields.email.trim(),
+          // Replying in the inbox answers the visitor directly.
+          replyto: fields.email.trim(),
           message: fields.message.trim(),
+          // Honeypot: always empty for people; Web3Forms drops the
+          // submission when a bot fills it in.
+          botcheck: honeypot.current?.checked ?? false,
         }),
       });
-      if (!response.ok) throw new Error(`Form service answered ${response.status}`);
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) throw new Error(result.message ?? `Status ${response.status}`);
       setStatus("sent");
-      setFields({ name: "", email: "", message: "" });
+      setFields(EMPTY);
     } catch {
+      // Keep everything the visitor typed.
       setStatus("failed");
     }
   }
 
   if (status === "sent") {
     return (
-      <div className={`${styles.notice} ${styles.success}`} role="status">
+      <div className={styles.success} role="status">
+        <svg className={styles.check} viewBox="0 0 52 52" aria-hidden="true">
+          <circle className={styles.checkCircle} cx="26" cy="26" r="24" />
+          <path className={styles.checkMark} d="M15 27l7 7 15-16" />
+        </svg>
         <p className={styles.noticeTitle}>Thank you, your message is on its way.</p>
         <p>I will reply to the email address you gave.</p>
         <button type="button" className={styles.textButton} onClick={() => setStatus("idle")}>
-          Send another message
+          Send another
         </button>
       </div>
     );
   }
 
-  return (
-    <form ref={formRef} className={styles.form} onSubmit={handleSubmit} noValidate>
-      {!connected && (
-        <div className={styles.notice} role="note">
-          <p className={styles.noticeTitle}>The contact form is not connected yet.</p>
-          <p>Messages cannot be sent from here at the moment. Please reach me on LinkedIn in the meantime.</p>
-        </div>
-      )}
+  const sending = status === "sending";
 
+  return (
+    <form ref={formRef} className={styles.form} onSubmit={handleSubmit} noValidate aria-busy={sending}>
       <Field id="name" label="Name" error={errors.name}>
         <input
           id="name"
@@ -114,7 +127,6 @@ export function ContactForm({ endpoint }: { endpoint: string }) {
           onChange={(e) => update("name", e.target.value)}
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? "name-error" : undefined}
-          disabled={!connected}
           required
         />
       </Field>
@@ -130,7 +142,6 @@ export function ContactForm({ endpoint }: { endpoint: string }) {
           onChange={(e) => update("email", e.target.value)}
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? "email-error" : undefined}
-          disabled={!connected}
           required
         />
       </Field>
@@ -144,43 +155,44 @@ export function ContactForm({ endpoint }: { endpoint: string }) {
           onChange={(e) => update("message", e.target.value)}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          disabled={!connected}
           required
         />
       </Field>
 
-      {/* Honeypot: hidden from people (visually and from screen readers), but
-          bots that fill in every field will fill this one too. */}
+      {/* Honeypot (Web3Forms "botcheck"): hidden from people and screen
+          readers; bots that tick every box give themselves away. */}
       <div className={styles.honeypot} aria-hidden="true">
-        <label htmlFor="website">Leave this field empty</label>
-        <input ref={honeypot} id="website" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor="botcheck">Leave this box unticked</label>
+        <input ref={honeypot} id="botcheck" name="botcheck" type="checkbox" tabIndex={-1} autoComplete="off" />
       </div>
 
       {status === "failed" && (
         <div className={`${styles.notice} ${styles.error}`} role="alert">
           <p className={styles.noticeTitle}>Sorry, the message could not be sent.</p>
-          <p>Please check your connection and try again, or reach me on LinkedIn.</p>
+          <p>
+            Your text is still here, so you can try again.
+            {linkedinUrl && (
+              <>
+                {" "}
+                Or reach me on{" "}
+                <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+                .
+              </>
+            )}
+          </p>
         </div>
       )}
 
-      <button type="submit" className={styles.submit} disabled={!connected || status === "sending"}>
-        {status === "sending" ? "Sending…" : "Send message"}
+      <button type="submit" className={styles.submit} disabled={sending}>
+        {sending ? "Sending…" : "Send message"}
       </button>
     </form>
   );
 }
 
-function Field({
-  id,
-  label,
-  error,
-  children,
-}: {
-  id: string;
-  label: string;
-  error?: string;
-  children: React.ReactNode;
-}) {
+function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
   return (
     <div className={styles.field}>
       <label htmlFor={id} className={styles.label}>
