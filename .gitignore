@@ -45,3 +45,7 @@ next-env.d.ts
 
 # the original asset kit (its contents are unpacked into public/ and design-reference/)
 *.zip
+
+# Local-only files: Claude Code instructions and task notes (not published)
+CLAUDE.md
+tasks.txt
