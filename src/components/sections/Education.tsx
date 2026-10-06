@@ -2,16 +2,13 @@ import { LiftCard } from "@/components/ui/LiftCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { formatRange, profile } from "@/lib/profile";
 import styles from "./Education.module.css";
+import { RevealText } from "@/components/motion/RevealText";
 
 export function Education() {
   return (
     <section id="education" className={styles.education} aria-labelledby="education-title">
       <div className={`container ${styles.inner}`}>
-        <Reveal>
-          <h2 id="education-title" className={styles.title}>
-            Education and certifications.
-          </h2>
-        </Reveal>
+        <RevealText id="education-title" className={styles.title} text="Education and certifications." />
 
         <div className={styles.grid}>
           {profile.education.map((item, i) => (

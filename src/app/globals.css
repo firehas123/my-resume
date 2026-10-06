@@ -79,10 +79,19 @@
    the shared list above so the bands themselves inherit the theme's value. */
 :root {
   --band-black: #000000;
+  /* The page's own backgrounds, also readable inside bands (which redefine
+     --bg): used by the colour blends between sections. */
+  --page-bg: #000000;
+  --page-bg-alt: #0a0a0c;
+  /* The two fixed bands, the same in both themes. */
+  --band-dark-bg: #0a0a0c; /* About */
+  --band-light-bg: #f1f2f4; /* Experience */
 }
 
 :root[data-theme="light"] {
   --band-black: #0a0a0c;
+  --page-bg: #f7f7f8;
+  --page-bg-alt: #efeff1;
 }
 
 /* Inside a black band, keep dark colours even in the light theme. */
@@ -93,7 +102,7 @@
 /* The Experience section is a light band in both themes. */
 .band-light {
   color-scheme: light;
-  --bg: #f1f2f4;
+  --bg: var(--band-light-bg);
   --card: #ffffff;
   --card-border: transparent;
   --text: #0a0a0c;
@@ -269,6 +278,70 @@ html.theme-transition *::after {
   font-size: 20px;
   font-weight: 700;
   color: var(--accent);
+}
+
+/* Colour blends between sections: instead of a hard edge where a dark band
+   meets a light one, the top of the lower section fades in from the colour
+   above it, so the background shifts smoothly while scrolling across.
+   Set --blend-from on the section; the gradient stays inside its top padding. */
+.blend-top {
+  position: relative;
+  isolation: isolate;
+}
+
+.blend-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 96px;
+  background: linear-gradient(to bottom, var(--blend-from), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 640px) {
+  .blend-top::before {
+    height: 64px;
+  }
+}
+
+/* Headline reveals (RevealText.tsx). Words keep their normal flow; each word
+   is a mask (overflow hidden) whose inner span rises into view. */
+.reveal-word {
+  display: inline-block;
+  overflow: hidden;
+  /* Room for descenders (g, y) inside the mask without moving the layout. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: top;
+}
+
+.reveal-inner,
+.reveal-letter {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal-text="lines"] .reveal-inner {
+    transform: translateY(110%);
+    transition: transform var(--dur-slow) var(--ease-out);
+    transition-delay: calc(var(--line, 0) * 90ms);
+  }
+
+  .js [data-reveal-text="letters"] .reveal-letter {
+    opacity: 0;
+    transform: translateY(60%);
+    transition:
+      transform var(--dur-standard) var(--ease-out),
+      opacity var(--dur-standard) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 45ms);
+  }
+
+  .js [data-reveal-text][data-in] .reveal-inner,
+  .js [data-reveal-text][data-in] .reveal-letter {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Scroll reveal: elements start slightly lower and transparent, and the

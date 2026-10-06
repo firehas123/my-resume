@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { PillLink } from "@/components/ui/PillLink";
 import { profile } from "@/lib/profile";
+import { NavLinks } from "./NavLinks";
+import { ScrollProgress } from "./ScrollProgress";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.css";
 
@@ -23,15 +25,7 @@ export function Header() {
           <Logo height={26} />
         </Link>
         <nav aria-label="Sections" className={styles.nav}>
-          <ul className={styles.links}>
-            {NAV.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={styles.link}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <NavLinks items={NAV} />
         </nav>
         <div className={styles.actions}>
           <ThemeToggle />
@@ -40,6 +34,7 @@ export function Header() {
           </PillLink>
         </div>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

@@ -22,6 +22,22 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Pop-in: pills scale up with a short stagger as the cloud enters (only with
+   JavaScript and motion allowed; otherwise they are simply visible). */
+@media (prefers-reduced-motion: no-preference) {
+  :global(.js) .cloud .anchor {
+    transition:
+      opacity var(--dur-standard) var(--ease-out),
+      transform var(--dur-standard) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 35ms);
+  }
+
+  :global(.js) .cloud:not([data-in]) .anchor {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
 /* --offset is set per pill in SkillCloud.tsx for the loose cloud look. */
 .anchor {
   --offset-scale: 1;
