@@ -24,6 +24,7 @@ type SyncedRepo = {
   group: string; // chosen automatically by the sync script
   languages: LanguageShare[];
   isFork: boolean;
+  forkOf: string | null; // "owner/repo" of the original, for forks
   url: string;
   homepageUrl: string | null;
   topics: string[];
@@ -32,7 +33,7 @@ type SyncedRepo = {
 
 type Override = {
   hide?: boolean;
-  include?: boolean; // forks are only shown when this is true
+  include?: boolean; // forces a fork to be shown (read by the sync script)
   title?: string;
   summary?: string;
   group?: string;
@@ -48,6 +49,7 @@ export type Project = {
   summary: string; // may be empty when GitHub has no description
   group: string; // the tab it appears under
   languages: LanguageShare[]; // its top languages, largest first
+  forkOf: string | null; // set when the repo is a fork: "owner/repo" of the original
   codeUrl: string;
   demoUrl: string | null;
   topics: string[];
@@ -90,11 +92,11 @@ function topLanguages(languages: LanguageShare[]): LanguageShare[] {
   return shown.length > 0 ? shown : languages.slice(0, 1);
 }
 
+// Which forks appear is decided by the sync script (only forks with commits
+// of my own, or "include": true), so projects.json only contains those.
+// "hide": true always wins.
 function isVisible(repo: SyncedRepo): boolean {
-  const o = overrides[repo.name] ?? {};
-  if (o.hide === true) return false;
-  // Forks stay hidden unless explicitly included.
-  return !repo.isFork || o.include === true;
+  return (overrides[repo.name] ?? {}).hide !== true;
 }
 
 function toProject(repo: SyncedRepo): Project {
@@ -107,6 +109,7 @@ function toProject(repo: SyncedRepo): Project {
     // A group set in overrides.json always wins over the automatic one.
     group: o.group?.trim() || repo.group,
     languages: topLanguages(repo.languages),
+    forkOf: repo.isFork ? (repo.forkOf ?? "another repository") : null,
     codeUrl: repo.url,
     // `demo: null` in overrides removes a demo link; leaving it out keeps GitHub's.
     demoUrl: o.demo !== undefined ? o.demo : repo.homepageUrl,

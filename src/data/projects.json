@@ -6,26 +6,27 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 52.9
+        "share": 48.5
       },
       {
         "name": "HTML",
-        "share": 24.5
+        "share": 22
       },
       {
         "name": "CSS",
-        "share": 20.4
+        "share": 19
       },
       {
         "name": "JavaScript",
-        "share": 2.2
+        "share": 10.5
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/my-resume",
     "homepageUrl": "https://my-resume-seven-coral.vercel.app",
     "topics": [],
-    "pushedAt": "2026-10-06T05:41:22Z"
+    "pushedAt": "2026-10-06T05:57:29Z"
   },
   {
     "name": "INFO-VIZ",
@@ -46,6 +47,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/INFO-VIZ",
     "homepageUrl": null,
     "topics": [],
@@ -62,6 +64,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/SLU",
     "homepageUrl": null,
     "topics": [],
@@ -86,10 +89,40 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Fintech-Lending-Application",
     "homepageUrl": null,
     "topics": [],
     "pushedAt": "2025-03-04T20:14:03Z"
+  },
+  {
+    "name": "made-project-ws2024",
+    "description": "",
+    "group": "Python",
+    "languages": [
+      {
+        "name": "Jupyter Notebook",
+        "share": 94.1
+      },
+      {
+        "name": "Python",
+        "share": 3.6
+      },
+      {
+        "name": "TeX",
+        "share": 2.1
+      },
+      {
+        "name": "Shell",
+        "share": 0.2
+      }
+    ],
+    "isFork": true,
+    "forkOf": "jvalue/made-template",
+    "url": "https://github.com/firehas123/made-project-ws2024",
+    "homepageUrl": null,
+    "topics": [],
+    "pushedAt": "2025-01-15T15:41:48Z"
   },
   {
     "name": "MHC-Solutions",
@@ -110,6 +143,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/MHC-Solutions",
     "homepageUrl": "https://mhc-solutions.vercel.app",
     "topics": [],
@@ -126,6 +160,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/JAVA-EDITOR-RUN",
     "homepageUrl": null,
     "topics": [],
@@ -158,6 +193,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Medizintechnik-II-Final-Project",
     "homepageUrl": null,
     "topics": [],
@@ -182,6 +218,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/E-Commerce-Clothing",
     "homepageUrl": null,
     "topics": [],
@@ -198,6 +235,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/my-tralive-netlifyapp",
     "homepageUrl": null,
     "topics": [],
@@ -218,6 +256,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Hockey-proj-JSP",
     "homepageUrl": null,
     "topics": [],
@@ -234,6 +273,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/GitHub-Essentials-Guide",
     "homepageUrl": null,
     "topics": [],
@@ -250,6 +290,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/UnitConverter",
     "homepageUrl": null,
     "topics": [],
@@ -266,6 +307,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Advanced-Account-Management-System",
     "homepageUrl": null,
     "topics": [],
@@ -282,6 +324,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/keyLogger",
     "homepageUrl": null,
     "topics": [],
@@ -298,6 +341,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Chat-Java",
     "homepageUrl": null,
     "topics": [],
@@ -314,6 +358,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Comprehensive-C-MCQ-Platform-for-Educational-Assessment",
     "homepageUrl": null,
     "topics": [],
@@ -338,6 +383,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Dynamic-Country-Explorer",
     "homepageUrl": null,
     "topics": [],
@@ -354,6 +400,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Admin-Patient-GUI",
     "homepageUrl": null,
     "topics": [],
@@ -370,6 +417,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/google-app-script-sheet-data-dumping",
     "homepageUrl": null,
     "topics": [],
@@ -394,6 +442,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Dots-Game",
     "homepageUrl": null,
     "topics": [],
@@ -410,6 +459,7 @@
       }
     ],
     "isFork": false,
+    "forkOf": null,
     "url": "https://github.com/firehas123/Employee-Management-System",
     "homepageUrl": null,
     "topics": [],

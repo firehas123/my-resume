@@ -12,6 +12,7 @@ export function Projects() {
     summary: p.summary,
     group: p.group,
     languages: p.languages.map((l) => l.name),
+    isFork: p.forkOf !== null,
     codeUrl: p.codeUrl,
     demoUrl: p.demoUrl,
     image: p.image,

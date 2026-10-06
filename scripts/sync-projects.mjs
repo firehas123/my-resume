@@ -8,7 +8,9 @@
 // Rules (the lists themselves live in src/data/language-groups.json):
 //   1. Private repositories never appear, not even in the report.
 //   2. Empty repositories are skipped.
-//   3. Forks are skipped unless overrides.json sets "include": true for them.
+//   3. A fork is shown only if my copy has commits of my own that the
+//      original does not have (my default branch compared with the parent's).
+//      overrides.json can force it either way: "include": true or "hide": true.
 //   4. Each repo's group comes from its full language breakdown, not from
 //      GitHub's single "primary language" label:
 //        - languages that are not project code (HTML, CSS, Shell, TeX, ...)
@@ -46,6 +48,9 @@ const FIELDS = [
   "isFork",
   "isPrivate",
   "isEmpty",
+  "nameWithOwner",
+  "parent",
+  "defaultBranchRef",
 ].join(",");
 
 const { compareGroups, autoGroup, decideGroup } = createGrouping(rules);
@@ -67,6 +72,66 @@ function plural(count, word) {
 // ---------------------------------------------------------------------------
 // Fetching
 // ---------------------------------------------------------------------------
+
+/** Runs `gh api <path>` and returns the parsed JSON. Arguments are never passed through a shell. */
+function ghApi(path) {
+  const stdout = execFileSync("gh", ["api", path], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+  return JSON.parse(stdout);
+}
+
+/**
+ * For a fork: how many commits my default branch has that the original's
+ * default branch does not (GitHub's "ahead by"), and how far it is behind.
+ */
+function compareWithParent(repo) {
+  const parent = repo.parent;
+  if (!parent?.owner?.login || !parent?.name) throw new Error("the original repository is not available");
+  const parentName = `${parent.owner.login}/${parent.name}`;
+  const myOwner = repo.nameWithOwner.split("/")[0];
+  const myBranch = repo.defaultBranchRef?.name;
+  if (!myBranch) throw new Error("my copy has no default branch");
+  const parentRepo = ghApi(`repos/${parentName}`);
+  const parentBranch = parentRepo.default_branch;
+  // Cross-repository compare: <parent branch>...<my owner>:<my branch>
+  const basehead = `${encodeURIComponent(parentBranch)}...${encodeURIComponent(myOwner)}:${encodeURIComponent(myBranch)}`;
+  const result = ghApi(`repos/${parentName}/compare/${basehead}`);
+  return {
+    parentName,
+    ahead: result.ahead_by,
+    behind: result.behind_by,
+    parentDescription: parentRepo.description?.trim() || "",
+    parentHomepage: parentRepo.homepage?.trim() || "",
+  };
+}
+
+/** Whether a fork is shown, and why. Overrides win; otherwise it needs commits of my own. */
+function decideFork(repo) {
+  const o = overrideFor(repo.name);
+  if (o.hide === true) {
+    return { show: false, forkOf: null, inherited: { description: false, homepage: false }, reason: '"hide": true in overrides.json' };
+  }
+  let comparison = null;
+  let error = null;
+  try {
+    comparison = compareWithParent(repo);
+  } catch (e) {
+    error = (e.stderr?.toString().trim() || e.message).split("\n")[0];
+  }
+  const forkOf = comparison?.parentName ?? (repo.parent ? `${repo.parent.owner?.login}/${repo.parent.name}` : null);
+  // A fork starts with the original's description and website. When they are
+  // still identical they describe the original, not my work, so they are not used.
+  const inherited = {
+    description: Boolean(comparison?.parentDescription) && repo.description?.trim() === comparison.parentDescription,
+    homepage: Boolean(comparison?.parentHomepage) && repo.homepageUrl?.trim() === comparison.parentHomepage,
+  };
+  const base = { forkOf, inherited };
+  if (o.include === true) return { ...base, show: true, reason: '"include": true in overrides.json' };
+  if (error) return { ...base, show: false, reason: `could not compare with the original (${error})` };
+  if (comparison.ahead > 0) {
+    return { ...base, show: true, reason: `${plural(comparison.ahead, "commit")} of my own that ${forkOf} does not have` };
+  }
+  return { ...base, show: false, reason: `no commits of my own beyond ${forkOf}` };
+}
 
 function fetchRepos() {
   const stdout = execFileSync("gh", ["repo", "list", "--limit", "200", "--json", FIELDS], {
@@ -105,9 +170,10 @@ const privateCount = repos.length - publicRepos.length;
 const emptyRepos = publicRepos.filter((repo) => repo.isEmpty === true);
 const nonEmpty = publicRepos.filter((repo) => repo.isEmpty !== true);
 
-const isIncludedFork = (repo) => overrideFor(repo.name).include === true;
-const skippedForks = nonEmpty.filter((repo) => repo.isFork && !isIncludedFork(repo));
-const selected = nonEmpty.filter((repo) => !repo.isFork || isIncludedFork(repo));
+// Decide every fork once (this asks GitHub to compare it with its original).
+const forkDecisions = new Map(nonEmpty.filter((repo) => repo.isFork).map((repo) => [repo.name, decideFork(repo)]));
+const skippedForks = nonEmpty.filter((repo) => repo.isFork && !forkDecisions.get(repo.name).show);
+const selected = nonEmpty.filter((repo) => !repo.isFork || forkDecisions.get(repo.name).show);
 
 const rows = selected.map((repo) => {
   const languages = languageBreakdown(repo.languages);
@@ -115,16 +181,19 @@ const rows = selected.map((repo) => {
   return { repo, languages, ...decision };
 });
 
+const inheritedFrom = (repo) => (repo.isFork ? forkDecisions.get(repo.name).inherited : { description: false, homepage: false });
+
 const projects = rows
   .map(({ repo, languages, auto }) => ({
     name: repo.name,
-    description: repo.description?.trim() || "",
+    description: inheritedFrom(repo).description ? "" : repo.description?.trim() || "",
     // The automatic group. A "group" in overrides.json is applied on top by the site.
     group: auto,
     languages: languages.map((l) => ({ name: l.name, share: Math.round(l.share * 10) / 10 })),
     isFork: repo.isFork,
+    forkOf: repo.isFork ? forkDecisions.get(repo.name).forkOf : null,
     url: repo.url,
-    homepageUrl: repo.homepageUrl?.trim() || null,
+    homepageUrl: inheritedFrom(repo).homepage ? null : repo.homepageUrl?.trim() || null,
     topics: (repo.repositoryTopics ?? []).map((t) => t.name ?? t.topic?.name).filter(Boolean),
     pushedAt: repo.pushedAt,
   }))
@@ -141,7 +210,13 @@ const topLanguages = (languages) =>
 
 const sortedRows = [...rows].sort((a, b) => compareGroups(a.group, b.group) || a.repo.name.localeCompare(b.repo.name));
 const hiddenNote = (name) => (overrideFor(name).hide === true ? " (hidden on the site via overrides.json)" : "");
-const forkNote = (repo) => (repo.isFork ? " (fork, included via overrides.json)" : "");
+function forkNote(repo) {
+  if (!repo.isFork) return "";
+  const { reason, inherited } = forkDecisions.get(repo.name);
+  const dropped = [inherited.description && "description", inherited.homepage && "website"].filter(Boolean);
+  const droppedNote = dropped.length ? `; ${dropped.join(" and ")} inherited from the original, not shown` : "";
+  return ` (fork shown: ${reason}${droppedNote})`;
+}
 
 const groupCounts = new Map();
 for (const row of rows) {
@@ -152,7 +227,7 @@ const summary = [...groupCounts.entries()].sort((a, b) => compareGroups(a[0], b[
 
 const forkRows = skippedForks
   .map((repo) => ({ repo, languages: languageBreakdown(repo.languages) }))
-  .map((f) => ({ ...f, wouldBe: autoGroup(f.languages).group }))
+  .map((f) => ({ ...f, wouldBe: autoGroup(f.languages).group, why: forkDecisions.get(f.repo.name).reason }))
   .sort((a, b) => a.repo.name.localeCompare(b.repo.name));
 
 // Console version: aligned plain-text columns.
@@ -169,11 +244,11 @@ printTable(
   ["Repo", "Top languages", "Group", "Reason"],
   sortedRows.map((r) => [r.repo.name, topLanguages(r.languages), r.group, r.reason + hiddenNote(r.repo.name) + forkNote(r.repo)]),
 );
-console.log("\nForks skipped (add \"include\": true in overrides.json to show one)\n");
+console.log("\nForks skipped (shown only with commits of my own, or \"include\": true in overrides.json)\n");
 if (forkRows.length) {
   printTable(
-    ["Fork", "Top languages", "Would be in"],
-    forkRows.map((f) => [f.repo.name, topLanguages(f.languages), f.wouldBe]),
+    ["Fork", "Top languages", "Would be in", "Why skipped"],
+    forkRows.map((f) => [f.repo.name, topLanguages(f.languages), f.wouldBe, f.why]),
   );
 } else {
   console.log("none");
@@ -215,13 +290,16 @@ const report = [
   "",
   "## Forks skipped",
   "",
-  'To show a fork on the site, add `"include": true` for it in `src/data/overrides.json` and run `npm run sync` again.',
+  "A fork is shown when my copy has commits of my own that the original does not have. To force one",
+  'either way, set `"include": true` or `"hide": true` for it in `src/data/overrides.json` and run `npm run sync` again.',
   "",
   ...(forkRows.length
     ? [
-        "| Fork | Top languages | Would be in |",
-        "| --- | --- | --- |",
-        ...forkRows.map((f) => `| [${md(f.repo.name)}](${f.repo.url}) | ${md(topLanguages(f.languages))} | ${md(f.wouldBe)} |`),
+        "| Fork | Top languages | Would be in | Why skipped |",
+        "| --- | --- | --- | --- |",
+        ...forkRows.map(
+          (f) => `| [${md(f.repo.name)}](${f.repo.url}) | ${md(topLanguages(f.languages))} | ${md(f.wouldBe)} | ${md(f.why)} |`,
+        ),
       ]
     : ["None."]),
   "",

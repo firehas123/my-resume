@@ -14,7 +14,11 @@ export function About() {
           src={profile.about.image}
           alt={profile.about.imageAlt}
           fill
+          // The photo spans the full width of the band on every screen size.
           sizes="100vw"
+          // High quality so the face stays sharp (92 must also be listed in
+          // images.qualities in next.config.ts, or Next.js lowers it to 75).
+          quality={92}
           className={styles.image}
         />
       </div>

@@ -38,7 +38,7 @@ single `index.html`.
   reduced motion, and the real page is rendered underneath from the start.
 - **Cursor effect** (`src/hooks/usePushField.ts`): pills move away before the cursor
   reaches them, neighbours share the push, and a soft spring returns them with a
-  slight overshoot. The company strip gets a much gentler version and pauses on
+  slight overshoot. (Updated 2026-10-06: the company strip no longer has this effect or a hover pause; it never stops. See "Company logos" in README.md.) Originally the company strip got a much gentler version and paused on
   hover. On touch screens a tap sends a ripple. It uses requestAnimationFrame and
   transforms only, pauses off screen, and is off with reduced motion.
 - **Data**: `src/data/profile.json` (from the PDF), `scripts/sync-projects.mjs` →
@@ -185,7 +185,6 @@ the same `next build` Vercel runs.
 | `src/app/impressum/page.tsx` | The whole Impressum (name, address, contact) |
 | `src/app/datenschutz/page.tsx` | Controller details, form service, rights; a technical outline is drafted |
 | GitHub / `overrides.json` | **None of the 21 repos has a description**, so cards show no summary. Add descriptions on GitHub and run `npm run sync`, or add `summary` in `overrides.json`. |
-| `public/logos/` | No company logos yet; names are shown as text |
 | Vercel | `NEXT_PUBLIC_FORM_ENDPOINT` (see below) |
 
 ## Things you should know
@@ -198,9 +197,9 @@ the same `next build` Vercel runs.
   direct way to contact you, which is usually an email address. If the site counts as
   business-like (job seeking can be borderline), you may legally need one there. Please
   decide this yourself or check it; I did not add one.
-- **There is no Python tab.** Your only Python repo (`made-project-ws2024`, notebooks)
-  is a fork, so it is skipped, and empty tabs are hidden. To show it, set
-  `"include": true` for it in `overrides.json` and run `npm run sync`.
+- **Python tab (updated 2026-10-06).** Your fork `made-project-ws2024` has 43 commits of
+  your own, so under the fork rule it is now shown, with a "Fork" label, and fills the
+  Python tab.
 - **Repo choices are yours.** All 21 public non-fork repos are shown, including the
   old static `my-resume`, `my-tralive-netlifyapp` and `keyLogger`. A recruiter may read
   a repo named "keyLogger" the wrong way out of context. Hide anything with

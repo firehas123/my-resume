@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { usePushField } from "@/hooks/usePushField";
 import type { Skill } from "@/lib/profile";
+import type { SkillIcon } from "@/lib/skillIcons";
 import styles from "./Skills.module.css";
 
 // Small fixed vertical offsets (px), repeated across the pills, so the cloud
@@ -13,7 +14,21 @@ const OFFSETS = [0, 12, -6, 6, -12, 10, -4, 14, -8, 4];
 
 const SIZE_CLASS = { 1: styles.small, 2: styles.medium, 3: styles.large } as const;
 
-export function SkillCloud({ skills }: { skills: Skill[] }) {
+export type CloudSkill = { name: string; size: Skill["size"]; icons: SkillIcon[] };
+
+/** One technology logo, drawn in the text colour; brand colour on hover. */
+function Icon({ icon }: { icon: SkillIcon }) {
+  // CSS variables carry the per-logo values; the CSS module does the rest.
+  const style = {
+    "--icon": `url("${icon.src}")`,
+    "--aspect": icon.aspect,
+    ...(icon.brandDark ? { "--brand-dark": icon.brandDark } : {}),
+    ...(icon.brandLight ? { "--brand-light": icon.brandLight } : {}),
+  } as React.CSSProperties;
+  return <span className={styles.icon} style={style} aria-hidden="true" />;
+}
+
+export function SkillCloud({ skills }: { skills: CloudSkill[] }) {
   const cloud = useRef<HTMLUListElement>(null);
 
   usePushField(cloud, {
@@ -35,6 +50,13 @@ export function SkillCloud({ skills }: { skills: Skill[] }) {
           style={{ "--offset": OFFSETS[i % OFFSETS.length] } as React.CSSProperties}
         >
           <span className={`${styles.pill} ${SIZE_CLASS[skill.size]}`} data-push-item="">
+            {skill.icons.length > 0 && (
+              <span className={styles.icons}>
+                {skill.icons.map((icon) => (
+                  <Icon key={icon.src} icon={icon} />
+                ))}
+              </span>
+            )}
             {skill.name}
           </span>
         </li>

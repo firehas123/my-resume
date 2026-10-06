@@ -14,6 +14,7 @@ export type ProjectCardData = {
   summary: string;
   group: string; // the tab it belongs to
   languages: string[]; // top languages, largest first
+  isFork: boolean;
   codeUrl: string;
   demoUrl: string | null;
   image: string | null;
@@ -110,8 +111,9 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
         <p className={styles.language}>{project.group}</p>
         <h3 className={styles.title}>{project.title}</h3>
         {project.summary && <p className={styles.summary}>{project.summary}</p>}
-        {project.languages.length > 0 && (
-          <ul className={styles.languageTags} aria-label="Languages">
+        {(project.isFork || project.languages.length > 0) && (
+          <ul className={styles.languageTags} aria-label="Labels">
+            {project.isFork && <li className={styles.forkTag}>Fork</li>}
             {project.languages.map((name) => (
               <li key={name}>{name}</li>
             ))}
