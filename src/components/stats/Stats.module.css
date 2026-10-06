@@ -1,0 +1,489 @@
+/* The /stats page. Uses only the site's design tokens, so both themes work. */
+
+.page {
+  background: var(--bg);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 40px;
+  padding-block: 80px 40px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.since {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Range switch: the same pill track as the project tabs. */
+.ranges {
+  display: flex;
+  gap: 6px;
+  max-width: 100%;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--track-bg);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ranges::-webkit-scrollbar {
+  display: none;
+}
+
+.range {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.range[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.range[aria-pressed="false"]:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.range:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: -4px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 96px;
+}
+
+.status,
+.muted {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 40px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+}
+
+.notice h2 {
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.notice p {
+  color: var(--muted);
+}
+
+/* Headline numbers */
+.headline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  /* Two per row on phones instead of five full-width cards. */
+  .headline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 18px;
+  }
+}
+
+.stat {
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+}
+
+.statLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.statValue {
+  margin-top: 6px;
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* Words ("3 minutes ago") instead of a number: smaller, so they fit. */
+.statText {
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* Panels */
+.panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  border-radius: var(--radius-card);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+}
+
+.panelTitle {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.mapRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px;
+}
+
+.twoUp {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 960px) {
+  .mapRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding-block: 56px 32px;
+  }
+
+  .panel,
+  .notice {
+    padding: 24px 20px;
+  }
+}
+
+/* Charts */
+.figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chart,
+.map {
+  width: 100%;
+  height: auto;
+}
+
+.grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.axis {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Page views: hollow bars. Visits: solid bars. Shape, not only colour. */
+.hollow {
+  fill: transparent;
+  stroke: var(--muted);
+  stroke-width: 1.5;
+}
+
+.solid {
+  fill: var(--accent);
+}
+
+.legend {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Map shading: steps of the accent mixed into the empty-country colour. */
+.country,
+.swatch {
+  fill: var(--media-bg);
+  background: var(--media-bg);
+}
+
+.country {
+  stroke: var(--card);
+  stroke-width: 0.6;
+  transition: fill var(--dur-fast) var(--ease-out);
+}
+
+.country[data-step="0"], .swatch[data-step="0"] {
+  fill: color-mix(in srgb, var(--accent) 30%, var(--media-bg));
+  background: color-mix(in srgb, var(--accent) 30%, var(--media-bg));
+}
+
+.country[data-step="1"], .swatch[data-step="1"] {
+  fill: color-mix(in srgb, var(--accent) 52%, var(--media-bg));
+  background: color-mix(in srgb, var(--accent) 52%, var(--media-bg));
+}
+
+.country[data-step="2"], .swatch[data-step="2"] {
+  fill: color-mix(in srgb, var(--accent) 76%, var(--media-bg));
+  background: color-mix(in srgb, var(--accent) 76%, var(--media-bg));
+}
+
+.country[data-step="3"], .swatch[data-step="3"] {
+  fill: var(--accent);
+  background: var(--accent);
+}
+
+.country[data-active],
+.country:focus-visible {
+  stroke: var(--text);
+  stroke-width: 1.5;
+  outline: none;
+}
+
+.mapCaption {
+  min-height: 1.6em;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.mapCaption strong {
+  color: var(--text);
+}
+
+.mapLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.mapLegend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+/* "Show numbers" tables */
+.numbers summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.tableWrap {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.numbers table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.numbers th,
+.numbers td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.numbers td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.numbers thead th {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* Ranked lists with small bars */
+.ranked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ranked li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  font-size: 15px;
+}
+
+.rankedLabel {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.rankedCount {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--media-bg);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+/* Recent views */
+.recent {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recent li {
+  display: grid;
+  /* Fixed time column, so the page column lines up on every row. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) 9em;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+}
+
+.recentWhere {
+  font-weight: 700;
+}
+
+.recent time {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .recent li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .recent li > span:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    color: var(--muted);
+  }
+}
+
+/* Bottom tools */
+.tools {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.downloads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.toolButton,
+.toolButton:hover {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--btn-outline);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.toolButton:hover {
+  border-color: var(--text);
+}
