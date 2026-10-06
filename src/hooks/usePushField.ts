@@ -37,6 +37,12 @@ export type PushFieldOptions = {
   pointerScope: "window" | "container";
   /** On touch screens a tap sends a small ripple outward from the tap point. */
   ripple: boolean;
+  /**
+   * The anchors move by themselves (the rolling company strip), so their
+   * home positions are re-measured every frame while the cursor is near.
+   * The push stays a separate transform layered over that motion.
+   */
+  movingAnchors?: boolean;
 };
 
 // Spring settings shared by every field: an under-damped spring (damping
@@ -67,7 +73,7 @@ type Item = {
 type Ripple = { x: number; y: number; start: number; hit: Set<Item> };
 
 export function usePushField(containerRef: RefObject<HTMLElement | null>, options: PushFieldOptions) {
-  const { radius, strength, coupling, drift, pointerScope, ripple } = options;
+  const { radius, strength, coupling, drift, pointerScope, ripple, movingAnchors = false } = options;
 
   useEffect(() => {
     const element = containerRef.current;
@@ -111,7 +117,9 @@ export function usePushField(containerRef: RefObject<HTMLElement | null>, option
     function step(now: number) {
       frame = 0;
       if (!visible) return;
-      if (needsMeasure) measure();
+      // Rolling anchors change position every frame; measure them before any
+      // transform is written this frame, so the browser lays out only once.
+      if (needsMeasure || (movingAnchors && (pointer.active || ripples.length > 0))) measure();
 
       // Seconds since the last frame, capped so a background tab does not
       // make items jump when it becomes active again.
@@ -297,5 +305,5 @@ export function usePushField(containerRef: RefObject<HTMLElement | null>, option
       reducedMotion.removeEventListener("change", onReducedMotionChange);
       for (const item of items) item.el.style.transform = "";
     };
-  }, [containerRef, radius, strength, coupling, drift, pointerScope, ripple]);
+  }, [containerRef, radius, strength, coupling, drift, pointerScope, ripple, movingAnchors]);
 }
