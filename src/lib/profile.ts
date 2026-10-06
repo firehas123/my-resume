@@ -6,7 +6,17 @@
 import data from "@/data/profile.json";
 
 export type Link = { id: string; label: string; url: string; show: boolean };
-export type Company = { name: string; logo: string };
+export type Company = {
+  name: string;
+  logo: string; // file name in public/logos/ without extension
+  /**
+   * How much of the logo file's height its letters fill (measured: Zertificon
+   * 0.395 because its tagline sits below, INFOTECH 0.97 in capitals). The strip
+   * sizes each logo so the letters come out the same height. i2c is a compact
+   * emblem, sized to match the tall letters of the others (0.7).
+   */
+  letterRatio: number;
+};
 
 export type Job = {
   company: string;

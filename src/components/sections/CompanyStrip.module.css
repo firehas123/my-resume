@@ -1,4 +1,7 @@
 .strip {
+  /* Height of the logos' letters. Each logo's box is this divided by its
+     letterRatio (from profile.json), so all wordmarks look the same height. */
+  --letter-height: 19px;
   background: var(--bg);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -31,28 +34,24 @@
   list-style: none;
 }
 
+/* Fixed padding (no min-width), so every copy of the list has exactly the
+   same width and the loop joins without a jump. */
 .slot {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 240px;
   height: 64px;
-  padding-inline: 32px;
+  padding-inline: 40px;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  will-change: transform;
-}
-
-/* Logos in one colour that suits the theme: black in light, white in dark. */
+/* All logos at the same visual height, in one colour that suits the theme:
+   white on dark, black on light. The filter only flattens the logo's own
+   colours to a single tone; its shape and proportions are untouched. */
 .logo {
-  height: 28px;
+  display: block;
+  height: calc(var(--letter-height) / var(--letter-ratio, 0.75));
   width: auto;
-  max-width: 160px;
-  object-fit: contain;
-  opacity: 0.7;
+  opacity: 0.75;
   filter: brightness(0) invert(1);
 }
 
@@ -69,9 +68,12 @@
 }
 
 @media (max-width: 640px) {
+  .strip {
+    --letter-height: 15px;
+  }
+
   .slot {
-    min-width: 168px;
-    padding-inline: 20px;
+    padding-inline: 28px;
   }
 
   .wordmark {
@@ -81,12 +83,9 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .track {
-    /* Moves by one copy (100% / 4 copies) and loops. */
-    animation: slide 40s linear infinite;
-  }
-
-  .viewport:hover .track {
-    animation-play-state: paused;
+    /* One steady speed, endless, and nothing the visitor does pauses it.
+       Moves by one copy (100% / 4 copies), then repeats. */
+    animation: slide 45s linear infinite;
   }
 }
 
@@ -96,7 +95,7 @@
   }
 }
 
-/* Reduced motion: no sliding; show one centred, wrapping row instead. */
+/* Reduced motion: the strip stands still, as one centred, wrapping row. */
 @media (prefers-reduced-motion: reduce) {
   .viewport {
     mask-image: none;

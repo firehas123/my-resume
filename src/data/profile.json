@@ -29,10 +29,10 @@
   ],
 
   "companies": [
-    { "name": "Zertificon", "logo": "zertificon" },
-    { "name": "Careem", "logo": "careem" },
-    { "name": "i2c Inc", "logo": "i2c" },
-    { "name": "InfoTech", "logo": "infotech" }
+    { "name": "Zertificon", "logo": "zertificon", "letterRatio": 0.395 },
+    { "name": "Careem", "logo": "careem", "letterRatio": 0.745 },
+    { "name": "i2c Inc", "logo": "i2c", "letterRatio": 0.7 },
+    { "name": "InfoTech", "logo": "infotech", "letterRatio": 0.97 }
   ],
 
   "experience": [
