@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.1",
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "devicon": "^2.17.0",
     "marked": "^18.1.0",
     "motion": "^14.0.0",

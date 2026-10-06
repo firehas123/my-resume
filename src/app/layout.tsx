@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { IntroScreen } from "@/components/layout/IntroScreen";
 import { MotionProvider } from "@/components/ui/MotionProvider";
+import { isProductionDeployment } from "@/lib/env";
 import { profile } from "@/lib/profile";
 import { siteUrl } from "@/lib/site";
 import { PRE_PAINT_SCRIPT } from "@/lib/theme";
@@ -68,6 +71,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <main id="main">{children}</main>
           <Footer />
         </MotionProvider>
+        {/* Vercel Web Analytics and Speed Insights: only on the production
+            deployment, never in previews or local development. */}
+        {isProductionDeployment && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );
