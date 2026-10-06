@@ -80,7 +80,7 @@
         "Integrated Kafka for efficient transaction handling, enhancing throughput and reducing latency.",
         "Enforced rigorous testing for software reliability and performance, automating tests with bash scripts.",
         "Streamlined application deployment and management using Docker, reducing deployment time and optimized server resource utilization, which enabled faster delivery of software solutions.",
-        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage by TODO (missing figure), ensuring thorough testing of critical functionalities.",
+        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage, ensuring thorough testing of critical functionalities.",
         "Demonstrated expertise in ISO 8583 standards, ensuring compliance with industry regulations, safeguarding sensitive data, and fostering strong client confidence."
       ]
     },
@@ -106,7 +106,7 @@
       "degree": "Master's, Artificial Intelligence",
       "school": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
       "start": "2024-04",
-      "end": "TODO"
+      "end": "present"
     },
     {
       "degree": "Bachelor's, Information Technology",
@@ -126,8 +126,8 @@
   ],
 
   "languages": [
-    { "name": "German", "level": "TODO" },
-    { "name": "TODO: other spoken languages", "level": "TODO" }
+    { "name": "English" },
+    { "name": "German" }
   ],
 
   "skills": [

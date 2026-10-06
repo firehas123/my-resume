@@ -268,15 +268,6 @@ html.theme-transition *::after {
   color: var(--accent);
 }
 
-/* Visible TODO markers for information that is still missing. */
-.todo {
-  font-weight: 700;
-  color: var(--text);
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-  border-radius: 6px;
-  padding: 0 6px;
-}
-
 /* Scroll reveal: elements start slightly lower and transparent, and the
    Reveal component animates them in. The `js` class is set by the pre-paint
    script, so without JavaScript nothing is ever hidden. */

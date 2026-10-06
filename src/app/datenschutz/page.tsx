@@ -1,36 +1,35 @@
 import type { Metadata } from "next";
-import { LegalPage, TodoNotice } from "@/components/layout/LegalPage";
+import Link from "next/link";
+import { LegalPage } from "@/components/layout/LegalPage";
+import { profile } from "@/lib/profile";
 
 export const metadata: Metadata = { title: "Datenschutz" };
 
-// TODO: replace this placeholder with a reviewed privacy policy. The outline
-// below only lists what this site technically does, as a starting point.
+// Describes what this site actually does. Open points (a professional review)
+// are tracked in TODO.md, never as markers on the page.
 export default function DatenschutzPage() {
   return (
     <LegalPage title="Datenschutz">
-      <TodoNotice>
-        <p>
-          This page is a placeholder, not a finished privacy policy. The outline below lists what this website
-          technically does, as a starting point. It must be completed and checked before relying on it.
-        </p>
-      </TodoNotice>
-
       <h2>Verantwortlicher</h2>
       <p>
-        <strong>TODO:</strong> Name und Anschrift des Verantwortlichen
+        Verantwortlich für die Datenverarbeitung auf dieser Website ist {profile.name}, Nürnberg, Deutschland.
+        Kontakt über das <Link href="/contact">Kontaktformular</Link>.
       </p>
 
       <h2>Hosting</h2>
       <p>
-        <strong>TODO:</strong> Die Website wird bei Vercel Inc. gehostet. Beim Aufruf verarbeitet der Hoster
-        technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt, aufgerufene Seite). Angaben zum Hoster, zur
-        Rechtsgrundlage und zur Speicherdauer ergänzen.
+        Die Website wird bei Vercel Inc. (San Francisco, USA) gehostet. Beim Aufruf verarbeitet der Hoster technisch
+        notwendige Daten wie IP-Adresse, Zeitpunkt und aufgerufene Seite, um die Website auszuliefern und vor
+        Missbrauch zu schützen. Rechtsgrundlage ist das berechtigte Interesse an einer sicheren und zuverlässigen
+        Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).
       </p>
 
       <h2>Kontaktformular</h2>
       <p>
-        <strong>TODO:</strong> Das Kontaktformular sendet Name, E-Mail-Adresse und Nachricht an einen externen
-        Formulardienst. Anbieter, Zweck, Rechtsgrundlage und Speicherdauer ergänzen, sobald der Dienst gewählt ist.
+        Wenn Sie das Kontaktformular nutzen, werden Name, E-Mail-Adresse und Nachricht direkt aus Ihrem Browser an den
+        Formulardienst Web3Forms übermittelt, dort verarbeitet und als E-Mail an mein Postfach weitergeleitet. Ihre
+        E-Mail-Adresse wird als Antwortadresse gesetzt, damit ich Ihnen antworten kann. Die Angaben verwende ich nur,
+        um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Ihre Anfrage selbst (Art. 6 Abs. 1 lit. b und f DSGVO).
       </p>
 
       <h2>Reichweitenmessung mit Vercel Web Analytics</h2>
@@ -42,8 +41,8 @@ export default function DatenschutzPage() {
         wird.
       </p>
       <p>
-        <strong>TODO:</strong> Angaben mit der aktuellen Datenschutzerklärung von Vercel abgleichen
-        (vercel.com/docs/analytics/privacy-policy) und Anbieter, Rechtsgrundlage und Speicherdauer ergänzen.
+        Rechtsgrundlage ist das berechtigte Interesse, die Nutzung der Website in zusammengefasster Form zu verstehen
+        (Art. 6 Abs. 1 lit. f DSGVO).
       </p>
 
       <h2>Leistungsmessung mit Vercel Speed Insights</h2>
@@ -52,8 +51,8 @@ export default function DatenschutzPage() {
         mit der aufgerufenen Seite und allgemeinen Angaben zu Gerät und Browser. Es werden keine Cookies gesetzt.
       </p>
       <p>
-        <strong>TODO:</strong> Angaben mit der aktuellen Datenschutzerklärung von Vercel abgleichen
-        (vercel.com/docs/speed-insights/privacy-policy) und Rechtsgrundlage ergänzen.
+        Rechtsgrundlage ist das berechtigte Interesse an einer schnell ladenden, gut funktionierenden Website
+        (Art. 6 Abs. 1 lit. f DSGVO).
       </p>
 
       <h2>Eigene Besucherstatistik</h2>
@@ -91,7 +90,8 @@ export default function DatenschutzPage() {
         Website, nicht in Vorschauversionen.
       </p>
       <p>
-        <strong>TODO:</strong> Rechtsgrundlage für die eigene Besucherstatistik ergänzen.
+        Rechtsgrundlage ist das berechtigte Interesse, die Reichweite der Website in zusammengefasster, nicht
+        personenbezogener Form zu erfassen (Art. 6 Abs. 1 lit. f DSGVO).
       </p>
 
       <h2>Speicherung im Browser</h2>
@@ -119,8 +119,13 @@ export default function DatenschutzPage() {
 
       <h2>Ihre Rechte</h2>
       <p>
-        <strong>TODO:</strong> Hinweise auf Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch,
-        Datenübertragbarkeit und Beschwerderecht bei einer Aufsichtsbehörde ergänzen.
+        Sie haben das Recht auf Auskunft über Ihre gespeicherten Daten, auf Berichtigung, Löschung und Einschränkung
+        der Verarbeitung, auf Widerspruch gegen die Verarbeitung sowie auf Datenübertragbarkeit (Art. 15 bis 21
+        DSGVO). Wenden Sie sich dafür über das <Link href="/contact">Kontaktformular</Link> an mich.
+      </p>
+      <p>
+        Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Bayerischen
+        Landesamt für Datenschutzaufsicht (BayLDA) in Ansbach.
       </p>
     </LegalPage>
   );

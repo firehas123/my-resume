@@ -1,6 +1,5 @@
 import { LiftCard } from "@/components/ui/LiftCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { TodoText } from "@/components/ui/TodoText";
 import { formatRange, profile } from "@/lib/profile";
 import styles from "./Experience.module.css";
 
@@ -29,7 +28,7 @@ export function Experience() {
                   <ul>
                     {job.highlights.map((line) => (
                       <li key={line}>
-                        <TodoText text={line} />
+                        {line}
                       </li>
                     ))}
                   </ul>

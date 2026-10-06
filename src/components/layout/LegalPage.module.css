@@ -44,19 +44,3 @@
 .body strong {
   color: var(--text);
 }
-
-.todo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 24px;
-  border-radius: 20px;
-  border: 1.5px solid var(--accent);
-  background: var(--card);
-  color: var(--text);
-}
-
-.todoTitle {
-  font-weight: 800;
-  color: var(--accent);
-}

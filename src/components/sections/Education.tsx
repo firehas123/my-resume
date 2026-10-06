@@ -1,6 +1,5 @@
 import { LiftCard } from "@/components/ui/LiftCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { TodoText } from "@/components/ui/TodoText";
 import { formatRange, profile } from "@/lib/profile";
 import styles from "./Education.module.css";
 
@@ -19,7 +18,7 @@ export function Education() {
             <Reveal key={item.degree} className={styles.cell} delay={(i % 2) * 0.08}>
               <LiftCard className={styles.card}>
                 <p className={styles.meta}>
-                  <TodoText text={formatRange(item.start, item.end)} />
+                  {formatRange(item.start, item.end)}
                   {item.note && ` · ${item.note}`}
                 </p>
                 <h3 className={styles.heading}>{item.degree}</h3>
@@ -48,12 +47,8 @@ export function Education() {
               <ul className={styles.list}>
                 {profile.languages.map((language) => (
                   <li key={language.name}>
-                    <span className={styles.itemName}>
-                      <TodoText text={language.name} />
-                    </span>
-                    <span className={styles.muted}>
-                      <TodoText text={language.level} />
-                    </span>
+                    <span className={styles.itemName}>{language.name}</span>
+                    {language.level && <span className={styles.muted}>{language.level}</span>}
                   </li>
                 ))}
               </ul>

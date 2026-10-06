@@ -34,12 +34,12 @@ export type Education = {
   degree: string;
   school: string;
   start: string;
-  end: string; // "YYYY-MM" or "TODO"
+  end: string; // "YYYY-MM", or "present" while still studying
   note?: string;
 };
 
 export type Certification = { name: string; detail: string };
-export type Language = { name: string; level: string };
+export type Language = { name: string; level?: string };
 export type Skill = {
   name: string;
   size: 1 | 2 | 3;
@@ -79,14 +79,14 @@ export function findLink(id: string): Link | undefined {
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-/** "2024-12" -> "Dec 2024". Anything else (for example "TODO") is shown as is. */
+/** "2024-12" -> "Dec 2024". Anything else (for example "present") is shown as is. */
 export function formatMonth(value: string): string {
   const match = /^(\d{4})-(\d{2})$/.exec(value);
   if (!match) return value;
   return `${MONTHS[Number(match[2]) - 1]} ${match[1]}`;
 }
 
-/** "Dec 2024 to present", "Jul 2018 to Jul 2022", "Apr 2024 to TODO". */
+/** "Dec 2024 to present", "Jul 2018 to Jul 2022". */
 export function formatRange(start: string, end: string | null): string {
   return `${formatMonth(start)} to ${end === null ? "present" : formatMonth(end)}`;
 }
