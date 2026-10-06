@@ -30,7 +30,9 @@
 }
 
 .pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   border-radius: var(--radius-pill);
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
@@ -38,6 +40,37 @@
   white-space: nowrap;
   will-change: transform;
   user-select: none;
+}
+
+/* Technology logos: drawn with a CSS mask, so the SVG's shape is used as-is
+   and filled with one colour. By default that is the pill's text colour; on
+   hover it becomes the technology's brand colour, when that colour is clear
+   enough on this theme's pill (otherwise it simply keeps the text colour). */
+.icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.icon {
+  --brand: var(--brand-dark);
+  display: block;
+  height: 1.15em;
+  width: calc(1.15em * var(--aspect, 1));
+  max-width: 2.6em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+:global(:root[data-theme="light"]) .icon {
+  --brand: var(--brand-light);
+}
+
+.pill:hover .icon {
+  /* Falls back to the text colour when no usable brand colour is set. */
+  background-color: var(--brand, currentColor);
 }
 
 .small {

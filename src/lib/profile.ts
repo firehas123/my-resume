@@ -40,7 +40,12 @@ export type Education = {
 
 export type Certification = { name: string; detail: string };
 export type Language = { name: string; level: string };
-export type Skill = { name: string; size: 1 | 2 | 3 };
+export type Skill = {
+  name: string;
+  size: 1 | 2 | 3;
+  /** Devicon logo names, e.g. ["java-plain"]. Left out when no logo exists. */
+  logos?: string[];
+};
 
 export type Profile = {
   name: string;
