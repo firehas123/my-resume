@@ -4,7 +4,7 @@ import { DURATION, EASE_OUT } from "@/lib/motion";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useSyncExternalStore, ViewTransition } from "react";
 import { LiftCard } from "@/components/ui/LiftCard";
 import { ProjectTile } from "@/components/ui/ProjectTile";
 import { Reveal } from "@/components/ui/Reveal";
@@ -30,20 +30,36 @@ type ProjectTabsProps = {
   githubUrl?: string;
 };
 
+function subscribeToHistory(onChange: () => void) {
+  window.addEventListener("popstate", onChange);
+  return () => window.removeEventListener("popstate", onChange);
+}
+
+function readTabParam(): string | null {
+  return new URLSearchParams(window.location.search).get("tab");
+}
+
 // How many cards a tab shows before "Show all".
 const INITIAL_COUNT = 6;
 
 export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTabsProps) {
-  // Every group passed in has at least one project, so start on the first.
-  const [active, setActive] = useState(groups[0]);
+  // The selected tab lives in the address (?tab=Python), so coming back to the
+  // home page (back button or "All projects") restores it. Read after
+  // hydration; the server always renders the first tab.
+  const tabFromUrl = useSyncExternalStore(subscribeToHistory, readTabParam, () => null);
+  const [chosen, setChosen] = useState<string | null>(null);
+  const active = chosen ?? (tabFromUrl && groups.includes(tabFromUrl) ? tabFromUrl : groups[0]);
   const [showAll, setShowAll] = useState(false);
 
   const inGroup = projects.filter((p) => p.group === active);
   const visible = showAll ? inGroup : inGroup.slice(0, INITIAL_COUNT);
 
   function selectGroup(group: string) {
-    setActive(group);
+    setChosen(group);
     setShowAll(false);
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", group);
+    window.history.replaceState(window.history.state, "", url);
   }
 
   return (
@@ -104,16 +120,21 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
 function ProjectCard({ project }: { project: ProjectCardData }) {
   return (
     <LiftCard className={styles.card}>
-      <div className={styles.media}>
-        {project.image ? (
-          <Image src={project.image} alt="" fill sizes="(max-width: 960px) 100vw, 540px" className={styles.mediaImage} />
-        ) : (
-          <ProjectTile name={project.slug} />
-        )}
-      </div>
+      {/* Shared with the project page: the image grows into its hero image. */}
+      <ViewTransition name={`project-media-${project.slug}`} share="morph" default="none">
+        <div className={styles.media}>
+          {project.image ? (
+            <Image src={project.image} alt="" fill sizes="(max-width: 960px) 100vw, 540px" className={styles.mediaImage} />
+          ) : (
+            <ProjectTile name={project.slug} />
+          )}
+        </div>
+      </ViewTransition>
       <div className={styles.body}>
         <p className={styles.language}>{project.group}</p>
-        <h3 className={styles.title}>{project.title}</h3>
+        <ViewTransition name={`project-title-${project.slug}`} share="morph" default="none">
+          <h3 className={styles.title}>{project.title}</h3>
+        </ViewTransition>
         {project.summary && <p className={styles.summary}>{project.summary}</p>}
         {(project.isFork || project.languages.length > 0) && (
           <ul className={styles.languageTags} aria-label="Labels">

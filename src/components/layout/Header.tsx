@@ -16,7 +16,8 @@ const NAV = [
 
 export function Header() {
   return (
-    <header className={styles.header}>
+    // viewTransitionName: the header stays still during page transitions.
+    <header className={styles.header} style={{ viewTransitionName: "site-header" }}>
       <div className={`container ${styles.bar}`}>
         <Link href="/#top" className={styles.logo} aria-label={`${profile.shortName}, home`}>
           <Logo height={26} />

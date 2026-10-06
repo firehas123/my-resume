@@ -280,3 +280,80 @@ html.theme-transition *::after {
     transform: translateY(24px);
   }
 }
+
+/* ==========================================================================
+   Page transitions (React <ViewTransition>, see PageTransition.tsx)
+   ========================================================================== */
+
+/* Clicks during a transition reach the live page. */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.page-exit) {
+  animation: page-out var(--dur-quick) var(--ease-out) both;
+}
+
+::view-transition-new(.page-enter) {
+  animation: page-in var(--dur-standard) var(--ease-out) 120ms both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* Shared elements (a project card's title and image growing into the project
+   page) morph with the standard timing. */
+::view-transition-group(.morph) {
+  animation-duration: var(--dur-standard);
+  animation-timing-function: var(--ease-out);
+}
+
+/* The header stays put while the page under it changes. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Browsers without View Transitions: a simple fade instead of a hard cut. */
+@supports not (view-transition-name: none) {
+  @media (prefers-reduced-motion: no-preference) {
+    .page {
+      animation: page-fade var(--dur-standard) var(--ease-out) both;
+    }
+  }
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
