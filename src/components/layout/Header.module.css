@@ -74,7 +74,7 @@
   background: transparent;
   color: var(--text);
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-quick) var(--ease-out);
 }
 
 .themeToggle:hover {

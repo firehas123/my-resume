@@ -16,10 +16,13 @@
   --radius-pill: 999px;
   --header-height: 64px;
 
-  /* Motion: soft ease-out curves, 300 to 700ms */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 300ms;
-  --dur-slow: 700ms;
+  /* Motion: one shared set of timings and easings for the whole site.
+     src/lib/motion.ts mirrors these for JavaScript animations; keep them equal. */
+  --dur-quick: 200ms;
+  --dur-standard: 450ms;
+  --dur-slow: 800ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* soft ease-out, the default */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* for things that move and stop */
 }
 
 /* Dark theme (the default). `.band-dark` reuses the same values so the black
@@ -174,7 +177,7 @@ canvas {
 a {
   color: var(--accent);
   text-decoration: none;
-  transition: color var(--dur-fast) var(--ease-out);
+  transition: color var(--dur-quick) var(--ease-out);
 }
 
 a:hover {

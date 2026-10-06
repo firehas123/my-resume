@@ -24,7 +24,7 @@
   border: 1px solid var(--btn-outline);
   background: var(--card);
   font-size: 18px;
-  transition: border-color var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-quick) var(--ease-out);
 }
 
 .field textarea {
@@ -86,8 +86,56 @@
   color: var(--text);
 }
 
+/* Success: replaces the form; a check mark draws itself. */
 .success {
-  border-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 17px;
+  color: var(--muted);
+}
+
+.check {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 12px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .success {
+    animation: success-in var(--dur-standard) var(--ease-out) both;
+  }
+
+  .checkCircle {
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: draw-stroke var(--dur-slow) var(--ease-out) forwards;
+  }
+
+  .checkMark {
+    stroke-dasharray: 36;
+    stroke-dashoffset: 36;
+    animation: draw-stroke var(--dur-standard) var(--ease-out) 450ms forwards;
+  }
+}
+
+@keyframes success-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .error {
@@ -105,7 +153,7 @@
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-quick) var(--ease-out);
 }
 
 .submit:hover:not(:disabled) {

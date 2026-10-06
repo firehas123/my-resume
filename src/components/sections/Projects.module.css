@@ -47,8 +47,8 @@
   font-weight: 700;
   cursor: pointer;
   transition:
-    background-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out);
+    background-color var(--dur-quick) var(--ease-out),
+    color var(--dur-quick) var(--ease-out);
 }
 
 .tab[aria-pressed="true"] {
@@ -89,7 +89,7 @@
   border-radius: var(--radius-card);
   background: var(--card);
   border: 1px solid var(--card-border);
-  transition: box-shadow var(--dur-fast) var(--ease-out);
+  transition: box-shadow var(--dur-quick) var(--ease-out);
 }
 
 .card:hover {
@@ -196,7 +196,7 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-out);
+  transition: border-color var(--dur-quick) var(--ease-out);
 }
 
 .more:hover {

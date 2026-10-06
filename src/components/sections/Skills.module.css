@@ -61,7 +61,7 @@
   background-color: currentColor;
   -webkit-mask: var(--icon) center / contain no-repeat;
   mask: var(--icon) center / contain no-repeat;
-  transition: background-color var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-quick) var(--ease-out);
 }
 
 :global(:root[data-theme="light"]) .icon {

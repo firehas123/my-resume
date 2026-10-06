@@ -60,7 +60,7 @@
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  transition: background-color var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out);
 }
 
 .range[aria-pressed="true"] {
@@ -271,7 +271,7 @@
 .country {
   stroke: var(--card);
   stroke-width: 0.6;
-  transition: fill var(--dur-fast) var(--ease-out);
+  transition: fill var(--dur-quick) var(--ease-out);
 }
 
 .country[data-step="0"], .swatch[data-step="0"] {

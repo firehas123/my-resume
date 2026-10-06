@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
-import { visibleLinks } from "@/lib/profile";
+import { findLink, profile, visibleLinks } from "@/lib/profile";
 import { trackName } from "@/lib/stats/track";
 import styles from "./page.module.css";
 
@@ -10,9 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  // NEXT_PUBLIC_ variables are filled in when the site is built, so after
-  // setting it on Vercel the site must be redeployed (see README.md).
-  const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT?.trim() ?? "";
+  // The Web3Forms key from profile.json; NEXT_PUBLIC_WEB3FORMS_KEY overrides it.
+  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim() || profile.contactAccessKey;
 
   return (
     <section className={styles.page} aria-labelledby="contact-title">
@@ -38,7 +37,7 @@ export default function ContactPage() {
           )}
         </div>
         <div className={styles.formWrap}>
-          <ContactForm endpoint={endpoint} />
+          <ContactForm accessKey={accessKey} linkedinUrl={findLink("linkedin")?.url} />
         </div>
       </div>
     </section>

@@ -192,24 +192,21 @@ hover. A brand colour that would be hard to see on the pill (below 3:1 contrast,
 black Kafka on a dark pill or yellow JavaScript on a white one) is skipped, and that
 logo keeps the text colour.
 
-### Connect the contact form
+### Contact form
 
-The form posts to an external form service. Until it is connected, it shows a "not
-connected yet" notice and sends nothing.
+The form on `/contact` sends messages through [Web3Forms](https://web3forms.com): the
+visitor's browser posts the message to Web3Forms, which emails it to your Gmail. There
+is no server code, and your email address never appears in the site or its source.
 
-1. Create a free form at a form service, for example [Formspree](https://formspree.io).
-   It gives you an endpoint like `https://formspree.io/f/abcdwxyz`.
-2. In Vercel, open the project, go to **Settings → Environment Variables**, and add
-   `NEXT_PUBLIC_FORM_ENDPOINT` with that URL (for Production, and Preview if wanted).
-3. **Redeploy** (Deployments → ⋯ → Redeploy). The value is built into the page, so it
-   only takes effect after a new build.
-4. Send yourself a test message from `/contact`.
-
-For local testing, copy `.env.example` to `.env.local` and fill in the same value.
-
-The form sends JSON `{ name, email, message }` with `Accept: application/json`, which
-Formspree and most similar services accept. A hidden honeypot field (`_gotcha`) catches
-simple spam bots.
+- The Web3Forms access key is `"contactAccessKey"` in `src/data/profile.json`. It is a
+  public key by design (it can only deliver messages to your inbox).
+  `NEXT_PUBLIC_WEB3FORMS_KEY` overrides it if set (Vercel → Settings → Environment
+  Variables, then redeploy).
+- Each email has the subject "New message from your website", and its reply-to is
+  the visitor's address, so replying in Gmail answers them directly.
+- A hidden honeypot field is passed to Web3Forms' `botcheck`, so simple spam bots are
+  dropped.
+- To change where messages go, change the email address in your Web3Forms account.
 
 ### Visitor statistics
 

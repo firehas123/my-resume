@@ -57,6 +57,12 @@ export type Profile = {
   previewImage: string;
   /** When true, the footer shows a quiet "Site stats" link to /stats. */
   showStatsLink: boolean;
+  /**
+   * Web3Forms access key for the contact form. Public by design (it only
+   * lets people send messages to the owner's inbox). NEXT_PUBLIC_WEB3FORMS_KEY
+   * overrides it.
+   */
+  contactAccessKey: string;
   links: Link[];
   companies: Company[];
   experience: Job[];
