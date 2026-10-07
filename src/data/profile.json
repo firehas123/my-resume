@@ -1,24 +1,114 @@
 {
+  "_help": "Everything about me, for the website and the CVs. A text is either a plain string (the same in every language: names, links, codes) or an object with one entry per language code from src/i18n/languages.json: { \"en\": \"...\", \"de\": \"...\" }. English (\"en\") is the source and must always be there; a language without its own entry shows English. `npm run i18n:check` lists what is missing.",
+
   "name": "Muhammad Hassan Chattha",
   "shortName": "Hassan Chattha",
-  "location": "Nuremberg, Germany",
+
+  "title": {
+    "en": "Software Engineer",
+    "de": "Software Engineer",
+    "fr": "Ingénieur logiciel",
+    "es": "Ingeniero de software",
+    "it": "Software Engineer",
+    "nl": "Software Engineer",
+    "tr": "Yazılım Mühendisi",
+    "ar": "مهندس برمجيات"
+  },
+
+  "city": {
+    "en": "Nuremberg",
+    "de": "Nürnberg",
+    "fr": "Nuremberg",
+    "es": "Núremberg",
+    "it": "Norimberga",
+    "nl": "Neurenberg",
+    "tr": "Nürnberg",
+    "ar": "نورنبرغ"
+  },
+
+  "location": {
+    "en": "Nuremberg, Germany",
+    "de": "Nürnberg, Deutschland",
+    "fr": "Nuremberg, Allemagne",
+    "es": "Núremberg, Alemania",
+    "it": "Norimberga, Germania",
+    "nl": "Neurenberg, Duitsland",
+    "tr": "Nürnberg, Almanya",
+    "ar": "نورنبرغ، ألمانيا"
+  },
 
   "intro": {
-    "headline": ["Software engineer.", "Studying AI."],
-    "pitch": "Backend systems by trade, and a Master's in Artificial Intelligence at FAU Erlangen-Nürnberg."
+    "headline": {
+      "en": ["Software engineer.", "Studying AI."],
+      "de": ["Software Engineer.", "Im KI-Studium."],
+      "fr": ["Ingénieur logiciel.", "Étudiant en IA."],
+      "es": ["Ingeniero de software.", "Estudiante de IA."],
+      "it": ["Software engineer.", "Studente di IA."],
+      "nl": ["Software engineer.", "Studeert AI."],
+      "tr": ["Yazılım mühendisi.", "Yapay zekâ öğrencisi."],
+      "ar": ["مهندس برمجيات.", "أدرس الذكاء الاصطناعي."]
+    },
+    "pitch": {
+      "en": "Backend systems by trade, and a Master's in Artificial Intelligence at FAU Erlangen-Nürnberg.",
+      "de": "Backend-Systeme als Beruf, dazu ein Master in Künstlicher Intelligenz an der FAU Erlangen-Nürnberg.",
+      "fr": "Les systèmes backend comme métier, et un master en intelligence artificielle à la FAU Erlangen-Nürnberg.",
+      "es": "Sistemas backend como oficio y un máster en Inteligencia Artificial en la FAU Erlangen-Nürnberg.",
+      "it": "Sistemi backend per mestiere, e un master in Intelligenza Artificiale alla FAU Erlangen-Nürnberg.",
+      "nl": "Backend-systemen als vak, en een master Kunstmatige Intelligentie aan de FAU Erlangen-Nürnberg.",
+      "tr": "Mesleğim backend sistemleri; FAU Erlangen-Nürnberg'de Yapay Zekâ yüksek lisansı yapıyorum.",
+      "ar": "أعمل في أنظمة الـ Backend، وأدرس الماجستير في الذكاء الاصطناعي في جامعة FAU Erlangen-Nürnberg."
+    }
   },
 
   "about": {
-    "headline": "Easy to work with. Hard to replace.",
-    "statements": ["Reliable by default.", "Curious by design.", "Calm under pressure.", "No shortcuts included."],
+    "headline": {
+      "en": "Easy to work with. Hard to replace.",
+      "de": "Unkompliziert im Team. Schwer zu ersetzen.",
+      "fr": "Facile à vivre. Difficile à remplacer.",
+      "es": "Fácil de tratar. Difícil de reemplazar.",
+      "it": "Facile lavorarci insieme. Difficile da sostituire.",
+      "nl": "Prettig om mee te werken. Moeilijk te vervangen.",
+      "tr": "Birlikte çalışması kolay. Yerine koyması zor.",
+      "ar": "سهل التعامل. صعب الاستبدال."
+    },
+    "statements": {
+      "en": ["Reliable by default.", "Curious by design.", "Calm under pressure.", "No shortcuts included."],
+      "de": ["Zuverlässig ab Werk.", "Neugierig aus Prinzip.", "Ruhig unter Druck.", "Abkürzungen nicht enthalten."],
+      "fr": ["Fiable par défaut.", "Curieux par nature.", "Calme sous pression.", "Raccourcis non inclus."],
+      "es": ["Fiable por defecto.", "Curioso por naturaleza.", "Tranquilo bajo presión.", "Atajos no incluidos."],
+      "it": ["Affidabile di serie.", "Curioso per natura.", "Calmo sotto pressione.", "Scorciatoie non incluse."],
+      "nl": ["Standaard betrouwbaar.", "Nieuwsgierig van aard.", "Kalm onder druk.", "Kortere wegen niet inbegrepen."],
+      "tr": ["Varsayılan olarak güvenilir.", "Doğuştan meraklı.", "Baskı altında sakin.", "Kestirme yol dahil değildir."],
+      "ar": ["موثوق بطبعي.", "فضولي بطبيعتي.", "هادئ تحت الضغط.", "بلا طرق مختصرة."]
+    },
     "image": "/images/about-wide-calm-v2.jpg",
-    "imageAlt": "Black and white portrait of Hassan Chattha in a black T-shirt"
+    "imageAlt": {
+      "en": "Black and white portrait of Hassan Chattha in a black T-shirt",
+      "de": "Schwarz-Weiß-Porträt von Hassan Chattha in einem schwarzen T-Shirt",
+      "fr": "Portrait en noir et blanc de Hassan Chattha en T-shirt noir",
+      "es": "Retrato en blanco y negro de Hassan Chattha con una camiseta negra",
+      "it": "Ritratto in bianco e nero di Hassan Chattha con una maglietta nera",
+      "nl": "Zwart-witportret van Hassan Chattha in een zwart T-shirt",
+      "tr": "Hassan Chattha'nın siyah tişörtlü siyah beyaz portresi",
+      "ar": "صورة بالأبيض والأسود لـ Hassan Chattha بقميص أسود"
+    }
   },
 
-  "cv": {
-    "path": "/files/resume.pdf",
-    "downloadName": "Muhammad-Hassan-Chattha-CV.pdf"
+  "_cvHelp": "The downloadable CVs (public/files/cv-<code>.pdf) are built from this file by `npm run cv`, which also runs during every build. cvProfile is the short Profile paragraph at the top of the CV. The CV never shows a phone number. It shows cvEmail only when cvShowEmail is true (and cvEmail is filled in), and the photo cvPhoto only when cvShowPhoto is true. A file public/files/europass-cv-<code>.pdf, if you add one, is offered in the download menu as \"Europass format\".",
+  "cvProfile": {
+    "en": "Software engineer with backend experience: payment systems at i2c, microservices for the Careem Super App and secure email at Zertificon. Currently a Master's student in Artificial Intelligence at FAU Erlangen-Nürnberg and a working student at Zertificon in Berlin.",
+    "de": "Software Engineer mit Backend-Erfahrung: Zahlungssysteme bei i2c, Microservices für die Careem Super App und sichere E-Mail bei Zertificon. Derzeit Masterstudent in Künstlicher Intelligenz an der FAU Erlangen-Nürnberg und Werkstudent bei Zertificon in Berlin.",
+    "fr": "Ingénieur logiciel avec une expérience backend : systèmes de paiement chez i2c, microservices pour la Careem Super App et messagerie sécurisée chez Zertificon. Actuellement étudiant en master d’intelligence artificielle à la FAU Erlangen-Nürnberg et étudiant salarié chez Zertificon à Berlin.",
+    "es": "Ingeniero de software con experiencia en backend: sistemas de pago en i2c, microservices para la Careem Super App y correo electrónico seguro en Zertificon. Actualmente cursa un máster en Inteligencia Artificial en la FAU Erlangen-Nürnberg y trabaja como estudiante en Zertificon, en Berlín.",
+    "it": "Software engineer con esperienza backend: sistemi di pagamento presso i2c, microservices per la Careem Super App ed email sicura presso Zertificon. Attualmente studente magistrale in Intelligenza Artificiale alla FAU Erlangen-Nürnberg e studente lavoratore presso Zertificon a Berlino.",
+    "nl": "Software engineer met backend-ervaring: betaalsystemen bij i2c, microservices voor de Careem Super App en beveiligde e-mail bij Zertificon. Momenteel masterstudent Kunstmatige Intelligentie aan de FAU Erlangen-Nürnberg en werkstudent bij Zertificon in Berlijn.",
+    "tr": "Backend deneyimine sahip yazılım mühendisi: i2c'de ödeme sistemleri, Careem Super App için microservices ve Zertificon'da güvenli e-posta. Şu anda FAU Erlangen-Nürnberg'de Yapay Zekâ yüksek lisans öğrencisi ve Berlin'deki Zertificon'da çalışan öğrenci.",
+    "ar": "مهندس برمجيات ذو خبرة في الـ Backend: أنظمة الدفع في i2c، وMicroservices لتطبيق Careem Super App، والبريد الإلكتروني الآمن في Zertificon. حاليًا طالب ماجستير في الذكاء الاصطناعي في جامعة FAU Erlangen-Nürnberg، وطالب عامل في Zertificon في برلين."
   },
+  "cvShowEmail": false,
+  "cvEmail": "",
+  "cvShowPhoto": false,
+  "cvPhoto": "/images/headshot-calm.jpg",
 
   "showStatsLink": false,
 
@@ -41,95 +131,454 @@
   "experience": [
     {
       "company": "Zertificon",
-      "role": "Working Student",
-      "city": "Berlin",
-      "country": "Germany",
+      "role": {
+        "en": "Working Student",
+        "de": "Werkstudent",
+        "fr": "Étudiant salarié",
+        "es": "Estudiante trabajador",
+        "it": "Studente lavoratore",
+        "nl": "Werkstudent",
+        "tr": "Çalışan Öğrenci",
+        "ar": "طالب عامل"
+      },
+      "city": { "en": "Berlin", "de": "Berlin", "fr": "Berlin", "es": "Berlín", "it": "Berlino", "nl": "Berlijn", "tr": "Berlin", "ar": "برلين" },
+      "country": { "en": "Germany", "de": "Deutschland", "fr": "Allemagne", "es": "Alemania", "it": "Germania", "nl": "Duitsland", "tr": "Almanya", "ar": "ألمانيا" },
       "start": "2024-12",
       "end": null,
-      "summary": "Operates and monitors the secure mail pipeline (TLS, S/MIME and PGP gateways), renews X.509 certificates and rotates keys.",
-      "highlights": [
-        "Operate and monitor the secure mail pipeline, keeping the TLS, S/MIME and PGP gateways running smoothly.",
-        "Renew expiring X.509 certificates, rotate keys and roll out new cipher-suite settings to staging and production.",
-        "Build minimal test cases for product teams and validate them in a sandbox before rollout."
-      ]
+      "summary": {
+        "en": "Operates and monitors the secure mail pipeline (TLS, S/MIME and PGP gateways), renews X.509 certificates and rotates keys.",
+        "de": "Betreibt und überwacht die Secure-Mail-Pipeline (TLS-, S/MIME- und PGP-Gateways), erneuert X.509-Zertifikate und führt Schlüsselrotationen durch.",
+        "fr": "Exploite et surveille la chaîne de messagerie sécurisée (passerelles TLS, S/MIME et PGP), renouvelle les certificats X.509 et assure la rotation des clés.",
+        "es": "Opera y supervisa el pipeline de correo seguro (pasarelas TLS, S/MIME y PGP), renueva certificados X.509 y rota las claves.",
+        "it": "Gestisce e monitora la pipeline di posta sicura (gateway TLS, S/MIME e PGP), rinnova i certificati X.509 ed esegue la rotazione delle chiavi.",
+        "nl": "Beheert en bewaakt de beveiligde mailpipeline (TLS-, S/MIME- en PGP-gateways), vernieuwt X.509-certificaten en roteert sleutels.",
+        "tr": "Güvenli e-posta hattını (TLS, S/MIME ve PGP ağ geçitleri) işletir ve izler, X.509 sertifikalarını yeniler ve anahtar rotasyonu yapar.",
+        "ar": "يشغّل منظومة البريد الآمن ويراقبها (بوابات TLS وS/MIME وPGP)، ويجدد شهادات X.509 ويدوّر المفاتيح."
+      },
+      "highlights": {
+        "en": [
+          "Operate and monitor the secure mail pipeline, keeping the TLS, S/MIME and PGP gateways running smoothly.",
+          "Renew expiring X.509 certificates, rotate keys and roll out new cipher-suite settings to staging and production.",
+          "Build minimal test cases for product teams and validate them in a sandbox before rollout."
+        ],
+        "de": [
+          "Betrieb und Überwachung der Secure-Mail-Pipeline, damit die TLS-, S/MIME- und PGP-Gateways reibungslos laufen.",
+          "Erneuerung ablaufender X.509-Zertifikate, Schlüsselrotation und Rollout neuer Cipher-Suite-Einstellungen auf Staging und Produktion.",
+          "Erstellung minimaler Testfälle für Produktteams und deren Validierung in einer Sandbox vor dem Rollout."
+        ],
+        "fr": [
+          "Exploitation et surveillance de la chaîne de messagerie sécurisée, pour un fonctionnement fluide des passerelles TLS, S/MIME et PGP.",
+          "Renouvellement des certificats X.509 arrivant à expiration, rotation des clés et déploiement de nouvelles suites de chiffrement en préproduction et en production.",
+          "Création de cas de test minimaux pour les équipes produit et validation en sandbox avant le déploiement."
+        ],
+        "es": [
+          "Operación y supervisión del pipeline de correo seguro para que las pasarelas TLS, S/MIME y PGP funcionen sin problemas.",
+          "Renovación de certificados X.509 a punto de caducar, rotación de claves y despliegue de nuevas configuraciones de cipher suites en staging y producción.",
+          "Creación de casos de prueba mínimos para los equipos de producto y validación en un sandbox antes del despliegue."
+        ],
+        "it": [
+          "Gestione e monitoraggio della pipeline di posta sicura, per un funzionamento regolare dei gateway TLS, S/MIME e PGP.",
+          "Rinnovo dei certificati X.509 in scadenza, rotazione delle chiavi e rilascio di nuove configurazioni delle cipher suite in staging e produzione.",
+          "Creazione di casi di test minimi per i team di prodotto e validazione in sandbox prima del rilascio."
+        ],
+        "nl": [
+          "Beheer en monitoring van de beveiligde mailpipeline, zodat de TLS-, S/MIME- en PGP-gateways soepel blijven draaien.",
+          "Vernieuwen van verlopende X.509-certificaten, roteren van sleutels en uitrollen van nieuwe cipher-suite-instellingen naar staging en productie.",
+          "Bouwen van minimale testcases voor productteams en valideren in een sandbox vóór de uitrol."
+        ],
+        "tr": [
+          "Güvenli e-posta hattının işletilmesi ve izlenmesi; TLS, S/MIME ve PGP ağ geçitlerinin sorunsuz çalışmasının sağlanması.",
+          "Süresi dolan X.509 sertifikalarının yenilenmesi, anahtar rotasyonu ve yeni cipher suite ayarlarının staging ve production ortamlarına aktarılması.",
+          "Ürün ekipleri için minimal test senaryolarının hazırlanması ve yayına almadan önce sandbox ortamında doğrulanması."
+        ],
+        "ar": [
+          "تشغيل منظومة البريد الآمن ومراقبتها، لضمان عمل بوابات TLS وS/MIME وPGP بسلاسة.",
+          "تجديد شهادات X.509 قبل انتهاء صلاحيتها، وتدوير المفاتيح، ونشر إعدادات cipher suites الجديدة على بيئتي staging والإنتاج.",
+          "إعداد حالات اختبار مصغّرة لفرق المنتجات والتحقق منها في بيئة sandbox قبل النشر."
+        ]
+      }
     },
     {
       "company": "Careem",
-      "role": "Software Engineer",
-      "city": "Lahore",
-      "country": "Pakistan",
+      "role": {
+        "en": "Software Engineer",
+        "de": "Software Engineer",
+        "fr": "Ingénieur logiciel",
+        "es": "Ingeniero de software",
+        "it": "Software Engineer",
+        "nl": "Software Engineer",
+        "tr": "Yazılım Mühendisi",
+        "ar": "مهندس برمجيات"
+      },
+      "city": { "en": "Lahore", "de": "Lahore", "fr": "Lahore", "es": "Lahore", "it": "Lahore", "nl": "Lahore", "tr": "Lahor", "ar": "لاهور" },
+      "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2023-12",
       "end": "2024-04",
-      "summary": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
-      "highlights": [
-        "Developed a scalable REST microservice for the Careem Super App, using vector Postgres for efficient data management and JWT-based OAuth for secure authentication.",
-        "Kept the service running reliably with Grafana for monitoring, Kibana for logging and Jaeger for request tracing with OpenTelemetry.",
-        "Managed CI/CD pipelines with GitHub Actions, deploying the dockerised service on AWS.",
-        "Refined prompts to improve the accuracy of results from large language models such as GPT."
-      ]
+      "summary": {
+        "en": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
+        "de": "Entwickelte einen REST-Microservice für die Careem Super App mit Vektor-Postgres und JWT-basiertem OAuth, bereitgestellt mit GitHub Actions und Docker auf AWS.",
+        "fr": "A développé un microservice REST pour la Careem Super App avec Postgres vectoriel et OAuth basé sur JWT, déployé avec GitHub Actions et Docker sur AWS.",
+        "es": "Desarrolló un microservice REST para la Careem Super App con Postgres vectorial y OAuth basado en JWT, desplegado con GitHub Actions y Docker en AWS.",
+        "it": "Ha sviluppato un microservice REST per la Careem Super App con Postgres vettoriale e OAuth basato su JWT, distribuito con GitHub Actions e Docker su AWS.",
+        "nl": "Bouwde een REST-microservice voor de Careem Super App met vector-Postgres en OAuth op basis van JWT, uitgerold met GitHub Actions en Docker op AWS.",
+        "tr": "Careem Super App için vektör Postgres ve JWT tabanlı OAuth kullanan bir REST microservice geliştirdi; GitHub Actions ve Docker ile AWS üzerinde yayına aldı.",
+        "ar": "طوّر Microservice من نوع REST لتطبيق Careem Super App باستخدام Postgres المتجهي وOAuth القائم على JWT، ونشره عبر GitHub Actions وDocker على AWS."
+      },
+      "highlights": {
+        "en": [
+          "Developed a scalable REST microservice for the Careem Super App, using vector Postgres for efficient data management and JWT-based OAuth for secure authentication.",
+          "Kept the service running reliably with Grafana for monitoring, Kibana for logging and Jaeger for request tracing with OpenTelemetry.",
+          "Managed CI/CD pipelines with GitHub Actions, deploying the dockerised service on AWS.",
+          "Refined prompts to improve the accuracy of results from large language models such as GPT."
+        ],
+        "de": [
+          "Entwicklung eines skalierbaren REST-Microservice für die Careem Super App, mit Vektor-Postgres für effizientes Datenmanagement und JWT-basiertem OAuth für sichere Authentifizierung.",
+          "Zuverlässiger Betrieb des Service mit Grafana für Monitoring, Kibana für Logging und Jaeger für Request-Tracing mit OpenTelemetry.",
+          "Verwaltung der CI/CD-Pipelines mit GitHub Actions und Deployment des mit Docker containerisierten Service auf AWS.",
+          "Optimierung von Prompts für genauere Ergebnisse großer Sprachmodelle wie GPT."
+        ],
+        "fr": [
+          "Développement d’un microservice REST évolutif pour la Careem Super App, avec Postgres vectoriel pour une gestion efficace des données et OAuth basé sur JWT pour une authentification sécurisée.",
+          "Fonctionnement fiable du service grâce à Grafana pour la supervision, Kibana pour les journaux et Jaeger pour le traçage des requêtes avec OpenTelemetry.",
+          "Gestion des pipelines CI/CD avec GitHub Actions et déploiement du service conteneurisé avec Docker sur AWS.",
+          "Affinage des prompts pour améliorer la précision des résultats de grands modèles de langage comme GPT."
+        ],
+        "es": [
+          "Desarrollo de un microservice REST escalable para la Careem Super App, con Postgres vectorial para una gestión eficiente de los datos y OAuth basado en JWT para una autenticación segura.",
+          "Funcionamiento fiable del servicio con Grafana para la monitorización, Kibana para los logs y Jaeger para el trazado de peticiones con OpenTelemetry.",
+          "Gestión de los pipelines de CI/CD con GitHub Actions y despliegue del servicio en contenedores Docker en AWS.",
+          "Ajuste de prompts para mejorar la precisión de los resultados de grandes modelos de lenguaje como GPT."
+        ],
+        "it": [
+          "Sviluppo di un microservice REST scalabile per la Careem Super App, con Postgres vettoriale per una gestione efficiente dei dati e OAuth basato su JWT per un’autenticazione sicura.",
+          "Funzionamento affidabile del servizio con Grafana per il monitoraggio, Kibana per i log e Jaeger per il tracciamento delle richieste con OpenTelemetry.",
+          "Gestione delle pipeline CI/CD con GitHub Actions e rilascio del servizio containerizzato con Docker su AWS.",
+          "Affinamento dei prompt per migliorare l’accuratezza dei risultati di grandi modelli linguistici come GPT."
+        ],
+        "nl": [
+          "Ontwikkeling van een schaalbare REST-microservice voor de Careem Super App, met vector-Postgres voor efficiënt databeheer en OAuth op basis van JWT voor veilige authenticatie.",
+          "Betrouwbare werking van de service met Grafana voor monitoring, Kibana voor logging en Jaeger voor request tracing met OpenTelemetry.",
+          "Beheer van CI/CD-pipelines met GitHub Actions en uitrol van de met Docker gecontaineriseerde service op AWS.",
+          "Verfijnen van prompts voor nauwkeurigere resultaten van grote taalmodellen zoals GPT."
+        ],
+        "tr": [
+          "Careem Super App için ölçeklenebilir bir REST microservice geliştirilmesi; verimli veri yönetimi için vektör Postgres, güvenli kimlik doğrulama için JWT tabanlı OAuth.",
+          "Servisin güvenilir çalışmasının sağlanması: izleme için Grafana, loglama için Kibana, OpenTelemetry ile istek takibi için Jaeger.",
+          "GitHub Actions ile CI/CD pipeline'larının yönetilmesi ve Docker ile paketlenen servisin AWS'ye dağıtılması.",
+          "GPT gibi büyük dil modellerinden alınan sonuçların doğruluğunu artırmak için prompt'ların iyileştirilmesi."
+        ],
+        "ar": [
+          "تطوير Microservice قابل للتوسع من نوع REST لتطبيق Careem Super App، باستخدام Postgres المتجهي لإدارة البيانات بكفاءة وOAuth القائم على JWT للمصادقة الآمنة.",
+          "الحفاظ على تشغيل الخدمة بموثوقية باستخدام Grafana للمراقبة وKibana للسجلات وJaeger لتتبع الطلبات مع OpenTelemetry.",
+          "إدارة مسارات CI/CD باستخدام GitHub Actions ونشر الخدمة المعبأة بـ Docker على AWS.",
+          "تحسين الـ prompts لرفع دقة نتائج النماذج اللغوية الكبيرة مثل GPT."
+        ]
+      }
     },
     {
       "company": "i2c Inc",
-      "role": "Software Engineer",
-      "city": "Lahore",
-      "country": "Pakistan",
+      "role": {
+        "en": "Software Engineer",
+        "de": "Software Engineer",
+        "fr": "Ingénieur logiciel",
+        "es": "Ingeniero de software",
+        "it": "Software Engineer",
+        "nl": "Software Engineer",
+        "tr": "Yazılım Mühendisi",
+        "ar": "مهندس برمجيات"
+      },
+      "city": { "en": "Lahore", "de": "Lahore", "fr": "Lahore", "es": "Lahore", "it": "Lahore", "nl": "Lahore", "tr": "Lahor", "ar": "لاهور" },
+      "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2022-07",
       "end": "2023-12",
-      "summary": "Moved payment services to an event-driven microservices architecture with Spring Boot and Kafka, and worked with the ISO 8583 standard.",
-      "highlights": [
-        "Led the shift to an event-driven microservices architecture with Spring Boot and Maven, improving scalability and reducing maintenance overhead.",
-        "Integrated Kafka for transaction handling, increasing throughput and reducing latency.",
-        "Introduced rigorous reliability and performance testing, automated with Bash scripts.",
-        "Streamlined deployment with Docker, reducing deployment time and server resource use, which enabled faster delivery.",
-        "Automated testing with UFT scripts, reducing testing time and increasing test coverage of critical functions.",
-        "Worked with the ISO 8583 standard, ensuring compliance with industry regulations and protecting sensitive data."
-      ]
+      "summary": {
+        "en": "Moved payment services to an event-driven microservices architecture with Spring Boot and Kafka, and worked with the ISO 8583 standard.",
+        "de": "Überführte Zahlungsdienste in eine ereignisgesteuerte Microservices-Architektur mit Spring Boot und Kafka und arbeitete mit dem Standard ISO 8583.",
+        "fr": "A migré des services de paiement vers une architecture microservices pilotée par les événements avec Spring Boot et Kafka, et a travaillé avec la norme ISO 8583.",
+        "es": "Migró servicios de pago a una arquitectura de microservices orientada a eventos con Spring Boot y Kafka, y trabajó con el estándar ISO 8583.",
+        "it": "Ha portato i servizi di pagamento su un’architettura a microservices event-driven con Spring Boot e Kafka, e ha lavorato con lo standard ISO 8583.",
+        "nl": "Bracht betaaldiensten over naar een event-driven microservices-architectuur met Spring Boot en Kafka, en werkte met de ISO 8583-standaard.",
+        "tr": "Ödeme servislerini Spring Boot ve Kafka ile olay güdümlü bir microservices mimarisine taşıdı ve ISO 8583 standardıyla çalıştı.",
+        "ar": "نقل خدمات الدفع إلى بنية Microservices قائمة على الأحداث باستخدام Spring Boot وKafka، وعمل وفق معيار ISO 8583."
+      },
+      "highlights": {
+        "en": [
+          "Led the shift to an event-driven microservices architecture with Spring Boot and Maven, improving scalability and reducing maintenance overhead.",
+          "Integrated Kafka for transaction handling, increasing throughput and reducing latency.",
+          "Introduced rigorous reliability and performance testing, automated with Bash scripts.",
+          "Streamlined deployment with Docker, reducing deployment time and server resource use, which enabled faster delivery.",
+          "Automated testing with UFT scripts, reducing testing time and increasing test coverage of critical functions.",
+          "Worked with the ISO 8583 standard, ensuring compliance with industry regulations and protecting sensitive data."
+        ],
+        "de": [
+          "Leitung der Umstellung auf eine ereignisgesteuerte Microservices-Architektur mit Spring Boot und Maven: bessere Skalierbarkeit, geringerer Wartungsaufwand.",
+          "Integration von Kafka in die Transaktionsverarbeitung: höherer Durchsatz, geringere Latenz.",
+          "Einführung gründlicher Zuverlässigkeits- und Performancetests, automatisiert mit Bash-Skripten.",
+          "Vereinfachtes Deployment mit Docker: kürzere Deployment-Zeiten und weniger Serverressourcen, dadurch schnellere Auslieferung.",
+          "Testautomatisierung mit UFT-Skripten: kürzere Testzeiten und höhere Testabdeckung kritischer Funktionen.",
+          "Arbeit mit dem Standard ISO 8583: Einhaltung der Branchenvorgaben und Schutz sensibler Daten."
+        ],
+        "fr": [
+          "Pilotage de la transition vers une architecture microservices pilotée par les événements avec Spring Boot et Maven, pour une meilleure scalabilité et une maintenance allégée.",
+          "Intégration de Kafka pour le traitement des transactions, avec un débit accru et une latence réduite.",
+          "Mise en place de tests rigoureux de fiabilité et de performance, automatisés avec des scripts Bash.",
+          "Simplification du déploiement avec Docker, réduisant le temps de déploiement et la consommation de ressources serveur, pour des livraisons plus rapides.",
+          "Automatisation des tests avec des scripts UFT, réduisant la durée des tests et augmentant la couverture des fonctions critiques.",
+          "Travail avec la norme ISO 8583, garantissant la conformité aux réglementations du secteur et la protection des données sensibles."
+        ],
+        "es": [
+          "Liderazgo de la transición a una arquitectura de microservices orientada a eventos con Spring Boot y Maven, con mejor escalabilidad y menos carga de mantenimiento.",
+          "Integración de Kafka en el procesamiento de transacciones, con mayor rendimiento y menor latencia.",
+          "Implantación de pruebas rigurosas de fiabilidad y rendimiento, automatizadas con scripts de Bash.",
+          "Simplificación del despliegue con Docker, que redujo el tiempo de despliegue y el uso de recursos del servidor y permitió entregas más rápidas.",
+          "Automatización de pruebas con scripts de UFT, que redujo el tiempo de pruebas y aumentó la cobertura de las funciones críticas.",
+          "Trabajo con el estándar ISO 8583, garantizando el cumplimiento de la normativa del sector y la protección de datos sensibles."
+        ],
+        "it": [
+          "Guida del passaggio a un’architettura a microservices event-driven con Spring Boot e Maven, migliorando la scalabilità e riducendo l’onere di manutenzione.",
+          "Integrazione di Kafka nella gestione delle transazioni, con throughput più elevato e latenza ridotta.",
+          "Introduzione di test rigorosi di affidabilità e prestazioni, automatizzati con script Bash.",
+          "Semplificazione del rilascio con Docker, riducendo i tempi di deploy e l’uso delle risorse dei server, per consegne più rapide.",
+          "Automazione dei test con script UFT, riducendo i tempi di test e aumentando la copertura delle funzioni critiche.",
+          "Lavoro con lo standard ISO 8583, garantendo la conformità alle normative di settore e la protezione dei dati sensibili."
+        ],
+        "nl": [
+          "Leiding over de overstap naar een event-driven microservices-architectuur met Spring Boot en Maven, voor betere schaalbaarheid en minder onderhoud.",
+          "Integratie van Kafka voor transactieverwerking, met hogere doorvoer en lagere latentie.",
+          "Invoering van grondige betrouwbaarheids- en performancetests, geautomatiseerd met Bash-scripts.",
+          "Gestroomlijnde deployment met Docker: kortere deploymenttijd en minder serverbelasting, waardoor sneller kon worden opgeleverd.",
+          "Testautomatisering met UFT-scripts: kortere testtijd en hogere testdekking van kritieke functies.",
+          "Werken met de ISO 8583-standaard, met naleving van sectorregels en bescherming van gevoelige gegevens."
+        ],
+        "tr": [
+          "Spring Boot ve Maven ile olay güdümlü bir microservices mimarisine geçişe liderlik; daha iyi ölçeklenebilirlik ve daha az bakım yükü.",
+          "İşlem yönetimi için Kafka entegrasyonu; daha yüksek verim ve daha düşük gecikme.",
+          "Bash betikleriyle otomatikleştirilmiş kapsamlı güvenilirlik ve performans testlerinin başlatılması.",
+          "Docker ile dağıtım sürecinin sadeleştirilmesi; dağıtım süresi ve sunucu kaynak kullanımı azaldı, teslimat hızlandı.",
+          "UFT betikleriyle test otomasyonu; test süresi kısaldı, kritik fonksiyonların test kapsamı arttı.",
+          "ISO 8583 standardıyla çalışma; sektör düzenlemelerine uyumun ve hassas verilerin korunmasının sağlanması."
+        ],
+        "ar": [
+          "قيادة التحول إلى بنية Microservices قائمة على الأحداث باستخدام Spring Boot وMaven، مما حسّن قابلية التوسع وقلّل أعباء الصيانة.",
+          "دمج Kafka في معالجة المعاملات، مما زاد الإنتاجية وخفّض زمن الاستجابة.",
+          "إدخال اختبارات صارمة للموثوقية والأداء، مؤتمتة بسكربتات Bash.",
+          "تبسيط النشر باستخدام Docker، مما قلّل وقت النشر واستهلاك موارد الخوادم وأتاح تسليمًا أسرع.",
+          "أتمتة الاختبارات بسكربتات UFT، مما قلّل وقت الاختبار وزاد تغطية الوظائف الحرجة.",
+          "العمل وفق معيار ISO 8583، مع ضمان الامتثال للوائح القطاع وحماية البيانات الحساسة."
+        ]
+      }
     },
     {
       "company": "InfoTech",
       "legalName": "InfoTech Private Limited",
-      "role": "Intern",
-      "city": "Lahore",
-      "country": "Pakistan",
+      "role": {
+        "en": "Intern",
+        "de": "Praktikant",
+        "fr": "Stagiaire",
+        "es": "Becario",
+        "it": "Stagista",
+        "nl": "Stagiair",
+        "tr": "Stajyer",
+        "ar": "متدرب"
+      },
+      "city": { "en": "Lahore", "de": "Lahore", "fr": "Lahore", "es": "Lahore", "it": "Lahore", "nl": "Lahore", "tr": "Lahor", "ar": "لاهور" },
+      "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2021-07",
       "end": "2021-09",
-      "summary": "Backend development with Java and JavaFX, working closely with the QA team.",
-      "highlights": [
-        "Developed backend features in Java and JavaFX, improving performance through better code structure and resource management.",
-        "Reduced processing time for critical operations with suitable algorithms and data structures.",
-        "Worked closely with the SQA team, speeding up bug fixes and reducing post-release defects."
-      ]
+      "summary": {
+        "en": "Backend development with Java and JavaFX, working closely with the QA team.",
+        "de": "Backend-Entwicklung mit Java und JavaFX in enger Zusammenarbeit mit dem QA-Team.",
+        "fr": "Développement backend en Java et JavaFX, en étroite collaboration avec l’équipe QA.",
+        "es": "Desarrollo backend con Java y JavaFX, en estrecha colaboración con el equipo de QA.",
+        "it": "Sviluppo backend con Java e JavaFX, in stretta collaborazione con il team QA.",
+        "nl": "Backend-ontwikkeling met Java en JavaFX, in nauwe samenwerking met het QA-team.",
+        "tr": "Java ve JavaFX ile backend geliştirme; QA ekibiyle yakın çalışma.",
+        "ar": "تطوير Backend باستخدام Java وJavaFX، بالتعاون الوثيق مع فريق ضمان الجودة (QA)."
+      },
+      "highlights": {
+        "en": [
+          "Developed backend features in Java and JavaFX, improving performance through better code structure and resource management.",
+          "Reduced processing time for critical operations with suitable algorithms and data structures.",
+          "Worked closely with the SQA team, speeding up bug fixes and reducing post-release defects."
+        ],
+        "de": [
+          "Entwicklung von Backend-Funktionen in Java und JavaFX: bessere Performance durch klarere Codestruktur und Ressourcenverwaltung.",
+          "Kürzere Verarbeitungszeiten kritischer Vorgänge durch passende Algorithmen und Datenstrukturen.",
+          "Enge Zusammenarbeit mit dem SQA-Team: schnellere Fehlerbehebung und weniger Fehler nach dem Release."
+        ],
+        "fr": [
+          "Développement de fonctionnalités backend en Java et JavaFX, avec de meilleures performances grâce à une structure de code et une gestion des ressources améliorées.",
+          "Réduction du temps de traitement des opérations critiques grâce à des algorithmes et des structures de données adaptés.",
+          "Collaboration étroite avec l’équipe SQA, accélérant la correction des bugs et réduisant les défauts après mise en production."
+        ],
+        "es": [
+          "Desarrollo de funcionalidades backend en Java y JavaFX, con mejor rendimiento gracias a una mejor estructura del código y gestión de recursos.",
+          "Reducción del tiempo de procesamiento de operaciones críticas con algoritmos y estructuras de datos adecuados.",
+          "Colaboración estrecha con el equipo de SQA, que aceleró la corrección de errores y redujo los defectos tras cada lanzamiento."
+        ],
+        "it": [
+          "Sviluppo di funzionalità backend in Java e JavaFX, migliorando le prestazioni grazie a una migliore struttura del codice e gestione delle risorse.",
+          "Riduzione dei tempi di elaborazione delle operazioni critiche con algoritmi e strutture dati adeguati.",
+          "Stretta collaborazione con il team SQA, velocizzando la correzione dei bug e riducendo i difetti dopo il rilascio."
+        ],
+        "nl": [
+          "Ontwikkeling van backend-functies in Java en JavaFX, met betere prestaties door een betere codestructuur en resourcebeheer.",
+          "Kortere verwerkingstijd voor kritieke bewerkingen dankzij passende algoritmen en datastructuren.",
+          "Nauwe samenwerking met het SQA-team: snellere bugfixes en minder fouten na de release."
+        ],
+        "tr": [
+          "Java ve JavaFX ile backend özelliklerinin geliştirilmesi; daha iyi kod yapısı ve kaynak yönetimiyle performans artışı.",
+          "Uygun algoritma ve veri yapılarıyla kritik işlemlerin süresinin kısaltılması.",
+          "SQA ekibiyle yakın çalışma; hata düzeltmeleri hızlandı, yayın sonrası hatalar azaldı."
+        ],
+        "ar": [
+          "تطوير ميزات Backend بلغة Java وJavaFX، وتحسين الأداء عبر هيكلة أفضل للشيفرة وإدارة أفضل للموارد.",
+          "تقليل زمن معالجة العمليات الحرجة باستخدام خوارزميات وهياكل بيانات مناسبة.",
+          "تعاون وثيق مع فريق SQA، مما سرّع إصلاح الأخطاء وقلّل العيوب بعد الإصدار."
+        ]
+      }
     }
   ],
 
   "education": [
     {
-      "degree": "Master's, Artificial Intelligence",
-      "short": "M.Sc. AI at FAU",
+      "degree": {
+        "en": "Master's, Artificial Intelligence",
+        "de": "Master, Künstliche Intelligenz",
+        "fr": "Master, Intelligence artificielle",
+        "es": "Máster, Inteligencia Artificial",
+        "it": "Master of Science, Intelligenza Artificiale",
+        "nl": "Master, Kunstmatige Intelligentie",
+        "tr": "Yüksek Lisans, Yapay Zekâ",
+        "ar": "ماجستير، الذكاء الاصطناعي"
+      },
+      "short": {
+        "en": "M.Sc. AI at FAU",
+        "de": "M.Sc. KI an der FAU",
+        "fr": "M.Sc. IA à la FAU",
+        "es": "M.Sc. IA en la FAU",
+        "it": "M.Sc. IA alla FAU",
+        "nl": "M.Sc. AI aan de FAU",
+        "tr": "FAU'da Yapay Zekâ yüksek lisansı",
+        "ar": "ماجستير الذكاء الاصطناعي في FAU"
+      },
       "school": "Friedrich-Alexander-Universität Erlangen-Nürnberg",
       "start": "2024-04",
       "end": "present"
     },
     {
-      "degree": "Bachelor's, Information Technology",
+      "degree": {
+        "en": "Bachelor's, Information Technology",
+        "de": "Bachelor, Informationstechnologie",
+        "fr": "Bachelor, Technologies de l’information",
+        "es": "Bachelor, Tecnologías de la Información",
+        "it": "Bachelor, Tecnologie dell’informazione",
+        "nl": "Bachelor, Informatietechnologie",
+        "tr": "Lisans, Bilgi Teknolojileri",
+        "ar": "بكالوريوس، تقنية المعلومات"
+      },
       "school": "University of the Punjab",
       "start": "2018-07",
       "end": "2022-07",
-      "note": "GPA 3.44"
+      "note": {
+        "en": "GPA 3.44",
+        "de": "GPA 3,44",
+        "fr": "GPA 3,44",
+        "es": "GPA 3,44",
+        "it": "GPA 3,44",
+        "nl": "GPA 3,44",
+        "tr": "GPA 3,44",
+        "ar": "المعدل التراكمي 3.44"
+      }
     }
   ],
 
   "certifications": [
-    { "name": "Machine Learning", "detail": "Achieved from LinkedIn" },
-    { "name": "Java", "detail": "Achieved 4-Star rating on HackerRank" },
-    { "name": "Problem Solving", "detail": "Achieved 4-Star rating on HackerRank" },
-    { "name": "SQL", "detail": "Achieved 4-Star rating on HackerRank" },
-    { "name": "Google Code Jam", "detail": "Participated in Google Code Jam competitions" }
+    {
+      "name": "Machine Learning",
+      "detail": {
+        "en": "Achieved from LinkedIn",
+        "de": "Über LinkedIn erworben",
+        "fr": "Obtenu via LinkedIn",
+        "es": "Obtenido a través de LinkedIn",
+        "it": "Conseguito tramite LinkedIn",
+        "nl": "Behaald via LinkedIn",
+        "tr": "LinkedIn üzerinden alındı",
+        "ar": "حصلت عليها عبر LinkedIn"
+      }
+    },
+    {
+      "name": "Java",
+      "detail": {
+        "en": "Achieved 4-Star rating on HackerRank",
+        "de": "4-Sterne-Bewertung auf HackerRank",
+        "fr": "Note de 4 étoiles sur HackerRank",
+        "es": "Valoración de 4 estrellas en HackerRank",
+        "it": "Valutazione a 4 stelle su HackerRank",
+        "nl": "4-sterrenbeoordeling op HackerRank",
+        "tr": "HackerRank'te 4 yıldız",
+        "ar": "تقييم 4 نجوم على HackerRank"
+      }
+    },
+    {
+      "name": {
+        "en": "Problem Solving",
+        "de": "Problemlösung",
+        "fr": "Résolution de problèmes",
+        "es": "Resolución de problemas",
+        "it": "Risoluzione dei problemi",
+        "nl": "Probleemoplossing",
+        "tr": "Problem Çözme",
+        "ar": "حل المشكلات"
+      },
+      "detail": {
+        "en": "Achieved 4-Star rating on HackerRank",
+        "de": "4-Sterne-Bewertung auf HackerRank",
+        "fr": "Note de 4 étoiles sur HackerRank",
+        "es": "Valoración de 4 estrellas en HackerRank",
+        "it": "Valutazione a 4 stelle su HackerRank",
+        "nl": "4-sterrenbeoordeling op HackerRank",
+        "tr": "HackerRank'te 4 yıldız",
+        "ar": "تقييم 4 نجوم على HackerRank"
+      }
+    },
+    {
+      "name": "SQL",
+      "detail": {
+        "en": "Achieved 4-Star rating on HackerRank",
+        "de": "4-Sterne-Bewertung auf HackerRank",
+        "fr": "Note de 4 étoiles sur HackerRank",
+        "es": "Valoración de 4 estrellas en HackerRank",
+        "it": "Valutazione a 4 stelle su HackerRank",
+        "nl": "4-sterrenbeoordeling op HackerRank",
+        "tr": "HackerRank'te 4 yıldız",
+        "ar": "تقييم 4 نجوم على HackerRank"
+      }
+    },
+    {
+      "name": "Google Code Jam",
+      "detail": {
+        "en": "Participated in Google Code Jam competitions",
+        "de": "Teilnahme an Google-Code-Jam-Wettbewerben",
+        "fr": "Participation aux compétitions Google Code Jam",
+        "es": "Participación en las competiciones Google Code Jam",
+        "it": "Partecipazione alle competizioni Google Code Jam",
+        "nl": "Deelname aan Google Code Jam-wedstrijden",
+        "tr": "Google Code Jam yarışmalarına katılım",
+        "ar": "المشاركة في مسابقات Google Code Jam"
+      }
+    }
   ],
 
   "languages": [
-    { "name": "English", "level": "C1" },
-    { "name": "German", "level": "A2" }
+    {
+      "name": { "en": "English", "de": "Englisch", "fr": "Anglais", "es": "Inglés", "it": "Inglese", "nl": "Engels", "tr": "İngilizce", "ar": "الإنجليزية" },
+      "level": "C1"
+    },
+    {
+      "name": { "en": "German", "de": "Deutsch", "fr": "Allemand", "es": "Alemán", "it": "Tedesco", "nl": "Duits", "tr": "Almanca", "ar": "الألمانية" },
+      "level": "A2"
+    }
   ],
 
   "skills": [
@@ -151,6 +600,18 @@
     { "name": "Linux/Unix", "size": 2, "logos": ["linux-plain", "unix-original"] },
     { "name": "Git", "size": 1, "logos": ["git-plain"] },
     { "name": "HTML/CSS", "size": 1, "logos": ["html5-plain", "css3-plain"] },
-    { "name": "Data Structures & Algorithms", "size": 1 }
+    {
+      "name": {
+        "en": "Data Structures & Algorithms",
+        "de": "Datenstrukturen & Algorithmen",
+        "fr": "Structures de données et algorithmes",
+        "es": "Estructuras de datos y algoritmos",
+        "it": "Strutture dati e algoritmi",
+        "nl": "Datastructuren en algoritmen",
+        "tr": "Veri Yapıları ve Algoritmalar",
+        "ar": "هياكل البيانات والخوارزميات"
+      },
+      "size": 1
+    }
   ]
 }

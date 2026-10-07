@@ -1,9 +1,13 @@
 // Typed access to src/data/profile.json.
 // The JSON is the single source of truth for everything about me; components
-// import `profile` from here instead of reading the JSON directly, so the
-// TypeScript types below catch typos at build time.
+// get it through getProfile(), already in the language of the current page,
+// so they never deal with translations themselves. The TypeScript types
+// below describe the result and catch typos at build time.
 
+import { getLocale } from "next-intl/server";
 import data from "@/data/profile.json";
+import { CATALOG_CODES, type Locale } from "@/i18n/config";
+import { localize } from "../../scripts/lib/i18n.mjs";
 
 export type Link = { id: string; label: string; url: string; show: boolean };
 export type Company = {
@@ -49,14 +53,23 @@ export type Skill = {
   logos?: string[];
 };
 
+/** The profile in one language: every text is a plain string here. */
 export type Profile = {
   name: string;
   shortName: string;
+  /** Job title for the CV header, e.g. "Software Engineer". */
+  title: string;
+  city: string;
   location: string;
   intro: { headline: [string, string]; pitch: string };
   /** statements: short lines shown one per line; the last one is in the accent colour. */
   about: { headline: string; statements: string[]; image: string; imageAlt: string };
-  cv: { path: string; downloadName: string };
+  /** The Profile paragraph at the top of the CV. */
+  cvProfile: string;
+  cvShowEmail: boolean;
+  cvEmail: string;
+  cvShowPhoto: boolean;
+  cvPhoto: string;
   /** When true, the footer shows a quiet "Site stats" link to /stats. */
   showStatsLink: boolean;
   /**
@@ -65,7 +78,7 @@ export type Profile = {
    * overrides it.
    */
   contactAccessKey: string;
-  /** Postal address for the Impressum only; shown nowhere else on the site. */
+  /** Postal address for the Legal Notice and Privacy Policy only; shown nowhere else. */
   postalAddress: { street: string; postcode: string; city: string; country: string };
   links: Link[];
   companies: Company[];
@@ -76,58 +89,27 @@ export type Profile = {
   skills: Skill[];
 };
 
-// `as Profile` tells TypeScript to trust the JSON shape; the type above
-// documents what the JSON must contain.
-export const profile = data as Profile;
+const cache = new Map<Locale, Profile>();
+
+/** The profile with every text in `locale` (English where a text has no translation). */
+export function profileFor(locale: Locale): Profile {
+  let profile = cache.get(locale);
+  if (!profile) {
+    // `as Profile`: localize() turns every { "en": ..., "de": ... } into one string.
+    profile = localize(data, locale, CATALOG_CODES) as Profile;
+    cache.set(locale, profile);
+  }
+  return profile;
+}
+
+/** The profile in the language of the page being rendered (server components). */
+export async function getProfile(): Promise<Profile> {
+  return profileFor(await getLocale());
+}
 
 /** Links that are switched on ("show": true) in profile.json. */
-export const visibleLinks = profile.links.filter((link) => link.show);
+export const visibleLinks: Link[] = (data.links as Link[]).filter((link) => link.show);
 
 export function findLink(id: string): Link | undefined {
   return visibleLinks.find((link) => link.id === id);
 }
-
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-/** "2024-12" -> "Dec 2024". Anything else (for example "present") is shown as is. */
-export function formatMonth(value: string): string {
-  const match = /^(\d{4})-(\d{2})$/.exec(value);
-  if (!match) return value;
-  return `${MONTHS[Number(match[2]) - 1]} ${match[1]}`;
-}
-
-/** "Dec 2024 to present", "Jul 2018 to Jul 2022". */
-export function formatRange(start: string, end: string | null): string {
-  return `${formatMonth(start)} to ${end === null ? "present" : formatMonth(end)}`;
-}
-
-/**
- * Length of a job, counting both the first and the last month, the way
- * LinkedIn does: "1 yr 6 mos", "3 mos", "2 yrs". A missing end means "until
- * now" (the date the site was built).
- */
-export function formatDuration(start: string, end: string | null, now = new Date()): string {
-  const [sy, sm] = start.split("-").map(Number);
-  const [ey, em] = end && /^\d{4}-\d{2}$/.test(end) ? end.split("-").map(Number) : [now.getUTCFullYear(), now.getUTCMonth() + 1];
-  const months = Math.max(1, ey * 12 + em - (sy * 12 + sm) + 1);
-  const years = Math.floor(months / 12);
-  const rest = months % 12;
-  const parts = [];
-  if (years) parts.push(`${years} yr${years === 1 ? "" : "s"}`);
-  if (rest) parts.push(`${rest} mo${rest === 1 ? "" : "s"}`);
-  return parts.join(" ");
-}
-
-/**
- * "Working student at Zertificon · M.Sc. AI at FAU": the current job (no end
- * date) and current studies ("present"), built from the data above.
- */
-export function statusLine(): string {
-  const job = profile.experience.find((j) => j.end === null);
-  const study = profile.education.find((e) => e.end === "present");
-  const parts = [];
-  if (job) parts.push(`${job.role[0]}${job.role.slice(1).toLowerCase()} at ${job.company}`);
-  if (study) parts.push(study.short ?? study.degree);
-  return parts.join(" · ");
-}
-
