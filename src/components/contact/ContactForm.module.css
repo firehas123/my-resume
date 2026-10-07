@@ -177,3 +177,12 @@
   color: var(--accent);
   cursor: pointer;
 }
+
+/* hCaptcha widget (an iframe, 303 x 78 px, sized by hCaptcha). The minimum
+   height keeps the button from jumping while the widget loads. */
+.captcha {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 78px;
+}

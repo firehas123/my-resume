@@ -1,6 +1,9 @@
 "use client";
 
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useRef, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useTheme } from "@/hooks/useTheme";
 import styles from "./ContactForm.module.css";
 
 // The contact form posts straight from the browser to Web3Forms
@@ -10,9 +13,13 @@ import styles from "./ContactForm.module.css";
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
 const SUBJECT = "New message from your website";
+// Web3Forms' shared hCaptcha site key for free plans: no account with
+// hCaptcha needed. Web3Forms checks the answer ("h-captcha-response") once
+// hCaptcha is chosen under "Block spam" in the Web3Forms dashboard.
+const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 type Fields = { name: string; email: string; message: string };
-type Errors = Partial<Record<keyof Fields, string>>;
+type Errors = Partial<Record<keyof Fields | "captcha", string>>;
 type Status = "idle" | "sending" | "sent" | "failed";
 
 const LIMITS = { name: 100, message: 5000 };
@@ -48,6 +55,11 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const honeypot = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const captchaRef = useRef<HCaptcha>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const { theme } = useTheme();
+  // The normal widget is 303px wide; narrow phones get the compact one.
+  const compact = useMediaQuery("(max-width: 400px)");
 
   function update(field: keyof Fields, value: string) {
     setFields((current) => ({ ...current, [field]: value }));
@@ -59,13 +71,15 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
     event.preventDefault(); // never reload the page
     if (status === "sending") return;
 
-    const found = validate(fields);
+    const found: Errors = validate(fields);
+    if (!captchaToken) found.captcha = "Please complete the check above, so I know you are not a bot.";
     setErrors(found);
-    const firstInvalid = (Object.keys(found) as (keyof Fields)[])[0];
+    const firstInvalid = (Object.keys(EMPTY) as (keyof Fields)[]).find((key) => found[key]);
     if (firstInvalid) {
       formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalid}"]`)?.focus();
       return;
     }
+    if (found.captcha) return;
 
     setStatus("sending");
     try {
@@ -84,6 +98,8 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
           // Honeypot: always empty for people; Web3Forms drops the
           // submission when a bot fills it in.
           botcheck: honeypot.current?.checked ?? false,
+          // The visitor's answer to the hCaptcha check.
+          "h-captcha-response": captchaToken,
         }),
       });
       const result = await response.json().catch(() => ({}));
@@ -93,6 +109,10 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
     } catch {
       // Keep everything the visitor typed.
       setStatus("failed");
+    } finally {
+      // An answer is valid for one submission only: ask again next time.
+      setCaptchaToken(null);
+      captchaRef.current?.resetCaptcha();
     }
   }
 
@@ -164,6 +184,29 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
       <div className={styles.honeypot} aria-hidden="true">
         <label htmlFor="botcheck">Leave this box unticked</label>
         <input ref={honeypot} id="botcheck" name="botcheck" type="checkbox" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      <div className={styles.captcha}>
+        {/* key: the widget only picks up a new theme or size when recreated. */}
+        <HCaptcha
+          key={`${theme}-${compact}`}
+          size={compact ? "compact" : "normal"}
+          ref={captchaRef}
+          sitekey={HCAPTCHA_SITEKEY}
+          reCaptchaCompat={false}
+          theme={theme}
+          onVerify={(token) => {
+            setCaptchaToken(token);
+            setErrors((current) => ({ ...current, captcha: undefined }));
+          }}
+          onExpire={() => setCaptchaToken(null)}
+          onError={() => setCaptchaToken(null)}
+        />
+        {errors.captcha && (
+          <p className={styles.fieldError} role="alert">
+            {errors.captcha}
+          </p>
+        )}
       </div>
 
       {status === "failed" && (
