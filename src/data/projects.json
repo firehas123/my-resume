@@ -6,30 +6,30 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 57.3
+        "share": 59.3
       },
       {
         "name": "CSS",
-        "share": 16.3
-      },
-      {
-        "name": "HTML",
-        "share": 14.2
+        "share": 17.5
       },
       {
         "name": "JavaScript",
-        "share": 12.3
+        "share": 11.8
+      },
+      {
+        "name": "HTML",
+        "share": 11.4
       }
     ],
-    "readmeSummary": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules with CSS variables, Motion for scroll and hover animation, and one optional React Three Fiber object in the hero.",
-    "readmeOverview": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules\nwith CSS variables, Motion for scroll and hover animation, and one optional\nReact Three Fiber object in the hero.\n\n## Commands\n\n| Command         | What it does                                                                 |\n| --------------- | ---------------------------------------------------------------------------- |\n| `npm install`   | Install dependencies (once, and after pulling changes to `package.json`).    |\n| `npm run dev`   | Development server on port 3000, reachable from other devices on the network. |\n| `npm run build` | Production build (this is what Vercel runs).                                  |\n| `npm run start` | Serve the production build locally.                                           |\n| `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |\n| `npm test`      | Test the rules that sort repos into language tabs.                            |\n| `npm run stats:backup` | Save all visit statistics to `data/stats-backup/.json`.          |\n| `npm run stats:restore ` | Load such a backup into an empty statistics database.          |\n| `npm run lint`  | Check the code with ESLint.                                                   |\n\nRequires Node.js 20.9 or newer.\n\n### Preview on another device (for example a Mac on the same Wi-Fi)\n\n`npm run dev` listens on all network interfaces. Open `http://:3000`\non the other device, for example `http://192.168.0.67:3000`. If the IP changes,\nalso update `allowedDevOrigins` in `next.config.ts`.\n\n### Update my details\n\nEdit `src/data/profile.json`. Anything still marked `TODO` shows up highlighted on the\nsite, so it is easy to spot.\n\n- **Switch the CV file:** put the new PDF in `public/files/` and change `\"cv\": { \"path\": ... }`,\n  for example to `\"/files/europass-cv.pdf\"`. That one line updates every Download CV button.\n- **Show or hide a profile link:** set `\"show\": true` or `false` on the link (Fiverr is\n  currently `false`).\n\n### Add a longer write-up to a project page\n\nCreate `content/projects/.md` with normal Markdown.",
+    "readmeSummary": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules with CSS variables, Motion for scroll and hover animation, and a canvas dot field in the hero.",
+    "readmeOverview": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules\nwith CSS variables, Motion for scroll and hover animation, and a canvas dot field\nin the hero.\n\n## Commands\n\n| Command         | What it does                                                                 |\n| --------------- | ---------------------------------------------------------------------------- |\n| `npm install`   | Install dependencies (once, and after pulling changes to `package.json`).    |\n| `npm run dev`   | Development server on port 3000, reachable from other devices on the network. |\n| `npm run build` | Production build (this is what Vercel runs).                                  |\n| `npm run start` | Serve the production build locally.                                           |\n| `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |\n| `npm test`      | Test the rules that sort repos into language tabs.                            |\n| `npm run stats:backup` | Save all visit statistics to `data/stats-backup/.json`.          |\n| `npm run stats:restore ` | Load such a backup into an empty statistics database.          |\n| `npm run lint`  | Check the code with ESLint.                                                   |\n\nRequires Node.js 20.9 or newer.\n\n### Preview on another device (for example a Mac on the same Wi-Fi)\n\n`npm run dev` listens on all network interfaces. Open `http://:3000`\non the other device, for example `http://192.168.0.67:3000`. If the IP changes,\nalso update `allowedDevOrigins` in `next.config.ts`.\n\n### Update my details\n\nEdit `src/data/profile.json`. Open items that still need my input are listed in\n`TODO.md`.\n\n- **Switch the CV file:** put the new PDF in `public/files/` and change `\"cv\": { \"path\": ... }`,\n  for example to `\"/files/europass-cv.pdf\"`. That one line updates every Download CV button.\n- **Show or hide a profile link:** set `\"show\": true` or `false` on the link (Fiverr is\n  currently `false`).\n\n### Add a longer write-up to a project page\n\nCreate `content/projects/.md` with normal Markdown.",
     "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/my-resume",
     "homepageUrl": "https://my-resume-seven-coral.vercel.app",
     "topics": [],
-    "pushedAt": "2026-10-06T17:01:26Z"
+    "pushedAt": "2026-10-06T22:00:12Z"
   },
   {
     "name": "INFO-VIZ",
