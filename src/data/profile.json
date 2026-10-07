@@ -48,8 +48,8 @@
       "end": null,
       "summary": "Operates and monitors the secure mail pipeline (TLS, S/MIME and PGP gateways), renews X.509 certificates and rotates keys.",
       "highlights": [
-        "Operate & monitor the secure mail pipeline – help keep our TLS, S/MIME / PGP gateways running smoothly.",
-        "Renew expiring X.509 certs, rotate keys, and push new cipher-suite settings to staging and production.",
+        "Operate and monitor the secure mail pipeline, keeping the TLS, S/MIME and PGP gateways running smoothly.",
+        "Renew expiring X.509 certificates, rotate keys and roll out new cipher-suite settings to staging and production.",
         "Build minimal test cases for product teams and validate them in a sandbox before rollout."
       ]
     },
@@ -62,10 +62,10 @@
       "end": "2024-04",
       "summary": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
       "highlights": [
-        "Developed a scalable REST microservice for the Careem Super App, leveraging Vector Postgres for efficient data management and implemented JWT-based OAuth for secure user authentication.",
-        "Ensuring continuous operation with health check services like Grafana for monitoring, Kibana for logging, and Jaeger for tracing requests using OpenTelemetry.",
-        "Managed CI/CD pipelines using GitHub Actions, deploying dockerized service on AWS server.",
-        "Optimized prompt engineering to enhance accuracy of results with large language models (LLMs) like GPT."
+        "Developed a scalable REST microservice for the Careem Super App, using vector Postgres for efficient data management and JWT-based OAuth for secure authentication.",
+        "Kept the service running reliably with Grafana for monitoring, Kibana for logging and Jaeger for request tracing with OpenTelemetry.",
+        "Managed CI/CD pipelines with GitHub Actions, deploying the dockerised service on AWS.",
+        "Refined prompts to improve the accuracy of results from large language models such as GPT."
       ]
     },
     {
@@ -77,12 +77,12 @@
       "end": "2023-12",
       "summary": "Moved payment services to an event-driven microservices architecture with Spring Boot and Kafka, and worked with the ISO 8583 standard.",
       "highlights": [
-        "Pioneered the shift to an event-driven microservices architecture using Maven Spring Boot, significantly boosting system scalability and reducing maintenance overhead.",
-        "Integrated Kafka for efficient transaction handling, enhancing throughput and reducing latency.",
-        "Enforced rigorous testing for software reliability and performance, automating tests with bash scripts.",
-        "Streamlined application deployment and management using Docker, reducing deployment time and optimized server resource utilization, which enabled faster delivery of software solutions.",
-        "Deployed automated testing scripts with UFT, reducing testing time and increasing test coverage, ensuring thorough testing of critical functionalities.",
-        "Demonstrated expertise in ISO 8583 standards, ensuring compliance with industry regulations, safeguarding sensitive data, and fostering strong client confidence."
+        "Led the shift to an event-driven microservices architecture with Spring Boot and Maven, improving scalability and reducing maintenance overhead.",
+        "Integrated Kafka for transaction handling, increasing throughput and reducing latency.",
+        "Introduced rigorous reliability and performance testing, automated with Bash scripts.",
+        "Streamlined deployment with Docker, reducing deployment time and server resource use, which enabled faster delivery.",
+        "Automated testing with UFT scripts, reducing testing time and increasing test coverage of critical functions.",
+        "Worked with the ISO 8583 standard, ensuring compliance with industry regulations and protecting sensitive data."
       ]
     },
     {
@@ -95,9 +95,9 @@
       "end": "2021-09",
       "summary": "Backend development with Java and JavaFX, working closely with the QA team.",
       "highlights": [
-        "Spearheaded backend development using Java and JavaFX, improving application performance through optimized code structure and efficient resource management.",
-        "Reduced processing time for critical operations by utilizing advanced algorithms and data structures, enhancing software responsiveness.",
-        "Facilitated seamless collaboration between development and SQA teams, improving bug resolution times and significantly reducing post-release defects."
+        "Developed backend features in Java and JavaFX, improving performance through better code structure and resource management.",
+        "Reduced processing time for critical operations with suitable algorithms and data structures.",
+        "Worked closely with the SQA team, speeding up bug fixes and reducing post-release defects."
       ]
     }
   ],
