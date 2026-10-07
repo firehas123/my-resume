@@ -11,5 +11,30 @@
   },
   "my-resume": {
     "summary": "This website: Next.js and TypeScript, projects synced from GitHub, a Web3Forms contact form, its own visit statistics and motion built on View Transitions."
+  },
+  "INFO-VIZ": {
+    "summary": "A self-test app for an Information Visualization course: multiple-choice and coding questions across six modules, with question import, progress stats and a light and dark theme, saved in the browser."
+  },
+  "Fintech-Lending-Application": {
+    "summary": "A loan application platform: an Express and MongoDB API for loan applications and offers, and a React (Vite) front end with an admin area."
+  },
+  "Dots-Game": {
+    "summary": "The classic Dots and Boxes game in the browser, built with JavaScript and jQuery.",
+    "demo": "https://bucolic-tapioca-cb6269.netlify.app/"
+  },
+  "Employee-Management-System": {
+    "summary": "A console program in C that manages employee records stored in files: list, add, modify and delete employees."
+  },
+  "SLU": {
+    "summary": "A visual, clickable study map for exam preparation in Speech and Language Understanding, published with GitHub Pages."
+  },
+  "Admin-Patient-GUI": {
+    "summary": "A Java (Maven) desktop app with separate Admin and Patient functions, backed by a database that runs in Docker."
+  },
+  "google-app-script-sheet-data-dumping": {
+    "summary": "A Google Apps Script that fetches data from an API with token authentication and writes it into the active Google Sheet."
+  },
+  "MHC-Solutions": {
+    "hide": true
   }
 }
