@@ -76,6 +76,30 @@ The sync prints a table of every repo with its top languages, the group it was p
 and why, plus a list of skipped forks. The same is saved to `SYNC-REPORT.md`, so you can
 check the result before committing.
 
+#### Automatic daily sync (GitHub Actions)
+
+You usually don't need to run the sync yourself. The workflow
+`.github/workflows/sync-projects.yml` runs it **every day at 04:17 UTC**. It reads
+your public repos with the workflow's own built-in token, so no secrets are needed.
+If `src/data/projects.json` or `SYNC-REPORT.md` changed, it commits them to `main`
+as *github-actions[bot]*, together with any README images. That push starts the
+Vercel deployment. If nothing changed, it makes no commit. The sync rules are the
+same as for a local run: private repos never appear, and `overrides.json` always wins.
+
+To run it by hand (for example right after creating a new repo):
+
+1. Open the repository on GitHub and click the **Actions** tab.
+2. Choose **Sync projects** in the list of workflows on the left.
+3. Click **Run workflow** on the right, keep the branch on `main`, and click the green
+   **Run workflow** button.
+4. After a minute or two the run shows a green tick. Open it and expand
+   **Commit and push if anything changed**. That step either says "No changes; nothing
+   to commit." or shows the commit it pushed.
+
+A sync commit lands on `main` on GitHub, so run `git pull` before your next local
+change. Two details keep the daily run quiet: the report's date only changes when its
+content changes, and a repo's "last updated" date ignores the workflow's own commits.
+
 Which repos are shown:
 
 - **Private repositories never appear**, not on the site and not in the report.

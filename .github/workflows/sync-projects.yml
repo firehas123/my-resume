@@ -1,0 +1,74 @@
+# Keeps the project list up to date: once a day (and whenever started by hand
+# from the Actions tab) it runs `npm run sync` against the owner's public
+# GitHub repositories. If the synced files changed, it commits them to main,
+# and that push starts the Vercel deployment. If nothing changed, no commit.
+#
+# Uses only the workflow's built-in GITHUB_TOKEN; no secrets are needed.
+# The sync rules are unchanged: private repos are dropped before anything
+# else, and src/data/overrides.json always wins (it is read, never written).
+
+name: Sync projects
+
+on:
+  schedule:
+    - cron: "17 4 * * *" # every day at 04:17 UTC
+  workflow_dispatch: # the "Run workflow" button on the Actions page
+
+# Only what the job needs: read the code and push the sync commit.
+permissions:
+  contents: write
+
+# Never two syncs at once; a new run waits for the previous one.
+concurrency:
+  group: sync-projects
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync projects from GitHub
+        run: npm run sync
+        env:
+          # gh is preinstalled on GitHub's runners and uses this token. The
+          # token is not a user account, so the owner is named explicitly.
+          GH_TOKEN: ${{ github.token }}
+          SYNC_OWNER: ${{ github.repository_owner }}
+
+      - name: Check the grouping rules still pass
+        run: npm test
+
+      - name: Commit and push if anything changed
+        run: |
+          # The files the sync writes. README images belong to projects.json,
+          # so they are committed with it (that folder only exists while at
+          # least one README image is in use).
+          git add --all -- src/data/projects.json SYNC-REPORT.md
+          if [ -d public/projects/readme ] || git ls-files --error-unmatch public/projects/readme >/dev/null 2>&1; then
+            git add --all -- public/projects/readme
+          fi
+          if git diff --cached --quiet; then
+            echo "No changes; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: sync projects from GitHub"
+          # main may have moved while the sync ran.
+          git pull --rebase origin main
+          git push origin HEAD:main
