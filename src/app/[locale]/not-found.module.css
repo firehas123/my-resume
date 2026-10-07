@@ -12,7 +12,7 @@
 
 .title {
   font-size: clamp(40px, 6vw, 72px);
-  line-height: 1.02;
+  line-height: var(--script-line-height, 1.02);
   font-weight: 800;
   letter-spacing: -0.035em;
   margin-bottom: 16px; /* with the 24px gap: room before the button */

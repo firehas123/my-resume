@@ -1,15 +1,22 @@
 // Share images (1200x630) for link previews, rendered at build time: the MHC
 // logo and a title on black, over a field of fine dots brighter toward the
-// right with a few accent dots. Used by src/app/opengraph-image.tsx (the site)
-// and src/app/projects/[slug]/opengraph-image.tsx (each project).
+// right with a few accent dots. Used by src/app/[locale]/opengraph-image.tsx
+// (the site) and src/app/[locale]/projects/[slug]/opengraph-image.tsx (each
+// project), once per language.
+//
+// Right-to-left languages are laid out right to left. The image renderer
+// (satori) shapes Arabic letters correctly but does not order words for
+// right-to-left text, so rtlWords() (scripts/lib/rtl.mjs) places the words.
 
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { languageInfo, type Locale } from "@/i18n/config";
+import { rtlWords } from "../../scripts/lib/rtl.mjs";
 
 export const SHARE_IMAGE_SIZE = { width: 1200, height: 630 };
 
-const fontDir = join(process.cwd(), "node_modules", "@fontsource", "manrope", "files");
+const fontDir = join(process.cwd(), "node_modules", "@fontsource");
 const ACCENT = "#5BE3A8"; // --accent-bright
 const TEXT = "#F4F4F5";
 const MUTED = "#A1A1AA";
@@ -32,6 +39,29 @@ function dots() {
   return out;
 }
 
+/** Fonts per script after Manrope (same as the CV; see src/i18n/languages.json). */
+const SCRIPT_FONT_FILES: Record<string, (weight: number) => string> = {
+  arabic: (weight) => join(fontDir, "cairo", "files", `cairo-arabic-${weight}-normal.woff`),
+};
+
+/** One line of text, laid out in the direction of the language. */
+function TextLine({ text, rtl, style }: { text: string; rtl: boolean; style: React.CSSProperties }) {
+  if (!rtl) return <div style={{ display: "flex", ...style }}>{text}</div>;
+  return (
+    <div style={{ display: "flex", flexDirection: "row-reverse", flexWrap: "wrap", columnGap: "0.26em", ...style }}>
+      {rtlWords(text).map((word, i) => (
+        <div key={i} style={{ display: "flex", flexDirection: "row-reverse" }}>
+          {word.flatMap((run, j) => [
+            <span key={`t${j}`}>{run.text}</span>,
+            // In right-to-left text the punctuation sits to the left of its word.
+            run.punctuation ? <span key={`p${j}`}>{run.punctuation}</span> : null,
+          ])}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 type ShareImage = {
   /** Small line above the title, e.g. the name or "Project · Java". */
   eyebrow: string;
@@ -39,45 +69,73 @@ type ShareImage = {
   lines: string[];
   /** Smaller title for long project names. */
   compact?: boolean;
+  /** The language of the page the image belongs to. */
+  locale: Locale;
 };
 
-export async function renderShareImage({ eyebrow, lines, compact }: ShareImage) {
-  const [medium, extraBold] = await Promise.all([
-    readFile(join(fontDir, "manrope-latin-500-normal.woff")),
-    readFile(join(fontDir, "manrope-latin-800-normal.woff")),
-  ]);
+export async function renderShareImage({ eyebrow, lines, compact, locale }: ShareImage) {
+  const { dir, script } = languageInfo(locale);
+  const rtl = dir === "rtl";
+  const manrope = (subset: string, weight: number) => join(fontDir, "manrope", "files", `manrope-${subset}-${weight}-normal.woff`);
+  const scriptFont = SCRIPT_FONT_FILES[script];
+  // Manrope (Latin and Latin Extended, e.g. Turkish), then the script's own font.
+  const files: { name: string; path: string; weight: 500 | 800 }[] = [
+    { name: "Manrope", path: manrope("latin", 500), weight: 500 },
+    { name: "Manrope", path: manrope("latin", 800), weight: 800 },
+    { name: "ManropeExt", path: manrope("latin-ext", 500), weight: 500 },
+    { name: "ManropeExt", path: manrope("latin-ext", 800), weight: 800 },
+    ...(scriptFont
+      ? [
+          { name: "Script", path: scriptFont(500), weight: 500 as const },
+          { name: "Script", path: scriptFont(800), weight: 800 as const },
+        ]
+      : []),
+  ];
+  const fonts = await Promise.all(files.map(async (f) => ({ name: f.name, data: await readFile(f.path), weight: f.weight, style: "normal" as const })));
   const titleSize = compact ? 72 : 96;
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#000000", fontFamily: "Manrope" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#000000", fontFamily: "Manrope, ManropeExt, Script" }}>
         <svg width={width} height={height} style={{ position: "absolute", inset: 0 }}>
           {dots().map((d, i) => (
             <circle key={i} cx={d.x} cy={d.y} r={d.r} fill={d.color} fillOpacity={d.opacity} />
           ))}
         </svg>
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "72px 80px", width: "100%", height: "100%" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            // Right-to-left: logo and text on the right.
+            alignItems: rtl ? "flex-end" : "flex-start",
+            padding: "72px 80px",
+            width: "100%",
+            height: "100%",
+          }}
+        >
           {/* The MHC logo artwork, unchanged */}
           <svg width={118} height={50} viewBox="0 0 236 100" fill="none" stroke={TEXT} strokeWidth={9} strokeLinecap="round" strokeLinejoin="round">
             <path d="M10 90V10l30 50 30-50v80" />
             <path d="M70 50h50M120 10v80" />
             <path d="M214.3 21.7a40 40 0 1 0 0 56.6" />
           </svg>
-          <div style={{ display: "flex", flexDirection: "column", maxWidth: 1000 }}>
-            <div style={{ fontSize: 30, fontWeight: 500, color: MUTED, marginBottom: 20 }}>{eyebrow}</div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: rtl ? "flex-end" : "flex-start", maxWidth: 1040 }}>
+            <TextLine text={eyebrow} rtl={rtl} style={{ fontSize: 30, fontWeight: 500, color: MUTED, marginBottom: 20 }} />
             {lines.map((line, i) => (
-              <div
+              <TextLine
                 key={i}
+                text={line}
+                rtl={rtl}
                 style={{
                   fontSize: titleSize,
                   fontWeight: 800,
                   color: lines.length > 1 && i === lines.length - 1 ? ACCENT : TEXT,
-                  letterSpacing: compact ? -3 : -4,
-                  lineHeight: 1.02,
+                  // Tight tracking suits Manrope; joined scripts keep their natural spacing.
+                  letterSpacing: rtl ? 0 : compact ? -3 : -4,
+                  lineHeight: rtl ? 1.3 : 1.02,
                 }}
-              >
-                {line}
-              </div>
+              />
             ))}
           </div>
         </div>
@@ -85,10 +143,7 @@ export async function renderShareImage({ eyebrow, lines, compact }: ShareImage) 
     ),
     {
       ...SHARE_IMAGE_SIZE,
-      fonts: [
-        { name: "Manrope", data: medium, weight: 500, style: "normal" },
-        { name: "Manrope", data: extraBold, weight: 800, style: "normal" },
-      ],
+      fonts,
     },
   );
 }

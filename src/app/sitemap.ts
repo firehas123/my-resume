@@ -1,16 +1,27 @@
 import type { MetadataRoute } from "next";
+import { LANGUAGES, LEGAL_LANGUAGES } from "@/i18n/config";
 import { getProjects } from "@/lib/projects";
-import { siteUrl } from "@/lib/site";
+import { absoluteUrl, languageAlternates } from "@/lib/seo";
 
-// /sitemap.xml, generated at build time.
+type Href = Parameters<typeof absoluteUrl>[0];
+
+// /sitemap.xml, generated at build time: every page in every language it
+// exists in, each with links to its other languages (hreflang).
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteUrl();
-  const pages = ["/", "/contact", "/impressum", "/datenschutz"].map((path) => ({
-    url: new URL(path, base).toString(),
-  }));
-  const projects = getProjects().map((project) => ({
-    url: new URL(`/projects/${project.slug}`, base).toString(),
-    lastModified: project.pushedAt,
-  }));
-  return [...pages, ...projects];
+  const entries = (href: Href, languages: string[], lastModified?: string) =>
+    languages.map((locale) => ({
+      url: absoluteUrl(href, locale),
+      ...(lastModified ? { lastModified } : {}),
+      alternates: { languages: languageAlternates(href, languages) },
+    }));
+
+  return [
+    ...entries("/", LANGUAGES),
+    ...entries("/contact", LANGUAGES),
+    ...entries("/legal-notice", LEGAL_LANGUAGES),
+    ...entries("/privacy", LEGAL_LANGUAGES),
+    ...getProjects().flatMap((project) =>
+      entries({ pathname: "/projects/[slug]", params: { slug: project.slug } }, LANGUAGES, project.pushedAt),
+    ),
+  ];
 }
