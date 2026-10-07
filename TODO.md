@@ -14,9 +14,6 @@ website; the site uses neutral, true wording until an item is done.
 - **Impressum contact.** German law (§ 5 DDG) usually expects a direct electronic
   contact, typically an email address. The Impressum offers the contact form instead,
   as you prefer; decide whether to add an email address there.
-- **Check the statistics after this deploy.** `/stats` should show "Counting since …".
-  If it still says "not connected", open Vercel → Storage and make sure the Upstash
-  database is connected to this project for Production, then redeploy.
 - **Vercel Web Analytics and Speed Insights:** make sure both are enabled in the Vercel
   project (Analytics and Speed Insights tabs).
 - **Optional: InfoTech's newer logo.** The site uses the logo from infotechgroup.com.
