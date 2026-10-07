@@ -263,23 +263,40 @@ logo keeps the text colour.
 
 ### Contact form
 
-The form on `/contact` sends messages through [Web3Forms](https://web3forms.com): the
-visitor's browser posts the message to Web3Forms, which emails it to your Gmail. There
-is no server code, and your email address never appears in the site or its source.
+The form on `/contact` works in one of two ways (`src/lib/contact.ts` decides, from the
+environment variables). Either way your email address never appears in the site or its
+source, every email names the language the visitor wrote in, and its reply-to is the
+visitor's address, so replying in Gmail answers them directly.
 
-- The Web3Forms access key is `"contactAccessKey"` in `src/data/profile.json`. It is a
-  public key by design (it can only deliver messages to your inbox).
-  `NEXT_PUBLIC_WEB3FORMS_KEY` overrides it if set (Vercel → Settings → Environment
-  Variables, then redeploy).
-- Each email has the subject "New message from your website", and its reply-to is
-  the visitor's address, so replying in Gmail answers them directly.
-- A hidden honeypot field is passed to Web3Forms' `botcheck`, so simple spam bots are
-  dropped.
-- An hCaptcha check must be solved before the form can be sent (Web3Forms' shared
-  free-plan site key, no hCaptcha account needed). For Web3Forms to also reject
-  submissions without it, choose **hCaptcha** under "Block spam" in the Web3Forms
-  dashboard for this access key.
-- To change where messages go, change the email address in your Web3Forms account.
+**Web3Forms (the default, nothing to set up).** The visitor's browser posts the message
+to [Web3Forms](https://web3forms.com), which emails it to you. The access key is
+`"contactAccessKey"` in `src/data/profile.json` (`NEXT_PUBLIC_WEB3FORMS_KEY` overrides
+it). The form requires an hCaptcha check with Web3Forms' shared key, but Web3Forms
+itself still accepts submissions that leave the captcha out (tested 2026-10-07), so a
+bot that posts to Web3Forms directly gets through.
+
+**Server check (recommended, needs two free accounts).** The form posts to this site's
+`/api/contact`, which asks hCaptcha whether the answer is genuine before anything is
+sent, then delivers the email through [Resend](https://resend.com). Nothing can skip the
+check, the page no longer contains any key that sends mail, and at most 30 messages a day
+get through (one shared counter in the statistics database; nothing about the sender is
+stored). To switch it on:
+
+1. [hCaptcha](https://dashboard.hcaptcha.com/signup): create a free account, add a site
+   for your domain, and copy its **site key** and your account **secret key**.
+2. [Resend](https://resend.com/signup): create a free account **with the Gmail address
+   messages should go to**, and create an API key. (Without a domain of your own, Resend
+   only delivers to the address the account was created with, which is exactly what
+   this needs.)
+3. Vercel → Settings → Environment Variables (Production), add:
+   `NEXT_PUBLIC_HCAPTCHA_SITEKEY`, `HCAPTCHA_SECRET`, `RESEND_API_KEY` and
+   `CONTACT_TO_EMAIL` (that Gmail address). Optional: `CONTACT_FROM_EMAIL` once you
+   have a verified domain in Resend.
+4. Redeploy, send yourself a test message, then delete the old access key in the
+   Web3Forms dashboard (it is public in this repo's history).
+
+Until all four variables are set, the site keeps using Web3Forms and `/api/contact`
+answers "off". The privacy policy describes whichever way is active.
 
 ### Visitor statistics
 

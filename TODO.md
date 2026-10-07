@@ -3,6 +3,10 @@
 Everything here still needs something from you. Nothing on this list is shown on the
 website; the site uses neutral, true wording until an item is done.
 
+- **Switch the contact form to the server check** (about 10 minutes, two free
+  accounts): hCaptcha site and secret key, a Resend API key on your Gmail address, four
+  variables in Vercel, redeploy, test, then delete the old Web3Forms key. Steps: README,
+  "Contact form". Until then, bots that skip the page can still reach Web3Forms.
 - **Have a native speaker read the German site and CV** (`/de` and
   `public/files/cv-de.pdf` after a build). German is a primary language, so it carries
   no "translated automatically" note.
