@@ -130,8 +130,8 @@ the same `next build` Vercel runs.
 6. Display names "InfoTech" (full "InfoTech Private Limited" kept in the data as
    `legalName`) and the Master's school as "Friedrich-Alexander-Universität
    Erlangen-Nürnberg", both as in the design reference.
-7. The Master's end date shows "present" and the languages are English and German
-   without levels, as instructed (see `TODO.md`).
+7. The Master's end date shows "present" (still studying; the CV's April 2026 was the
+   planned end). Languages: English C1, German A2.
 8. The skills cloud uses all 20 skills from the PDF. The three pill sizes (bigger =
    more central) are my judgement. Adjust `size` (1–3) in `profile.json`.
 9. Footer text says "Projects are pulled from GitHub" instead of the reference's
@@ -272,3 +272,13 @@ single-page site comes back on the next deploy.
   page transitions only.
 - Experience durations and "Show details", hero status line, header Contact link,
   footer "Back to top" and last-updated date, share images per page, theme-color.
+
+## Update 2026-10-07
+
+- Impressum with postal address; privacy page reviewed and extended (hCaptcha, address,
+  § 25 TDDDG, US transfers).
+- Contact form requires an hCaptcha check.
+- CV PDF is generated from `profile.json` (`npm run cv`): one page, no phone number or
+  email, typos fixed; experience bullets tidied for grammar and tense.
+- Project data re-synced; summaries for repos without one; MHC-Solutions hidden;
+  my-resume demo link fixed.
