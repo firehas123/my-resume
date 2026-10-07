@@ -127,8 +127,8 @@
   ],
 
   "languages": [
-    { "name": "English" },
-    { "name": "German" }
+    { "name": "English", "level": "C1" },
+    { "name": "German", "level": "A2" }
   ],
 
   "skills": [
