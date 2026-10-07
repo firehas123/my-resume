@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "sync": "node scripts/sync-projects.mjs",
+    "cv": "node scripts/build-cv.mjs",
     "test": "node --test scripts/*.test.mjs",
     "stats:backup": "node scripts/stats-backup.mjs",
     "stats:restore": "node scripts/stats-restore.mjs",
@@ -30,6 +31,7 @@
     "world-atlas": "^2.0.2"
   },
   "devDependencies": {
+    "@react-pdf/renderer": "^4.9.0",
     "@types/d3-geo": "^3.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
