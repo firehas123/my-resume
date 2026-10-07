@@ -12,7 +12,7 @@
 
 .title {
   font-size: clamp(40px, 6vw, 72px);
-  line-height: 1.02;
+  line-height: var(--script-line-height, 1.02);
   font-weight: 800;
   letter-spacing: -0.035em;
 }
@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-left: 1.3em;
+  padding-inline-start: 1.3em;
 }
 
 .body strong {
