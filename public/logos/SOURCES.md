@@ -17,3 +17,8 @@ How InfoTech was identified: the CV names "InfoTech Private Limited, Lahore". In
 integration), has its head office at 12-N Gulberg II, Lahore, and its official site is
 infotechgroup.com. If this is not the right company, delete `infotech.png` and the
 strip falls back to the name as text.
+
+Checked again on 2026-10-07: infotechgroup.com still shows this logo in its header
+(also `InfoTech-logo-02-09.png` for the light header). A newer logo was reported on
+LinkedIn, but LinkedIn could not be read without signing in, so the logo was not
+changed. To update it, take the file from the company's official site or brand pack.
