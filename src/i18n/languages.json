@@ -1,0 +1,35 @@
+{
+  "_help": "The one list that drives every language on the site and in the CVs. To add a language: put its code in \"languages\" (it must have an entry in \"catalog\"), then run `npm run i18n:add`. To remove one, delete its code here. \"primary\" are the languages I work in; all others show a note that they were translated automatically. \"legal\" are the languages the Legal Notice and Privacy Policy exist in; the others link to English.",
+
+  "languages": ["en", "de", "fr", "es", "it", "nl", "tr", "ar"],
+  "primary": ["en", "de"],
+  "default": "en",
+  "legal": ["en", "de"],
+
+  "_catalogHelp": "Known languages. name: the language in its own name (shown in the menus). intl: the locale used for dates and numbers. dir: rtl for right-to-left scripts. script: picks the fonts (latin = Manrope; arabic = Cairo on the site and in the CV; others need a font, see README). letters: false for scripts whose letters join or combine, so headlines are never split into single letters. cvDates: numeric writes CV dates as MM/YYYY (the German convention); otherwise short month names. lowerRoles: job titles are written in Title Case in the data and lowered in the middle of a sentence (English).",
+  "catalog": {
+    "en": { "name": "English", "intl": "en-GB", "dir": "ltr", "script": "latin", "lowerRoles": true },
+    "de": { "name": "Deutsch", "intl": "de-DE", "dir": "ltr", "script": "latin", "cvDates": "numeric" },
+    "fr": { "name": "Français", "intl": "fr-FR", "dir": "ltr", "script": "latin" },
+    "es": { "name": "Español", "intl": "es-ES", "dir": "ltr", "script": "latin" },
+    "it": { "name": "Italiano", "intl": "it-IT", "dir": "ltr", "script": "latin" },
+    "nl": { "name": "Nederlands", "intl": "nl-NL", "dir": "ltr", "script": "latin" },
+    "tr": { "name": "Türkçe", "intl": "tr-TR", "dir": "ltr", "script": "latin" },
+    "ar": { "name": "العربية", "intl": "ar-u-nu-latn", "dir": "rtl", "script": "arabic", "letters": false },
+    "pt": { "name": "Português", "intl": "pt-PT", "dir": "ltr", "script": "latin" },
+    "pl": { "name": "Polski", "intl": "pl-PL", "dir": "ltr", "script": "latin" },
+    "ur": { "name": "اردو", "intl": "ur-PK-u-nu-latn", "dir": "rtl", "script": "arabic", "letters": false },
+    "hi": { "name": "हिन्दी", "intl": "hi-IN-u-nu-latn", "dir": "ltr", "script": "devanagari", "letters": false },
+    "zh": { "name": "中文", "intl": "zh-CN", "dir": "ltr", "script": "han", "letters": false },
+    "ja": { "name": "日本語", "intl": "ja-JP", "dir": "ltr", "script": "japanese", "letters": false }
+  },
+
+  "_scriptsHelp": "Fonts per script. site: the font the website adds after Manrope (null = Manrope only). cv: the @fontsource package the CV embeds after Manrope. A script without a site font falls back to the visitor's system fonts until one is added in src/i18n/fonts.ts; npm run i18n:check warns about that.",
+  "scripts": {
+    "latin": { "site": null, "cv": null },
+    "arabic": { "site": "cairo", "cv": "@fontsource/cairo" },
+    "devanagari": { "site": null, "cv": "@fontsource/noto-sans-devanagari" },
+    "han": { "site": null, "cv": "@fontsource/noto-sans-sc" },
+    "japanese": { "site": null, "cv": "@fontsource/noto-sans-jp" }
+  }
+}

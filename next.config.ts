@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   // The dev server listens on the network (see "dev" in package.json).
@@ -12,6 +13,20 @@ const nextConfig: NextConfig = {
     // the About photo sharp.
     qualities: [75, 92],
   },
+
+  // Old addresses from before the site had languages keep working. (Pages
+  // without a language, like /contact, are redirected by src/proxy.ts.)
+  async redirects() {
+    return [
+      // The legal pages were German only.
+      { source: "/impressum", destination: "/de/impressum", permanent: true },
+      { source: "/datenschutz", destination: "/de/datenschutz", permanent: true },
+      // The single English CV is now one CV per language.
+      { source: "/files/resume.pdf", destination: "/files/cv-en.pdf", permanent: true },
+    ];
+  },
 };
 
-export default nextConfig;
+// next-intl finds its request config in src/i18n/request.ts.
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+export default withNextIntl(nextConfig);
