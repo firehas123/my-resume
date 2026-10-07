@@ -42,13 +42,25 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 /**
  * Connection details from the environment. Supports both the names the
  * Vercel Redis (Upstash) integration provides (KV_REST_API_URL / _TOKEN)
- * and Upstash's own names (UPSTASH_REDIS_REST_URL / _TOKEN).
+ * and Upstash's own names (UPSTASH_REDIS_REST_URL / _TOKEN). When the
+ * integration was connected with a custom prefix (for example
+ * STORAGE_KV_REST_API_URL), the prefixed pair is found as well.
  * Returns null when they are missing; the counter then simply does nothing.
  */
 export function redisConfigFromEnv(env = process.env) {
-  const url = env.UPSTASH_REDIS_REST_URL || env.KV_REST_API_URL;
-  const token = env.UPSTASH_REDIS_REST_TOKEN || env.KV_REST_API_TOKEN;
-  return url && token ? { url, token } : null;
+  for (const [urlName, tokenName] of [
+    ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"],
+    ["KV_REST_API_URL", "KV_REST_API_TOKEN"],
+  ]) {
+    if (env[urlName] && env[tokenName]) return { url: env[urlName], token: env[tokenName] };
+    // Prefixed: <PREFIX>_KV_REST_API_URL with the matching <PREFIX>_KV_REST_API_TOKEN.
+    for (const name of Object.keys(env)) {
+      if (!name.endsWith(`_${urlName}`) || !env[name]) continue;
+      const token = env[name.slice(0, -urlName.length) + tokenName];
+      if (token) return { url: env[name], token };
+    }
+  }
+  return null;
 }
 
 export function createRedis(env = process.env) {
