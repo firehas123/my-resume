@@ -298,3 +298,9 @@ single-page site comes back on the next deploy.
   `public/logos/SOURCES.md`).
 - MHC-Solutions stays hidden until it has real content (`"hide": true` in
   `src/data/overrides.json`).
+- hCaptcha enabled in the Web3Forms dashboard. Tested on the live site: a fake captcha
+  answer is rejected ("Could not validate hCaptcha"), but a submission with no captcha
+  field at all is still accepted. That is Web3Forms' behaviour on the free plan (its
+  docs rely on the page to require the check, which this site does). Closing that gap
+  would need a server-side check with an hCaptcha secret key, which the shared
+  free-plan site key does not provide.
