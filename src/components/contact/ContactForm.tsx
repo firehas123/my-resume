@@ -1,7 +1,9 @@
 "use client";
 
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import { languageInfo } from "@/i18n/config";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useTheme } from "@/hooks/useTheme";
 import styles from "./ContactForm.module.css";
@@ -12,6 +14,8 @@ import styles from "./ContactForm.module.css";
 // page: Web3Forms knows it from the public access key.
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+// The email is for me, so it stays in English; it names the language the
+// visitor used, e.g. "New message from your website (Deutsch, de)".
 const SUBJECT = "New message from your website";
 // Web3Forms' shared hCaptcha site key for free plans: no account with
 // hCaptcha needed. Web3Forms checks the answer ("h-captcha-response") once
@@ -20,25 +24,26 @@ const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 type Fields = { name: string; email: string; message: string };
 type Errors = Partial<Record<keyof Fields | "captcha", string>>;
+type Translate = (key: string, values?: Record<string, number>) => string;
 type Status = "idle" | "sending" | "sent" | "failed";
 
-const LIMITS = { name: 100, message: 5000 };
+const LIMITS = { name: 100, message: 5000, messageMin: 10 };
 // Deliberately simple: something@something.something. Web3Forms and the
 // reply are the real check.
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EMPTY: Fields = { name: "", email: "", message: "" };
 
-function validate(fields: Fields): Errors {
+/** `t` is the "form.errors" translator, so the messages are in the page's language. */
+function validate(fields: Fields, t: Translate): Errors {
   const errors: Errors = {};
-  if (!fields.name.trim()) errors.name = "Please enter your name.";
-  else if (fields.name.length > LIMITS.name) errors.name = `Please keep your name under ${LIMITS.name} characters.`;
+  if (!fields.name.trim()) errors.name = t("nameMissing");
+  else if (fields.name.length > LIMITS.name) errors.name = t("nameLong", { max: LIMITS.name });
 
-  if (!fields.email.trim()) errors.email = "Please enter your email address, so I can reply.";
-  else if (!EMAIL_PATTERN.test(fields.email.trim())) errors.email = "This email address does not look complete.";
+  if (!fields.email.trim()) errors.email = t("emailMissing");
+  else if (!EMAIL_PATTERN.test(fields.email.trim())) errors.email = t("emailInvalid");
 
-  if (fields.message.trim().length < 10) errors.message = "Please write a message of at least 10 characters.";
-  else if (fields.message.length > LIMITS.message)
-    errors.message = `Please keep your message under ${LIMITS.message} characters.`;
+  if (fields.message.trim().length < LIMITS.messageMin) errors.message = t("messageShort", { min: LIMITS.messageMin });
+  else if (fields.message.length > LIMITS.message) errors.message = t("messageLong", { max: LIMITS.message });
   return errors;
 }
 
@@ -50,6 +55,10 @@ type ContactFormProps = {
 };
 
 export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
+  const t = useTranslations("form");
+  const tErrors = useTranslations("form.errors");
+  const locale = useLocale();
+  const language = `${languageInfo(locale).name}, ${locale}`;
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
@@ -71,8 +80,8 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
     event.preventDefault(); // never reload the page
     if (status === "sending") return;
 
-    const found: Errors = validate(fields);
-    if (!captchaToken) found.captcha = "Please complete the check above, so I know you are not a bot.";
+    const found: Errors = validate(fields, tErrors);
+    if (!captchaToken) found.captcha = tErrors("captcha");
     setErrors(found);
     const firstInvalid = (Object.keys(EMPTY) as (keyof Fields)[]).find((key) => found[key]);
     if (firstInvalid) {
@@ -88,13 +97,15 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: SUBJECT,
+          subject: `${SUBJECT} (${language})`,
           from_name: "Resume website",
           name: fields.name.trim(),
           email: fields.email.trim(),
           // Replying in the inbox answers the visitor directly.
           replyto: fields.email.trim(),
           message: fields.message.trim(),
+          // Which language the visitor wrote from, so I can answer in it.
+          language,
           // Honeypot: always empty for people; Web3Forms drops the
           // submission when a bot fills it in.
           botcheck: honeypot.current?.checked ?? false,
@@ -123,10 +134,10 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
           <circle className={styles.checkCircle} cx="26" cy="26" r="24" />
           <path className={styles.checkMark} d="M15 27l7 7 15-16" />
         </svg>
-        <p className={styles.noticeTitle}>Thank you, your message is on its way.</p>
-        <p>I will reply to the email address you gave.</p>
+        <p className={styles.noticeTitle}>{t("sentTitle")}</p>
+        <p>{t("sentText")}</p>
         <button type="button" className={styles.textButton} onClick={() => setStatus("idle")}>
-          Send another
+          {t("sendAnother")}
         </button>
       </div>
     );
@@ -136,7 +147,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={handleSubmit} noValidate aria-busy={sending}>
-      <Field id="name" label="Name" error={errors.name}>
+      <Field id="name" label={t("name")} error={errors.name}>
         <input
           id="name"
           name="name"
@@ -151,7 +162,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
         />
       </Field>
 
-      <Field id="email" label="Email" error={errors.email}>
+      <Field id="email" label={t("email")} error={errors.email}>
         <input
           id="email"
           name="email"
@@ -166,7 +177,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
         />
       </Field>
 
-      <Field id="message" label="Message" error={errors.message}>
+      <Field id="message" label={t("message")} error={errors.message}>
         <textarea
           id="message"
           name="message"
@@ -182,7 +193,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
       {/* Honeypot (Web3Forms "botcheck"): hidden from people and screen
           readers; bots that tick every box give themselves away. */}
       <div className={styles.honeypot} aria-hidden="true">
-        <label htmlFor="botcheck">Leave this box unticked</label>
+        <label htmlFor="botcheck">{t("honeypot")}</label>
         <input ref={honeypot} id="botcheck" name="botcheck" type="checkbox" tabIndex={-1} autoComplete="off" />
       </div>
 
@@ -195,6 +206,8 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
           sitekey={HCAPTCHA_SITEKEY}
           reCaptchaCompat={false}
           theme={theme}
+          // The check speaks the page's language.
+          languageOverride={locale}
           onVerify={(token) => {
             setCaptchaToken(token);
             setErrors((current) => ({ ...current, captcha: undefined }));
@@ -211,17 +224,19 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
 
       {status === "failed" && (
         <div className={`${styles.notice} ${styles.error}`} role="alert">
-          <p className={styles.noticeTitle}>Sorry, the message could not be sent.</p>
+          <p className={styles.noticeTitle}>{t("failedTitle")}</p>
           <p>
-            Your text is still here, so you can try again.
+            {t("failedText")}
             {linkedinUrl && (
               <>
                 {" "}
-                Or reach me on{" "}
-                <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-                  LinkedIn
-                </a>
-                .
+                {t.rich("failedLinkedin", {
+                  link: (chunks) => (
+                    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+                      {chunks}
+                    </a>
+                  ),
+                })}
               </>
             )}
           </p>
@@ -229,7 +244,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
       )}
 
       <button type="submit" className={styles.submit} disabled={sending}>
-        {sending ? "Sending…" : "Send message"}
+        {sending ? t("sending") : t("send")}
       </button>
     </form>
   );
