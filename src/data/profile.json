@@ -23,6 +23,7 @@
   "showStatsLink": false,
 
   "contactAccessKey": "97fa0758-d57d-4e96-ab27-03a4b41e29ff",
+  "postalAddress": { "street": "Veilhofstraße 24", "postcode": "90489", "city": "Nürnberg", "country": "Deutschland" },
 
   "links": [
     { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/muhammad-hassan-852827189/", "show": true },

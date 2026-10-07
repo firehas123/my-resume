@@ -64,6 +64,8 @@ export type Profile = {
    * overrides it.
    */
   contactAccessKey: string;
+  /** Postal address for the Impressum only; shown nowhere else on the site. */
+  postalAddress: { street: string; postcode: string; city: string; country: string };
   links: Link[];
   companies: Company[];
   experience: Job[];
