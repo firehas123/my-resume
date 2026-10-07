@@ -34,6 +34,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createGrouping, formatShare, languageBreakdown } from "./lib/grouping.mjs";
+import { knownCodes, translationGaps } from "./lib/i18n.mjs";
 import { readmeContent, readmeImage } from "./lib/readme.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -376,6 +377,27 @@ console.log(
 );
 console.log(`sync: on the site: ${summary.map(([g, n]) => `${g} ${n}`).join(", ")}.`);
 
+/**
+ * Projects on the site whose summary is missing in some configured language
+ * (they show the English text there). Same rules as `npm run i18n:check`.
+ */
+function translationGapRows() {
+  const config = readJson(join(root, "src", "i18n", "languages.json"));
+  const codes = knownCodes(config);
+  const others = config.languages.filter((code) => code !== "en");
+  return projects
+    .filter((repo) => overrideFor(repo.name).hide !== true)
+    .map((repo) => {
+      const summary = overrideFor(repo.name).summary;
+      if (summary === undefined || typeof summary === "string") {
+        return { name: repo.name, missing: summary || repo.description || repo.readmeSummary ? others : [] };
+      }
+      const missing = translationGaps(summary, others, codes).filter((g) => g.problem === "missing").map((g) => g.locale);
+      return { name: repo.name, missing };
+    })
+    .filter((row) => row.missing.length > 0);
+}
+
 // Markdown version, saved to SYNC-REPORT.md. Pipes in text would break a
 // Markdown table, so they are escaped.
 const md = (text) => String(text).replaceAll("|", "\\|");
@@ -420,6 +442,18 @@ const report = [
         ),
       ]
     : ["None."]),
+  "",
+  "## Project texts per language",
+  "",
+  "The site shows each project's summary in the page's language when `src/data/overrides.json` has one",
+  '(`"summary": { "en": "...", "de": "..." }`); otherwise it shows the English text with an "In English" label.',
+  "",
+  ...(() => {
+    const gaps = translationGapRows();
+    return gaps.length
+      ? ["| Repo | Summary missing in |", "| --- | --- |", ...gaps.map((g) => `| ${md(g.name)} | ${md(g.missing.join(", "))} |`)]
+      : ["Every project shown has a summary in every language."];
+  })(),
   "",
   "## Other skipped repositories",
   "",

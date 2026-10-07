@@ -49,6 +49,13 @@ either way, set `"include": true` or `"hide": true` for it in `src/data/override
 
 None.
 
+## Project texts per language
+
+The site shows each project's summary in the page's language when `src/data/overrides.json` has one
+(`"summary": { "en": "...", "de": "..." }`); otherwise it shows the English text with an "In English" label.
+
+Every project shown has a summary in every language.
+
 ## Other skipped repositories
 
 - Empty: none

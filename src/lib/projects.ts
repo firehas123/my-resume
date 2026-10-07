@@ -4,6 +4,10 @@
 //   3. src/data/language-groups.json the grouping rules (tab order lives here)
 //   4. content/projects/*.md         optional longer write-ups for project pages
 //
+// Titles and summaries can be written per language in overrides.json
+// ({ "en": "...", "de": "..." }). A project with no text in the page's
+// language shows the English one, marked so the page can say "In English".
+//
 // This file reads from disk, so it only runs on the server / at build time.
 
 import { existsSync, readFileSync } from "node:fs";
@@ -13,6 +17,8 @@ import { marked } from "marked";
 import synced from "@/data/projects.json";
 import overridesFile from "@/data/overrides.json";
 import groupRules from "@/data/language-groups.json";
+import { CATALOG_CODES, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { isLocalized } from "../../scripts/lib/i18n.mjs";
 // The same grouping code the sync script uses, so the tab order is defined once.
 import { createGrouping, formatShare } from "../../scripts/lib/grouping.mjs";
 
@@ -34,11 +40,14 @@ type SyncedRepo = {
   pushedAt: string;
 };
 
+/** A plain string, or one text per language: { "en": "...", "de": "..." }. */
+type Text = string | Record<string, string>;
+
 type Override = {
   hide?: boolean;
   include?: boolean; // forces a fork to be shown (read by the sync script)
-  title?: string;
-  summary?: string;
+  title?: Text;
+  summary?: Text;
   group?: string;
   demo?: string | null;
   featured?: boolean;
@@ -50,6 +59,8 @@ export type Project = {
   slug: string; // used in /projects/<slug>
   title: string;
   summary: string; // override, else GitHub description, else README summary; may be ""
+  /** True when the summary is shown in English because the page's language has none. */
+  summaryInEnglish: boolean;
   group: string; // the tab it appears under
   languages: LanguageShare[]; // its top languages, largest first
   forkOf: string | null; // set when the repo is a fork: "owner/repo" of the original
@@ -102,13 +113,27 @@ function isVisible(repo: SyncedRepo): boolean {
   return (overrides[repo.name] ?? {}).hide !== true;
 }
 
-function toProject(repo: SyncedRepo): Project {
+/**
+ * One text in one language. Synced GitHub texts are English. Returns the
+ * text and the language it is really in ("" text means there is none).
+ */
+function pick(text: Text | undefined, fallback: string, locale: Locale): { text: string; lang: Locale } {
+  if (text === undefined) return { text: fallback, lang: DEFAULT_LOCALE };
+  if (typeof text === "string" || !isLocalized(text, CATALOG_CODES)) return { text: String(text), lang: DEFAULT_LOCALE };
+  if (text[locale]) return { text: text[locale], lang: locale };
+  return { text: text[DEFAULT_LOCALE] || fallback, lang: DEFAULT_LOCALE };
+}
+
+function toProject(repo: SyncedRepo, locale: Locale): Project {
   const o = overrides[repo.name] ?? {};
+  const summary = pick(o.summary, repo.description || repo.readmeSummary, locale);
   return {
     name: repo.name,
     slug: repo.name.toLowerCase(),
-    title: o.title ?? prettifyRepoName(repo.name),
-    summary: o.summary ?? (repo.description || repo.readmeSummary),
+    // Titles stay as they are in English unless a language has its own.
+    title: pick(o.title, prettifyRepoName(repo.name), locale).text,
+    summary: summary.text,
+    summaryInEnglish: summary.text !== "" && summary.lang !== locale,
     // A group set in overrides.json always wins over the automatic one.
     group: o.group?.trim() || repo.group,
     languages: topLanguages(repo.languages),
@@ -131,9 +156,12 @@ function compareProjects(a: Project, b: Project): number {
   return b.pushedAt.localeCompare(a.pushedAt);
 }
 
-/** All projects that should appear on the site, in display order. */
-export function getProjects(): Project[] {
-  return (synced as SyncedRepo[]).filter(isVisible).map(toProject).sort(compareProjects);
+/** All projects that should appear on the site, in display order, with texts in `locale`. */
+export function getProjects(locale: Locale = DEFAULT_LOCALE): Project[] {
+  return (synced as SyncedRepo[])
+    .filter(isVisible)
+    .map((repo) => toProject(repo, locale))
+    .sort(compareProjects);
 }
 
 /**
@@ -144,8 +172,8 @@ export function getGroups(projects: Project[]): string[] {
   return [...new Set(projects.map((p) => p.group))].sort(compareGroups);
 }
 
-export function getProject(slug: string): Project | undefined {
-  return getProjects().find((project) => project.slug === slug);
+export function getProject(slug: string, locale: Locale = DEFAULT_LOCALE): Project | undefined {
+  return getProjects(locale).find((project) => project.slug === slug);
 }
 
 /**

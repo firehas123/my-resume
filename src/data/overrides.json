@@ -10,32 +10,260 @@
     "hide": false
   },
   "my-resume": {
-    "summary": "This website: Next.js and TypeScript, projects synced from GitHub, a Web3Forms contact form, its own visit statistics and motion built on View Transitions.",
+    "summary": {
+      "en": "This website: Next.js and TypeScript, projects synced from GitHub, a contact form, its own visit statistics, eight languages and motion built on View Transitions.",
+      "de": "Diese Website: Next.js und TypeScript, Projekte direkt aus GitHub, ein Kontaktformular, eine eigene Besucherstatistik, acht Sprachen und Animationen mit View Transitions.",
+      "fr": "Ce site : Next.js et TypeScript, des projets synchronisés depuis GitHub, un formulaire de contact, ses propres statistiques de visites, huit langues et des animations basées sur les View Transitions.",
+      "es": "Este sitio web: Next.js y TypeScript, proyectos sincronizados desde GitHub, un formulario de contacto, estadísticas de visitas propias, ocho idiomas y animaciones con View Transitions.",
+      "it": "Questo sito: Next.js e TypeScript, progetti sincronizzati da GitHub, un modulo di contatto, statistiche delle visite proprie, otto lingue e animazioni basate sulle View Transitions.",
+      "nl": "Deze website: Next.js en TypeScript, projecten rechtstreeks uit GitHub, een contactformulier, eigen bezoekersstatistieken, acht talen en animaties met View Transitions.",
+      "tr": "Bu web sitesi: Next.js ve TypeScript, GitHub’dan senkronize edilen projeler, bir iletişim formu, kendi ziyaret istatistikleri, sekiz dil ve View Transitions ile animasyonlar.",
+      "ar": "هذا الموقع: Next.js وTypeScript، ومشاريع تُزامَن من GitHub، ونموذج تواصل، وإحصاءات زيارات خاصة به، وثماني لغات، وحركة مبنية على View Transitions."
+    },
     "demo": "https://my-resume-pied-tau.vercel.app"
   },
   "INFO-VIZ": {
-    "summary": "A self-test app for an Information Visualization course: multiple-choice and coding questions across six modules, with question import, progress stats and a light and dark theme, saved in the browser."
+    "summary": {
+      "en": "A self-test app for an Information Visualization course: multiple-choice and coding questions across six modules, with question import, progress stats and a light and dark theme, saved in the browser.",
+      "de": "Eine Lern-App für eine Vorlesung zu Informationsvisualisierung: Multiple-Choice- und Programmieraufgaben aus sechs Modulen, mit Fragenimport, Fortschrittsstatistik sowie hellem und dunklem Design, gespeichert im Browser.",
+      "fr": "Une application d’auto-évaluation pour un cours de visualisation de l’information : questions à choix multiples et exercices de code sur six modules, avec import de questions, suivi de progression et thème clair ou sombre, le tout enregistré dans le navigateur.",
+      "es": "Una aplicación de autoevaluación para un curso de Visualización de Información: preguntas tipo test y ejercicios de programación en seis módulos, con importación de preguntas, estadísticas de progreso y tema claro u oscuro, guardado en el navegador.",
+      "it": "Un’app di autoverifica per un corso di Visualizzazione delle informazioni: domande a scelta multipla ed esercizi di programmazione su sei moduli, con importazione delle domande, statistiche sui progressi e tema chiaro o scuro, salvati nel browser.",
+      "nl": "Een oefenapp voor een vak informatievisualisatie: meerkeuze- en programmeervragen over zes modules, met het importeren van vragen, voortgangsstatistieken en een licht en donker thema, opgeslagen in de browser.",
+      "tr": "Bilgi Görselleştirme dersi için bir öz değerlendirme uygulaması: altı modülde çoktan seçmeli ve kodlama soruları, soru içe aktarma, ilerleme istatistikleri ve açık/koyu tema; her şey tarayıcıda saklanır.",
+      "ar": "تطبيق للاختبار الذاتي في مقرر تصوير المعلومات: أسئلة اختيار من متعدد وأسئلة برمجة في ستة أقسام، مع استيراد الأسئلة وإحصاءات التقدم ووضع فاتح وداكن، وكل ذلك محفوظ في المتصفح."
+    }
   },
   "Fintech-Lending-Application": {
-    "summary": "A loan application platform: an Express and MongoDB API for loan applications and offers, and a React (Vite) front end with an admin area."
+    "summary": {
+      "en": "A loan application platform: an Express and MongoDB API for loan applications and offers, and a React (Vite) front end with an admin area.",
+      "de": "Eine Plattform für Kreditanträge: eine API mit Express und MongoDB für Anträge und Angebote sowie ein Frontend mit React (Vite) und Adminbereich.",
+      "fr": "Une plateforme de demandes de prêt : une API Express et MongoDB pour les demandes et les offres, et un front-end React (Vite) avec un espace d’administration.",
+      "es": "Una plataforma de solicitudes de préstamo: una API con Express y MongoDB para solicitudes y ofertas, y un front-end en React (Vite) con área de administración.",
+      "it": "Una piattaforma per richieste di prestito: un’API Express e MongoDB per richieste e offerte, e un front-end React (Vite) con area di amministrazione.",
+      "nl": "Een platform voor leningaanvragen: een API met Express en MongoDB voor aanvragen en aanbiedingen, en een React-frontend (Vite) met een beheeromgeving.",
+      "tr": "Bir kredi başvuru platformu: başvurular ve teklifler için Express ve MongoDB tabanlı bir API ile yönetici paneli olan React (Vite) ön yüzü.",
+      "ar": "منصة لطلبات القروض: واجهة API مبنية بـ Express وMongoDB للطلبات والعروض، وواجهة أمامية بـ React (Vite) مع لوحة إدارة."
+    }
   },
   "Dots-Game": {
-    "summary": "The classic Dots and Boxes game in the browser, built with JavaScript and jQuery.",
+    "summary": {
+      "en": "The classic Dots and Boxes game in the browser, built with JavaScript and jQuery.",
+      "de": "Das klassische Käsekästchen-Spiel (Dots and Boxes) im Browser, gebaut mit JavaScript und jQuery.",
+      "fr": "Le jeu classique des petits carrés (Dots and Boxes) dans le navigateur, réalisé en JavaScript et jQuery.",
+      "es": "El clásico juego de los puntos y las cajas (Dots and Boxes) en el navegador, hecho con JavaScript y jQuery.",
+      "it": "Il classico gioco dei punti e quadrati (Dots and Boxes) nel browser, realizzato con JavaScript e jQuery.",
+      "nl": "Het klassieke spel kamertje verhuren (Dots and Boxes) in de browser, gebouwd met JavaScript en jQuery.",
+      "tr": "Klasik Dots and Boxes (kutu kapmaca) oyunu, tarayıcıda; JavaScript ve jQuery ile geliştirildi.",
+      "ar": "لعبة النقاط والمربعات (Dots and Boxes) الكلاسيكية في المتصفح، مبنية بـ JavaScript وjQuery."
+    },
     "demo": "https://bucolic-tapioca-cb6269.netlify.app/"
   },
   "Employee-Management-System": {
-    "summary": "A console program in C that manages employee records stored in files: list, add, modify and delete employees."
+    "summary": {
+      "en": "A console program in C that manages employee records stored in files: list, add, modify and delete employees.",
+      "de": "Ein Konsolenprogramm in C, das Mitarbeiterdaten in Dateien verwaltet: anzeigen, hinzufügen, ändern und löschen.",
+      "fr": "Un programme console en C qui gère des fiches d’employés stockées dans des fichiers : afficher, ajouter, modifier et supprimer.",
+      "es": "Un programa de consola en C que gestiona registros de empleados guardados en archivos: listar, añadir, modificar y eliminar.",
+      "it": "Un programma da console in C che gestisce schede dei dipendenti salvate su file: elencare, aggiungere, modificare ed eliminare.",
+      "nl": "Een consoleprogramma in C dat werknemersgegevens in bestanden beheert: tonen, toevoegen, wijzigen en verwijderen.",
+      "tr": "Dosyalarda saklanan çalışan kayıtlarını yöneten C ile yazılmış bir konsol programı: listeleme, ekleme, değiştirme ve silme.",
+      "ar": "برنامج سطر أوامر بلغة C يدير سجلات الموظفين المحفوظة في ملفات: العرض والإضافة والتعديل والحذف."
+    }
   },
   "SLU": {
-    "summary": "A visual, clickable study map for exam preparation in Speech and Language Understanding, published with GitHub Pages."
+    "summary": {
+      "en": "A visual, clickable study map for exam preparation in Speech and Language Understanding, published with GitHub Pages.",
+      "de": "Eine visuelle, klickbare Lernkarte zur Prüfungsvorbereitung in Speech and Language Understanding, veröffentlicht mit GitHub Pages.",
+      "fr": "Une carte de révision visuelle et cliquable pour préparer l’examen de Speech and Language Understanding, publiée avec GitHub Pages.",
+      "es": "Un mapa de estudio visual e interactivo para preparar el examen de Speech and Language Understanding, publicado con GitHub Pages.",
+      "it": "Una mappa di studio visiva e cliccabile per preparare l’esame di Speech and Language Understanding, pubblicata con GitHub Pages.",
+      "nl": "Een visuele, klikbare studiekaart ter voorbereiding op het tentamen Speech and Language Understanding, gepubliceerd met GitHub Pages.",
+      "tr": "Speech and Language Understanding sınavına hazırlık için görsel, tıklanabilir bir çalışma haritası; GitHub Pages ile yayınlandı.",
+      "ar": "خريطة دراسية مرئية وتفاعلية للتحضير لامتحان Speech and Language Understanding، منشورة عبر GitHub Pages."
+    }
   },
   "Admin-Patient-GUI": {
-    "summary": "A Java (Maven) desktop app with separate Admin and Patient functions, backed by a database that runs in Docker."
+    "summary": {
+      "en": "A Java (Maven) desktop app with separate Admin and Patient functions, backed by a database that runs in Docker.",
+      "de": "Eine Desktop-App in Java (Maven) mit getrennten Funktionen für Admin und Patient, mit einer Datenbank, die in Docker läuft.",
+      "fr": "Une application de bureau Java (Maven) avec des fonctions distinctes pour l’administrateur et le patient, reposant sur une base de données qui tourne dans Docker.",
+      "es": "Una aplicación de escritorio en Java (Maven) con funciones separadas para administrador y paciente, sobre una base de datos que se ejecuta en Docker.",
+      "it": "Un’app desktop Java (Maven) con funzioni separate per amministratore e paziente, basata su un database eseguito in Docker.",
+      "nl": "Een desktopapp in Java (Maven) met aparte functies voor beheerder en patiënt, met een database die in Docker draait.",
+      "tr": "Yönetici ve hasta için ayrı işlevleri olan, Docker’da çalışan bir veritabanına dayanan Java (Maven) masaüstü uygulaması.",
+      "ar": "تطبيق سطح مكتب بلغة Java (Maven) بوظائف منفصلة للمسؤول والمريض، تعتمد على قاعدة بيانات تعمل في Docker."
+    }
   },
   "google-app-script-sheet-data-dumping": {
-    "summary": "A Google Apps Script that fetches data from an API with token authentication and writes it into the active Google Sheet."
+    "summary": {
+      "en": "A Google Apps Script that fetches data from an API with token authentication and writes it into the active Google Sheet.",
+      "de": "Ein Google-Apps-Script, das Daten über eine API mit Token-Authentifizierung abruft und in das aktive Google Sheet schreibt.",
+      "fr": "Un script Google Apps Script qui récupère des données d’une API avec authentification par jeton et les écrit dans la feuille Google Sheets active.",
+      "es": "Un Google Apps Script que obtiene datos de una API con autenticación por token y los escribe en la hoja de Google Sheets activa.",
+      "it": "Uno script Google Apps Script che recupera dati da un’API con autenticazione tramite token e li scrive nel foglio Google Sheets attivo.",
+      "nl": "Een Google Apps Script dat gegevens ophaalt via een API met tokenauthenticatie en ze in het actieve Google Sheet zet.",
+      "tr": "Belirteçle kimlik doğrulaması yapan bir API’den veri çekip etkin Google E-Tablosu’na yazan bir Google Apps Script.",
+      "ar": "سكربت Google Apps Script يجلب البيانات من واجهة API بمصادقة رمزية (Token) ويكتبها في جدول Google Sheets النشط."
+    }
   },
   "MHC-Solutions": {
     "hide": true
+  },
+  "made-project-ws2024": {
+    "summary": {
+      "en": "Investigates the relationship between air pollution and respiratory health in California, from data extraction and transformation to statistical modelling.",
+      "de": "Untersucht den Zusammenhang zwischen Luftverschmutzung und Atemwegsgesundheit in Kalifornien, von der Datengewinnung und -aufbereitung bis zur statistischen Modellierung.",
+      "fr": "Étudie le lien entre pollution de l’air et santé respiratoire en Californie, de l’extraction et la transformation des données jusqu’à la modélisation statistique.",
+      "es": "Analiza la relación entre la contaminación del aire y la salud respiratoria en California, desde la extracción y transformación de datos hasta el modelado estadístico.",
+      "it": "Studia il rapporto tra inquinamento dell’aria e salute respiratoria in California, dall’estrazione e trasformazione dei dati fino alla modellazione statistica.",
+      "nl": "Onderzoekt het verband tussen luchtvervuiling en ademhalingsgezondheid in Californië, van het verzamelen en bewerken van data tot statistische modellering.",
+      "tr": "Kaliforniya’da hava kirliliği ile solunum sağlığı arasındaki ilişkiyi inceler; verilerin çıkarılması ve dönüştürülmesinden istatistiksel modellemeye kadar.",
+      "ar": "يدرس العلاقة بين تلوث الهواء وصحة الجهاز التنفسي في كاليفورنيا، من استخراج البيانات وتحويلها حتى النمذجة الإحصائية."
+    }
+  },
+  "JAVA-EDITOR-RUN": {
+    "summary": {
+      "en": "Java Editor Runner, a development environment for writing, editing and running Java code.",
+      "de": "Java Editor Runner, eine Entwicklungsumgebung zum Schreiben, Bearbeiten und Ausführen von Java-Code.",
+      "fr": "Java Editor Runner, un environnement de développement pour écrire, modifier et exécuter du code Java.",
+      "es": "Java Editor Runner, un entorno de desarrollo para escribir, editar y ejecutar código Java.",
+      "it": "Java Editor Runner, un ambiente di sviluppo per scrivere, modificare ed eseguire codice Java.",
+      "nl": "Java Editor Runner, een ontwikkelomgeving om Java-code te schrijven, te bewerken en uit te voeren.",
+      "tr": "Java Editor Runner: Java kodu yazmak, düzenlemek ve çalıştırmak için bir geliştirme ortamı.",
+      "ar": "Java Editor Runner، بيئة تطوير لكتابة شيفرة Java وتحريرها وتشغيلها."
+    }
+  },
+  "Medizintechnik-II-Final-Project": {
+    "summary": {
+      "en": "Code and documentation for a project that implements and evaluates several image processing techniques.",
+      "de": "Code und Dokumentation zu einem Projekt, das verschiedene Verfahren der Bildverarbeitung umsetzt und bewertet.",
+      "fr": "Code et documentation d’un projet qui met en œuvre et évalue plusieurs techniques de traitement d’images.",
+      "es": "Código y documentación de un proyecto que implementa y evalúa varias técnicas de procesamiento de imágenes.",
+      "it": "Codice e documentazione di un progetto che implementa e valuta diverse tecniche di elaborazione delle immagini.",
+      "nl": "Code en documentatie van een project dat verschillende technieken voor beeldbewerking implementeert en evalueert.",
+      "tr": "Çeşitli görüntü işleme tekniklerini uygulayan ve değerlendiren bir projenin kodu ve dokümantasyonu.",
+      "ar": "الشيفرة والتوثيق لمشروع يطبّق عدة تقنيات لمعالجة الصور ويقيّمها."
+    }
+  },
+  "E-Commerce-Clothing": {
+    "summary": {
+      "en": "Chic Threads, a full-stack clothing shop on the MERN stack where users browse, choose and buy products.",
+      "de": "Chic Threads, ein Full-Stack-Modeshop auf Basis des MERN-Stacks, in dem Nutzer Produkte ansehen, auswählen und kaufen.",
+      "fr": "Chic Threads, une boutique de vêtements full-stack basée sur la stack MERN, où l’on parcourt, choisit et achète des produits.",
+      "es": "Chic Threads, una tienda de ropa full-stack con el stack MERN en la que los usuarios exploran, eligen y compran productos.",
+      "it": "Chic Threads, un negozio di abbigliamento full-stack basato sullo stack MERN, dove gli utenti sfogliano, scelgono e acquistano prodotti.",
+      "nl": "Chic Threads, een full-stack kledingwinkel op de MERN-stack waar gebruikers producten bekijken, kiezen en kopen.",
+      "tr": "Chic Threads: MERN yığını üzerine kurulu, kullanıcıların ürünlere göz atıp seçtiği ve satın aldığı full-stack bir giyim mağazası.",
+      "ar": "Chic Threads، متجر ملابس متكامل (Full-Stack) مبني على MERN، يتصفح فيه المستخدمون المنتجات ويختارونها ويشترونها."
+    }
+  },
+  "my-tralive-netlifyapp": {
+    "summary": {
+      "en": "Tralive, a web app with tools and resources for planning and enjoying a trip.",
+      "de": "Tralive, eine Web-App mit Werkzeugen und Informationen, um Reisen zu planen und zu genießen.",
+      "fr": "Tralive, une application web avec des outils et des ressources pour préparer et profiter de ses voyages.",
+      "es": "Tralive, una aplicación web con herramientas y recursos para planificar y disfrutar los viajes.",
+      "it": "Tralive, un’app web con strumenti e risorse per pianificare e godersi i viaggi.",
+      "nl": "Tralive, een webapp met hulpmiddelen en informatie om reizen te plannen en ervan te genieten.",
+      "tr": "Tralive: seyahat planlamak ve keyfini çıkarmak için araçlar ve kaynaklar sunan bir web uygulaması.",
+      "ar": "Tralive، تطبيق ويب يقدم أدوات وموارد لتخطيط الرحلات والاستمتاع بها."
+    }
+  },
+  "Hockey-proj-JSP": {
+    "summary": {
+      "en": "A hockey management system in JavaServer Pages (JSP) for player and game data.",
+      "de": "Ein Verwaltungssystem für Eishockey mit JavaServer Pages (JSP), für Spieler- und Spieldaten.",
+      "fr": "Un système de gestion de hockey en JavaServer Pages (JSP) pour les données des joueurs et des matchs.",
+      "es": "Un sistema de gestión de hockey con JavaServer Pages (JSP) para datos de jugadores y partidos.",
+      "it": "Un sistema di gestione per l’hockey in JavaServer Pages (JSP), per i dati di giocatori e partite.",
+      "nl": "Een beheersysteem voor hockey in JavaServer Pages (JSP) voor speler- en wedstrijdgegevens.",
+      "tr": "Oyuncu ve maç verileri için JavaServer Pages (JSP) ile geliştirilmiş bir hokey yönetim sistemi.",
+      "ar": "نظام لإدارة الهوكي مبني بـ JavaServer Pages (JSP) لبيانات اللاعبين والمباريات."
+    }
+  },
+  "GitHub-Essentials-Guide": {
+    "summary": {
+      "en": "An interactive guide to GitHub with step-by-step instructions for the basic operations.",
+      "de": "Ein interaktiver Leitfaden zu GitHub mit Schritt-für-Schritt-Anleitungen für die wichtigsten Grundlagen.",
+      "fr": "Un guide interactif de GitHub avec des instructions pas à pas pour les opérations de base.",
+      "es": "Una guía interactiva de GitHub con instrucciones paso a paso para las operaciones básicas.",
+      "it": "Una guida interattiva a GitHub con istruzioni passo passo per le operazioni di base.",
+      "nl": "Een interactieve gids voor GitHub met stapsgewijze uitleg van de basishandelingen.",
+      "tr": "Temel işlemler için adım adım talimatlar içeren etkileşimli bir GitHub rehberi.",
+      "ar": "دليل تفاعلي إلى GitHub مع تعليمات خطوة بخطوة للعمليات الأساسية."
+    }
+  },
+  "UnitConverter": {
+    "summary": {
+      "en": "A unit converter in Java for length, weight, temperature and more.",
+      "de": "Ein Einheitenumrechner in Java für Länge, Gewicht, Temperatur und mehr.",
+      "fr": "Un convertisseur d’unités en Java pour les longueurs, les poids, les températures et plus encore.",
+      "es": "Un conversor de unidades en Java para longitud, peso, temperatura y más.",
+      "it": "Un convertitore di unità in Java per lunghezza, peso, temperatura e altro.",
+      "nl": "Een eenhedenomrekenaar in Java voor lengte, gewicht, temperatuur en meer.",
+      "tr": "Uzunluk, ağırlık, sıcaklık ve daha fazlası için Java ile yazılmış bir birim dönüştürücü.",
+      "ar": "محوّل وحدات بلغة Java للطول والوزن ودرجة الحرارة وغيرها."
+    }
+  },
+  "Advanced-Account-Management-System": {
+    "summary": {
+      "en": "A C++ application for account management operations.",
+      "de": "Eine C++-Anwendung für die Verwaltung von Konten.",
+      "fr": "Une application C++ pour la gestion de comptes.",
+      "es": "Una aplicación en C++ para la gestión de cuentas.",
+      "it": "Un’applicazione C++ per la gestione dei conti.",
+      "nl": "Een C++-applicatie voor het beheren van accounts.",
+      "tr": "Hesap yönetimi işlemleri için bir C++ uygulaması.",
+      "ar": "تطبيق بلغة C++ لعمليات إدارة الحسابات."
+    }
+  },
+  "keyLogger": {
+    "summary": {
+      "en": "A keylogger in Java that records keystrokes, written for educational purposes to show how key logging works.",
+      "de": "Ein Keylogger in Java, der Tastatureingaben aufzeichnet, geschrieben zu Lernzwecken, um zu zeigen, wie Keylogging funktioniert.",
+      "fr": "Un keylogger en Java qui enregistre les frappes au clavier, écrit à des fins pédagogiques pour montrer le fonctionnement du keylogging.",
+      "es": "Un keylogger en Java que registra las pulsaciones de teclas, escrito con fines educativos para mostrar cómo funciona el keylogging.",
+      "it": "Un keylogger in Java che registra i tasti premuti, scritto a scopo didattico per mostrare come funziona il keylogging.",
+      "nl": "Een keylogger in Java die toetsaanslagen vastlegt, geschreven voor educatieve doeleinden om te laten zien hoe keylogging werkt.",
+      "tr": "Tuş vuruşlarını kaydeden, keylogging’in nasıl çalıştığını göstermek amacıyla eğitim için yazılmış bir Java keylogger’ı.",
+      "ar": "برنامج Keylogger بلغة Java يسجل ضغطات المفاتيح، كُتب لأغراض تعليمية لشرح طريقة عمل تسجيل المفاتيح."
+    }
+  },
+  "Chat-Java": {
+    "summary": {
+      "en": "A real-time chat application in Java, built on Java’s networking features.",
+      "de": "Eine Chat-Anwendung in Java für Nachrichten in Echtzeit, aufgebaut auf den Netzwerkfunktionen von Java.",
+      "fr": "Une application de chat en temps réel en Java, reposant sur les fonctions réseau de Java.",
+      "es": "Una aplicación de chat en tiempo real en Java, basada en las funciones de red de Java.",
+      "it": "Un’applicazione di chat in tempo reale in Java, basata sulle funzionalità di rete di Java.",
+      "nl": "Een realtime chatapplicatie in Java, gebouwd op de netwerkfuncties van Java.",
+      "tr": "Java’nın ağ özellikleri üzerine kurulu, gerçek zamanlı bir Java sohbet uygulaması.",
+      "ar": "تطبيق محادثة فورية بلغة Java، مبني على إمكانات الشبكات في Java."
+    }
+  },
+  "Comprehensive-C-MCQ-Platform-for-Educational-Assessment": {
+    "summary": {
+      "en": "A multiple-choice test platform in C++: teachers create, run and grade tests in the console or import questions from external files.",
+      "de": "Eine Plattform für Multiple-Choice-Tests in C++: Lehrkräfte erstellen, starten und bewerten Tests in der Konsole oder importieren Fragen aus externen Dateien.",
+      "fr": "Une plateforme de QCM en C++ : les enseignants créent, font passer et corrigent des tests dans la console, ou importent des questions depuis des fichiers externes.",
+      "es": "Una plataforma de exámenes tipo test en C++: los docentes crean, aplican y califican exámenes en la consola o importan preguntas desde archivos externos.",
+      "it": "Una piattaforma per test a scelta multipla in C++: i docenti creano, somministrano e valutano i test nella console o importano domande da file esterni.",
+      "nl": "Een platform voor meerkeuzetoetsen in C++: docenten maken, nemen en beoordelen toetsen in de console of importeren vragen uit externe bestanden.",
+      "tr": "C++ ile çoktan seçmeli sınav platformu: eğitmenler konsolda sınav oluşturur, uygular ve puanlar ya da soruları harici dosyalardan içe aktarır.",
+      "ar": "منصة اختبارات اختيار من متعدد بلغة C++: ينشئ المعلمون الاختبارات ويجرونها ويصححونها في سطر الأوامر، أو يستوردون الأسئلة من ملفات خارجية."
+    }
+  },
+  "Dynamic-Country-Explorer": {
+    "summary": {
+      "en": "A single dynamic web page for exploring the regions of the world and looking up details about their countries.",
+      "de": "Eine dynamische Webseite, um die Regionen der Welt zu erkunden und Details zu ihren Ländern abzurufen.",
+      "fr": "Une page web dynamique pour explorer les régions du monde et consulter les détails de leurs pays.",
+      "es": "Una página web dinámica para explorar las regiones del mundo y consultar información detallada de sus países.",
+      "it": "Una pagina web dinamica per esplorare le regioni del mondo e consultare i dettagli dei loro paesi.",
+      "nl": "Eén dynamische webpagina om de regio’s van de wereld te verkennen en details over hun landen op te zoeken.",
+      "tr": "Dünyanın bölgelerini keşfetmek ve ülkeleri hakkında ayrıntılı bilgi almak için tek sayfalık dinamik bir web sayfası.",
+      "ar": "صفحة ويب تفاعلية واحدة لاستكشاف مناطق العالم والاطلاع على تفاصيل دولها."
+    }
   }
 }
