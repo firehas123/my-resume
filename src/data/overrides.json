@@ -10,7 +10,8 @@
     "hide": false
   },
   "my-resume": {
-    "summary": "This website: Next.js and TypeScript, projects synced from GitHub, a Web3Forms contact form, its own visit statistics and motion built on View Transitions."
+    "summary": "This website: Next.js and TypeScript, projects synced from GitHub, a Web3Forms contact form, its own visit statistics and motion built on View Transitions.",
+    "demo": "https://my-resume-pied-tau.vercel.app"
   },
   "INFO-VIZ": {
     "summary": "A self-test app for an Information Visualization course: multiple-choice and coding questions across six modules, with question import, progress stats and a light and dark theme, saved in the browser."
