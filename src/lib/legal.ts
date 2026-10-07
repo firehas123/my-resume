@@ -8,6 +8,7 @@ import { join } from "node:path";
 import { marked } from "marked";
 import type { Locale } from "@/i18n/config";
 import { getPathname } from "@/i18n/navigation";
+import { contactSetup } from "./contact";
 import { profileFor } from "./profile";
 
 export type LegalPageName = "legal-notice" | "privacy";
@@ -20,7 +21,14 @@ export async function legalHtml(page: LegalPageName, locale: Locale): Promise<st
     ...profile.postalAddress,
     contactUrl: getPathname({ href: "/contact", locale }),
   };
-  const filled = markdown.replace(/\{\{(\w+)\}\}/g, (match, key: string) => values[key] ?? match);
+  // Passages that depend on how the contact form sends (lib/contact.ts) are
+  // marked <!-- form:server --> ... <!-- /form --> or <!-- form:web3forms -->
+  // ... <!-- /form -->; only the ones for the current setup are kept.
+  const mode = contactSetup().mode;
+  const forSetup = markdown.replace(/<!-- form:(\w+) -->([\s\S]*?)<!-- \/form -->/g, (_, which: string, text: string) =>
+    which === mode ? text.trim() : "",
+  );
+  const filled = forSetup.replace(/\{\{(\w+)\}\}/g, (match, key: string) => values[key] ?? match);
   // breaks: a single line break is a line break (the postal address).
   return marked.parse(filled, { async: true, breaks: true });
 }
