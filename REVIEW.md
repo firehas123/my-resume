@@ -282,3 +282,19 @@ single-page site comes back on the next deploy.
   email, typos fixed; experience bullets tidied for grammar and tense.
 - Project data re-synced; summaries for repos without one; MHC-Solutions hidden;
   my-resume demo link fixed.
+
+### Closed from TODO.md on 2026-10-07
+
+- Contact form delivery tested on the live site: Web3Forms accepted and forwarded a
+  test message.
+- Vercel Web Analytics and Speed Insights are enabled (both scripts are served on the
+  live site).
+- Test coverage figure: none exists (the old CV had none either); the sentence stays
+  true without a number. Add one in `profile.json` and run `npm run cv` if it turns up.
+- Impressum: the contact form is offered instead of an email address, by the owner's
+  choice. German law (§ 5 DDG) usually expects a direct electronic contact such as an
+  email address; adding one is a one-line change in `src/app/impressum/page.tsx`.
+- InfoTech logo: the official site still shows the current file (see
+  `public/logos/SOURCES.md`).
+- MHC-Solutions stays hidden until it has real content (`"hide": true` in
+  `src/data/overrides.json`).
