@@ -34,8 +34,16 @@ export function About() {
           <h2 id="about-title" className="eyebrow">
             About
           </h2>
-          <RevealText as="p" className={styles.lead} text={profile.about.lead} />
-          <p className={styles.body}>{profile.about.body}</p>
+          <RevealText as="p" className={styles.lead} text={profile.about.headline} />
+          {/* One statement per line, each fading in a little after the one
+              before it; the last one is in the accent colour. */}
+          <ul className={styles.statements}>
+            {profile.about.statements.map((statement, i, all) => (
+              <li key={statement} className={i === all.length - 1 ? styles.accent : undefined}>
+                <Reveal delay={0.35 + i * 0.15}>{statement}</Reveal>
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </div>
     </section>

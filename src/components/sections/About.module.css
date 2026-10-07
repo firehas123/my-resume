@@ -53,13 +53,28 @@
   line-height: 1.14;
   font-weight: 700;
   letter-spacing: -0.025em;
+  /* Even line lengths, so on phones the headline breaks between its two
+     sentences instead of leaving "to replace." alone on the second line. */
+  text-wrap: balance;
 }
 
-.body {
-  max-width: 30em;
-  font-size: 20px;
-  font-weight: 500;
+/* Four short statements, one per line: larger than body text, muted. */
+.statements {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(22px, 2vw, 26px);
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.015em;
   color: var(--muted);
+}
+
+.accent {
+  color: var(--accent);
 }
 
 /* Medium screens: keep the text clear of the face. */

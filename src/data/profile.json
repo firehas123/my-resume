@@ -9,8 +9,8 @@
   },
 
   "about": {
-    "lead": "Payment systems at i2c. Microservices for the Careem Super App. Secure email at Zertificon.",
-    "body": "Currently a Master's student in Artificial Intelligence, and a working student at Zertificon in Berlin.",
+    "headline": "Easy to work with. Hard to replace.",
+    "statements": ["Reliable by default.", "Curious by design.", "Calm under pressure.", "No shortcuts included."],
     "image": "/images/about-wide-calm-v2.jpg",
     "imageAlt": "Black and white portrait of Hassan Chattha in a black T-shirt"
   },

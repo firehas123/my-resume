@@ -54,7 +54,8 @@ export type Profile = {
   shortName: string;
   location: string;
   intro: { headline: [string, string]; pitch: string };
-  about: { lead: string; body: string; image: string; imageAlt: string };
+  /** statements: short lines shown one per line; the last one is in the accent colour. */
+  about: { headline: string; statements: string[]; image: string; imageAlt: string };
   cv: { path: string; downloadName: string };
   /** When true, the footer shows a quiet "Site stats" link to /stats. */
   showStatsLink: boolean;
