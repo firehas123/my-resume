@@ -6,16 +6,18 @@ import { PageTransition } from "@/components/motion/PageTransition";
 
 export const metadata: Metadata = { title: "Datenschutz" };
 
-// Describes what this site actually does. Open points (a professional review)
-// are tracked in TODO.md, never as markers on the page.
+// Describes what this site actually does; keep it in step with the code
+// (contact form, hCaptcha, analytics, the own visit counter, browser storage).
 export default function DatenschutzPage() {
+  const address = profile.postalAddress;
   return (
     <PageTransition>
       <LegalPage title="Datenschutz">
         <h2>Verantwortlicher</h2>
         <p>
-          Verantwortlich für die Datenverarbeitung auf dieser Website ist {profile.name}, Nürnberg, Deutschland.
-          Kontakt über das <Link href="/contact">Kontaktformular</Link>.
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist {profile.name}, {address.street},{" "}
+          {address.postcode} {address.city}, {address.country}. Kontakt über das{" "}
+          <Link href="/contact">Kontaktformular</Link>.
         </p>
 
         <h2>Hosting</h2>
@@ -25,13 +27,37 @@ export default function DatenschutzPage() {
           Missbrauch zu schützen. Rechtsgrundlage ist das berechtigte Interesse an einer sicheren und zuverlässigen
           Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).
         </p>
+        <p>
+          Einige der hier genannten Dienste haben ihren Sitz in den USA. Für Übermittlungen dorthin stützen sich die
+          Anbieter nach eigenen Angaben auf die von der EU-Kommission vorgesehenen Garantien (EU-US Data Privacy
+          Framework bzw. Standardvertragsklauseln).
+        </p>
 
         <h2>Kontaktformular</h2>
         <p>
           Wenn Sie das Kontaktformular nutzen, werden Name, E-Mail-Adresse und Nachricht direkt aus Ihrem Browser an den
           Formulardienst Web3Forms übermittelt, dort verarbeitet und als E-Mail an mein Postfach weitergeleitet. Ihre
           E-Mail-Adresse wird als Antwortadresse gesetzt, damit ich Ihnen antworten kann. Die Angaben verwende ich nur,
-          um Ihre Anfrage zu beantworten. Rechtsgrundlage ist Ihre Anfrage selbst (Art. 6 Abs. 1 lit. b und f DSGVO).
+          um Ihre Anfrage zu beantworten, und lösche die E-Mail, wenn sie nicht mehr gebraucht wird. Rechtsgrundlage ist
+          Ihre Anfrage selbst (Art. 6 Abs. 1 lit. b und f DSGVO).
+        </p>
+
+        <h2>Spamschutz mit hCaptcha</h2>
+        <p>
+          Damit das Kontaktformular nicht für Spam missbraucht wird, ist auf der Kontaktseite hCaptcha eingebunden, ein
+          Dienst der Intuition Machines, Inc. (USA). hCaptcha prüft, ob die Eingabe von einem Menschen stammt. Dafür
+          werden beim Laden der Kontaktseite und beim Lösen der Prüfung Daten wie IP-Adresse, Browser- und
+          Geräteangaben sowie das Verhalten bei der Prüfung an hCaptcha übermittelt; hCaptcha kann dabei eigene
+          Cookies oder ähnliche Speicher setzen. Das Ergebnis der Prüfung wird mit dem Formular an Web3Forms gesendet.
+          Auf anderen Seiten dieser Website wird hCaptcha nicht geladen.
+        </p>
+        <p>
+          Rechtsgrundlage ist das berechtigte Interesse, das Formular und mein Postfach vor automatisiertem Missbrauch
+          zu schützen (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen: Datenschutzerklärung von hCaptcha unter{" "}
+          <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">
+            hcaptcha.com/privacy
+          </a>
+          .
         </p>
 
         <h2>Reichweitenmessung mit Vercel Web Analytics</h2>
@@ -97,7 +123,10 @@ export default function DatenschutzPage() {
         </p>
 
         <h2>Speicherung im Browser</h2>
-        <p>Diese Website setzt keine Cookies. Im Browser werden nur diese Einstellungen gespeichert:</p>
+        <p>
+          Diese Website selbst setzt keine Cookies (zu hCaptcha auf der Kontaktseite siehe oben). Im Browser werden nur
+          diese Einstellungen gespeichert:
+        </p>
         <ul>
           <li>die gewählte Farbdarstellung (hell oder dunkel) im lokalen Speicher (localStorage),</li>
           <li>ob die kurze Eingangsanimation in dieser Sitzung schon gezeigt wurde (sessionStorage),</li>
@@ -106,11 +135,16 @@ export default function DatenschutzPage() {
             (localStorage).
           </li>
         </ul>
+        <p>
+          Diese Einträge sind für die von Ihnen genutzten Funktionen erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG) und
+          enthalten keine Kennung, die Sie wiedererkennbar macht.
+        </p>
 
         <h2>Schriftarten</h2>
         <p>
           Die Schriftart wird von dieser Website selbst ausgeliefert. Beim Aufruf werden keine Verbindungen zu Google
-          oder anderen Schriftanbietern aufgebaut.
+          oder anderen Schriftanbietern aufgebaut. Die einzige Verbindung zu einem Drittanbieter beim Seitenaufbau ist
+          hCaptcha auf der Kontaktseite.
         </p>
 
         <h2>Externe Links</h2>
