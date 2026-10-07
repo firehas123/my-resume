@@ -17,7 +17,11 @@
 //                                d:<device>            visits per device type
 //                                r:<referrer>          visits per referring site
 //                                t:<theme>             visits per theme
-//                                e:<event>             CV downloads and link clicks
+//                                l:<code>              page views per site language
+//                                e:<event>             CV downloads per CV language
+//                                                      (cv-en, cv-de, ...; plain
+//                                                      "cv" = the English CV from
+//                                                      before languages) and link clicks
 //   stats:recent          list   the last 25 views: {c: country, p: path, t: time}
 //
 // A date range is read as one batched request of HGETALL per day, and the

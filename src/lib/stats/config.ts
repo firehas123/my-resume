@@ -4,21 +4,24 @@
 
 import synced from "@/data/projects.json";
 import overridesFile from "@/data/overrides.json";
+import { LANGUAGES } from "@/i18n/config";
 
 export const DEVICES = ["phone", "tablet", "desktop"] as const;
 export const THEMES = ["dark", "light"] as const;
-export const EVENTS = ["cv", "linkedin", "github", "ask"] as const;
+/** Link clicks that are counted. */
+export const LINK_EVENTS = ["linkedin", "github", "ask"] as const;
+/**
+ * CV downloads, one per CV language: "cv-en", "cv-de", ... Before the site had
+ * languages there was only the English CV, counted as "cv"; the stats page
+ * adds those to English.
+ */
+export const CV_EVENTS = LANGUAGES.map((code) => `cv-${code}`);
+export const LEGACY_CV_EVENT = "cv";
+export const EVENTS: readonly string[] = [...CV_EVENTS, ...LINK_EVENTS];
 
 export type Device = (typeof DEVICES)[number];
 export type Theme = (typeof THEMES)[number];
-export type TrackEvent = (typeof EVENTS)[number];
-
-export const EVENT_LABELS: Record<TrackEvent, string> = {
-  cv: "CV downloads",
-  linkedin: "LinkedIn clicks",
-  github: "GitHub clicks",
-  ask: "“Ask me a question” clicks",
-};
+export type TrackEvent = string;
 
 /** Used when the country is missing or not a valid code. */
 export const UNKNOWN_COUNTRY = "XX";
@@ -28,8 +31,11 @@ export const UNKNOWN_COUNTRY = "XX";
 // ---------------------------------------------------------------------------
 
 const projectNames = (synced as { name: string }[]).map((p) => p.name);
-const overrideTitles = overridesFile as Record<string, { title?: string } | string>;
+const overrideTitles = overridesFile as Record<string, { title?: string | Record<string, string> } | string>;
 
+// Pages are counted without their language (the language has its own
+// counter), under the addresses they had before the site had languages, so
+// old and new numbers add up.
 const FIXED_PAGES: Record<string, string> = {
   "/": "Home",
   "/contact": "Contact",
@@ -43,7 +49,9 @@ export const PAGE_LABELS: Record<string, string> = {
   ...Object.fromEntries(
     projectNames.map((name) => {
       const override = overrideTitles[name];
-      const title = typeof override === "object" && override?.title ? override.title : name.replace(/[-_]+/g, " ");
+      const raw = typeof override === "object" ? override?.title : undefined;
+      // Titles may be written per language; the stats use the English one.
+      const title = typeof raw === "string" ? raw : (raw?.en ?? name.replace(/[-_]+/g, " "));
       return [`/projects/${name.toLowerCase()}`, `Project: ${title}`];
     }),
   ),
@@ -55,6 +63,11 @@ export function isAllowedPath(path: unknown): path is string {
 
 export function pageLabel(path: string): string {
   return PAGE_LABELS[path] ?? path;
+}
+
+/** A page's name without the "Project: " prefix; the stats page words it per language. */
+export function pageTitle(path: string): string {
+  return pageLabel(path).replace(/^Project: /, "");
 }
 
 // ---------------------------------------------------------------------------

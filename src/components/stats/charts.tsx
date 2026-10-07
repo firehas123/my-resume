@@ -5,8 +5,11 @@
 // - every bar has a <title> with its exact numbers (shown on hover),
 // - the exact numbers are always available as a table ("Show numbers"),
 // - two series are told apart by shape (hollow vs solid), not colour alone.
+// All words and numbers come in the page's language (useStatsFormat). The
+// drawings themselves always run left to right (time, hours, weekdays), also
+// on right-to-left pages, so their SVGs are marked direction="ltr".
 
-import { formatNumber, plural } from "./format";
+import { useStatsFormat } from "./format";
 import styles from "./Stats.module.css";
 
 /** Rounds a maximum up to a tidy number so the axis labels are readable. */
@@ -27,9 +30,10 @@ function stagger(i: number, n: number): React.CSSProperties {
 
 /** The exact numbers behind a chart, as a table in a <details> element. */
 export function NumbersTable({ caption, columns, rows }: { caption: string; columns: string[]; rows: (string | number)[][] }) {
+  const { t, formatNumber } = useStatsFormat();
   return (
     <details className={styles.numbers}>
-      <summary>Show numbers</summary>
+      <summary>{t("showNumbers")}</summary>
       <div className={styles.tableWrap}>
         <table>
           <caption className="visually-hidden">{caption}</caption>
@@ -63,10 +67,12 @@ export function NumbersTable({ caption, columns, rows }: { caption: string; colu
   );
 }
 
-type SeriesPoint = { label: string; visits: number; pageViews: number };
+/** `label` names the period in full ("Week of 6 Oct"); `axis` is the short form under the bar. */
+type SeriesPoint = { key: string; label: string; axis: string; visits: number; pageViews: number };
 
 /** Visits (solid bars) inside page views (hollow bars) over time. */
 export function SeriesChart({ points, title }: { points: SeriesPoint[]; title: string }) {
+  const { t, formatNumber, visits, pageViews } = useStatsFormat();
   const width = 720;
   const height = 240;
   const pad = { top: 12, right: 8, bottom: 30, left: 40 };
@@ -87,46 +93,47 @@ export function SeriesChart({ points, title }: { points: SeriesPoint[]; title: s
       <div className={styles.legend} aria-hidden="true">
         <span>
           <svg width="14" height="14"><rect x="1" y="1" width="12" height="12" rx="2" className={styles.hollow} /></svg>
-          Page views
+          {t("pageViews")}
         </span>
         <span>
           <svg width="14" height="14"><rect x="1" y="1" width="12" height="12" rx="2" className={styles.solid} /></svg>
-          Visits
+          {t("visits")}
         </span>
       </div>
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className={styles.chart}
+        direction="ltr"
         role="img"
-        aria-label={`${title}: ${plural(totalVisits, "visit")} and ${plural(totalViews, "page view")} across ${points.length} periods.`}
+        aria-label={t("seriesSummary", { title, visits: visits(totalVisits), views: pageViews(totalViews), periods: points.length })}
       >
-        {ticks.map((t) => (
-          <g key={t}>
-            <line x1={pad.left} x2={width - pad.right} y1={y(t)} y2={y(t)} className={styles.grid} />
-            <text x={pad.left - 8} y={y(t)} className={styles.axis} textAnchor="end" dominantBaseline="middle">
-              {formatNumber(Math.round(t))}
+        {ticks.map((tick) => (
+          <g key={tick}>
+            <line x1={pad.left} x2={width - pad.right} y1={y(tick)} y2={y(tick)} className={styles.grid} />
+            <text x={pad.left - 8} y={y(tick)} className={styles.axis} textAnchor="end" dominantBaseline="middle">
+              {formatNumber(Math.round(tick))}
             </text>
           </g>
         ))}
         {points.map((p, i) => {
           const x = pad.left + i * slot + (slot - barW) / 2;
           return (
-            <g key={p.label}>
-              <title>{`${p.label}: ${plural(p.visits, "visit")}, ${plural(p.pageViews, "page view")}`}</title>
+            <g key={p.key}>
+              <title>{`${p.label}: ${visits(p.visits)}, ${pageViews(p.pageViews)}`}</title>
               {/* invisible full-height target, so small bars are easy to hover */}
               <rect x={pad.left + i * slot} y={pad.top} width={slot} height={innerH} fill="transparent" />
               {p.pageViews > 0 && <rect x={x} y={y(p.pageViews)} width={barW} height={pad.top + innerH - y(p.pageViews)} rx="2" className={`${styles.hollow} ${styles.grow}`} style={stagger(i, points.length)} />}
               {p.visits > 0 && <rect x={x + barW * 0.2} y={y(p.visits)} width={barW * 0.6} height={pad.top + innerH - y(p.visits)} rx="2" className={`${styles.solid} ${styles.grow}`} style={stagger(i, points.length)} />}
               {i % labelEvery === 0 && (
                 <text x={x + barW / 2} y={height - 10} className={styles.axis} textAnchor="middle">
-                  {p.label.replace("Week of ", "")}
+                  {p.axis}
                 </text>
               )}
             </g>
           );
         })}
       </svg>
-      <NumbersTable caption={title} columns={["Period", "Visits", "Page views"]} rows={points.map((p) => [p.label, p.visits, p.pageViews])} />
+      <NumbersTable caption={title} columns={[t("period"), t("visits"), t("pageViews")]} rows={points.map((p) => [p.label, p.visits, p.pageViews])} />
     </figure>
   );
 }
@@ -136,19 +143,23 @@ export function ColumnChart({
   values,
   labels,
   title,
-  unit,
+  count,
+  valueLabel,
   categoryLabel,
   labelEvery = 1,
 }: {
   values: number[];
   labels: string[];
   title: string;
-  /** Singular unit for the numbers, e.g. "page view". */
-  unit: string;
+  /** The number in words, e.g. 3 -> "3 page views". */
+  count: (n: number) => string;
+  /** Heading of the numbers column in the table, e.g. "Page views". */
+  valueLabel: string;
   /** Heading of the first table column, e.g. "Hour" or "Weekday". */
   categoryLabel: string;
   labelEvery?: number;
 }) {
+  const { t, formatNumber } = useStatsFormat();
   const width = 480;
   const height = 200;
   const pad = { top: 12, right: 4, bottom: 28, left: 34 };
@@ -159,16 +170,18 @@ export function ColumnChart({
   const barW = slot * 0.66;
   const y = (v: number) => pad.top + innerH - (v / max) * innerH;
   const busiest = values.indexOf(Math.max(...values));
-  const summary = values.some((v) => v > 0) ? `busiest: ${labels[busiest]} with ${plural(values[busiest], unit)}` : "no data yet";
+  const summary = values.some((v) => v > 0)
+    ? t("busiest", { title, label: labels[busiest], value: count(values[busiest]) })
+    : t("noDataYet", { title });
 
   return (
     <figure className={styles.figure}>
-      <svg viewBox={`0 0 ${width} ${height}`} className={styles.chart} role="img" aria-label={`${title}, ${summary}.`}>
-        {[0, max / 2, max].map((t) => (
-          <g key={t}>
-            <line x1={pad.left} x2={width - pad.right} y1={y(t)} y2={y(t)} className={styles.grid} />
-            <text x={pad.left - 6} y={y(t)} className={styles.axis} textAnchor="end" dominantBaseline="middle">
-              {formatNumber(Math.round(t))}
+      <svg viewBox={`0 0 ${width} ${height}`} className={styles.chart} direction="ltr" role="img" aria-label={summary}>
+        {[0, max / 2, max].map((tick) => (
+          <g key={tick}>
+            <line x1={pad.left} x2={width - pad.right} y1={y(tick)} y2={y(tick)} className={styles.grid} />
+            <text x={pad.left - 6} y={y(tick)} className={styles.axis} textAnchor="end" dominantBaseline="middle">
+              {formatNumber(Math.round(tick))}
             </text>
           </g>
         ))}
@@ -176,7 +189,7 @@ export function ColumnChart({
           const x = pad.left + i * slot + (slot - barW) / 2;
           return (
             <g key={labels[i]}>
-              <title>{`${labels[i]}: ${plural(v, unit)}`}</title>
+              <title>{`${labels[i]}: ${count(v)}`}</title>
               <rect x={pad.left + i * slot} y={pad.top} width={slot} height={innerH} fill="transparent" />
               {v > 0 && <rect x={x} y={y(v)} width={barW} height={pad.top + innerH - y(v)} rx="2" className={`${styles.solid} ${styles.grow}`} style={stagger(i, values.length)} />}
               {i % labelEvery === 0 && (
@@ -188,13 +201,14 @@ export function ColumnChart({
           );
         })}
       </svg>
-      <NumbersTable caption={title} columns={[categoryLabel, `${unit[0].toUpperCase()}${unit.slice(1)}s`]} rows={values.map((v, i) => [labels[i], v])} />
+      <NumbersTable caption={title} columns={[categoryLabel, valueLabel]} rows={values.map((v, i) => [labels[i], v])} />
     </figure>
   );
 }
 
 /** A ranked list with the number as text and a small bar beside it. */
 export function RankedList({ items, emptyText, label }: { items: { key: string; label: string; count: number }[]; emptyText: string; label: string }) {
+  const { formatNumber } = useStatsFormat();
   const max = Math.max(1, ...items.map((i) => i.count));
   if (items.every((i) => i.count === 0)) return <p className={styles.muted}>{emptyText}</p>;
   return (

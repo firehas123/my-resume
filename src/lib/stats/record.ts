@@ -12,6 +12,8 @@ import { berlinHourAndWeekday, utcDate } from "./time";
 export type ViewInput = {
   country: string;
   path: string;
+  /** The site language the page was viewed in, e.g. "de". */
+  lang?: string;
   /** First page of a full load in a browser tab: also counts as a visit. */
   newVisit: boolean;
   device?: Device;
@@ -31,6 +33,7 @@ export async function recordView(redis: Redis, input: ViewInput, now = new Date(
   tx.hincrby(day, `p:${path}`, 1);
   tx.hincrby(day, `h:${hour}`, 1);
   tx.hincrby(day, `wd:${weekday}`, 1);
+  if (input.lang) tx.hincrby(day, `l:${input.lang}`, 1);
   tx.hincrby(KEYS.total, "pv", 1);
   tx.hincrby(KEYS.total, `c:pv:${country}`, 1);
   // Visit counters (first page of a tab only)

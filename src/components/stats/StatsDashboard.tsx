@@ -5,22 +5,16 @@ import { DURATION } from "@/lib/motion";
 import { EXCLUDE_ME_KEY } from "@/components/analytics/VisitTracker";
 import type { Range, StatsSummary } from "@/lib/stats/summary";
 import type { WorldMap } from "@/lib/stats/worldMap";
+import { languageInfo } from "@/i18n/config";
 import { ColumnChart, RankedList, SeriesChart } from "./charts";
-import { countryName, formatDay, formatNumber, timeAgo } from "./format";
+import { useStatsFormat, type StatsFormat } from "./format";
 import { WorldMapChart } from "./WorldMapChart";
 import styles from "./Stats.module.css";
 
-const RANGE_OPTIONS: { value: Range; label: string }[] = [
-  { value: "today", label: "Today" },
-  { value: "7d", label: "7 days" },
-  { value: "30d", label: "30 days" },
-  { value: "90d", label: "90 days" },
-  { value: "12m", label: "12 months" },
-  { value: "all", label: "All time" },
-];
+const RANGE_OPTIONS: Range[] = ["today", "7d", "30d", "90d", "12m", "all"];
 const REFRESH_MS = 60_000;
 const HOURS = Array.from({ length: 24 }, (_, h) => String(h).padStart(2, "0"));
-const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const FIXED_PAGES = ["/", "/contact", "/impressum", "/datenschutz"];
 
 type State =
   | { status: "loading" }
@@ -61,7 +55,10 @@ function useExcludeMe(): boolean | null {
   return excluded;
 }
 
-export function StatsDashboard({ map }: { map: WorldMap }) {
+/** `languages`: the site's language codes, for the language panels. */
+export function StatsDashboard({ map, languages }: { map: WorldMap; languages: string[] }) {
+  const f = useStatsFormat();
+  const { t } = f;
   const [range, setRange] = useState<Range>("30d");
   const [state, setState] = useState<State>({ status: "loading" });
   const excluded = useExcludeMe();
@@ -89,72 +86,73 @@ export function StatsDashboard({ map }: { map: WorldMap }) {
     <div className={styles.page}>
       <header className={`container ${styles.header}`}>
         <div className={styles.titleBlock}>
-          <p className="eyebrow">Site stats</p>
-          <h1 className={styles.title}>Who visits.</h1>
-          <p className={styles.since}>
-            {data?.since ? <>Counting since {formatDay(data.since)}</> : "Visits counted by this site itself, without cookies."}
-          </p>
+          <p className="eyebrow">{t("eyebrow")}</p>
+          <h1 className={styles.title}>{t("title")}</h1>
+          <p className={styles.since}>{data?.since ? t("since", { date: f.formatDay(data.since) }) : t("intro")}</p>
         </div>
-        <div className={styles.ranges} role="group" aria-label="Time range">
+        <div className={styles.ranges} role="group" aria-label={t("rangeLabel")}>
           {RANGE_OPTIONS.map((option) => (
             <button
-              key={option.value}
+              key={option}
               type="button"
               className={styles.range}
-              aria-pressed={range === option.value}
+              aria-pressed={range === option}
               onClick={() => {
                 setState({ status: "loading" });
-                setRange(option.value);
+                setRange(option);
               }}
             >
-              {option.label}
+              {t(`ranges.${option}`)}
             </button>
           ))}
         </div>
       </header>
 
       <div className={`container ${styles.body}`}>
-        {state.status === "loading" && <p className={styles.status} role="status">Loading the latest numbers…</p>}
+        {state.status === "loading" && (
+          <p className={styles.status} role="status">
+            {t("loading")}
+          </p>
+        )}
 
         {state.status === "not-connected" && (
           <div className={styles.notice} role="status">
-            <h2>Statistics are not connected yet.</h2>
-            <p>The visit counter needs its database. Once it is connected and the site is redeployed, visits are counted from that moment on.</p>
+            <h2>{t("notConnectedTitle")}</h2>
+            <p>{t("notConnectedText")}</p>
           </div>
         )}
 
         {state.status === "error" && (
           <div className={styles.notice} role="alert">
-            <h2>The statistics could not be loaded right now.</h2>
-            <p>They refresh automatically every minute, or reload the page to try again.</p>
+            <h2>{t("errorTitle")}</h2>
+            <p>{t("errorText")}</p>
           </div>
         )}
 
         {data && data.allTime.pageViews === 0 && (
           <div className={styles.notice} role="status">
-            <h2>No visits recorded yet.</h2>
-            <p>Counting starts with the first visit to the live site. Check back soon.</p>
+            <h2>{t("noVisitsTitle")}</h2>
+            <p>{t("noVisitsText")}</p>
           </div>
         )}
 
-        {data && data.allTime.pageViews > 0 && <Dashboard data={data} map={map} />}
+        {data && data.allTime.pageViews > 0 && <Dashboard data={data} map={map} languages={languages} f={f} />}
 
         <footer className={styles.tools}>
           {/* Downloads only make sense once the database is connected. */}
           {data && (
             <div className={styles.downloads}>
               <a className={styles.toolButton} href="/api/stats/export?format=json" download>
-                Download data (JSON)
+                {t("downloadJson")}
               </a>
               <a className={styles.toolButton} href="/api/stats/export?format=csv" download>
-                Download data (CSV)
+                {t("downloadCsv")}
               </a>
             </div>
           )}
           <p className={styles.muted}>
-            Updates every minute.{" "}
-            {excluded === true && "Your own visits from this browser are not counted."}
-            {excluded === false && "Visits from this browser are counted (open /stats?exclude-me=1 to stop that)."}
+            {t("updatesEveryMinute")} {excluded === true && t("excluded")}
+            {excluded === false && t("included")}
           </p>
         </footer>
       </div>
@@ -162,80 +160,120 @@ export function StatsDashboard({ map }: { map: WorldMap }) {
   );
 }
 
-function Dashboard({ data, map }: { data: StatsSummary; map: WorldMap }) {
+function Dashboard({ data, map, languages, f }: { data: StatsSummary; map: WorldMap; languages: string[]; f: StatsFormat }) {
+  const { t } = f;
   const rangeEmpty = data.totals.pageViews === 0;
-  const topCountries = data.countries.slice(0, 10).map((c) => ({ key: c.code, label: countryName(c.code), count: c.visits }));
+  const topCountries = data.countries.slice(0, 10).map((c) => ({ key: c.code, label: f.countryName(c.code), count: c.visits }));
+  // Words for what was counted, in the page's language.
+  const pageName = (key: string, title: string) =>
+    FIXED_PAGES.includes(key) ? t(`pages.${key}`) : key.startsWith("/projects/") ? t("pages.project", { title }) : key;
+  const languageName = (code: string) => (languages.includes(code) ? languageInfo(code).name : code);
+  const relabel = (items: { key: string; label: string; count: number }[], name: (key: string, label: string) => string) =>
+    items.map((item) => ({ ...item, label: name(item.key, item.label) }));
+  const seriesTitle = t("series", { grouping: data.grouping });
+  const points = data.series.map((b) => ({
+    key: b.start,
+    label: f.bucketLabel(b.start, data.grouping),
+    axis: f.axisLabel(b.start, data.grouping),
+    visits: b.visits,
+    pageViews: b.pageViews,
+  }));
 
   return (
     <>
-      <section aria-label="Headline numbers" className={styles.headline}>
-        <Stat label="Visits" count={data.totals.visits} />
-        <Stat label="Page views" count={data.totals.pageViews} />
-        <Stat label="Countries reached" count={data.totals.countries} />
-        <Stat label="All-time visits" count={data.allTime.visits} />
-        <Stat label="Last viewed" value={data.lastViewed ? timeAgo(data.lastViewed) : "—"} text />
+      <section aria-label={t("headline")} className={styles.headline}>
+        <Stat label={t("visits")} count={data.totals.visits} />
+        <Stat label={t("pageViews")} count={data.totals.pageViews} />
+        <Stat label={t("countriesReached")} count={data.totals.countries} />
+        <Stat label={t("allTimeVisits")} count={data.allTime.visits} />
+        <Stat label={t("lastViewed")} value={data.lastViewed ? f.timeAgo(data.lastViewed) : "—"} text />
       </section>
 
       {rangeEmpty ? (
         <div className={styles.notice} role="status">
-          <h2>No visits recorded in this period yet.</h2>
-          <p>Pick a longer range to see earlier visits.</p>
+          <h2>{t("emptyRangeTitle")}</h2>
+          <p>{t("emptyRangeText")}</p>
         </div>
       ) : (
         <>
           <div className={styles.mapRow}>
-            <Panel title="Where visitors come from" wide>
+            <Panel title={t("whereFrom")} wide>
               <WorldMapChart map={map} countries={data.countries} />
             </Panel>
-            <Panel title="Top countries">
-              <RankedList items={topCountries} label="Top ten countries by visits" emptyText="No countries yet." />
+            <Panel title={t("topCountries")}>
+              <RankedList items={topCountries} label={t("topCountriesLabel")} emptyText={t("noCountries")} />
             </Panel>
           </div>
 
-          <Panel title={`Visits and page views per ${data.grouping}`}>
-            <SeriesChart points={data.series} title={`Visits and page views per ${data.grouping}`} />
+          <Panel title={seriesTitle}>
+            <SeriesChart points={points} title={seriesTitle} />
           </Panel>
 
           <div className={styles.twoUp}>
-            <Panel title="By hour of day (Berlin time)">
-              <ColumnChart values={data.hours} labels={HOURS} title="Page views by hour of day" unit="page view" categoryLabel="Hour" labelEvery={3} />
+            <Panel title={t("byHour")}>
+              <ColumnChart
+                values={data.hours}
+                labels={HOURS}
+                title={t("byHourTitle")}
+                count={f.pageViews}
+                valueLabel={t("pageViews")}
+                categoryLabel={t("hour")}
+                labelEvery={3}
+              />
             </Panel>
-            <Panel title="By weekday">
-              <ColumnChart values={data.weekdays} labels={WEEKDAYS} title="Page views by weekday" unit="page view" categoryLabel="Weekday" />
+            <Panel title={t("byWeekday")}>
+              <ColumnChart
+                values={data.weekdays}
+                labels={f.weekdays}
+                title={t("byWeekdayTitle")}
+                count={f.pageViews}
+                valueLabel={t("pageViews")}
+                categoryLabel={t("weekday")}
+              />
             </Panel>
           </div>
 
           <div className={styles.panels}>
-            <Panel title="Top pages">
-              <RankedList items={data.pages.slice(0, 8)} label="Most viewed pages" emptyText="No page views yet." />
+            <Panel title={t("topPages")}>
+              <RankedList items={relabel(data.pages.slice(0, 8), pageName)} label={t("topPagesLabel")} emptyText={t("noPageViews")} />
             </Panel>
-            <Panel title="Top referrers">
-              <RankedList items={data.referrers.slice(0, 8)} label="Sites visitors came from" emptyText="No visits yet." />
+            <Panel title={t("siteLanguages")}>
+              <RankedList items={relabel(data.languages, languageName)} label={t("siteLanguagesLabel")} emptyText={t("noPageViews")} />
             </Panel>
-            <Panel title="Devices">
-              <RankedList items={data.devices} label="Visits by device type" emptyText="No visits yet." />
+            <Panel title={t("topReferrers")}>
+              <RankedList
+                items={relabel(data.referrers.slice(0, 8), (key) => (key === "direct" || key === "other" ? t(`referrers.${key}`) : key))}
+                label={t("topReferrersLabel")}
+                emptyText={t("noVisits")}
+              />
             </Panel>
-            <Panel title="Dark or light theme">
-              <RankedList items={data.themes} label="Visits by colour theme" emptyText="No visits yet." />
+            <Panel title={t("devices")}>
+              <RankedList items={relabel(data.devices, (key) => t(`deviceNames.${key}`))} label={t("devicesLabel")} emptyText={t("noVisits")} />
             </Panel>
-            <Panel title="CV downloads and link clicks">
-              <RankedList items={data.events} label="CV downloads and link clicks" emptyText="No downloads or clicks yet." />
+            <Panel title={t("themes")}>
+              <RankedList items={relabel(data.themes, (key) => t(`themeNames.${key}`))} label={t("themesLabel")} emptyText={t("noVisits")} />
+            </Panel>
+            <Panel title={t("events")}>
+              <RankedList items={relabel(data.events, (key) => t(`eventNames.${key}`))} label={t("events")} emptyText={t("noEvents")} />
+            </Panel>
+            <Panel title={t("cvByLanguage")}>
+              <RankedList items={relabel(data.cvLanguages, languageName)} label={t("cvByLanguageLabel")} emptyText={t("noDownloads")} />
             </Panel>
           </div>
         </>
       )}
 
-      <Panel title="Recent views">
+      <Panel title={t("recent")}>
         {data.recent.length === 0 ? (
-          <p className={styles.muted}>No views yet.</p>
+          <p className={styles.muted}>{t("noViews")}</p>
         ) : (
           <ol className={styles.recent}>
             {data.recent.map((r, i) => (
               <li key={`${r.time}-${i}`}>
-                <span className={styles.recentWhere}>{countryName(r.country)}</span>
-                <span>{r.label}</span>
+                <span className={styles.recentWhere}>{f.countryName(r.country)}</span>
+                <span>{pageName(r.path, r.label)}</span>
                 <time dateTime={r.time} className={styles.muted}>
-                  {timeAgo(r.time)}
+                  {f.timeAgo(r.time)}
                 </time>
               </li>
             ))}
@@ -262,6 +300,7 @@ function Stat({ label, count, value, text }: { label: string; count?: number; va
 
 /** Counts from 0 to `value` once, on mount, with the shared slow ease-out. */
 function CountUp({ value }: { value: number }) {
+  const { formatNumber } = useStatsFormat();
   const ref = useRef<HTMLSpanElement>(null);
   const played = useRef(false);
 
@@ -284,7 +323,7 @@ function CountUp({ value }: { value: number }) {
       cancelAnimationFrame(frame);
       el.textContent = formatNumber(value);
     };
-  }, [value]);
+  }, [value, formatNumber]);
 
   // The real number is in the HTML; the effect only animates the text.
   return <span ref={ref}>{formatNumber(value)}</span>;

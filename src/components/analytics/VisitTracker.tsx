@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { statsPath } from "@/lib/stats/paths";
 
 // Sends page views and a few clicks to /api/visit for the site's own,
 // privacy-friendly statistics (see src/app/api/visit/route.ts).
@@ -60,32 +61,36 @@ export function VisitTracker({ enabled }: { enabled: boolean }) {
   const pathname = usePathname();
 
   // One page view per page; the first one in this tab is also the visit.
+  // The page is sent without its language ("/contact"), the language separately ("de").
   useEffect(() => {
-    if (!enabled || !pathname || pathname.startsWith("/stats") || shouldSkip()) return;
+    if (!enabled || !pathname || shouldSkip()) return;
+    const { path, lang } = statsPath(pathname);
+    if (path.startsWith("/stats")) return;
     if (pathname === lastSentPath) return; // guard against double effects
     lastSentPath = pathname;
     if (!visitCounted) {
       visitCounted = true;
       send({
         kind: "view",
-        path: pathname,
+        path,
+        lang,
         newVisit: true,
         device: deviceType(),
         theme: document.documentElement.dataset.theme === "light" ? "light" : "dark",
         referrer: referrerDomain(),
       });
     } else {
-      send({ kind: "view", path: pathname, newVisit: false });
+      send({ kind: "view", path, lang, newVisit: false });
     }
   }, [enabled, pathname]);
 
-  // Clicks on elements marked data-track="cv|linkedin|github|ask".
+  // Clicks on elements marked data-track="cv-<language>|linkedin|github|ask".
   useEffect(() => {
     if (!enabled) return;
     const onClick = (event: MouseEvent) => {
       const target = (event.target as Element | null)?.closest?.("[data-track]");
       const name = target?.getAttribute("data-track");
-      if (!name || location.pathname.startsWith("/stats") || shouldSkip()) return;
+      if (!name || statsPath(location.pathname).path.startsWith("/stats") || shouldSkip()) return;
       send({ kind: "event", name });
     };
     document.addEventListener("click", onClick, { capture: true });

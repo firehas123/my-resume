@@ -4,7 +4,8 @@
 
 import type { Redis } from "@upstash/redis";
 import { KEYS, hgetallMany } from "../../../scripts/lib/stats-store.mjs";
-import { DEVICES, EVENTS, THEMES, pageLabel, type TrackEvent } from "./config";
+import { LANGUAGES } from "@/i18n/config";
+import { DEVICES, LEGACY_CV_EVENT, LINK_EVENTS, THEMES, pageTitle } from "./config";
 import { addDays, datesBetween, utcDate } from "./time";
 
 export const RANGES = ["today", "7d", "30d", "90d", "12m", "all"] as const;
@@ -13,6 +14,11 @@ export type Range = (typeof RANGES)[number];
 const RANGE_DAYS: Record<Exclude<Range, "all">, number> = { today: 1, "7d": 7, "30d": 30, "90d": 90, "12m": 365 };
 
 export type Bucket = { start: string; label: string; visits: number; pageViews: number };
+/**
+ * One row of a ranked list. `key` is what was counted (a page path, a
+ * language code, "phone", ...); the stats page turns it into words in its
+ * own language. `label` is an English name, used for project titles.
+ */
 export type Ranked = { key: string; label: string; count: number };
 
 export type StatsSummary = {
@@ -33,6 +39,11 @@ export type StatsSummary = {
   referrers: Ranked[];
   devices: Ranked[];
   themes: Ranked[];
+  /** Page views per site language (key: language code). */
+  languages: Ranked[];
+  /** CV downloads per CV language (key: language code). */
+  cvLanguages: Ranked[];
+  /** All CV downloads together (key "cv"), then the link clicks. */
   events: Ranked[];
   recent: { country: string; path: string; label: string; time: string }[];
 };
@@ -88,7 +99,14 @@ export async function getSummary(redis: Redis, range: Range, now = new Date()): 
   const countries = new Map<string, { visits: number; pageViews: number }>();
   const hours = Array<number>(24).fill(0);
   const weekdays = Array<number>(7).fill(0);
-  const sums = { pages: new Map<string, number>(), referrers: new Map<string, number>(), devices: new Map<string, number>(), themes: new Map<string, number>(), events: new Map<string, number>() };
+  const sums = {
+    pages: new Map<string, number>(),
+    referrers: new Map<string, number>(),
+    devices: new Map<string, number>(),
+    themes: new Map<string, number>(),
+    languages: new Map<string, number>(),
+    events: new Map<string, number>(),
+  };
   let visits = 0;
   let pageViews = 0;
 
@@ -116,6 +134,7 @@ export async function getSummary(redis: Redis, range: Range, now = new Date()): 
       else if (kind === "r") sums.referrers.set(a, (sums.referrers.get(a) ?? 0) + value);
       else if (kind === "d") sums.devices.set(a, (sums.devices.get(a) ?? 0) + value);
       else if (kind === "t") sums.themes.set(a, (sums.themes.get(a) ?? 0) + value);
+      else if (kind === "l") sums.languages.set(a, (sums.languages.get(a) ?? 0) + value);
       else if (kind === "e") sums.events.set(a, (sums.events.get(a) ?? 0) + value);
     }
   });
@@ -123,7 +142,11 @@ export async function getSummary(redis: Redis, range: Range, now = new Date()): 
   // Fixed categories always appear (with 0), so the panels keep their shape.
   for (const d of DEVICES) if (!sums.devices.has(d)) sums.devices.set(d, 0);
   for (const t of THEMES) if (!sums.themes.has(t)) sums.themes.set(t, 0);
-  const eventLabel: Record<TrackEvent, string> = { cv: "CV downloads", linkedin: "LinkedIn", github: "GitHub", ask: "Ask me a question" };
+  // CV downloads per language. The single CV from before the site had
+  // languages ("cv") was the English one.
+  const cvLanguages = new Map<string, number>(LANGUAGES.map((code) => [code, sums.events.get(`cv-${code}`) ?? 0]));
+  cvLanguages.set("en", (cvLanguages.get("en") ?? 0) + (sums.events.get(LEGACY_CV_EVENT) ?? 0));
+  const cvTotal = [...cvLanguages.values()].reduce((a, b) => a + b, 0);
 
   const countryList = [...countries.entries()]
     .map(([code, v]) => ({ code, ...v }))
@@ -144,13 +167,18 @@ export async function getSummary(redis: Redis, range: Range, now = new Date()): 
     countries: countryList,
     hours,
     weekdays,
-    pages: ranked(sums.pages, pageLabel),
-    referrers: ranked(sums.referrers, (k) => (k === "direct" ? "Direct / none" : k === "other" ? "Other sites" : k)),
-    devices: DEVICES.map((d) => ({ key: d, label: d[0].toUpperCase() + d.slice(1), count: sums.devices.get(d) ?? 0 })),
-    themes: THEMES.map((t) => ({ key: t, label: t === "dark" ? "Dark" : "Light", count: sums.themes.get(t) ?? 0 })),
-    events: EVENTS.map((e) => ({ key: e, label: eventLabel[e], count: sums.events.get(e) ?? 0 })),
+    pages: ranked(sums.pages, pageTitle),
+    referrers: ranked(sums.referrers),
+    devices: DEVICES.map((d) => ({ key: d, label: d, count: sums.devices.get(d) ?? 0 })),
+    themes: THEMES.map((t) => ({ key: t, label: t, count: sums.themes.get(t) ?? 0 })),
+    languages: ranked(sums.languages),
+    cvLanguages: ranked(cvLanguages),
+    events: [
+      { key: "cv", label: "cv", count: cvTotal },
+      ...LINK_EVENTS.map((e) => ({ key: e, label: e, count: sums.events.get(e) ?? 0 })),
+    ],
     recent: recentRaw
       .filter((r) => r && typeof r === "object")
-      .map((r) => ({ country: String(r.c), path: String(r.p), label: pageLabel(String(r.p)), time: String(r.t) })),
+      .map((r) => ({ country: String(r.c), path: String(r.p), label: pageTitle(String(r.p)), time: String(r.t) })),
   };
 }

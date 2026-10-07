@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import type { WorldMap } from "@/lib/stats/worldMap";
 import { NumbersTable } from "./charts";
-import { countryName, formatNumber, plural } from "./format";
+import { useStatsFormat } from "./format";
 import styles from "./Stats.module.css";
 
 type CountryCount = { code: string; visits: number; pageViews: number };
@@ -18,6 +18,7 @@ function stepsFor(max: number): number[] {
 }
 
 export function WorldMapChart({ map, countries }: { map: WorldMap; countries: CountryCount[] }) {
+  const { t, countryName, formatNumber, visits: visitWords, pageViews: viewWords, countries: countryWords } = useStatsFormat();
   const [selected, setSelected] = useState<string | null>(null);
   const byCode = useMemo(() => new Map(countries.map((c) => [c.code, c])), [countries]);
   const max = Math.max(0, ...countries.filter((c) => c.code !== "XX").map((c) => c.visits));
@@ -31,15 +32,17 @@ export function WorldMapChart({ map, countries }: { map: WorldMap; countries: Co
       <svg
         viewBox={`0 0 ${map.width} ${map.height}`}
         className={styles.map}
+        // A map is not mirrored in right-to-left languages.
+        direction="ltr"
         role="group"
-        aria-label={`World map: visitors from ${plural(countries.filter((c) => c.code !== "XX").length, "country")}. Countries with visits can be focused.`}
+        aria-label={t("mapLabel", { countries: countryWords(countries.filter((c) => c.code !== "XX").length) })}
         onPointerLeave={() => setSelected(null)}
       >
         {map.shapes.map((shape, i) => {
           const data = shape.code ? byCode.get(shape.code) : undefined;
           const visits = data?.visits ?? 0;
           const step = stepOf(visits);
-          const name = shape.code ? countryName(shape.code) : "No data";
+          const name = shape.code ? countryName(shape.code) : t("noData");
           const interactive = visits > 0 && shape.code;
           return (
             <path
@@ -51,12 +54,12 @@ export function WorldMapChart({ map, countries }: { map: WorldMap; countries: Co
               data-active={(selected !== null && selected === shape.code) || undefined}
               tabIndex={interactive ? 0 : undefined}
               role={interactive ? "img" : undefined}
-              aria-label={interactive ? `${name}: ${plural(visits, "visit")}` : undefined}
+              aria-label={interactive ? `${name}: ${visitWords(visits)}` : undefined}
               onPointerEnter={() => shape.code && setSelected(shape.code)}
               onClick={() => shape.code && setSelected(shape.code)}
               onFocus={() => shape.code && setSelected(shape.code)}
             >
-              <title>{`${name}: ${plural(visits, "visit")}`}</title>
+              <title>{`${name}: ${visitWords(visits)}`}</title>
             </path>
           );
         })}
@@ -66,15 +69,15 @@ export function WorldMapChart({ map, countries }: { map: WorldMap; countries: Co
       <p className={styles.mapCaption} aria-live="polite">
         {selected ? (
           <>
-            <strong>{countryName(selected)}</strong>: {plural(info?.visits ?? 0, "visit")}, {plural(info?.pageViews ?? 0, "page view")}
+            <strong>{countryName(selected)}</strong>: {visitWords(info?.visits ?? 0)}, {viewWords(info?.pageViews ?? 0)}
           </>
         ) : (
-          "Hover over, tap or focus a country to see its numbers."
+          t("mapHint")
         )}
       </p>
 
       {max > 0 && (
-        <ul className={styles.mapLegend} aria-label="Map legend: visits per country">
+        <ul className={styles.mapLegend} aria-label={t("mapLegend")}>
           {legend.map((l) => (
             <li key={l.step}>
               <span className={styles.swatch} data-step={l.step} aria-hidden="true" />
@@ -83,14 +86,14 @@ export function WorldMapChart({ map, countries }: { map: WorldMap; countries: Co
           ))}
           <li>
             <span className={styles.swatch} data-step={-1} aria-hidden="true" />
-            None
+            {t("mapNone")}
           </li>
         </ul>
       )}
 
       <NumbersTable
-        caption="Visits and page views per country"
-        columns={["Country", "Visits", "Page views"]}
+        caption={t("mapTable")}
+        columns={[t("country"), t("visits"), t("pageViews")]}
         rows={countries.map((c) => [countryName(c.code), c.visits, c.pageViews])}
       />
     </figure>

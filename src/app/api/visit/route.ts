@@ -7,6 +7,7 @@
 // Nothing about the visitor is stored or logged: only the country (from
 // Vercel's geolocation header) goes into the aggregated counters.
 
+import { isLocale } from "@/i18n/config";
 import { statsEnabled } from "@/lib/env";
 import { DEVICES, EVENTS, THEMES, isAllowedPath, isOneOf, normalizeCountry, normalizeReferrer } from "@/lib/stats/config";
 import { isBot, isSameOrigin, optedOut, rateLimited } from "@/lib/stats/guard";
@@ -47,15 +48,18 @@ export async function POST(request: Request) {
 
     if (body.kind === "view") {
       if (!isAllowedPath(body.path) || typeof body.newVisit !== "boolean") return new Response(null, { status: 400 });
+      // The site language: one of the configured codes, or none.
+      if (body.lang !== undefined && body.lang !== null && !isLocale(body.lang)) return new Response(null, { status: 400 });
+      const lang = isLocale(body.lang) ? body.lang : undefined;
       const country = normalizeCountry(headers.get("x-vercel-ip-country"));
       if (body.newVisit) {
         const referrer = normalizeReferrer(body.referrer);
         if (!isOneOf(DEVICES, body.device) || !isOneOf(THEMES, body.theme) || referrer === null) {
           return new Response(null, { status: 400 });
         }
-        await recordView(redis, { country, path: body.path, newVisit: true, device: body.device, theme: body.theme, referrer });
+        await recordView(redis, { country, path: body.path, lang, newVisit: true, device: body.device, theme: body.theme, referrer });
       } else {
-        await recordView(redis, { country, path: body.path, newVisit: false });
+        await recordView(redis, { country, path: body.path, lang, newVisit: false });
       }
       return noContent();
     }

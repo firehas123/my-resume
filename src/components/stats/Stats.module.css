@@ -21,7 +21,7 @@
 
 .title {
   font-size: clamp(40px, 6vw, 72px);
-  line-height: 1.02;
+  line-height: var(--script-line-height, 1.02);
   font-weight: 800;
   letter-spacing: -0.035em;
 }
@@ -102,7 +102,7 @@
 
 .notice h2 {
   font-size: 28px;
-  line-height: 1.15;
+  line-height: var(--script-line-height, 1.15);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -146,7 +146,7 @@
 .statValue {
   margin-top: 6px;
   font-size: clamp(28px, 3.4vw, 40px);
-  line-height: 1.1;
+  line-height: var(--script-line-height, 1.1);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -362,11 +362,11 @@
 .numbers td {
   padding: 6px 8px;
   border-bottom: 1px solid var(--line);
-  text-align: left;
+  text-align: start;
 }
 
 .numbers td {
-  text-align: right;
+  text-align: end;
   font-variant-numeric: tabular-nums;
 }
 
@@ -442,7 +442,7 @@
 }
 
 .recent time {
-  text-align: right;
+  text-align: end;
 }
 
 @media (max-width: 640px) {
@@ -497,8 +497,9 @@
     animation: grow-up var(--dur-slow) var(--ease-out) var(--delay, 0ms) both;
   }
 
+  /* Bars grow from the start of the line (the right in right-to-left languages). */
   .bar span {
-    transform-origin: left center;
+    transform-origin: var(--start) center;
     animation: grow-right var(--dur-slow) var(--ease-out) var(--delay, 0ms) both;
   }
 
