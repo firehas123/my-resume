@@ -1,21 +1,22 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Link, usePathname } from "@/i18n/navigation";
 import styles from "./Header.module.css";
 
-type NavItem = { href: string; label: string };
+/** A section of the home page ("about"), or a page of its own ("/contact"). */
+type NavItem = { label: string } & ({ section: string; page?: never } | { page: "/contact"; section?: never });
 
 /** The header links; the one for the section in view (or the current page) is highlighted. */
 export function NavLinks({ items }: { items: NavItem[] }) {
-  const pathname = usePathname();
+  const pathname = usePathname(); // without the language, e.g. "/" or "/contact"
   const [inView, setInView] = useState<string | null>(null);
+  const onHome = pathname === "/";
 
   // On the home page, watch which section is in the middle of the screen.
   useEffect(() => {
-    if (pathname !== "/") return;
-    const ids = items.map((i) => i.href.split("#")[1]).filter(Boolean);
+    if (!onHome) return;
+    const ids = items.map((i) => i.section).filter((id): id is string => Boolean(id));
     const sections = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null);
     const visible = new Map<string, boolean>();
     const observer = new IntersectionObserver(
@@ -28,16 +29,19 @@ export function NavLinks({ items }: { items: NavItem[] }) {
     );
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, [pathname, items]);
+  }, [onHome, items]);
 
   return (
     <ul className={styles.links}>
       {items.map((item) => {
-        const id = item.href.split("#")[1];
-        const active = pathname === "/" ? id !== undefined && id === inView : pathname === item.href;
+        const active = item.section ? onHome && item.section === inView : pathname === item.page;
         return (
-          <li key={item.href}>
-            <Link href={item.href} className={styles.link} aria-current={active ? (id ? "location" : "page") : undefined}>
+          <li key={item.section ?? item.page}>
+            <Link
+              href={item.section ? { pathname: "/", hash: item.section } : item.page!}
+              className={styles.link}
+              aria-current={active ? (item.section ? "location" : "page") : undefined}
+            >
               {item.label}
             </Link>
           </li>

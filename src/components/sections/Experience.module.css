@@ -50,7 +50,7 @@
 
 .company {
   font-size: 36px;
-  line-height: 1.1;
+  line-height: var(--script-line-height, 1.1);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -155,16 +155,17 @@
   }
 }
 
-/* Timeline: a line down the left of the job cards, drawn by scrolling, and a
+/* Timeline: a line down the start side of the job cards (left, or right in
+   right-to-left languages), drawn by scrolling, and a
    dot beside each job that lights up as its card comes into view. */
 .timeline {
   position: relative;
-  padding-left: 40px;
+  padding-inline-start: 40px;
 }
 
 .line {
   position: absolute;
-  left: 11px;
+  inset-inline-start: 11px;
   top: 8px;
   bottom: 8px;
   width: 2px;
@@ -202,11 +203,11 @@
 
 @media (max-width: 640px) {
   .timeline {
-    padding-left: 24px;
+    padding-inline-start: 24px;
   }
 
   .line {
-    left: 4px;
+    inset-inline-start: 4px;
   }
 }
 

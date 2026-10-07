@@ -96,9 +96,12 @@
   }
 }
 
+/* Rolls toward the start of the line: to the left, or to the right in
+   right-to-left languages (--dir is -1 there), where the logos also run
+   from right to left. */
 @keyframes slide {
   to {
-    transform: translateX(-25%);
+    transform: translateX(calc(-25% * var(--dir)));
   }
 }
 

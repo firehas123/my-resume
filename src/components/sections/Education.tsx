@@ -1,21 +1,28 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { LiftCard } from "@/components/ui/LiftCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { formatRange, profile } from "@/lib/profile";
+import { languageInfo } from "@/i18n/config";
+import { formatRange } from "@/lib/dates";
+import { getProfile } from "@/lib/profile";
 import styles from "./Education.module.css";
 import { RevealText } from "@/components/motion/RevealText";
 
-export function Education() {
+export async function Education() {
+  const profile = await getProfile();
+  const t = await getTranslations("education");
+  const tDates = await getTranslations("dates");
+  const { intl } = languageInfo(await getLocale());
   return (
     <section id="education" className={styles.education} aria-labelledby="education-title">
       <div className={`container ${styles.inner}`}>
-        <RevealText id="education-title" className={styles.title} text="Education and certifications." />
+        <RevealText id="education-title" className={styles.title} text={t("title")} />
 
         <div className={styles.grid}>
           {profile.education.map((item, i) => (
             <Reveal key={item.degree} className={styles.cell} delay={(i % 2) * 0.08}>
               <LiftCard className={styles.card}>
                 <p className={styles.meta}>
-                  {formatRange(item.start, item.end)}
+                  {formatRange(item.start, item.end, intl, tDates)}
                   {item.note && ` · ${item.note}`}
                 </p>
                 <h3 className={styles.heading}>{item.degree}</h3>
@@ -26,7 +33,7 @@ export function Education() {
 
           <Reveal className={styles.cell}>
             <LiftCard className={styles.card}>
-              <h3 className={styles.heading}>Certifications</h3>
+              <h3 className={styles.heading}>{t("certifications")}</h3>
               <ul className={styles.list}>
                 {profile.certifications.map((cert) => (
                   <li key={cert.name}>
@@ -40,7 +47,7 @@ export function Education() {
 
           <Reveal className={styles.cell} delay={0.08}>
             <LiftCard className={styles.card}>
-              <h3 className={styles.heading}>Languages</h3>
+              <h3 className={styles.heading}>{t("languages")}</h3>
               <ul className={styles.list}>
                 {profile.languages.map((language) => (
                   <li key={language.name}>

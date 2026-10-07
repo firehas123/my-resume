@@ -8,7 +8,8 @@
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { profile } from "@/lib/profile";
+import { DEFAULT_LOCALE } from "@/i18n/config";
+import { profileFor } from "@/lib/profile";
 
 type DeviconEntry = { name: string; color: string };
 
@@ -63,7 +64,8 @@ export function readIconSvg(name: string): string {
 
 /** Every logo name used in profile.json (each listed once). */
 export function usedIconNames(): string[] {
-  return [...new Set(profile.skills.flatMap((skill) => skill.logos ?? []))];
+  // Logos are the same in every language.
+  return [...new Set(profileFor(DEFAULT_LOCALE).skills.flatMap((skill) => skill.logos ?? []))];
 }
 
 export type SkillIcon = {

@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 
 // The hero background: a field of fine dots on a regular grid, brighter
-// toward the right, with a few in the accent colour. The dots move away from
+// toward the side away from the text (the right; the left in right-to-left
+// languages), with a few in the accent colour. The dots move away from
 // the cursor like something pushed through water and float back with a soft,
 // slightly springy settle (the same feel as the skills cloud); a tap sends a
 // ripple outward. Drawn on a <canvas> with requestAnimationFrame.
@@ -63,6 +64,7 @@ export function HeroDotField({ className }: { className?: string }) {
     }
 
     function layout() {
+      const rtl = document.documentElement.dir === "rtl";
       const rect = host.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
@@ -77,9 +79,13 @@ export function HeroDotField({ className }: { className?: string }) {
         for (let col = 0; col < cols; col++) {
           const hx = col * GAP + GAP / 2;
           const hy = row * GAP + GAP / 2;
-          const t = hx / width; // 0 on the left, 1 on the right
+          // 0 at the start of the line (where the text is), 1 at the far end:
+          // left to right, or right to left in right-to-left languages.
+          // The last column can sit just past the edge; clamp so the
+          // brightness never goes out of range (1 - x/width < 0 would be NaN below).
+          const t = Math.min(1, Math.max(0, rtl ? 1 - hx / width : hx / width));
           const accent = t > 0.5 && noise(col, row) < 0.035;
-          // Faint behind the text on the left, brighter toward the right.
+          // Faint behind the text, brighter toward the far side.
           const alpha = accent ? 0.9 : 0.05 + Math.pow(t, 1.6) * 0.42;
           dots.push({ hx, hy, x: 0, y: 0, vx: 0, vy: 0, alpha, accent });
         }

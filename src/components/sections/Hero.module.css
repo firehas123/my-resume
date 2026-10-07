@@ -101,7 +101,7 @@
 
 .title {
   font-size: clamp(44px, 8.2vw, 108px);
-  line-height: 0.98;
+  line-height: var(--script-line-height, 0.98);
   font-weight: 800;
   letter-spacing: -0.04em;
 }

@@ -137,7 +137,7 @@
 
 .title {
   font-size: 30px;
-  line-height: 1.12;
+  line-height: var(--script-line-height, 1.12);
   font-weight: 800;
   letter-spacing: -0.03em;
   overflow-wrap: anywhere;

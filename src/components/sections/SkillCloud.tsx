@@ -28,7 +28,7 @@ function Icon({ icon }: { icon: SkillIcon }) {
   return <span className={styles.icon} style={style} aria-hidden="true" />;
 }
 
-export function SkillCloud({ skills }: { skills: CloudSkill[] }) {
+export function SkillCloud({ skills, label }: { skills: CloudSkill[]; label: string }) {
   const cloud = useRef<HTMLUListElement>(null);
 
   usePushField(cloud, {
@@ -64,7 +64,7 @@ export function SkillCloud({ skills }: { skills: CloudSkill[] }) {
   }, []);
 
   return (
-    <ul ref={cloud} className={styles.cloud} aria-label="Languages and tools">
+    <ul ref={cloud} className={styles.cloud} aria-label={label}>
       {skills.map((skill, i) => (
         <li
           key={skill.name}

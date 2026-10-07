@@ -1,12 +1,19 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { LiftCard } from "@/components/ui/LiftCard";
 import { Reveal } from "@/components/ui/Reveal";
-import { formatDuration, formatRange, profile } from "@/lib/profile";
+import { languageInfo } from "@/i18n/config";
+import { formatDuration, formatRange } from "@/lib/dates";
+import { getProfile } from "@/lib/profile";
 import styles from "./Experience.module.css";
 import { RevealText } from "@/components/motion/RevealText";
 import { Timeline } from "@/components/motion/Timeline";
 
 // The one light band of the page (in both themes).
-export function Experience() {
+export async function Experience() {
+  const profile = await getProfile();
+  const t = await getTranslations("experience");
+  const tDates = await getTranslations("dates");
+  const { intl } = languageInfo(await getLocale());
   return (
     <section
       id="experience"
@@ -15,14 +22,14 @@ export function Experience() {
       aria-labelledby="experience-title"
     >
       <div className={`container ${styles.inner}`}>
-        <RevealText id="experience-title" className="section-title" text="Where I’ve worked." />
+        <RevealText id="experience-title" className="section-title" text={t("title")} />
         <Timeline className={`${styles.grid} ${styles.timeline}`} lineClassName={styles.line} progressClassName={styles.lineProgress}>
           {profile.experience.map((job, i) => (
             <Reveal key={job.company} className={styles.cell} delay={0.15 + (i % 2) * 0.08}>
               <LiftCard className={styles.card}>
                 <p className={styles.meta} data-job="">
                   <span className={styles.dot} aria-hidden="true" />
-                  {formatRange(job.start, job.end)} · {formatDuration(job.start, job.end)} · {job.city}
+                  {formatRange(job.start, job.end, intl, tDates)} · {formatDuration(job.start, job.end, intl, tDates)} · {job.city}
                 </p>
                 <h3 className={styles.company}>{job.company}</h3>
                 <p className={styles.role}>{job.role}</p>
@@ -31,8 +38,8 @@ export function Experience() {
                   {/* Native <details>: works and is readable without JavaScript;
                       the height animation is pure CSS where supported. */}
                   <summary>
-                    <span className={styles.showLabel}>Show details</span>
-                    <span className={styles.hideLabel}>Hide details</span>
+                    <span className={styles.showLabel}>{t("showDetails")}</span>
+                    <span className={styles.hideLabel}>{t("hideDetails")}</span>
                   </summary>
                   <ul>
                     {job.highlights.map((line) => (

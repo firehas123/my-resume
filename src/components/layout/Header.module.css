@@ -32,7 +32,7 @@
 }
 
 .nav {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .links {
@@ -52,8 +52,8 @@
   color: var(--muted);
 }
 
-/* Underline that grows from left to right on hover, and stays for the
-   section in view (aria-current). */
+/* Underline that grows in the reading direction on hover, and stays for
+   the section in view (aria-current). */
 .link {
   position: relative;
 }
@@ -67,7 +67,7 @@
   height: 1.5px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: var(--start);
   transition: transform var(--dur-standard) var(--ease-out);
 }
 
@@ -89,7 +89,7 @@
   bottom: -1px;
   height: 2px;
   background: var(--accent);
-  transform-origin: left;
+  transform-origin: var(--start);
   transform: scaleX(0);
   pointer-events: none;
 }
@@ -129,16 +129,120 @@
   border-color: var(--text);
 }
 
+/* Language menu: a pill with a globe and the language code, and the list
+   under it (LanguageSwitcher.tsx). */
+.language {
+  position: relative;
+}
+
+.languageButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--btn-outline);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color var(--dur-quick) var(--ease-out);
+}
+
+.languageButton:hover,
+.languageButton[aria-expanded="true"] {
+  border-color: var(--text);
+}
+
+/* The globe keeps its size even when the row is tight. */
+.languageButton svg {
+  flex-shrink: 0;
+}
+
+.languageCode {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.languageMenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: var(--lift-shadow);
+  list-style: none;
+}
+
+.languageMenu[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .languageMenu:not([hidden]) {
+    animation: language-menu-in var(--dur-quick) var(--ease-out);
+  }
+}
+
+@keyframes language-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.languageItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding-inline: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.languageItem:hover,
+.languageItem:focus-visible {
+  background: var(--pill-bg);
+  color: var(--text);
+}
+
+.languageItem[aria-current] {
+  color: var(--accent);
+}
+
+.languageItemCode {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 /* Phones: logo + actions on the first row, section links on the second. */
 @media (max-width: 640px) {
   .nav {
     order: 3;
     width: 100%;
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 
+  /* Left-aligned like a line of text: a language with longer words wraps
+     to a second line that reads naturally. */
   .links {
-    justify-content: space-between;
-    gap: 0 16px;
+    justify-content: flex-start;
+    gap: 0 18px;
   }
 }

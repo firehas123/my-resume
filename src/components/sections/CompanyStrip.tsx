@@ -1,12 +1,15 @@
+import { getTranslations } from "next-intl/server";
 import { findCompanyLogo } from "@/lib/logos";
 import { Reveal } from "@/components/ui/Reveal";
-import { profile } from "@/lib/profile";
+import { getProfile } from "@/lib/profile";
 import { CompanyTrack, type StripCompany } from "./CompanyTrack";
 import styles from "./CompanyStrip.module.css";
 
 // Server part: finds the logo files at build time and hands plain data to the
 // rolling, cursor-reactive track (CompanyTrack.tsx).
-export function CompanyStrip() {
+export async function CompanyStrip() {
+  const t = await getTranslations("companies");
+  const profile = await getProfile();
   const companies: StripCompany[] = profile.companies.map((company) => ({
     name: company.name,
     logo: findCompanyLogo(company.logo),
@@ -19,7 +22,7 @@ export function CompanyStrip() {
       <Reveal>
         <div className="container">
           <h2 id="companies-title" className={styles.label}>
-            Companies I’ve worked with
+            {t("title")}
           </h2>
         </div>
         <CompanyTrack companies={companies} />

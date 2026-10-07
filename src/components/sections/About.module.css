@@ -18,6 +18,12 @@
   object-position: 0% 20%;
 }
 
+/* Right-to-left languages: the text sits on the right, so the photo is
+   mirrored and I stand on the left, looking toward the text. */
+:root[dir="rtl"] .image {
+  transform: scaleX(-1);
+}
+
 /* The only overlay on the photo: a fade into the band's black on the left,
    behind the text. It ends at 45% of the width; the face starts at about 50%,
    so the face itself is never covered, filtered or blurred. */
@@ -28,7 +34,7 @@
   /* Fades the photo into the band on the left (behind the text) and at the
      bottom, so the blend into Experience starts from the plain band colour. */
   background:
-    linear-gradient(to right, var(--bg-alt) 0%, transparent 45%),
+    linear-gradient(to var(--end), var(--bg-alt) 0%, transparent 45%),
     linear-gradient(to top, var(--band-dark-bg) 0%, transparent 22%);
   pointer-events: none;
 }
@@ -50,7 +56,7 @@
 
 .lead {
   font-size: clamp(30px, 3.2vw, 42px);
-  line-height: 1.14;
+  line-height: var(--script-line-height, 1.14);
   font-weight: 700;
   letter-spacing: -0.025em;
   /* Even line lengths, so on phones the headline breaks between its two

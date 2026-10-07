@@ -19,7 +19,7 @@ export function ScrollEaseBack({ children, className }: { children: React.ReactN
   const opacity = useTransform(y, [0, -70], [1, 0.45]);
 
   return (
-    <motion.div ref={ref} className={className} style={rich ? { y, scale, opacity, transformOrigin: "left top" } : undefined}>
+    <motion.div ref={ref} className={className} style={rich ? { y, scale, opacity, transformOrigin: "var(--start) top" } : undefined}>
       {children}
     </motion.div>
   );

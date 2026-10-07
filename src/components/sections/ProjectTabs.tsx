@@ -2,7 +2,8 @@
 
 import { DURATION, EASE_OUT } from "@/lib/motion";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { useState, useSyncExternalStore, ViewTransition } from "react";
 import { TiltCard } from "@/components/motion/TiltCard";
@@ -14,6 +15,8 @@ export type ProjectCardData = {
   slug: string;
   title: string;
   summary: string;
+  /** The summary is shown in English because this language has none yet. */
+  summaryInEnglish: boolean;
   group: string; // the tab it belongs to
   languages: string[]; // top languages, largest first
   isFork: boolean;
@@ -49,7 +52,15 @@ const CELL = {
 // How many cards a tab shows before "Show all".
 const INITIAL_COUNT = 6;
 
+/** Tab names come from the data; only "Other" is a word that needs translating. */
+function useGroupName() {
+  const t = useTranslations("projects.groups");
+  return (group: string) => (t.has(group) ? t(group) : group);
+}
+
 export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTabsProps) {
+  const t = useTranslations("projects");
+  const groupName = useGroupName();
   // The selected tab lives in the address (?tab=Python), so coming back to the
   // home page (back button or "All projects") restores it. Read after
   // hydration; the server always renders the first tab.
@@ -76,7 +87,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
     <>
       <Reveal className={styles.header}>
         {heading}
-        <div className={styles.tabs} role="group" aria-label="Filter projects by language">
+        <div className={styles.tabs} role="group" aria-label={t("filterLabel")}>
           {groups.map((group) => (
             <button
               key={group}
@@ -94,7 +105,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
                   aria-hidden="true"
                 />
               )}
-              <span className={styles.tabLabel}>{group}</span>
+              <span className={styles.tabLabel}>{groupName(group)}</span>
             </button>
           ))}
         </div>
@@ -102,7 +113,7 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
 
       {/* Announces the result of a filter change to screen readers. */}
       <p className="visually-hidden" aria-live="polite">
-        {`${inGroup.length} ${active} ${inGroup.length === 1 ? "project" : "projects"}`}
+        {t("count", { count: inGroup.length, group: groupName(active) })}
       </p>
 
       {/* `key` re-mounts the grid when the tab changes; the new cards then
@@ -125,12 +136,12 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
       <div className={styles.footer}>
         {inGroup.length > INITIAL_COUNT && (
           <button type="button" className={styles.more} onClick={() => setShowAll((v) => !v)} aria-expanded={showAll}>
-            {showAll ? "Show fewer" : `Show all ${inGroup.length} ${active} projects`}
+            {showAll ? t("showFewer") : t("showAll", { count: inGroup.length, group: groupName(active) })}
           </button>
         )}
         {githubUrl && (
           <a href={githubUrl} className={`u-link ${styles.moreLink}`} target="_blank" rel="noopener noreferrer">
-            All repositories on GitHub
+            {t("allRepos")}
           </a>
         )}
       </div>
@@ -139,6 +150,9 @@ export function ProjectTabs({ projects, groups, heading, githubUrl }: ProjectTab
 }
 
 function ProjectCard({ project }: { project: ProjectCardData }) {
+  const t = useTranslations("projects");
+  const tCommon = useTranslations("common");
+  const groupName = useGroupName();
   return (
     <TiltCard className={styles.card}>
       {/* Shared with the project page: the image grows into its hero image. */}
@@ -152,29 +166,42 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
         </div>
       </ViewTransition>
       <div className={styles.body}>
-        <p className={styles.language}>{project.group}</p>
+        <p className={styles.language}>{groupName(project.group)}</p>
         <ViewTransition name={`project-title-${project.slug}`} share="morph" default="none">
-          <h3 className={styles.title}>{project.title}</h3>
+          {/* Repo names keep their own direction, also in right-to-left languages. */}
+          <h3 className={styles.title} dir="auto">
+            {project.title}
+          </h3>
         </ViewTransition>
-        {project.summary && <p className={styles.summary}>{project.summary}</p>}
+        {project.summary && (
+          <p className={styles.summary}>
+            <span lang={project.summaryInEnglish ? "en" : undefined}>{project.summary}</span>
+            {project.summaryInEnglish && <span className="lang-note">{tCommon("inEnglish")}</span>}
+          </p>
+        )}
         {(project.isFork || project.languages.length > 0) && (
-          <ul className={styles.languageTags} aria-label="Labels">
-            {project.isFork && <li className={styles.forkTag}>Fork</li>}
+          <ul className={styles.languageTags} aria-label={t("labels")}>
+            {project.isFork && <li className={styles.forkTag}>{t("fork")}</li>}
             {project.languages.map((name) => (
-              <li key={name}>{name}</li>
+              <li key={name} dir="ltr">
+                {name}
+              </li>
             ))}
           </ul>
         )}
         <div className={styles.links}>
-          <Link href={`/projects/${project.slug}`} className="u-link">
-            Details<span className="visually-hidden"> about {project.title}</span>
+          <Link href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }} className="u-link">
+            {t("details")}
+            <span className="visually-hidden"> {t("detailsHidden", { title: project.title })}</span>
           </Link>
           <a href={project.codeUrl} className="u-link" target="_blank" rel="noopener noreferrer">
-            Code<span className="visually-hidden"> of {project.title} on GitHub</span>
+            {t("code")}
+            <span className="visually-hidden"> {t("codeHidden", { title: project.title })}</span>
           </a>
           {project.demoUrl && (
             <a href={project.demoUrl} className="u-link" target="_blank" rel="noopener noreferrer">
-              Live demo<span className="visually-hidden"> of {project.title}</span>
+              {t("liveDemo")}
+              <span className="visually-hidden"> {t("liveDemoHidden", { title: project.title })}</span>
             </a>
           )}
         </div>

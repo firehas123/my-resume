@@ -12,7 +12,7 @@
 
 .title {
   font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.05;
+  line-height: var(--script-line-height, 1.05);
   font-weight: 800;
   letter-spacing: -0.03em;
 }
@@ -54,7 +54,7 @@
 
 .heading {
   font-size: 28px;
-  line-height: 1.15;
+  line-height: var(--script-line-height, 1.15);
   font-weight: 800;
   letter-spacing: -0.03em;
 }

@@ -1,14 +1,17 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { ParallaxPhoto } from "@/components/motion/ParallaxPhoto";
 import { Reveal } from "@/components/ui/Reveal";
-import { profile } from "@/lib/profile";
+import { getProfile } from "@/lib/profile";
 import styles from "./About.module.css";
 import { RevealText } from "@/components/motion/RevealText";
 
 // Full-width black band in both themes. On wide screens the photo fills the
-// band with me on the right and the text over the dark left side; on phones
-// the photo sits above the text.
-export function About() {
+// band with me on the far side and the text over the dark side nearest the
+// start of the line; on phones the photo sits above the text.
+export async function About() {
+  const profile = await getProfile();
+  const t = await getTranslations("about");
   return (
     <section
       id="about"
@@ -32,7 +35,7 @@ export function About() {
       <div className={`container ${styles.inner}`}>
         <Reveal className={styles.text}>
           <h2 id="about-title" className="eyebrow">
-            About
+            {t("eyebrow")}
           </h2>
           <RevealText as="p" className={styles.lead} text={profile.about.headline} />
           {/* One statement per line, each fading in a little after the one

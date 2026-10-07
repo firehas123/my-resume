@@ -23,6 +23,20 @@
   --dur-slow: 800ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* soft ease-out, the default */
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* for things that move and stop */
+
+  /* Reading direction, for the few things logical CSS properties cannot
+     express (transform origins, gradients, slide directions). Right-to-left
+     languages (dir="rtl" on <html>) flip them below, for every such language
+     at once. */
+  --start: left;
+  --end: right;
+  --dir: 1;
+}
+
+:root[dir="rtl"] {
+  --start: right;
+  --end: left;
+  --dir: -1;
 }
 
 /* Dark theme (the default). `.band-dark` reuses the same values so the black
@@ -134,6 +148,9 @@
 }
 
 html {
+  /* The font for the language's script, after Manrope (src/i18n/fonts.ts sets
+     it for scripts Manrope does not cover, e.g. Cairo for Arabic). */
+  --font-script: "Segoe UI";
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-height) + 16px);
@@ -154,7 +171,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-manrope), "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: var(--font-manrope), var(--font-script), "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 1.55;
   font-weight: 400;
@@ -251,7 +268,7 @@ html.theme-transition *::after {
 
 .skip-link {
   position: absolute;
-  left: 16px;
+  inset-inline-start: 16px;
   top: -100px;
   z-index: 100;
   padding: 12px 20px;
@@ -269,7 +286,7 @@ html.theme-transition *::after {
 /* Section headings shared by most sections */
 .section-title {
   font-size: clamp(40px, 5.6vw, 72px);
-  line-height: 1.02;
+  line-height: var(--script-line-height, 1.02);
   font-weight: 800;
   letter-spacing: -0.035em;
 }
@@ -282,7 +299,7 @@ html.theme-transition *::after {
 
 /* Small interaction details ------------------------------------------------ */
 
-/* Links: an underline that grows from left to right on hover. */
+/* Links: an underline that grows in the reading direction on hover. */
 .u-link {
   position: relative;
 }
@@ -296,7 +313,7 @@ html.theme-transition *::after {
   height: 1.5px;
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
+  transform-origin: var(--start);
   transition: transform var(--dur-standard) var(--ease-out);
 }
 
@@ -358,6 +375,39 @@ html.theme-transition *::after {
   .blend-top::before {
     height: 96px;
   }
+}
+
+/* Joined scripts (Arabic): letters must touch, so no tightened tracking, and
+   a little more line height for their taller letters. One rule for every
+   language written in such a script. */
+:root[data-script="arabic"] body * {
+  letter-spacing: 0 !important;
+}
+
+:root[data-script="arabic"] {
+  --script-line-height: 1.3;
+}
+
+/* Arrows that point along the reading direction (back, external link) turn
+   around in right-to-left languages. */
+:root[dir="rtl"] .flip-rtl {
+  transform: scaleX(-1);
+}
+
+/* "In English": a quiet label on a text that has no translation yet. */
+.lang-note {
+  display: inline-block;
+  margin-inline-start: 8px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--muted);
+  white-space: nowrap;
+  vertical-align: 0.15em;
 }
 
 /* Headline reveals (RevealText.tsx). Words keep their normal flow; each word

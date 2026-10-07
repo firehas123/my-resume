@@ -1,16 +1,19 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { findLink } from "@/lib/profile";
 import { getGroups, getProjects } from "@/lib/projects";
 import { ProjectTabs, type ProjectCardData } from "./ProjectTabs";
 import styles from "./Projects.module.css";
 import { RevealText } from "@/components/motion/RevealText";
 
-export function Projects() {
-  const all = getProjects();
+export async function Projects() {
+  const t = await getTranslations("projects");
+  const all = getProjects(await getLocale());
   // Plain objects only: this data is handed to a client component.
   const projects: ProjectCardData[] = all.map((p) => ({
     slug: p.slug,
     title: p.title,
     summary: p.summary,
+    summaryInEnglish: p.summaryInEnglish,
     group: p.group,
     languages: p.languages.map((l) => l.name),
     isFork: p.forkOf !== null,
@@ -21,7 +24,7 @@ export function Projects() {
   const github = findLink("github");
 
   const heading = (
-    <RevealText id="projects-title" className="section-title" text="Things I’ve built." />
+    <RevealText id="projects-title" className="section-title" text={t("title")} />
   );
 
   return (
@@ -38,11 +41,11 @@ export function Projects() {
           <>
             {heading}
             <p className={styles.empty}>
-              Projects will appear here soon.
+              {t("empty")}
               {github && (
                 <>
                   {" "}
-                  Meanwhile, my code is on <a href={github.url}>GitHub</a>.
+                  {t.rich("emptyGithub", { link: (chunks) => <a href={github.url}>{chunks}</a> })}
                 </>
               )}
             </p>

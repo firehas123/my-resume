@@ -4,9 +4,10 @@
 
 type IconProps = { size?: number };
 
-function Svg({ size = 20, children }: IconProps & { children: React.ReactNode }) {
+function Svg({ size = 20, children, className }: IconProps & { children: React.ReactNode; className?: string }) {
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -53,18 +54,31 @@ export function MoonIcon(props: IconProps) {
   );
 }
 
-export function ArrowLeftIcon(props: IconProps) {
+/** A simple globe: a circle with a meridian and the equator (the language menu). */
+export function GlobeIcon(props: IconProps) {
   return (
     <Svg {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" />
+    </Svg>
+  );
+}
+
+/** Points back (left); turned around in right-to-left languages. */
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <Svg {...props} className="flip-rtl">
       <path d="M19 12H5" />
       <path d="M11 6l-6 6 6 6" />
     </Svg>
   );
 }
 
+/** Out of the page, toward the end of the line; turned around in right-to-left languages. */
 export function ExternalIcon(props: IconProps) {
   return (
-    <Svg {...props}>
+    <Svg {...props} className="flip-rtl">
       <path d="M7 17L17 7" />
       <path d="M8 7h9v9" />
     </Svg>

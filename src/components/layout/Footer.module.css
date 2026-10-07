@@ -16,12 +16,23 @@
 }
 
 .note {
-  margin-right: auto;
+  margin-inline-end: auto;
+}
+
+/* The quiet notes on translated pages: a full-width line under the rest. */
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .legal {
   display: flex;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 0 24px;
   padding: 0;
   list-style: none;
 }

@@ -1,37 +1,44 @@
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { CvDownload } from "@/components/ui/CvDownload";
 import { Logo } from "@/components/ui/Logo";
-import { PillLink } from "@/components/ui/PillLink";
-import { profile } from "@/lib/profile";
+import { LANGUAGES, languageInfo } from "@/i18n/config";
+import { Link } from "@/i18n/navigation";
+import { cvFiles } from "@/lib/cv";
+import { getProfile } from "@/lib/profile";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { NavLinks } from "./NavLinks";
 import { ScrollProgress } from "./ScrollProgress";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.css";
 
-// Paths start with "/" so the links also work from the project and contact pages.
-const NAV = [
-  { href: "/#about", label: "About" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#skills", label: "Skills" },
-  { href: "/contact", label: "Contact" },
-];
+export async function Header() {
+  const t = await getTranslations();
+  const profile = await getProfile();
+  const cv = await cvFiles(await getLocale());
+  // Section links point at the home page, so they also work from other pages.
+  const nav = [
+    { section: "about", label: t("nav.about") },
+    { section: "experience", label: t("nav.experience") },
+    { section: "projects", label: t("nav.projects") },
+    { section: "skills", label: t("nav.skills") },
+    { page: "/contact" as const, label: t("nav.contact") },
+  ];
+  const languages = LANGUAGES.map((code) => ({ code, name: languageInfo(code).name }));
 
-export function Header() {
   return (
     // viewTransitionName: the header stays still during page transitions.
     <header className={styles.header} style={{ viewTransitionName: "site-header" }}>
       <div className={`container ${styles.bar}`}>
-        <Link href="/#top" className={styles.logo} data-header-logo="" aria-label={`${profile.shortName}, home`}>
+        <Link href={{ pathname: "/", hash: "top" }} className={styles.logo} data-header-logo="" aria-label={t("common.homeLink", { name: profile.shortName })}>
           <Logo height={26} />
         </Link>
-        <nav aria-label="Sections" className={styles.nav}>
-          <NavLinks items={NAV} />
+        <nav aria-label={t("common.sectionsNav")} className={styles.nav}>
+          <NavLinks items={nav} />
         </nav>
         <div className={styles.actions}>
+          <LanguageSwitcher languages={languages} />
           <ThemeToggle />
-          <PillLink href={profile.cv.path} download={profile.cv.downloadName} track="cv" size="small">
-            Download CV
-          </PillLink>
+          <CvDownload {...cv} size="small" align="end" shortOnPhones />
         </div>
       </div>
       <ScrollProgress />
