@@ -13,6 +13,7 @@ in the hero.
 | `npm run build` | Production build (this is what Vercel runs).                                  |
 | `npm run start` | Serve the production build locally.                                           |
 | `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |
+| `npm run cv`    | Rebuild the downloadable CV (`public/files/resume.pdf`) from `profile.json`.  |
 | `npm test`      | Test the rules that sort repos into language tabs.                            |
 | `npm run stats:backup` | Save all visit statistics to `data/stats-backup/<date>.json`.          |
 | `npm run stats:restore <file>` | Load such a backup into an empty statistics database.          |
@@ -56,8 +57,10 @@ src/app/globals.css        all colours (theme tokens), spacing and base styles
 Edit `src/data/profile.json`. Open items that still need my input are listed in
 `TODO.md`.
 
-- **Switch the CV file:** put the new PDF in `public/files/` and change `"cv": { "path": ... }`,
-  for example to `"/files/europass-cv.pdf"`. That one line updates every Download CV button.
+- **Update the CV:** after changing `profile.json`, run `npm run cv` and commit
+  `public/files/resume.pdf`. The PDF is built from the same data as the site (one A4
+  page, Manrope), without phone number or email address. To use a different file
+  instead, put it in `public/files/` and change `"cv": { "path": ... }`.
 - **Show or hide a profile link:** set `"show": true` or `false` on the link (Fiverr is
   currently `false`).
 
@@ -219,6 +222,10 @@ is no server code, and your email address never appears in the site or its sourc
   the visitor's address, so replying in Gmail answers them directly.
 - A hidden honeypot field is passed to Web3Forms' `botcheck`, so simple spam bots are
   dropped.
+- An hCaptcha check must be solved before the form can be sent (Web3Forms' shared
+  free-plan site key, no hCaptcha account needed). For Web3Forms to also reject
+  submissions without it, choose **hCaptcha** under "Block spam" in the Web3Forms
+  dashboard for this access key.
 - To change where messages go, change the email address in your Web3Forms account.
 
 ### Visitor statistics
