@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · Software engineer",
+    "description": "{pitch} Based in {location}.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "homeLink": "{name}, home",
+    "sectionsNav": "Sections",
+    "inEnglish": "In English"
+  },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
+  "language": {
+    "button": "Language: {name}. Choose another language",
+    "menu": "Choose a language"
+  },
+  "cv": {
+    "download": "Download CV",
+    "downloadShort": "CV",
+    "fileName": "{name}-CV",
+    "otherLanguages": "Also available in",
+    "menu": "CV in other languages",
+    "europassIn": "Europass format, {language}",
+    "close": "Close"
+  },
+  "dates": {
+    "present": "present",
+    "range": "{start} to {end}",
+    "years": "{count, plural, one {# yr} other {# yrs}}",
+    "months": "{count, plural, one {# mo} other {# mos}}"
+  },
+  "hero": {
+    "statusJob": "{role} at {company}",
+    "seeProjects": "See projects"
+  },
+  "companies": {
+    "title": "Companies I’ve worked with"
+  },
+  "about": {
+    "eyebrow": "About"
+  },
+  "experience": {
+    "title": "Where I’ve worked.",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details"
+  },
+  "projects": {
+    "title": "Things I’ve built.",
+    "filterLabel": "Filter projects by language",
+    "count": "{count, plural, one {# {group} project} other {# {group} projects}}",
+    "showFewer": "Show fewer",
+    "showAll": "Show all {count} {group} projects",
+    "allRepos": "All repositories on GitHub",
+    "empty": "Projects will appear here soon.",
+    "emptyGithub": "Meanwhile, my code is on <link>GitHub</link>.",
+    "labels": "Labels",
+    "fork": "Fork",
+    "details": "Details",
+    "detailsHidden": "about {title}",
+    "code": "Code",
+    "codeHidden": "of {title} on GitHub",
+    "liveDemo": "Live demo",
+    "liveDemoHidden": "of {title}",
+    "groups": {
+      "Other": "Other"
+    }
+  },
+  "project": {
+    "allProjects": "All projects",
+    "forkOf": "Fork of {repo}",
+    "lastUpdated": "Last updated {date}",
+    "topics": "Topics",
+    "codeOnGithub": "Code on GitHub",
+    "liveDemo": "Live demo",
+    "screenshotAlt": "Screenshot of {title}",
+    "fullCode": "The full source code and README are on <link>GitHub</link>.",
+    "readmeInEnglish": "From the project’s README on GitHub, in English.",
+    "metaDescription": "{title}, a {group} project on GitHub.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}, a project by {name}"
+  },
+  "skills": {
+    "title": "What I work with.",
+    "cloudLabel": "Languages and tools"
+  },
+  "education": {
+    "title": "Education and certifications.",
+    "certifications": "Certifications",
+    "languages": "Languages"
+  },
+  "contactCall": {
+    "title": "Get in touch.",
+    "ask": "Ask me a question"
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Ask me a question. I reply by email.",
+    "title": "Ask me a <accent>question.</accent>",
+    "lead": "About a role, a project or anything on this site. I reply by email.",
+    "findMe": "Or find me on <links></links>."
+  },
+  "form": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "honeypot": "Leave this box unticked",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sentTitle": "Thank you, your message is on its way.",
+    "sentText": "I will reply to the email address you gave.",
+    "sendAnother": "Send another",
+    "failedTitle": "Sorry, the message could not be sent.",
+    "failedText": "Your text is still here, so you can try again.",
+    "failedLinkedin": "Or reach me on <link>LinkedIn</link>.",
+    "errors": {
+      "nameMissing": "Please enter your name.",
+      "nameLong": "Please keep your name under {max} characters.",
+      "emailMissing": "Please enter your email address, so I can reply.",
+      "emailInvalid": "This email address does not look complete.",
+      "messageShort": "Please write a message of at least {min} characters.",
+      "messageLong": "Please keep your message under {max} characters.",
+      "captcha": "Please complete the check above, so I know you are not a bot."
+    }
+  },
+  "footer": {
+    "updated": "Updated <date></date>",
+    "backToTop": "Back to top",
+    "legalNav": "Legal",
+    "legalNotice": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "stats": "Site stats",
+    "translated": "This page was translated automatically. The original is in English.",
+    "legalInEnglish": "The legal pages are available in English and German."
+  },
+  "legal": {
+    "legalNoticeTitle": "Legal Notice (Impressum)",
+    "privacyTitle": "Privacy Policy"
+  },
+  "notFound": {
+    "title": "This page does not exist.",
+    "back": "Back to the home page"
+  },
+  "stats": {
+    "metaTitle": "Site stats",
+    "eyebrow": "Site stats",
+    "title": "Who visits.",
+    "since": "Counting since {date}",
+    "intro": "Visits counted by this site itself, without cookies.",
+    "rangeLabel": "Time range",
+    "ranges": {
+      "today": "Today",
+      "7d": "7 days",
+      "30d": "30 days",
+      "90d": "90 days",
+      "12m": "12 months",
+      "all": "All time"
+    },
+    "loading": "Loading the latest numbers…",
+    "notConnectedTitle": "Statistics are not connected yet.",
+    "notConnectedText": "The visit counter needs its database. Once it is connected and the site is redeployed, visits are counted from that moment on.",
+    "errorTitle": "The statistics could not be loaded right now.",
+    "errorText": "They refresh automatically every minute, or reload the page to try again.",
+    "noVisitsTitle": "No visits recorded yet.",
+    "noVisitsText": "Counting starts with the first visit to the live site. Check back soon.",
+    "downloadJson": "Download data (JSON)",
+    "downloadCsv": "Download data (CSV)",
+    "updatesEveryMinute": "Updates every minute.",
+    "excluded": "Your own visits from this browser are not counted.",
+    "included": "Visits from this browser are counted (open /stats?exclude-me=1 to stop that).",
+    "headline": "Headline numbers",
+    "visits": "Visits",
+    "pageViews": "Page views",
+    "countriesReached": "Countries reached",
+    "allTimeVisits": "All-time visits",
+    "lastViewed": "Last viewed",
+    "emptyRangeTitle": "No visits recorded in this period yet.",
+    "emptyRangeText": "Pick a longer range to see earlier visits.",
+    "whereFrom": "Where visitors come from",
+    "topCountries": "Top countries",
+    "topCountriesLabel": "Top ten countries by visits",
+    "noCountries": "No countries yet.",
+    "series": "{grouping, select, day {Visits and page views per day} week {Visits and page views per week} other {Visits and page views per month}}",
+    "weekOf": "Week of {date}",
+    "byHour": "By hour of day (Berlin time)",
+    "byHourTitle": "Page views by hour of day",
+    "hour": "Hour",
+    "byWeekday": "By weekday",
+    "byWeekdayTitle": "Page views by weekday",
+    "weekday": "Weekday",
+    "topPages": "Top pages",
+    "topPagesLabel": "Most viewed pages",
+    "noPageViews": "No page views yet.",
+    "topReferrers": "Top referrers",
+    "topReferrersLabel": "Sites visitors came from",
+    "noVisits": "No visits yet.",
+    "devices": "Devices",
+    "devicesLabel": "Visits by device type",
+    "themes": "Dark or light theme",
+    "themesLabel": "Visits by colour theme",
+    "siteLanguages": "Site language",
+    "siteLanguagesLabel": "Page views by site language",
+    "cvByLanguage": "CV downloads by language",
+    "cvByLanguageLabel": "CV downloads by CV language",
+    "noDownloads": "No downloads yet.",
+    "events": "CV downloads and link clicks",
+    "noEvents": "No downloads or clicks yet.",
+    "recent": "Recent views",
+    "noViews": "No views yet.",
+    "justNow": "just now",
+    "unknownCountry": "Unknown",
+    "noData": "No data",
+    "showNumbers": "Show numbers",
+    "period": "Period",
+    "country": "Country",
+    "visitsCount": "{count, plural, one {# visit} other {# visits}}",
+    "pageViewsCount": "{count, plural, one {# page view} other {# page views}}",
+    "countriesCount": "{count, plural, one {# country} other {# countries}}",
+    "seriesSummary": "{title}: {visits} and {views} across {periods} periods.",
+    "busiest": "{title}, busiest: {label} with {value}.",
+    "noDataYet": "{title}, no data yet.",
+    "mapLabel": "World map: visitors from {countries}. Countries with visits can be focused.",
+    "mapHint": "Hover over, tap or focus a country to see its numbers.",
+    "mapLegend": "Map legend: visits per country",
+    "mapNone": "None",
+    "mapTable": "Visits and page views per country",
+    "pages": {
+      "/": "Home",
+      "/contact": "Contact",
+      "/impressum": "Legal Notice",
+      "/datenschutz": "Privacy Policy",
+      "project": "Project: {title}"
+    },
+    "referrers": {
+      "direct": "Direct / none",
+      "other": "Other sites"
+    },
+    "deviceNames": {
+      "phone": "Phone",
+      "tablet": "Tablet",
+      "desktop": "Desktop"
+    },
+    "themeNames": {
+      "dark": "Dark",
+      "light": "Light"
+    },
+    "eventNames": {
+      "cv": "CV downloads",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "Ask me a question"
+    }
+  },
+  "cvDocument": {
+    "heading": "Curriculum Vitae",
+    "profile": "Profile",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "certifications": "Certifications",
+    "range": "{start} – {end}",
+    "translated": "Translated for convenience. Working languages: {languages}.",
+    "roleAt": "{role}, {company}",
+    "place": "{city}, {country}"
+  }
+}

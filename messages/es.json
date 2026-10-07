@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · Ingeniero de software",
+    "description": "{pitch} Con base en {location}.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "Ir al contenido",
+    "homeLink": "{name}, inicio",
+    "sectionsNav": "Secciones",
+    "inEnglish": "En inglés"
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto"
+  },
+  "theme": {
+    "toLight": "Cambiar al tema claro",
+    "toDark": "Cambiar al tema oscuro"
+  },
+  "language": {
+    "button": "Idioma: {name}. Elegir otro idioma",
+    "menu": "Elegir un idioma"
+  },
+  "cv": {
+    "download": "Descargar CV",
+    "downloadShort": "CV",
+    "fileName": "{name}-CV",
+    "otherLanguages": "También disponible en",
+    "menu": "CV en otros idiomas",
+    "europassIn": "Formato Europass, {language}",
+    "close": "Cerrar"
+  },
+  "dates": {
+    "present": "actualidad",
+    "range": "{start} a {end}",
+    "years": "{count, plural, one {# año} other {# años}}",
+    "months": "{count, plural, one {# mes} other {# meses}}"
+  },
+  "hero": {
+    "statusJob": "{role} en {company}",
+    "seeProjects": "Ver proyectos"
+  },
+  "companies": {
+    "title": "Empresas en las que he trabajado"
+  },
+  "about": {
+    "eyebrow": "Sobre mí"
+  },
+  "experience": {
+    "title": "Dónde he trabajado.",
+    "showDetails": "Ver detalles",
+    "hideDetails": "Ocultar detalles"
+  },
+  "projects": {
+    "title": "Lo que he construido.",
+    "filterLabel": "Filtrar proyectos por lenguaje",
+    "count": "{count, plural, one {# proyecto de {group}} other {# proyectos de {group}}}",
+    "showFewer": "Mostrar menos",
+    "showAll": "Mostrar los {count} proyectos de {group}",
+    "allRepos": "Todos los repositorios en GitHub",
+    "empty": "Los proyectos aparecerán aquí pronto.",
+    "emptyGithub": "Mientras tanto, mi código está en <link>GitHub</link>.",
+    "labels": "Etiquetas",
+    "fork": "Fork",
+    "details": "Detalles",
+    "detailsHidden": "sobre {title}",
+    "code": "Código",
+    "codeHidden": "de {title} en GitHub",
+    "liveDemo": "Demo en vivo",
+    "liveDemoHidden": "de {title}",
+    "groups": {
+      "Other": "Otros"
+    }
+  },
+  "project": {
+    "allProjects": "Todos los proyectos",
+    "forkOf": "Fork de {repo}",
+    "lastUpdated": "Última actualización: {date}",
+    "topics": "Temas",
+    "codeOnGithub": "Código en GitHub",
+    "liveDemo": "Demo en vivo",
+    "screenshotAlt": "Captura de pantalla de {title}",
+    "fullCode": "El código fuente completo y el README están en <link>GitHub</link>.",
+    "readmeInEnglish": "Del README del proyecto en GitHub, en inglés.",
+    "metaDescription": "{title}, un proyecto de {group} en GitHub.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}, un proyecto de {name}"
+  },
+  "skills": {
+    "title": "Con qué trabajo.",
+    "cloudLabel": "Lenguajes y herramientas"
+  },
+  "education": {
+    "title": "Formación y certificaciones.",
+    "certifications": "Certificaciones",
+    "languages": "Idiomas"
+  },
+  "contactCall": {
+    "title": "Hablemos.",
+    "ask": "Hacer una pregunta"
+  },
+  "contact": {
+    "metaTitle": "Contacto",
+    "metaDescription": "Hágame una pregunta. Respondo por correo electrónico.",
+    "title": "Hágame una <accent>pregunta.</accent>",
+    "lead": "Sobre un puesto, un proyecto o cualquier cosa de este sitio. Respondo por correo electrónico.",
+    "findMe": "También me encuentra en <links></links>."
+  },
+  "form": {
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "message": "Mensaje",
+    "honeypot": "Deje esta casilla sin marcar",
+    "send": "Enviar mensaje",
+    "sending": "Enviando…",
+    "sentTitle": "Gracias, su mensaje está en camino.",
+    "sentText": "Le responderé a la dirección de correo que indicó.",
+    "sendAnother": "Enviar otro mensaje",
+    "failedTitle": "Lo siento, no se pudo enviar el mensaje.",
+    "failedText": "Su texto sigue aquí, así que puede volver a intentarlo.",
+    "failedLinkedin": "También puede escribirme en <link>LinkedIn</link>.",
+    "errors": {
+      "nameMissing": "Por favor, indique su nombre.",
+      "nameLong": "Su nombre no puede superar los {max} caracteres.",
+      "emailMissing": "Por favor, indique su correo electrónico para que pueda responderle.",
+      "emailInvalid": "Esta dirección de correo no parece completa.",
+      "messageShort": "Por favor, escriba un mensaje de al menos {min} caracteres.",
+      "messageLong": "Su mensaje no puede superar los {max} caracteres.",
+      "captcha": "Por favor, complete la verificación de arriba, para saber que no es un bot."
+    }
+  },
+  "footer": {
+    "updated": "Actualizado el <date></date>",
+    "backToTop": "Volver arriba",
+    "legalNav": "Aviso legal",
+    "legalNotice": "Aviso legal",
+    "privacy": "Política de privacidad",
+    "stats": "Estadísticas",
+    "translated": "Esta página se tradujo automáticamente. El original está en inglés.",
+    "legalInEnglish": "Las páginas legales están disponibles en inglés y alemán."
+  },
+  "legal": {
+    "legalNoticeTitle": "Aviso legal (Impressum)",
+    "privacyTitle": "Política de privacidad"
+  },
+  "notFound": {
+    "title": "Esta página no existe.",
+    "back": "Volver a la página de inicio"
+  },
+  "stats": {
+    "metaTitle": "Estadísticas",
+    "eyebrow": "Estadísticas",
+    "title": "Quién visita.",
+    "since": "Contando desde el {date}",
+    "intro": "Visitas contadas por el propio sitio, sin cookies.",
+    "rangeLabel": "Periodo",
+    "ranges": {
+      "today": "Hoy",
+      "7d": "7 días",
+      "30d": "30 días",
+      "90d": "90 días",
+      "12m": "12 meses",
+      "all": "Todo"
+    },
+    "loading": "Cargando las cifras más recientes…",
+    "notConnectedTitle": "Las estadísticas aún no están conectadas.",
+    "notConnectedText": "El contador de visitas necesita su base de datos. Cuando esté conectada y el sitio se vuelva a publicar, las visitas se contarán desde ese momento.",
+    "errorTitle": "Ahora mismo no se pueden cargar las estadísticas.",
+    "errorText": "Se actualizan solas cada minuto; también puede recargar la página.",
+    "noVisitsTitle": "Todavía no hay visitas registradas.",
+    "noVisitsText": "El recuento empieza con la primera visita al sitio publicado. Vuelva pronto.",
+    "downloadJson": "Descargar datos (JSON)",
+    "downloadCsv": "Descargar datos (CSV)",
+    "updatesEveryMinute": "Se actualiza cada minuto.",
+    "excluded": "Sus propias visitas desde este navegador no se cuentan.",
+    "included": "Las visitas desde este navegador se cuentan (abra /stats?exclude-me=1 para evitarlo).",
+    "headline": "Cifras principales",
+    "visits": "Visitas",
+    "pageViews": "Páginas vistas",
+    "countriesReached": "Países alcanzados",
+    "allTimeVisits": "Visitas totales",
+    "lastViewed": "Última visita",
+    "emptyRangeTitle": "Todavía no hay visitas en este periodo.",
+    "emptyRangeText": "Elija un periodo más largo para ver visitas anteriores.",
+    "whereFrom": "De dónde vienen los visitantes",
+    "topCountries": "Países principales",
+    "topCountriesLabel": "Los diez países con más visitas",
+    "noCountries": "Todavía no hay países.",
+    "series": "{grouping, select, day {Visitas y páginas vistas por día} week {Visitas y páginas vistas por semana} other {Visitas y páginas vistas por mes}}",
+    "weekOf": "Semana del {date}",
+    "byHour": "Por hora del día (hora de Berlín)",
+    "byHourTitle": "Páginas vistas por hora del día",
+    "hour": "Hora",
+    "byWeekday": "Por día de la semana",
+    "byWeekdayTitle": "Páginas vistas por día de la semana",
+    "weekday": "Día",
+    "topPages": "Páginas más vistas",
+    "topPagesLabel": "Las páginas más visitadas",
+    "noPageViews": "Todavía no hay páginas vistas.",
+    "topReferrers": "Principales orígenes",
+    "topReferrersLabel": "Sitios desde los que llegaron los visitantes",
+    "noVisits": "Todavía no hay visitas.",
+    "devices": "Dispositivos",
+    "devicesLabel": "Visitas por tipo de dispositivo",
+    "themes": "Tema oscuro o claro",
+    "themesLabel": "Visitas por tema de color",
+    "siteLanguages": "Idioma del sitio",
+    "siteLanguagesLabel": "Páginas vistas por idioma del sitio",
+    "cvByLanguage": "Descargas del CV por idioma",
+    "cvByLanguageLabel": "Descargas del CV por idioma del CV",
+    "noDownloads": "Todavía no hay descargas.",
+    "events": "Descargas del CV y clics en enlaces",
+    "noEvents": "Todavía no hay descargas ni clics.",
+    "recent": "Visitas recientes",
+    "noViews": "Todavía no hay visitas.",
+    "justNow": "ahora mismo",
+    "unknownCountry": "Desconocido",
+    "noData": "Sin datos",
+    "showNumbers": "Mostrar cifras",
+    "period": "Periodo",
+    "country": "País",
+    "visitsCount": "{count, plural, one {# visita} other {# visitas}}",
+    "pageViewsCount": "{count, plural, one {# página vista} other {# páginas vistas}}",
+    "countriesCount": "{count, plural, one {# país} other {# países}}",
+    "seriesSummary": "{title}: {visits} y {views} en {periods} periodos.",
+    "busiest": "{title}, máxima actividad: {label} con {value}.",
+    "noDataYet": "{title}, todavía sin datos.",
+    "mapLabel": "Mapa del mundo: visitantes de {countries}. Los países con visitas se pueden seleccionar.",
+    "mapHint": "Pase el cursor, toque o seleccione un país para ver sus cifras.",
+    "mapLegend": "Leyenda del mapa: visitas por país",
+    "mapNone": "Ninguna",
+    "mapTable": "Visitas y páginas vistas por país",
+    "pages": {
+      "/": "Inicio",
+      "/contact": "Contacto",
+      "/impressum": "Aviso legal",
+      "/datenschutz": "Política de privacidad",
+      "project": "Proyecto: {title}"
+    },
+    "referrers": {
+      "direct": "Directo / ninguno",
+      "other": "Otros sitios"
+    },
+    "deviceNames": {
+      "phone": "Móvil",
+      "tablet": "Tableta",
+      "desktop": "Ordenador"
+    },
+    "themeNames": {
+      "dark": "Oscuro",
+      "light": "Claro"
+    },
+    "eventNames": {
+      "cv": "Descargas del CV",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "Hacer una pregunta"
+    }
+  },
+  "cvDocument": {
+    "heading": "Currículum vitae",
+    "profile": "Perfil",
+    "experience": "Experiencia profesional",
+    "education": "Formación",
+    "skills": "Habilidades",
+    "languages": "Idiomas",
+    "certifications": "Certificaciones",
+    "range": "{start} – {end}",
+    "translated": "Traducido para su comodidad. Idiomas de trabajo: {languages}.",
+    "roleAt": "{role}, {company}",
+    "place": "{city}, {country}"
+  }
+}

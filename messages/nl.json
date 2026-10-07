@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · Software engineer",
+    "description": "{pitch} Gevestigd in {location}.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "Naar de inhoud",
+    "homeLink": "{name}, home",
+    "sectionsNav": "Onderdelen",
+    "inEnglish": "In het Engels"
+  },
+  "nav": {
+    "about": "Over mij",
+    "experience": "Ervaring",
+    "projects": "Projecten",
+    "skills": "Vaardigheden",
+    "contact": "Contact"
+  },
+  "theme": {
+    "toLight": "Naar licht thema",
+    "toDark": "Naar donker thema"
+  },
+  "language": {
+    "button": "Taal: {name}. Andere taal kiezen",
+    "menu": "Kies een taal"
+  },
+  "cv": {
+    "download": "Cv downloaden",
+    "downloadShort": "Cv",
+    "fileName": "{name}-CV",
+    "otherLanguages": "Ook beschikbaar in",
+    "menu": "Cv in andere talen",
+    "europassIn": "Europass-formaat, {language}",
+    "close": "Sluiten"
+  },
+  "dates": {
+    "present": "heden",
+    "range": "{start} tot {end}",
+    "years": "{count, plural, one {# jaar} other {# jaar}}",
+    "months": "{count, plural, one {# maand} other {# maanden}}"
+  },
+  "hero": {
+    "statusJob": "{role} bij {company}",
+    "seeProjects": "Bekijk projecten"
+  },
+  "companies": {
+    "title": "Bedrijven waar ik heb gewerkt"
+  },
+  "about": {
+    "eyebrow": "Over mij"
+  },
+  "experience": {
+    "title": "Waar ik heb gewerkt.",
+    "showDetails": "Details tonen",
+    "hideDetails": "Details verbergen"
+  },
+  "projects": {
+    "title": "Wat ik heb gebouwd.",
+    "filterLabel": "Projecten filteren op taal",
+    "count": "{count, plural, one {# {group}-project} other {# {group}-projecten}}",
+    "showFewer": "Minder tonen",
+    "showAll": "Alle {count} {group}-projecten tonen",
+    "allRepos": "Alle repositories op GitHub",
+    "empty": "Projecten verschijnen hier binnenkort.",
+    "emptyGithub": "Intussen staat mijn code op <link>GitHub</link>.",
+    "labels": "Labels",
+    "fork": "Fork",
+    "details": "Details",
+    "detailsHidden": "over {title}",
+    "code": "Code",
+    "codeHidden": "van {title} op GitHub",
+    "liveDemo": "Live demo",
+    "liveDemoHidden": "van {title}",
+    "groups": {
+      "Other": "Overig"
+    }
+  },
+  "project": {
+    "allProjects": "Alle projecten",
+    "forkOf": "Fork van {repo}",
+    "lastUpdated": "Laatst bijgewerkt in {date}",
+    "topics": "Onderwerpen",
+    "codeOnGithub": "Code op GitHub",
+    "liveDemo": "Live demo",
+    "screenshotAlt": "Schermafbeelding van {title}",
+    "fullCode": "De volledige broncode en de README staan op <link>GitHub</link>.",
+    "readmeInEnglish": "Uit de README van het project op GitHub, in het Engels.",
+    "metaDescription": "{title}, een {group}-project op GitHub.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}, een project van {name}"
+  },
+  "skills": {
+    "title": "Waarmee ik werk.",
+    "cloudLabel": "Talen en tools"
+  },
+  "education": {
+    "title": "Opleiding en certificaten.",
+    "certifications": "Certificaten",
+    "languages": "Talen"
+  },
+  "contactCall": {
+    "title": "Laten we praten.",
+    "ask": "Stel een vraag"
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Stel mij een vraag. Ik antwoord per e-mail.",
+    "title": "Stel mij een <accent>vraag.</accent>",
+    "lead": "Over een functie, een project of iets anders op deze site. Ik antwoord per e-mail.",
+    "findMe": "U vindt mij ook op <links></links>."
+  },
+  "form": {
+    "name": "Naam",
+    "email": "E-mail",
+    "message": "Bericht",
+    "honeypot": "Laat dit vakje leeg",
+    "send": "Bericht versturen",
+    "sending": "Bezig met versturen…",
+    "sentTitle": "Bedankt, uw bericht is onderweg.",
+    "sentText": "Ik antwoord op het e-mailadres dat u hebt opgegeven.",
+    "sendAnother": "Nog een bericht versturen",
+    "failedTitle": "Het bericht kon helaas niet worden verstuurd.",
+    "failedText": "Uw tekst staat er nog, dus u kunt het opnieuw proberen.",
+    "failedLinkedin": "Of bereik mij via <link>LinkedIn</link>.",
+    "errors": {
+      "nameMissing": "Vul uw naam in.",
+      "nameLong": "Uw naam mag niet langer zijn dan {max} tekens.",
+      "emailMissing": "Vul uw e-mailadres in, zodat ik kan antwoorden.",
+      "emailInvalid": "Dit e-mailadres lijkt niet volledig.",
+      "messageShort": "Schrijf een bericht van minstens {min} tekens.",
+      "messageLong": "Uw bericht mag niet langer zijn dan {max} tekens.",
+      "captcha": "Voltooi de controle hierboven, zodat ik weet dat u geen bot bent."
+    }
+  },
+  "footer": {
+    "updated": "Bijgewerkt op <date></date>",
+    "backToTop": "Naar boven",
+    "legalNav": "Juridisch",
+    "legalNotice": "Colofon",
+    "privacy": "Privacyverklaring",
+    "stats": "Statistieken",
+    "translated": "Deze pagina is automatisch vertaald. Het origineel is in het Engels.",
+    "legalInEnglish": "De juridische pagina’s zijn beschikbaar in het Engels en het Duits."
+  },
+  "legal": {
+    "legalNoticeTitle": "Colofon (Impressum)",
+    "privacyTitle": "Privacyverklaring"
+  },
+  "notFound": {
+    "title": "Deze pagina bestaat niet.",
+    "back": "Terug naar de homepage"
+  },
+  "stats": {
+    "metaTitle": "Statistieken",
+    "eyebrow": "Statistieken",
+    "title": "Wie er langskomt.",
+    "since": "Geteld sinds {date}",
+    "intro": "Bezoeken geteld door de site zelf, zonder cookies.",
+    "rangeLabel": "Periode",
+    "ranges": {
+      "today": "Vandaag",
+      "7d": "7 dagen",
+      "30d": "30 dagen",
+      "90d": "90 dagen",
+      "12m": "12 maanden",
+      "all": "Altijd"
+    },
+    "loading": "De nieuwste cijfers worden geladen…",
+    "notConnectedTitle": "De statistieken zijn nog niet gekoppeld.",
+    "notConnectedText": "De bezoekersteller heeft zijn database nodig. Zodra die gekoppeld is en de site opnieuw is gepubliceerd, worden bezoeken vanaf dat moment geteld.",
+    "errorTitle": "De statistieken kunnen nu niet worden geladen.",
+    "errorText": "Ze worden elke minuut vanzelf bijgewerkt; u kunt de pagina ook opnieuw laden.",
+    "noVisitsTitle": "Nog geen bezoeken geteld.",
+    "noVisitsText": "Het tellen begint bij het eerste bezoek aan de gepubliceerde site. Kom snel terug.",
+    "downloadJson": "Gegevens downloaden (JSON)",
+    "downloadCsv": "Gegevens downloaden (CSV)",
+    "updatesEveryMinute": "Wordt elke minuut bijgewerkt.",
+    "excluded": "Uw eigen bezoeken met deze browser worden niet geteld.",
+    "included": "Bezoeken met deze browser worden geteld (open /stats?exclude-me=1 om dat te stoppen).",
+    "headline": "Kerncijfers",
+    "visits": "Bezoeken",
+    "pageViews": "Paginaweergaven",
+    "countriesReached": "Bereikte landen",
+    "allTimeVisits": "Bezoeken in totaal",
+    "lastViewed": "Laatst bekeken",
+    "emptyRangeTitle": "Nog geen bezoeken in deze periode.",
+    "emptyRangeText": "Kies een langere periode om eerdere bezoeken te zien.",
+    "whereFrom": "Waar bezoekers vandaan komen",
+    "topCountries": "Belangrijkste landen",
+    "topCountriesLabel": "De tien landen met de meeste bezoeken",
+    "noCountries": "Nog geen landen.",
+    "series": "{grouping, select, day {Bezoeken en paginaweergaven per dag} week {Bezoeken en paginaweergaven per week} other {Bezoeken en paginaweergaven per maand}}",
+    "weekOf": "Week van {date}",
+    "byHour": "Per uur (Berlijnse tijd)",
+    "byHourTitle": "Paginaweergaven per uur",
+    "hour": "Uur",
+    "byWeekday": "Per weekdag",
+    "byWeekdayTitle": "Paginaweergaven per weekdag",
+    "weekday": "Weekdag",
+    "topPages": "Meest bekeken pagina’s",
+    "topPagesLabel": "De meest bekeken pagina’s",
+    "noPageViews": "Nog geen paginaweergaven.",
+    "topReferrers": "Belangrijkste herkomst",
+    "topReferrersLabel": "Sites waar bezoekers vandaan kwamen",
+    "noVisits": "Nog geen bezoeken.",
+    "devices": "Apparaten",
+    "devicesLabel": "Bezoeken per type apparaat",
+    "themes": "Donker of licht thema",
+    "themesLabel": "Bezoeken per kleurthema",
+    "siteLanguages": "Taal van de site",
+    "siteLanguagesLabel": "Paginaweergaven per taal van de site",
+    "cvByLanguage": "Cv-downloads per taal",
+    "cvByLanguageLabel": "Cv-downloads per taal van het cv",
+    "noDownloads": "Nog geen downloads.",
+    "events": "Cv-downloads en klikken op links",
+    "noEvents": "Nog geen downloads of klikken.",
+    "recent": "Recente weergaven",
+    "noViews": "Nog geen weergaven.",
+    "justNow": "zojuist",
+    "unknownCountry": "Onbekend",
+    "noData": "Geen gegevens",
+    "showNumbers": "Cijfers tonen",
+    "period": "Periode",
+    "country": "Land",
+    "visitsCount": "{count, plural, one {# bezoek} other {# bezoeken}}",
+    "pageViewsCount": "{count, plural, one {# paginaweergave} other {# paginaweergaven}}",
+    "countriesCount": "{count, plural, one {# land} other {# landen}}",
+    "seriesSummary": "{title}: {visits} en {views} over {periods} perioden.",
+    "busiest": "{title}, drukst: {label} met {value}.",
+    "noDataYet": "{title}, nog geen gegevens.",
+    "mapLabel": "Wereldkaart: bezoekers uit {countries}. Landen met bezoeken kunnen worden geselecteerd.",
+    "mapHint": "Wijs een land aan, tik erop of selecteer het om de cijfers te zien.",
+    "mapLegend": "Legenda: bezoeken per land",
+    "mapNone": "Geen",
+    "mapTable": "Bezoeken en paginaweergaven per land",
+    "pages": {
+      "/": "Home",
+      "/contact": "Contact",
+      "/impressum": "Colofon",
+      "/datenschutz": "Privacyverklaring",
+      "project": "Project: {title}"
+    },
+    "referrers": {
+      "direct": "Direct / geen",
+      "other": "Andere sites"
+    },
+    "deviceNames": {
+      "phone": "Smartphone",
+      "tablet": "Tablet",
+      "desktop": "Computer"
+    },
+    "themeNames": {
+      "dark": "Donker",
+      "light": "Licht"
+    },
+    "eventNames": {
+      "cv": "Cv-downloads",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "Stel een vraag"
+    }
+  },
+  "cvDocument": {
+    "heading": "Curriculum vitae",
+    "profile": "Profiel",
+    "experience": "Werkervaring",
+    "education": "Opleiding",
+    "skills": "Vaardigheden",
+    "languages": "Talen",
+    "certifications": "Certificaten",
+    "range": "{start} – {end}",
+    "translated": "Vertaald voor het gemak. Werktalen: {languages}.",
+    "roleAt": "{role}, {company}",
+    "place": "{city}, {country}"
+  }
+}

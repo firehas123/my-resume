@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · مهندس برمجيات",
+    "description": "{pitch} مقيم في {location}.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "الانتقال إلى المحتوى",
+    "homeLink": "{name}، الصفحة الرئيسية",
+    "sectionsNav": "الأقسام",
+    "inEnglish": "بالإنجليزية"
+  },
+  "nav": {
+    "about": "نبذة عني",
+    "experience": "الخبرة",
+    "projects": "المشاريع",
+    "skills": "المهارات",
+    "contact": "تواصل"
+  },
+  "theme": {
+    "toLight": "التبديل إلى الوضع الفاتح",
+    "toDark": "التبديل إلى الوضع الداكن"
+  },
+  "language": {
+    "button": "اللغة: {name}. اختر لغة أخرى",
+    "menu": "اختر لغة"
+  },
+  "cv": {
+    "download": "تنزيل السيرة الذاتية",
+    "downloadShort": "CV",
+    "fileName": "{name}-CV",
+    "otherLanguages": "متوفرة أيضًا بـ",
+    "menu": "السيرة الذاتية بلغات أخرى",
+    "europassIn": "صيغة Europass، {language}",
+    "close": "إغلاق"
+  },
+  "dates": {
+    "present": "حتى الآن",
+    "range": "{start} – {end}",
+    "years": "{count, plural, zero {أقل من سنة} one {سنة واحدة} two {سنتان} few {# سنوات} many {# سنة} other {# سنة}}",
+    "months": "{count, plural, zero {أقل من شهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}}"
+  },
+  "hero": {
+    "statusJob": "{role} في {company}",
+    "seeProjects": "عرض المشاريع"
+  },
+  "companies": {
+    "title": "شركات عملت معها"
+  },
+  "about": {
+    "eyebrow": "نبذة عني"
+  },
+  "experience": {
+    "title": "أين عملت.",
+    "showDetails": "عرض التفاصيل",
+    "hideDetails": "إخفاء التفاصيل"
+  },
+  "projects": {
+    "title": "ما قمت ببنائه.",
+    "filterLabel": "تصفية المشاريع حسب لغة البرمجة",
+    "count": "{count, plural, zero {لا مشاريع {group}} one {مشروع {group} واحد} two {مشروعا {group}} few {# مشاريع {group}} many {# مشروعًا {group}} other {# مشروع {group}}}",
+    "showFewer": "عرض أقل",
+    "showAll": "عرض كل مشاريع {group} ({count})",
+    "allRepos": "كل المستودعات على GitHub",
+    "empty": "ستظهر المشاريع هنا قريبًا.",
+    "emptyGithub": "في هذه الأثناء، تجد الشيفرة على <link>GitHub</link>.",
+    "labels": "الوسوم",
+    "fork": "Fork",
+    "details": "التفاصيل",
+    "detailsHidden": "حول {title}",
+    "code": "الشيفرة",
+    "codeHidden": "الخاصة بـ {title} على GitHub",
+    "liveDemo": "عرض مباشر",
+    "liveDemoHidden": "لـ {title}",
+    "groups": {
+      "Other": "أخرى"
+    }
+  },
+  "project": {
+    "allProjects": "كل المشاريع",
+    "forkOf": "Fork من {repo}",
+    "lastUpdated": "آخر تحديث: {date}",
+    "topics": "المواضيع",
+    "codeOnGithub": "الشيفرة على GitHub",
+    "liveDemo": "عرض مباشر",
+    "screenshotAlt": "لقطة شاشة من {title}",
+    "fullCode": "الشيفرة المصدرية الكاملة وملف README على <link>GitHub</link>.",
+    "readmeInEnglish": "من ملف README الخاص بالمشروع على GitHub، بالإنجليزية.",
+    "metaDescription": "{title}، مشروع {group} على GitHub.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}، مشروع من إعداد {name}"
+  },
+  "skills": {
+    "title": "أدواتي.",
+    "cloudLabel": "اللغات والأدوات"
+  },
+  "education": {
+    "title": "التعليم والشهادات.",
+    "certifications": "الشهادات",
+    "languages": "اللغات"
+  },
+  "contactCall": {
+    "title": "لنتحدث.",
+    "ask": "اطرح سؤالًا"
+  },
+  "contact": {
+    "metaTitle": "تواصل",
+    "metaDescription": "اطرح عليّ سؤالًا. أرد عبر البريد الإلكتروني.",
+    "title": "اطرح عليّ <accent>سؤالًا.</accent>",
+    "lead": "عن وظيفة أو مشروع أو أي شيء في هذا الموقع. أرد عبر البريد الإلكتروني.",
+    "findMe": "أو تجدني على <links></links>."
+  },
+  "form": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "message": "الرسالة",
+    "honeypot": "اترك هذا المربع فارغًا",
+    "send": "إرسال الرسالة",
+    "sending": "جارٍ الإرسال…",
+    "sentTitle": "شكرًا لك، رسالتك في طريقها.",
+    "sentText": "سأرد على عنوان البريد الإلكتروني الذي أدخلته.",
+    "sendAnother": "إرسال رسالة أخرى",
+    "failedTitle": "عذرًا، تعذّر إرسال الرسالة.",
+    "failedText": "نصك ما زال هنا، فيمكنك المحاولة مرة أخرى.",
+    "failedLinkedin": "أو تواصل معي عبر <link>LinkedIn</link>.",
+    "errors": {
+      "nameMissing": "يرجى إدخال اسمك.",
+      "nameLong": "يجب ألا يتجاوز الاسم {max} حرفًا.",
+      "emailMissing": "يرجى إدخال بريدك الإلكتروني حتى أتمكن من الرد.",
+      "emailInvalid": "يبدو أن عنوان البريد الإلكتروني غير مكتمل.",
+      "messageShort": "يرجى كتابة رسالة لا تقل عن {min} أحرف.",
+      "messageLong": "يجب ألا تتجاوز الرسالة {max} حرف.",
+      "captcha": "يرجى إكمال التحقق أعلاه، حتى أعرف أنك لست برنامجًا آليًا."
+    }
+  },
+  "footer": {
+    "updated": "آخر تحديث: <date></date>",
+    "backToTop": "العودة إلى الأعلى",
+    "legalNav": "معلومات قانونية",
+    "legalNotice": "بيانات الناشر",
+    "privacy": "سياسة الخصوصية",
+    "stats": "إحصاءات الموقع",
+    "translated": "تُرجمت هذه الصفحة آليًا. النص الأصلي بالإنجليزية.",
+    "legalInEnglish": "الصفحات القانونية متوفرة بالإنجليزية والألمانية."
+  },
+  "legal": {
+    "legalNoticeTitle": "بيانات الناشر (Impressum)",
+    "privacyTitle": "سياسة الخصوصية"
+  },
+  "notFound": {
+    "title": "هذه الصفحة غير موجودة.",
+    "back": "العودة إلى الصفحة الرئيسية"
+  },
+  "stats": {
+    "metaTitle": "إحصاءات الموقع",
+    "eyebrow": "إحصاءات الموقع",
+    "title": "من يزور الموقع.",
+    "since": "العدّ منذ {date}",
+    "intro": "زيارات يعدّها الموقع بنفسه، دون ملفات تعريف الارتباط.",
+    "rangeLabel": "الفترة الزمنية",
+    "ranges": {
+      "today": "اليوم",
+      "7d": "7 أيام",
+      "30d": "30 يومًا",
+      "90d": "90 يومًا",
+      "12m": "12 شهرًا",
+      "all": "منذ البداية"
+    },
+    "loading": "جارٍ تحميل أحدث الأرقام…",
+    "notConnectedTitle": "الإحصاءات غير متصلة بعد.",
+    "notConnectedText": "يحتاج عدّاد الزيارات إلى قاعدة بياناته. بعد ربطها وإعادة نشر الموقع، تُعدّ الزيارات ابتداءً من تلك اللحظة.",
+    "errorTitle": "تعذّر تحميل الإحصاءات حاليًا.",
+    "errorText": "تتحدث تلقائيًا كل دقيقة، ويمكنك أيضًا إعادة تحميل الصفحة.",
+    "noVisitsTitle": "لم تُسجَّل أي زيارات بعد.",
+    "noVisitsText": "يبدأ العدّ مع أول زيارة للموقع المنشور. عد قريبًا.",
+    "downloadJson": "تنزيل البيانات (JSON)",
+    "downloadCsv": "تنزيل البيانات (CSV)",
+    "updatesEveryMinute": "تتحدث كل دقيقة.",
+    "excluded": "زياراتك من هذا المتصفح لا تُحتسب.",
+    "included": "تُحتسب الزيارات من هذا المتصفح (افتح /stats?exclude-me=1 لإيقاف ذلك).",
+    "headline": "الأرقام الرئيسية",
+    "visits": "الزيارات",
+    "pageViews": "مشاهدات الصفحات",
+    "countriesReached": "الدول",
+    "allTimeVisits": "إجمالي الزيارات",
+    "lastViewed": "آخر مشاهدة",
+    "emptyRangeTitle": "لا توجد زيارات في هذه الفترة بعد.",
+    "emptyRangeText": "اختر فترة أطول لرؤية الزيارات السابقة.",
+    "whereFrom": "من أين يأتي الزوار",
+    "topCountries": "أبرز الدول",
+    "topCountriesLabel": "الدول العشر الأكثر زيارة",
+    "noCountries": "لا توجد دول بعد.",
+    "series": "{grouping, select, day {الزيارات ومشاهدات الصفحات يوميًا} week {الزيارات ومشاهدات الصفحات أسبوعيًا} other {الزيارات ومشاهدات الصفحات شهريًا}}",
+    "weekOf": "أسبوع {date}",
+    "byHour": "حسب ساعة اليوم (بتوقيت برلين)",
+    "byHourTitle": "مشاهدات الصفحات حسب ساعة اليوم",
+    "hour": "الساعة",
+    "byWeekday": "حسب يوم الأسبوع",
+    "byWeekdayTitle": "مشاهدات الصفحات حسب يوم الأسبوع",
+    "weekday": "اليوم",
+    "topPages": "أكثر الصفحات مشاهدة",
+    "topPagesLabel": "الصفحات الأكثر مشاهدة",
+    "noPageViews": "لا توجد مشاهدات بعد.",
+    "topReferrers": "أبرز مصادر الزيارات",
+    "topReferrersLabel": "المواقع التي جاء منها الزوار",
+    "noVisits": "لا توجد زيارات بعد.",
+    "devices": "الأجهزة",
+    "devicesLabel": "الزيارات حسب نوع الجهاز",
+    "themes": "الوضع الداكن أو الفاتح",
+    "themesLabel": "الزيارات حسب نمط الألوان",
+    "siteLanguages": "لغة الموقع",
+    "siteLanguagesLabel": "مشاهدات الصفحات حسب لغة الموقع",
+    "cvByLanguage": "تنزيلات السيرة الذاتية حسب اللغة",
+    "cvByLanguageLabel": "تنزيلات السيرة الذاتية حسب لغتها",
+    "noDownloads": "لا توجد تنزيلات بعد.",
+    "events": "تنزيلات السيرة الذاتية والنقرات على الروابط",
+    "noEvents": "لا توجد تنزيلات أو نقرات بعد.",
+    "recent": "أحدث المشاهدات",
+    "noViews": "لا توجد مشاهدات بعد.",
+    "justNow": "الآن",
+    "unknownCountry": "غير معروف",
+    "noData": "لا توجد بيانات",
+    "showNumbers": "عرض الأرقام",
+    "period": "الفترة",
+    "country": "الدولة",
+    "visitsCount": "{count, plural, zero {لا زيارات} one {زيارة واحدة} two {زيارتان} few {# زيارات} many {# زيارة} other {# زيارة}}",
+    "pageViewsCount": "{count, plural, zero {لا مشاهدات} one {مشاهدة واحدة} two {مشاهدتان} few {# مشاهدات} many {# مشاهدة} other {# مشاهدة}}",
+    "countriesCount": "{count, plural, zero {لا دول} one {دولة واحدة} two {دولتين} few {# دول} many {# دولة} other {# دولة}}",
+    "seriesSummary": "{title}: {visits} و{views} على مدى {periods} فترات.",
+    "busiest": "{title}، الأكثر نشاطًا: {label} بـ {value}.",
+    "noDataYet": "{title}، لا توجد بيانات بعد.",
+    "mapLabel": "خريطة العالم: زوار من {countries}. يمكن تحديد الدول التي لها زيارات.",
+    "mapHint": "مرّر المؤشر فوق دولة أو المسها أو حدّدها لرؤية أرقامها.",
+    "mapLegend": "مفتاح الخريطة: الزيارات لكل دولة",
+    "mapNone": "لا شيء",
+    "mapTable": "الزيارات ومشاهدات الصفحات لكل دولة",
+    "pages": {
+      "/": "الصفحة الرئيسية",
+      "/contact": "تواصل",
+      "/impressum": "بيانات الناشر",
+      "/datenschutz": "سياسة الخصوصية",
+      "project": "مشروع: {title}"
+    },
+    "referrers": {
+      "direct": "مباشر / بلا مصدر",
+      "other": "مواقع أخرى"
+    },
+    "deviceNames": {
+      "phone": "هاتف",
+      "tablet": "جهاز لوحي",
+      "desktop": "حاسوب"
+    },
+    "themeNames": {
+      "dark": "داكن",
+      "light": "فاتح"
+    },
+    "eventNames": {
+      "cv": "تنزيلات السيرة الذاتية",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "اطرح سؤالًا"
+    }
+  },
+  "cvDocument": {
+    "heading": "السيرة الذاتية",
+    "profile": "الملف الشخصي",
+    "experience": "الخبرة المهنية",
+    "education": "التعليم",
+    "skills": "المهارات",
+    "languages": "اللغات",
+    "certifications": "الشهادات",
+    "range": "{start} – {end}",
+    "translated": "مترجمة للتيسير. لغات العمل: {languages}.",
+    "roleAt": "{role}، {company}",
+    "place": "{city}، {country}"
+  }
+}

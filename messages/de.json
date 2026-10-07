@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · Software Engineer",
+    "description": "{pitch} Mit Sitz in {location}.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "Zum Inhalt springen",
+    "homeLink": "{name}, Startseite",
+    "sectionsNav": "Bereiche",
+    "inEnglish": "Auf Englisch"
+  },
+  "nav": {
+    "about": "Über mich",
+    "experience": "Erfahrung",
+    "projects": "Projekte",
+    "skills": "Kenntnisse",
+    "contact": "Kontakt"
+  },
+  "theme": {
+    "toLight": "Zum hellen Design wechseln",
+    "toDark": "Zum dunklen Design wechseln"
+  },
+  "language": {
+    "button": "Sprache: {name}. Andere Sprache wählen",
+    "menu": "Sprache wählen"
+  },
+  "cv": {
+    "download": "Lebenslauf herunterladen",
+    "downloadShort": "CV",
+    "fileName": "{name}-Lebenslauf",
+    "otherLanguages": "Auch verfügbar auf",
+    "menu": "Lebenslauf in anderen Sprachen",
+    "europassIn": "Europass-Format, {language}",
+    "close": "Schließen"
+  },
+  "dates": {
+    "present": "heute",
+    "range": "{start} bis {end}",
+    "years": "{count, plural, one {# Jahr} other {# Jahre}}",
+    "months": "{count, plural, one {# Monat} other {# Monate}}"
+  },
+  "hero": {
+    "statusJob": "{role} bei {company}",
+    "seeProjects": "Projekte ansehen"
+  },
+  "companies": {
+    "title": "Unternehmen, für die ich gearbeitet habe"
+  },
+  "about": {
+    "eyebrow": "Über mich"
+  },
+  "experience": {
+    "title": "Meine Stationen.",
+    "showDetails": "Details anzeigen",
+    "hideDetails": "Details ausblenden"
+  },
+  "projects": {
+    "title": "Was ich gebaut habe.",
+    "filterLabel": "Projekte nach Sprache filtern",
+    "count": "{count, plural, one {# Projekt in {group}} other {# Projekte in {group}}}",
+    "showFewer": "Weniger anzeigen",
+    "showAll": "Alle {count} Projekte in {group} anzeigen",
+    "allRepos": "Alle Repositories auf GitHub",
+    "empty": "Projekte erscheinen hier in Kürze.",
+    "emptyGithub": "Bis dahin finden Sie meinen Code auf <link>GitHub</link>.",
+    "labels": "Merkmale",
+    "fork": "Fork",
+    "details": "Details",
+    "detailsHidden": "zu {title}",
+    "code": "Code",
+    "codeHidden": "von {title} auf GitHub",
+    "liveDemo": "Live-Demo",
+    "liveDemoHidden": "von {title}",
+    "groups": {
+      "Other": "Sonstige"
+    }
+  },
+  "project": {
+    "allProjects": "Alle Projekte",
+    "forkOf": "Fork von {repo}",
+    "lastUpdated": "Zuletzt aktualisiert im {date}",
+    "topics": "Themen",
+    "codeOnGithub": "Code auf GitHub",
+    "liveDemo": "Live-Demo",
+    "screenshotAlt": "Screenshot von {title}",
+    "fullCode": "Den vollständigen Quellcode und die README finden Sie auf <link>GitHub</link>.",
+    "readmeInEnglish": "Aus der README des Projekts auf GitHub, auf Englisch.",
+    "metaDescription": "{title}, ein {group}-Projekt auf GitHub.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}, ein Projekt von {name}"
+  },
+  "skills": {
+    "title": "Womit ich arbeite.",
+    "cloudLabel": "Sprachen und Werkzeuge"
+  },
+  "education": {
+    "title": "Ausbildung und Zertifikate.",
+    "certifications": "Zertifikate",
+    "languages": "Sprachen"
+  },
+  "contactCall": {
+    "title": "Sprechen wir.",
+    "ask": "Frage stellen"
+  },
+  "contact": {
+    "metaTitle": "Kontakt",
+    "metaDescription": "Stellen Sie mir eine Frage. Ich antworte per E-Mail.",
+    "title": "Stellen Sie mir eine <accent>Frage.</accent>",
+    "lead": "Zu einer Stelle, einem Projekt oder zu allem auf dieser Website. Ich antworte per E-Mail.",
+    "findMe": "Oder finden Sie mich auf <links></links>."
+  },
+  "form": {
+    "name": "Name",
+    "email": "E-Mail",
+    "message": "Nachricht",
+    "honeypot": "Dieses Feld nicht ankreuzen",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet …",
+    "sentTitle": "Danke, Ihre Nachricht ist unterwegs.",
+    "sentText": "Ich antworte an die angegebene E-Mail-Adresse.",
+    "sendAnother": "Weitere Nachricht senden",
+    "failedTitle": "Die Nachricht konnte leider nicht gesendet werden.",
+    "failedText": "Ihr Text ist noch da, Sie können es also erneut versuchen.",
+    "failedLinkedin": "Oder erreichen Sie mich über <link>LinkedIn</link>.",
+    "errors": {
+      "nameMissing": "Bitte geben Sie Ihren Namen ein.",
+      "nameLong": "Bitte verwenden Sie für Ihren Namen höchstens {max} Zeichen.",
+      "emailMissing": "Bitte geben Sie Ihre E-Mail-Adresse ein, damit ich antworten kann.",
+      "emailInvalid": "Diese E-Mail-Adresse scheint unvollständig zu sein.",
+      "messageShort": "Bitte schreiben Sie eine Nachricht mit mindestens {min} Zeichen.",
+      "messageLong": "Bitte fassen Sie Ihre Nachricht in höchstens {max} Zeichen.",
+      "captcha": "Bitte schließen Sie die Prüfung oben ab, damit ich weiß, dass Sie kein Bot sind."
+    }
+  },
+  "footer": {
+    "updated": "Aktualisiert am <date></date>",
+    "backToTop": "Nach oben",
+    "legalNav": "Rechtliches",
+    "legalNotice": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "stats": "Statistik",
+    "translated": "Diese Seite wurde automatisch übersetzt. Das Original ist auf Englisch.",
+    "legalInEnglish": "Die rechtlichen Seiten gibt es auf Englisch und Deutsch."
+  },
+  "legal": {
+    "legalNoticeTitle": "Impressum",
+    "privacyTitle": "Datenschutzerklärung"
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht.",
+    "back": "Zurück zur Startseite"
+  },
+  "stats": {
+    "metaTitle": "Statistik",
+    "eyebrow": "Statistik",
+    "title": "Wer vorbeischaut.",
+    "since": "Gezählt seit {date}",
+    "intro": "Besuche, gezählt von dieser Website selbst, ohne Cookies.",
+    "rangeLabel": "Zeitraum",
+    "ranges": {
+      "today": "Heute",
+      "7d": "7 Tage",
+      "30d": "30 Tage",
+      "90d": "90 Tage",
+      "12m": "12 Monate",
+      "all": "Gesamt"
+    },
+    "loading": "Die neuesten Zahlen werden geladen …",
+    "notConnectedTitle": "Die Statistik ist noch nicht verbunden.",
+    "notConnectedText": "Der Besucherzähler braucht seine Datenbank. Sobald sie verbunden und die Website neu veröffentlicht ist, werden Besuche ab diesem Moment gezählt.",
+    "errorTitle": "Die Statistik kann gerade nicht geladen werden.",
+    "errorText": "Sie aktualisiert sich jede Minute von selbst; Sie können die Seite auch neu laden.",
+    "noVisitsTitle": "Noch keine Besuche gezählt.",
+    "noVisitsText": "Gezählt wird ab dem ersten Besuch der veröffentlichten Website. Schauen Sie bald wieder vorbei.",
+    "downloadJson": "Daten herunterladen (JSON)",
+    "downloadCsv": "Daten herunterladen (CSV)",
+    "updatesEveryMinute": "Aktualisiert sich jede Minute.",
+    "excluded": "Ihre eigenen Besuche mit diesem Browser werden nicht gezählt.",
+    "included": "Besuche mit diesem Browser werden gezählt (mit /stats?exclude-me=1 abschalten).",
+    "headline": "Kennzahlen",
+    "visits": "Besuche",
+    "pageViews": "Seitenaufrufe",
+    "countriesReached": "Erreichte Länder",
+    "allTimeVisits": "Besuche insgesamt",
+    "lastViewed": "Zuletzt aufgerufen",
+    "emptyRangeTitle": "In diesem Zeitraum gibt es noch keine Besuche.",
+    "emptyRangeText": "Wählen Sie einen längeren Zeitraum für frühere Besuche.",
+    "whereFrom": "Woher die Besucher kommen",
+    "topCountries": "Häufigste Länder",
+    "topCountriesLabel": "Die zehn Länder mit den meisten Besuchen",
+    "noCountries": "Noch keine Länder.",
+    "series": "{grouping, select, day {Besuche und Seitenaufrufe pro Tag} week {Besuche und Seitenaufrufe pro Woche} other {Besuche und Seitenaufrufe pro Monat}}",
+    "weekOf": "Woche ab {date}",
+    "byHour": "Nach Uhrzeit (deutsche Zeit)",
+    "byHourTitle": "Seitenaufrufe nach Uhrzeit",
+    "hour": "Stunde",
+    "byWeekday": "Nach Wochentag",
+    "byWeekdayTitle": "Seitenaufrufe nach Wochentag",
+    "weekday": "Wochentag",
+    "topPages": "Meistbesuchte Seiten",
+    "topPagesLabel": "Die am häufigsten aufgerufenen Seiten",
+    "noPageViews": "Noch keine Seitenaufrufe.",
+    "topReferrers": "Häufigste Herkunft",
+    "topReferrersLabel": "Websites, von denen Besucher kamen",
+    "noVisits": "Noch keine Besuche.",
+    "devices": "Geräte",
+    "devicesLabel": "Besuche nach Gerätetyp",
+    "themes": "Dunkles oder helles Design",
+    "themesLabel": "Besuche nach Farbdarstellung",
+    "siteLanguages": "Sprache der Website",
+    "siteLanguagesLabel": "Seitenaufrufe nach Sprache der Website",
+    "cvByLanguage": "Lebenslauf-Downloads nach Sprache",
+    "cvByLanguageLabel": "Lebenslauf-Downloads nach Sprache des Lebenslaufs",
+    "noDownloads": "Noch keine Downloads.",
+    "events": "Lebenslauf-Downloads und Link-Klicks",
+    "noEvents": "Noch keine Downloads oder Klicks.",
+    "recent": "Letzte Aufrufe",
+    "noViews": "Noch keine Aufrufe.",
+    "justNow": "gerade eben",
+    "unknownCountry": "Unbekannt",
+    "noData": "Keine Daten",
+    "showNumbers": "Zahlen anzeigen",
+    "period": "Zeitraum",
+    "country": "Land",
+    "visitsCount": "{count, plural, one {# Besuch} other {# Besuche}}",
+    "pageViewsCount": "{count, plural, one {# Seitenaufruf} other {# Seitenaufrufe}}",
+    "countriesCount": "{count, plural, one {# Land} other {# Ländern}}",
+    "seriesSummary": "{title}: {visits} und {views} in {periods} Zeiträumen.",
+    "busiest": "{title}, am meisten los: {label} mit {value}.",
+    "noDataYet": "{title}, noch keine Daten.",
+    "mapLabel": "Weltkarte: Besucher aus {countries}. Länder mit Besuchen lassen sich auswählen.",
+    "mapHint": "Zeigen, tippen oder fokussieren Sie ein Land, um seine Zahlen zu sehen.",
+    "mapLegend": "Kartenlegende: Besuche pro Land",
+    "mapNone": "Keine",
+    "mapTable": "Besuche und Seitenaufrufe pro Land",
+    "pages": {
+      "/": "Startseite",
+      "/contact": "Kontakt",
+      "/impressum": "Impressum",
+      "/datenschutz": "Datenschutzerklärung",
+      "project": "Projekt: {title}"
+    },
+    "referrers": {
+      "direct": "Direkt / ohne",
+      "other": "Andere Websites"
+    },
+    "deviceNames": {
+      "phone": "Smartphone",
+      "tablet": "Tablet",
+      "desktop": "Computer"
+    },
+    "themeNames": {
+      "dark": "Dunkel",
+      "light": "Hell"
+    },
+    "eventNames": {
+      "cv": "Lebenslauf-Downloads",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "Frage stellen"
+    }
+  },
+  "cvDocument": {
+    "heading": "Lebenslauf",
+    "profile": "Profil",
+    "experience": "Berufserfahrung",
+    "education": "Ausbildung",
+    "skills": "Kenntnisse",
+    "languages": "Sprachen",
+    "certifications": "Zertifikate",
+    "range": "{start} – {end}",
+    "translated": "Zur besseren Lesbarkeit übersetzt. Arbeitssprachen: {languages}.",
+    "roleAt": "{role}, {company}",
+    "place": "{city}, {country}"
+  }
+}

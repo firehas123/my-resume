@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "siteTitle": "{name} · Yazılım mühendisi",
+    "description": "{pitch} {location} merkezli.",
+    "shareImageAlt": "{name}: {headline}"
+  },
+  "common": {
+    "skipToContent": "İçeriğe geç",
+    "homeLink": "{name}, ana sayfa",
+    "sectionsNav": "Bölümler",
+    "inEnglish": "İngilizce"
+  },
+  "nav": {
+    "about": "Hakkımda",
+    "experience": "Deneyim",
+    "projects": "Projeler",
+    "skills": "Yetkinlikler",
+    "contact": "İletişim"
+  },
+  "theme": {
+    "toLight": "Açık temaya geç",
+    "toDark": "Koyu temaya geç"
+  },
+  "language": {
+    "button": "Dil: {name}. Başka bir dil seçin",
+    "menu": "Dil seçin"
+  },
+  "cv": {
+    "download": "Özgeçmişi indir",
+    "downloadShort": "CV",
+    "fileName": "{name}-Ozgecmis",
+    "otherLanguages": "Diğer diller",
+    "menu": "Diğer dillerde özgeçmiş",
+    "europassIn": "Europass formatı, {language}",
+    "close": "Kapat"
+  },
+  "dates": {
+    "present": "günümüz",
+    "range": "{start} – {end}",
+    "years": "{count, plural, other {# yıl}}",
+    "months": "{count, plural, other {# ay}}"
+  },
+  "hero": {
+    "statusJob": "{company} şirketinde {role}",
+    "seeProjects": "Projeleri gör"
+  },
+  "companies": {
+    "title": "Çalıştığım şirketler"
+  },
+  "about": {
+    "eyebrow": "Hakkımda"
+  },
+  "experience": {
+    "title": "Çalıştığım yerler.",
+    "showDetails": "Ayrıntıları göster",
+    "hideDetails": "Ayrıntıları gizle"
+  },
+  "projects": {
+    "title": "Geliştirdiklerim.",
+    "filterLabel": "Projeleri dile göre filtrele",
+    "count": "{count, plural, other {# {group} projesi}}",
+    "showFewer": "Daha az göster",
+    "showAll": "{count} {group} projesinin tümünü göster",
+    "allRepos": "GitHub’daki tüm depolar",
+    "empty": "Projeler yakında burada olacak.",
+    "emptyGithub": "Bu arada kodlarım <link>GitHub</link>’da.",
+    "labels": "Etiketler",
+    "fork": "Fork",
+    "details": "Ayrıntılar",
+    "detailsHidden": "{title} hakkında",
+    "code": "Kod",
+    "codeHidden": "{title} için GitHub’da",
+    "liveDemo": "Canlı demo",
+    "liveDemoHidden": "{title} için",
+    "groups": {
+      "Other": "Diğer"
+    }
+  },
+  "project": {
+    "allProjects": "Tüm projeler",
+    "forkOf": "{repo} deposunun fork’u",
+    "lastUpdated": "Son güncelleme: {date}",
+    "topics": "Konular",
+    "codeOnGithub": "GitHub’da kod",
+    "liveDemo": "Canlı demo",
+    "screenshotAlt": "{title} ekran görüntüsü",
+    "fullCode": "Kaynak kodun tamamı ve README <link>GitHub</link>’da.",
+    "readmeInEnglish": "Projenin GitHub’daki README dosyasından, İngilizce.",
+    "metaDescription": "{title}, GitHub’da bir {group} projesi.",
+    "shareEyebrow": "{name} · {group}",
+    "shareAlt": "{title}, {name} tarafından geliştirilen bir proje"
+  },
+  "skills": {
+    "title": "Neyle çalışıyorum.",
+    "cloudLabel": "Diller ve araçlar"
+  },
+  "education": {
+    "title": "Eğitim ve sertifikalar.",
+    "certifications": "Sertifikalar",
+    "languages": "Diller"
+  },
+  "contactCall": {
+    "title": "Konuşalım.",
+    "ask": "Soru sorun"
+  },
+  "contact": {
+    "metaTitle": "İletişim",
+    "metaDescription": "Bana bir soru sorun. E-postayla yanıt veririm.",
+    "title": "Bana bir <accent>soru sorun.</accent>",
+    "lead": "Bir pozisyon, bir proje ya da bu sitedeki herhangi bir konu hakkında. E-postayla yanıt veririm.",
+    "findMe": "Beni <links></links> üzerinden de bulabilirsiniz."
+  },
+  "form": {
+    "name": "Ad",
+    "email": "E-posta",
+    "message": "Mesaj",
+    "honeypot": "Bu kutuyu işaretlemeyin",
+    "send": "Mesajı gönder",
+    "sending": "Gönderiliyor…",
+    "sentTitle": "Teşekkürler, mesajınız yola çıktı.",
+    "sentText": "Verdiğiniz e-posta adresine yanıt vereceğim.",
+    "sendAnother": "Başka bir mesaj gönder",
+    "failedTitle": "Üzgünüm, mesaj gönderilemedi.",
+    "failedText": "Metniniz duruyor, yeniden deneyebilirsiniz.",
+    "failedLinkedin": "Ya da bana <link>LinkedIn</link> üzerinden ulaşın.",
+    "errors": {
+      "nameMissing": "Lütfen adınızı girin.",
+      "nameLong": "Adınız en fazla {max} karakter olabilir.",
+      "emailMissing": "Yanıt verebilmem için lütfen e-posta adresinizi girin.",
+      "emailInvalid": "Bu e-posta adresi eksik görünüyor.",
+      "messageShort": "Lütfen en az {min} karakterlik bir mesaj yazın.",
+      "messageLong": "Mesajınız en fazla {max} karakter olabilir.",
+      "captcha": "Bot olmadığınızı bilmem için lütfen yukarıdaki doğrulamayı tamamlayın."
+    }
+  },
+  "footer": {
+    "updated": "Güncelleme: <date></date>",
+    "backToTop": "Başa dön",
+    "legalNav": "Yasal",
+    "legalNotice": "Künye",
+    "privacy": "Gizlilik politikası",
+    "stats": "İstatistikler",
+    "translated": "Bu sayfa otomatik olarak çevrildi. Orijinali İngilizcedir.",
+    "legalInEnglish": "Yasal sayfalar İngilizce ve Almanca olarak mevcuttur."
+  },
+  "legal": {
+    "legalNoticeTitle": "Künye (Impressum)",
+    "privacyTitle": "Gizlilik politikası"
+  },
+  "notFound": {
+    "title": "Bu sayfa mevcut değil.",
+    "back": "Ana sayfaya dön"
+  },
+  "stats": {
+    "metaTitle": "İstatistikler",
+    "eyebrow": "İstatistikler",
+    "title": "Kimler uğruyor.",
+    "since": "{date} tarihinden beri sayılıyor",
+    "intro": "Ziyaretler, çerez kullanmadan sitenin kendisi tarafından sayılır.",
+    "rangeLabel": "Zaman aralığı",
+    "ranges": {
+      "today": "Bugün",
+      "7d": "7 gün",
+      "30d": "30 gün",
+      "90d": "90 gün",
+      "12m": "12 ay",
+      "all": "Tüm zamanlar"
+    },
+    "loading": "Son rakamlar yükleniyor…",
+    "notConnectedTitle": "İstatistikler henüz bağlı değil.",
+    "notConnectedText": "Ziyaret sayacının veritabanına ihtiyacı var. Veritabanı bağlanıp site yeniden yayınlandığında ziyaretler o andan itibaren sayılır.",
+    "errorTitle": "İstatistikler şu anda yüklenemiyor.",
+    "errorText": "Her dakika kendiliğinden yenilenir; sayfayı yeniden de yükleyebilirsiniz.",
+    "noVisitsTitle": "Henüz ziyaret kaydedilmedi.",
+    "noVisitsText": "Sayım, yayındaki siteye yapılan ilk ziyaretle başlar. Yakında tekrar bakın.",
+    "downloadJson": "Verileri indir (JSON)",
+    "downloadCsv": "Verileri indir (CSV)",
+    "updatesEveryMinute": "Her dakika güncellenir.",
+    "excluded": "Bu tarayıcıdan yaptığınız ziyaretler sayılmaz.",
+    "included": "Bu tarayıcıdan yapılan ziyaretler sayılır (durdurmak için /stats?exclude-me=1 açın).",
+    "headline": "Temel rakamlar",
+    "visits": "Ziyaretler",
+    "pageViews": "Sayfa görüntülemeleri",
+    "countriesReached": "Ulaşılan ülkeler",
+    "allTimeVisits": "Toplam ziyaret",
+    "lastViewed": "Son görüntüleme",
+    "emptyRangeTitle": "Bu dönemde henüz ziyaret yok.",
+    "emptyRangeText": "Önceki ziyaretleri görmek için daha uzun bir dönem seçin.",
+    "whereFrom": "Ziyaretçiler nereden geliyor",
+    "topCountries": "Öne çıkan ülkeler",
+    "topCountriesLabel": "En çok ziyaret alan on ülke",
+    "noCountries": "Henüz ülke yok.",
+    "series": "{grouping, select, day {Günlük ziyaret ve sayfa görüntülemeleri} week {Haftalık ziyaret ve sayfa görüntülemeleri} other {Aylık ziyaret ve sayfa görüntülemeleri}}",
+    "weekOf": "{date} haftası",
+    "byHour": "Saate göre (Berlin saati)",
+    "byHourTitle": "Saate göre sayfa görüntülemeleri",
+    "hour": "Saat",
+    "byWeekday": "Haftanın gününe göre",
+    "byWeekdayTitle": "Haftanın gününe göre sayfa görüntülemeleri",
+    "weekday": "Gün",
+    "topPages": "En çok görüntülenen sayfalar",
+    "topPagesLabel": "En çok görüntülenen sayfalar",
+    "noPageViews": "Henüz sayfa görüntüleme yok.",
+    "topReferrers": "Öne çıkan kaynaklar",
+    "topReferrersLabel": "Ziyaretçilerin geldiği siteler",
+    "noVisits": "Henüz ziyaret yok.",
+    "devices": "Cihazlar",
+    "devicesLabel": "Cihaz türüne göre ziyaretler",
+    "themes": "Koyu veya açık tema",
+    "themesLabel": "Renk temasına göre ziyaretler",
+    "siteLanguages": "Site dili",
+    "siteLanguagesLabel": "Site diline göre sayfa görüntülemeleri",
+    "cvByLanguage": "Dile göre özgeçmiş indirmeleri",
+    "cvByLanguageLabel": "Özgeçmiş diline göre indirmeler",
+    "noDownloads": "Henüz indirme yok.",
+    "events": "Özgeçmiş indirmeleri ve bağlantı tıklamaları",
+    "noEvents": "Henüz indirme veya tıklama yok.",
+    "recent": "Son görüntülemeler",
+    "noViews": "Henüz görüntüleme yok.",
+    "justNow": "az önce",
+    "unknownCountry": "Bilinmiyor",
+    "noData": "Veri yok",
+    "showNumbers": "Rakamları göster",
+    "period": "Dönem",
+    "country": "Ülke",
+    "visitsCount": "{count, plural, other {# ziyaret}}",
+    "pageViewsCount": "{count, plural, other {# sayfa görüntüleme}}",
+    "countriesCount": "{count, plural, other {# ülke}}",
+    "seriesSummary": "{title}: {periods} dönemde {visits} ve {views}.",
+    "busiest": "{title}, en yoğun: {value} ile {label}.",
+    "noDataYet": "{title}, henüz veri yok.",
+    "mapLabel": "Dünya haritası: {countries} kaynaklı ziyaretçiler. Ziyaret alan ülkeler seçilebilir.",
+    "mapHint": "Rakamlarını görmek için bir ülkenin üzerine gelin, dokunun veya seçin.",
+    "mapLegend": "Harita açıklaması: ülke başına ziyaret",
+    "mapNone": "Yok",
+    "mapTable": "Ülke başına ziyaret ve sayfa görüntülemeleri",
+    "pages": {
+      "/": "Ana sayfa",
+      "/contact": "İletişim",
+      "/impressum": "Künye",
+      "/datenschutz": "Gizlilik politikası",
+      "project": "Proje: {title}"
+    },
+    "referrers": {
+      "direct": "Doğrudan / yok",
+      "other": "Diğer siteler"
+    },
+    "deviceNames": {
+      "phone": "Telefon",
+      "tablet": "Tablet",
+      "desktop": "Bilgisayar"
+    },
+    "themeNames": {
+      "dark": "Koyu",
+      "light": "Açık"
+    },
+    "eventNames": {
+      "cv": "Özgeçmiş indirmeleri",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "ask": "Soru sorun"
+    }
+  },
+  "cvDocument": {
+    "heading": "Özgeçmiş",
+    "profile": "Profil",
+    "experience": "İş deneyimi",
+    "education": "Eğitim",
+    "skills": "Yetkinlikler",
+    "languages": "Diller",
+    "certifications": "Sertifikalar",
+    "range": "{start} – {end}",
+    "translated": "Kolaylık için çevrilmiştir. Çalışma dilleri: {languages}.",
+    "roleAt": "{role}, {company}",
+    "place": "{city}, {country}"
+  }
+}
