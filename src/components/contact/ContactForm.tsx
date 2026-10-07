@@ -4,57 +4,57 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { languageInfo } from "@/i18n/config";
+import type { ContactSetup } from "@/lib/contact";
+import { LIMITS, SUBJECT, validateContact } from "../../../scripts/lib/contact.mjs";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useTheme } from "@/hooks/useTheme";
 import styles from "./ContactForm.module.css";
 
-// The contact form posts straight from the browser to Web3Forms
-// (https://web3forms.com), which emails the message to the site owner. There
-// is no server code here, and the owner's email address never appears in the
-// page: Web3Forms knows it from the public access key.
+// The contact form. How it sends depends on the setup the page passes in
+// (see src/lib/contact.ts):
+//   - "server":    posts to this site's /api/contact, which checks the
+//                  hCaptcha answer with hCaptcha and then emails me;
+//   - "web3forms": posts straight from the browser to Web3Forms
+//                  (https://web3forms.com), which emails me.
+// Either way my email address never appears in the page. The field rules
+// are shared with the server (scripts/lib/contact.mjs).
 
 const WEB3FORMS_URL = "https://api.web3forms.com/submit";
-// The email is for me, so it stays in English; it names the language the
-// visitor used, e.g. "New message from your website (Deutsch, de)".
-const SUBJECT = "New message from your website";
-// Web3Forms' shared hCaptcha site key for free plans: no account with
-// hCaptcha needed. Web3Forms checks the answer ("h-captcha-response") once
-// hCaptcha is chosen under "Block spam" in the Web3Forms dashboard.
-const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 type Fields = { name: string; email: string; message: string };
 type Errors = Partial<Record<keyof Fields | "captcha", string>>;
 type Translate = (key: string, values?: Record<string, number>) => string;
 type Status = "idle" | "sending" | "sent" | "failed";
 
-const LIMITS = { name: 100, message: 5000, messageMin: 10 };
-// Deliberately simple: something@something.something. Web3Forms and the
-// reply are the real check.
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EMPTY: Fields = { name: "", email: "", message: "" };
+// Problem codes from validateContact() -> message keys in "form.errors".
+const ERROR_KEYS: Record<string, string> = {
+  "name.missing": "nameMissing",
+  "name.long": "nameLong",
+  "email.missing": "emailMissing",
+  "email.invalid": "emailInvalid",
+  "message.short": "messageShort",
+  "message.long": "messageLong",
+};
 
 /** `t` is the "form.errors" translator, so the messages are in the page's language. */
 function validate(fields: Fields, t: Translate): Errors {
+  const problems = validateContact(fields) as Partial<Record<keyof Fields, string>>;
   const errors: Errors = {};
-  if (!fields.name.trim()) errors.name = t("nameMissing");
-  else if (fields.name.length > LIMITS.name) errors.name = t("nameLong", { max: LIMITS.name });
-
-  if (!fields.email.trim()) errors.email = t("emailMissing");
-  else if (!EMAIL_PATTERN.test(fields.email.trim())) errors.email = t("emailInvalid");
-
-  if (fields.message.trim().length < LIMITS.messageMin) errors.message = t("messageShort", { min: LIMITS.messageMin });
-  else if (fields.message.length > LIMITS.message) errors.message = t("messageLong", { max: LIMITS.message });
+  for (const [field, code] of Object.entries(problems) as [keyof Fields, string][]) {
+    errors[field] = t(ERROR_KEYS[`${field}.${code}`], { max: field === "name" ? LIMITS.name : LIMITS.message, min: LIMITS.messageMin });
+  }
   return errors;
 }
 
 type ContactFormProps = {
-  /** Web3Forms public access key (not a secret). */
-  accessKey: string;
+  /** How messages are sent, and the hCaptcha site key to use. */
+  setup: ContactSetup;
   /** Fallback when sending fails. */
   linkedinUrl?: string;
 };
 
-export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
+export function ContactForm({ setup, linkedinUrl }: ContactFormProps) {
   const t = useTranslations("form");
   const tErrors = useTranslations("form.errors");
   const locale = useLocale();
@@ -92,27 +92,33 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
 
     setStatus("sending");
     try {
-      const response = await fetch(WEB3FORMS_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: accessKey,
-          subject: `${SUBJECT} (${language})`,
-          from_name: "Resume website",
-          name: fields.name.trim(),
-          email: fields.email.trim(),
-          // Replying in the inbox answers the visitor directly.
-          replyto: fields.email.trim(),
-          message: fields.message.trim(),
-          // Which language the visitor wrote from, so I can answer in it.
-          language,
-          // Honeypot: always empty for people; Web3Forms drops the
-          // submission when a bot fills it in.
-          botcheck: honeypot.current?.checked ?? false,
-          // The visitor's answer to the hCaptcha check.
-          "h-captcha-response": captchaToken,
-        }),
-      });
+      const botcheck = honeypot.current?.checked ?? false;
+      const response =
+        setup.mode === "server"
+          ? await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json", Accept: "application/json" },
+              body: JSON.stringify({ ...trimmed(fields), language, botcheck, captcha: captchaToken }),
+            })
+          : await fetch(WEB3FORMS_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json", Accept: "application/json" },
+              body: JSON.stringify({
+                access_key: setup.accessKey,
+                subject: `${SUBJECT} (${language})`,
+                from_name: "Resume website",
+                ...trimmed(fields),
+                // Replying in the inbox answers the visitor directly.
+                replyto: fields.email.trim(),
+                // Which language the visitor wrote from, so I can answer in it.
+                language,
+                // Honeypot: always empty for people; Web3Forms drops the
+                // submission when a bot fills it in.
+                botcheck,
+                // The visitor's answer to the hCaptcha check.
+                "h-captcha-response": captchaToken,
+              }),
+            });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.success !== true) throw new Error(result.message ?? `Status ${response.status}`);
       setStatus("sent");
@@ -203,7 +209,7 @@ export function ContactForm({ accessKey, linkedinUrl }: ContactFormProps) {
           key={`${theme}-${compact}`}
           size={compact ? "compact" : "normal"}
           ref={captchaRef}
-          sitekey={HCAPTCHA_SITEKEY}
+          sitekey={setup.sitekey}
           reCaptchaCompat={false}
           theme={theme}
           // The check speaks the page's language.
@@ -264,4 +270,8 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
       )}
     </div>
   );
+}
+
+function trimmed(fields: Fields): Fields {
+  return { name: fields.name.trim(), email: fields.email.trim(), message: fields.message.trim() };
 }

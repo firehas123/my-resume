@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { contactSetup } from "@/lib/contact";
 import { languageInfo } from "@/i18n/config";
-import { findLink, getProfile, visibleLinks } from "@/lib/profile";
+import { findLink, visibleLinks } from "@/lib/profile";
 import { alternates } from "@/lib/seo";
 import { trackName } from "@/lib/stats/track";
 import styles from "./page.module.css";
@@ -17,9 +18,8 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/contact"
 export default async function ContactPage({ params }: PageProps<"/[locale]/contact">) {
   const { locale } = await params;
   const t = await getTranslations("contact");
-  const profile = await getProfile();
-  // The Web3Forms key from profile.json; NEXT_PUBLIC_WEB3FORMS_KEY overrides it.
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim() || profile.contactAccessKey;
+  // Server route with my own hCaptcha keys, or Web3Forms (see lib/contact.ts).
+  const setup = contactSetup();
   // "LinkedIn and GitHub" / "LinkedIn und GitHub": joined the way the language joins lists.
   const listParts = new Intl.ListFormat(languageInfo(locale).intl, { type: "conjunction" }).formatToParts(
     visibleLinks.map((link) => link.id),
@@ -53,7 +53,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             )}
           </div>
           <div className={styles.formWrap}>
-            <ContactForm accessKey={accessKey} linkedinUrl={findLink("linkedin")?.url} />
+            <ContactForm setup={setup} linkedinUrl={findLink("linkedin")?.url} />
           </div>
         </div>
       </section>
