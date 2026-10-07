@@ -49,3 +49,6 @@ next-env.d.ts
 # Local-only files: Claude Code instructions and task notes (not published)
 CLAUDE.md
 tasks.txt
+
+# Built by `npm run cv` before every build and dev start (one CV per language).
+public/files/cv-*.pdf

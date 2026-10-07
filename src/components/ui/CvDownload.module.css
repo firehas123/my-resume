@@ -1,0 +1,116 @@
+/* The CV button and the small menu of other languages under it. */
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-start: 0;
+  z-index: 60;
+  min-width: 240px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--lift-shadow);
+}
+
+.menu[data-align="end"] {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}
+
+.menu[hidden] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu:not([hidden]) {
+    animation: menu-in var(--dur-quick) var(--ease-out);
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-inline-start: 12px;
+}
+
+.menuTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--text);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.list a:hover,
+.list a:focus-visible {
+  background: var(--pill-bg);
+  color: var(--text);
+}
+
+/* Header button: the short label on narrow phones, where the long one would
+   squeeze the language and theme buttons. */
+.shortLabel {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .longLabel {
+    display: none;
+  }
+
+  .shortLabel {
+    display: inline;
+  }
+}
