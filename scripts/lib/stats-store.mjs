@@ -28,6 +28,9 @@
 // all-time totals are their own counters, so nothing ever needs a scan.
 
 import { Redis } from "@upstash/redis";
+import { DATE_PATTERN, EXPORT_FORMAT, EXPORT_VERSION, validateBackup } from "./stats-backup-check.mjs";
+
+export { EXPORT_FORMAT, EXPORT_VERSION };
 
 export const KEYS = {
   meta: "stats:meta",
@@ -38,10 +41,6 @@ export const KEYS = {
 };
 
 export const RECENT_LIMIT = 25;
-export const EXPORT_FORMAT = "resume-site-stats";
-export const EXPORT_VERSION = 1;
-
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 /**
  * Connection details from the environment. Supports both the names the
@@ -138,14 +137,6 @@ export function exportToCsv(data) {
 export async function isEmpty(redis) {
   const [cursor, keys] = await redis.scan("0", { match: "stats:*", count: 1000 });
   return keys.length === 0 && String(cursor) === "0";
-}
-
-function validateBackup(data) {
-  if (!data || data.format !== EXPORT_FORMAT) throw new Error(`Not a ${EXPORT_FORMAT} backup file.`);
-  if (data.version !== EXPORT_VERSION) throw new Error(`Unsupported backup version ${data.version}.`);
-  for (const date of Object.keys(data.days ?? {})) {
-    if (!DATE_PATTERN.test(date)) throw new Error(`Invalid day in backup: ${date}`);
-  }
 }
 
 /**
