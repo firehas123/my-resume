@@ -1,0 +1,80 @@
+# Weekly backup of the visit statistics (and whenever started by hand from
+# the Actions tab). It downloads the complete statistics from the site's own
+# public export route, the same file as "Download data (JSON)" on /stats,
+# checks it, and commits it to the separate "stats-backup" branch as
+#   data/stats-backup/<YYYY-MM-DD>.json   one per run, all kept
+#   data/stats-backup/latest.json         always the newest good backup
+#
+# No database credentials and no secrets: only the public route and the
+# workflow's built-in token. If the route cannot be reached or returns
+# anything that is not a complete, non-empty backup (or less than the last
+# one), the job fails before anything is written, so a good backup is never
+# replaced by a bad one. The checks live in scripts/lib/stats-backup-check.mjs.
+#
+# Pushes to "stats-backup" never deploy: vercel.json turns deployments off
+# for that branch, and the branch carries a copy of vercel.json too.
+# Restore a backup with `npm run stats:restore` (see README, "Visitor statistics").
+
+name: Stats backup
+
+on:
+  schedule:
+    - cron: "23 3 * * 1" # every Monday at 03:23 UTC
+  workflow_dispatch: # the "Run workflow" button on the Actions page
+
+# Only what the job needs: read the code and push to the backup branch.
+permissions:
+  contents: write
+
+concurrency:
+  group: stats-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      BRANCH: stats-backup
+    steps:
+      - name: Check out main (for the backup script)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Open the backup branch (create it on the first run)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git fetch --depth=1 origin "$BRANCH"
+            git worktree add --detach backups FETCH_HEAD
+          else
+            # A branch with no history from main: it only ever holds backups.
+            git worktree add --detach backups
+            git -C backups checkout --orphan "$BRANCH"
+            git -C backups rm -rf --quiet .
+          fi
+          # Keep the branch's copy of the deployment rule and the notes current.
+          cp vercel.json backups/vercel.json
+          cp data/stats-backup/README.md backups/README.md
+
+      - name: Download and check the statistics
+        # Writes nothing unless the export is a complete, non-empty backup.
+        run: node scripts/stats-fetch-backup.mjs backups/data/stats-backup
+
+      - name: Commit and push the backup
+        working-directory: backups
+        run: |
+          git add --all
+          if git diff --cached --quiet; then
+            echo "Nothing new to save."
+            exit 0
+          fi
+          git commit -m "chore: stats backup $(date -u +%Y-%m-%d)"
+          git push origin "HEAD:refs/heads/$BRANCH"
