@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { languageInfo } from "@/i18n/config";
 import { CvDownload } from "@/components/ui/CvDownload";
@@ -40,13 +41,18 @@ export async function Hero() {
         <ScrollEaseBack className={styles.text}>
           <p className={styles.status}>
             <span className={styles.statusDot} aria-hidden="true" />
-            {/* Each part stays on one line; a narrow screen wraps at the "·". */}
+            {/* Each part is kept together where it fits; a narrow screen wraps
+                after the "·". The space between parts sits outside them so the
+                line can break there. */}
             <span>
-              {statusParts(profile, t, languageInfo(locale).lowerRoles).map((part, i) => (
-                <span key={part} className={styles.statusPart}>
-                  {i > 0 && " · "}
-                  {part}
-                </span>
+              {statusParts(profile, t, languageInfo(locale).lowerRoles).map((part, i, all) => (
+                <Fragment key={part}>
+                  {i > 0 && " "}
+                  <span className={styles.statusPart}>
+                    {part}
+                    {i < all.length - 1 && " ·"}
+                  </span>
+                </Fragment>
               ))}
             </span>
           </p>
