@@ -70,9 +70,15 @@ export function LanguageSwitcher({ languages }: { languages: Language[] }) {
     list[next]?.focus();
   }
 
-  // Leaving the menu with Tab closes it.
+  // Leaving the menu with Tab closes it: focus moved to something outside.
+  // When focus simply drops (relatedTarget null), keep the menu open. Safari
+  // (every browser on iPhone, and Safari on Mac) never focuses a tapped or
+  // clicked link, so a tap on a language drops focus *before* the click
+  // arrives; closing here would hide the menu and swallow the tap. Taps and
+  // clicks outside the menu are handled by the pointerdown listener above.
   function onBlur(event: React.FocusEvent) {
-    if (!wrap.current?.contains(event.relatedTarget as Node)) setOpen(false);
+    const next = event.relatedTarget as Node | null;
+    if (next && !wrap.current?.contains(next)) setOpen(false);
   }
 
   return (
