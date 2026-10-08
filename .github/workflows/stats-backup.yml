@@ -21,6 +21,14 @@ on:
   schedule:
     - cron: "23 3 * * 1" # every Monday at 03:23 UTC
   workflow_dispatch: # the "Run workflow" button on the Actions page
+  # Also right after the backup code changes on main, so a broken change
+  # shows up at once instead of on the next Monday.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/stats-backup.yml
+      - scripts/stats-fetch-backup.mjs
+      - scripts/lib/stats-backup-check.mjs
 
 # Only what the job needs: read the code and push to the backup branch.
 permissions:
