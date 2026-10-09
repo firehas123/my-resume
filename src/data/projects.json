@@ -6,30 +6,30 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 56.7
+        "share": 55.6
       },
       {
         "name": "JavaScript",
-        "share": 20
+        "share": 21.5
       },
       {
         "name": "CSS",
-        "share": 14.8
+        "share": 14.5
       },
       {
         "name": "HTML",
-        "share": 8.5
+        "share": 8.3
       }
     ],
     "readmeSummary": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules with CSS variables, Motion for scroll and hover animation, and a canvas dot field in the hero.",
-    "readmeOverview": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules\nwith CSS variables, Motion for scroll and hover animation, and a canvas dot field\nin the hero.\n\n## Commands\n\n| Command         | What it does                                                                 |\n| --------------- | ---------------------------------------------------------------------------- |\n| `npm install`   | Install dependencies (once, and after pulling changes to `package.json`).    |\n| `npm run dev`   | Development server on port 3000, reachable from other devices on the network. |\n| `npm run build` | Production build (this is what Vercel runs).                                  |\n| `npm run start` | Serve the production build locally.                                           |\n| `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |\n| `npm run cv`    | Build one CV per language (`public/files/cv-.pdf`) from `profile.json`. Runs before every build and dev start. |\n| `npm run i18n:check` | List texts missing or identical to English, per language.              |\n| `npm run i18n:add`   | After adding a language code: create its messages file, check its fonts. |\n| `npm test`      | Test the tab rules, the language helpers and right-to-left text layout.       |\n| `npm run stats:backup` | Save all visit statistics to `data/stats-backup/.json`.          |\n| `npm run stats:restore ` | Load such a backup into an empty statistics database.          |\n| `npm run lint`  | Check the code with ESLint.                                                   |\n\nRequires Node.js 20.9 or newer.\n\n### Preview on another device (for example a Mac on the same Wi-Fi)\n\n`npm run dev` listens on all network interfaces. Open `http://:3000`\non the other device, for example `http://192.168.0.67:3000`. If the IP changes,\nalso update `allowedDevOrigins` in `next.config.ts`.\n\n### Add a longer write-up to a project page\n\nCreate `content/projects/.md` with normal Markdown.",
+    "readmeOverview": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules\nwith CSS variables, Motion for scroll and hover animation, and a canvas dot field\nin the hero.\n\nWhat it does: eight languages (English and German as working languages), projects\npulled from GitHub every day, a contact form with a captcha, its own cookie-free visit\nstatistics with a weekly backup, a downloadable CV in every language, and dark and\nlight themes.\n\n## Commands\n\n| Command         | What it does                                                                 |\n| --------------- | ---------------------------------------------------------------------------- |\n| `npm install`   | Install dependencies (once, and after pulling changes to `package.json`).    |\n| `npm run dev`   | Development server on port 3000, reachable from other devices on the network. |\n| `npm run build` | Production build (this is what Vercel runs).                                  |\n| `npm run start` | Serve the production build locally.                                           |\n| `npm run sync`  | Refresh `src/data/projects.json` from GitHub (needs the `gh` CLI, logged in). |\n| `npm run cv`    | Build one CV per language (`public/files/cv-.pdf`) from `profile.json`. Runs before every build and dev start. |\n| `npm run i18n:check` | List texts missing or identical to English, per language.              |\n| `npm run i18n:add`   | After adding a language code: create its messages file, check its fonts. |\n| `npm test`      | Run all unit tests: tab rules, languages, right-to-left text, contact form, stats backups. |\n| `npm run stats:backup` | Back up the statistics by hand (normally the weekly workflow does it). |\n| `npm run stats:restore ` | Load such a backup into an empty statistics database.          |\n| `npm run lint`  | Check the code with ESLint.                                                   |\n\nRequires Node.js 20.9 or newer.\n\n### Preview on another device (for example a Mac on the same Wi-Fi)\n\n`npm run dev` listens on all network interfaces. Open `http://:3000`\non the other device, for example `http://192.168.0.67:3000`. If the IP changes,\nalso update `allowedDevOrigins` in `next.config.ts`.",
     "readmeImage": null,
     "isFork": false,
     "forkOf": null,
     "url": "https://github.com/firehas123/my-resume",
     "homepageUrl": "https://my-resume-seven-coral.vercel.app",
     "topics": [],
-    "pushedAt": "2026-10-08T11:13:34Z"
+    "pushedAt": "2026-10-08T16:10:45Z"
   },
   {
     "name": "INFO-VIZ",
