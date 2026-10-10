@@ -59,6 +59,7 @@ src/components/            sections, layout pieces and small UI components
 src/hooks/usePushField.ts  the cursor "push through water" effect
 src/app/globals.css        all colours (theme tokens), spacing and base styles
 .github/workflows/         daily project sync (sync-projects.yml), weekly stats backup (stats-backup.yml)
+LESSONS-LEARNED.md         the technical problems met while building the site, and how they were solved
 ```
 
 ## Common changes
