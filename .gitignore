@@ -20,6 +20,9 @@
 # production
 /build
 
+# copied from node_modules/devicon by scripts/copy-skill-icons.mjs
+/public/skill-icons/
+
 # misc
 .DS_Store
 *.pem

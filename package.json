@@ -5,14 +5,15 @@
   "scripts": {
     "sync": "node scripts/sync-projects.mjs",
     "cv": "node scripts/build-cv.mjs",
+    "icons": "node scripts/copy-skill-icons.mjs",
     "i18n:check": "node scripts/i18n-check.mjs",
     "i18n:add": "node scripts/i18n-add.mjs",
     "test": "node --test scripts/*.test.mjs",
     "stats:backup": "node scripts/stats-backup.mjs",
     "stats:restore": "node scripts/stats-restore.mjs",
-    "predev": "npm run cv",
+    "predev": "npm run cv && npm run icons",
     "dev": "next dev -H 0.0.0.0",
-    "prebuild": "npm run cv",
+    "prebuild": "npm run cv && npm run icons",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

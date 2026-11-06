@@ -274,7 +274,8 @@ Each pill in "What I work with" shows the technology's logo from
 [Devicon](https://devicon.dev) (MIT licence, installed through npm as `devicon`).
 Which logo a skill uses is set by `"logos"` on that skill in `profile.json`, using
 Devicon's file names, for example `"logos": ["java-plain"]` or two for a combined pill
-like C/C++. Browse the names in `node_modules/devicon/icons/`. Skills without a Devicon
+like C/C++. Browse the names in `node_modules/devicon/icons/`. `npm run dev` and
+`npm run build` copy the logos in use to `public/skill-icons/` (not committed). Skills without a Devicon
 logo (JavaFX, InformixDB, Data Structures & Algorithms) have no `logos` and stay text
 only.
 

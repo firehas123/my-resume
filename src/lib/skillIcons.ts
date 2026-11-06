@@ -3,8 +3,10 @@
 // Which logo belongs to which skill is set in src/data/profile.json
 // ("logos": ["java-plain"]); a skill without logos stays text only.
 //
-// The SVG files are served by src/app/skill-icons/[icon]/route.ts, which
-// is generated at build time. This file runs on the server / at build time.
+// scripts/copy-skill-icons.mjs copies the logos in use to public/skill-icons/
+// before dev and build, so visitors get plain static files. This file runs on
+// the server / at build time. Don't read from node_modules/devicon/icons here:
+// the build would then copy all 102 MB of it into the server functions.
 
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -13,9 +15,8 @@ import { profileFor } from "@/lib/profile";
 
 type DeviconEntry = { name: string; color: string };
 
-const ICON_DIR = join(process.cwd(), "node_modules", "devicon", "icons");
-// Logo names look like "java-plain" or "amazonwebservices-plain-wordmark":
-// the part before the first "-" is the folder in the Devicon package.
+const ICON_DIR = join(process.cwd(), "public", "skill-icons");
+// Logo names look like "java-plain" or "amazonwebservices-plain-wordmark".
 const NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 // Pill backgrounds in each theme (see --pill-bg in globals.css).
@@ -58,8 +59,7 @@ export function isValidIconName(name: string): boolean {
 /** The SVG file contents for one logo name, e.g. "java-plain". */
 export function readIconSvg(name: string): string {
   if (!isValidIconName(name)) throw new Error(`Invalid icon name: ${name}`);
-  const folder = name.split("-")[0];
-  return readFileSync(join(ICON_DIR, folder, `${name}.svg`), "utf8");
+  return readFileSync(join(ICON_DIR, `${name}.svg`), "utf8");
 }
 
 /** Every logo name used in profile.json (each listed once). */
