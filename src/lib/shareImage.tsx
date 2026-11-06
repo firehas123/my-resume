@@ -97,7 +97,7 @@ export async function renderShareImage({ eyebrow, lines, compact, locale }: Shar
   return new ImageResponse(
     (
       <div style={{ width: "100%", height: "100%", display: "flex", position: "relative", background: "#000000", fontFamily: "Manrope, ManropeExt, Script" }}>
-        <svg width={width} height={height} style={{ position: "absolute", inset: 0 }}>
+        <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ position: "absolute", inset: 0 }}>
           {dots().map((d, i) => (
             <circle key={i} cx={d.x} cy={d.y} r={d.r} fill={d.color} fillOpacity={d.opacity} />
           ))}
