@@ -6,15 +6,15 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 55.8
+        "share": 55.6
       },
       {
         "name": "JavaScript",
-        "share": 21.4
+        "share": 21.6
       },
       {
         "name": "CSS",
-        "share": 14.5
+        "share": 14.4
       },
       {
         "name": "HTML",
@@ -29,7 +29,7 @@
     "url": "https://github.com/firehas123/my-resume",
     "homepageUrl": "https://my-resume-seven-coral.vercel.app",
     "topics": [],
-    "pushedAt": "2026-10-08T16:10:45Z"
+    "pushedAt": "2026-11-06T20:35:53Z"
   },
   {
     "name": "INFO-VIZ",
