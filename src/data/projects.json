@@ -1,5 +1,33 @@
 [
   {
+    "name": "air-traffic-control",
+    "description": "",
+    "group": "C#",
+    "languages": [
+      {
+        "name": "C#",
+        "share": 90.2
+      },
+      {
+        "name": "HTML",
+        "share": 9
+      },
+      {
+        "name": "ShaderLab",
+        "share": 0.8
+      }
+    ],
+    "readmeSummary": "Developed by MHC Studio. © 2026 MHC Studio. All rights reserved.",
+    "readmeOverview": "**Developed by MHC Studio.** © 2026 MHC Studio. All rights reserved.\n\nAn original top-down 2D aircraft-routing game. The player draws flight paths to land aircraft safely and avoid collisions.\n\n- Platforms: mobile first (Android, then iOS). PC and consoles later.\n- Engine: Unity 2D with C# (proposed, not yet confirmed).\n- Offline-first. No accounts and no backend in the first release.\n- First release: Island Airport with ten levels, an endless mode, a daily level and one optional supporter purchase. No advertising.\n\nThe game title is still open, so this repository uses the working title.\n\n## Documents\n\n- [docs/BLUEPRINT.md](docs/BLUEPRINT.md): the full game plan, with every decision marked AGREED, PROPOSED or OPEN.\n- [CLAUDE.md](CLAUDE.md): working rules for Claude Code in this repository.\n- [docs/SETUP.md](docs/SETUP.md): how to set up the Mac before development starts.\n- [mockups/index.html](mockups/index.html): clickable screen mockups.\n\n## Next step\n\nCreate the Unity 2D project, launch a blank scene on the iPad, then prototype one aircraft following a finger-drawn path (milestones M0 and M1 in the blueprint).\n\n## Screen mockups\n\n[mockups/index.html](mockups/index.html) shows eight screens for the first release (home, level select, in flight, level result, collision, Daily Flight, Tower Shift, Hangar). Open the file in a browser; buttons inside each screen jump to the screen they lead to.",
+    "readmeImage": null,
+    "isFork": false,
+    "forkOf": null,
+    "url": "https://github.com/firehas123/air-traffic-control",
+    "homepageUrl": null,
+    "topics": [],
+    "pushedAt": "2026-11-15T09:38:57Z"
+  },
+  {
     "name": "my-resume",
     "description": "",
     "group": "JavaScript / TypeScript",
