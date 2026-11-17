@@ -294,7 +294,9 @@ function buildCv(code) {
   );
 
   // A no-break space keeps each "·" with the word before it when lines wrap.
-  const skills = Section(words.skills, T(null, profile.skills.map((skill) => skill.name).join("\u00a0· ")));
+  // wrap: false keeps the short skills list with its heading on one page
+  // (minPresenceAhead alone could leave the heading alone at a page bottom).
+  const skills = h(View, { wrap: false }, Section(words.skills, T(null, profile.skills.map((skill) => skill.name).join("\u00a0· "))));
 
   const certifications = Section(
     words.certifications,
