@@ -273,5 +273,19 @@
     "translated": "Vertaald voor het gemak. Werktalen: {languages}.",
     "roleAt": "{role}, {company}",
     "place": "{city}, {country}"
+  },
+  "qr": {
+    "metaTitle": "QR-code",
+    "metaDescription": "Scan om het cv en de projecten van {name} te openen.",
+    "scan": "Scan voor mijn cv & projecten",
+    "download": "QR-code downloaden",
+    "open": "QR-code tonen",
+    "dialogLabel": "QR-code van deze site",
+    "close": "Sluiten",
+    "share": "Delen",
+    "copy": "Link kopiëren",
+    "copied": "Link gekopieerd",
+    "fullScreen": "Als volledige pagina openen",
+    "imageAlt": "QR-code voor {url}"
   }
 }

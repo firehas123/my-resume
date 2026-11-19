@@ -39,6 +39,7 @@ const overrideTitles = overridesFile as Record<string, { title?: string | Record
 const FIXED_PAGES: Record<string, string> = {
   "/": "Home",
   "/contact": "Contact",
+  "/qr": "QR code",
   "/impressum": "Impressum",
   "/datenschutz": "Datenschutz",
 };

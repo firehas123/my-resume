@@ -5,9 +5,11 @@ import { LANGUAGES, languageInfo } from "@/i18n/config";
 import { Link } from "@/i18n/navigation";
 import { cvFiles } from "@/lib/cv";
 import { getProfile } from "@/lib/profile";
+import { QR_DISPLAY_URL, QR_URL, qrShape } from "@/lib/qr";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { NavLinks } from "./NavLinks";
 import { ScrollProgress } from "./ScrollProgress";
+import { ShareQr } from "./ShareQr";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.css";
 
@@ -38,6 +40,8 @@ export async function Header() {
         <div className={styles.actions}>
           <LanguageSwitcher languages={languages} />
           <ThemeToggle />
+          {/* QR code to hold up to someone, plus the phone's share sheet. */}
+          <ShareQr shape={qrShape()} url={QR_URL} displayUrl={QR_DISPLAY_URL} name={profile.name} title={profile.title} />
           <CvDownload {...cv} size="small" align="end" shortOnPhones />
         </div>
       </div>

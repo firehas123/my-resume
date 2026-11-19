@@ -84,3 +84,36 @@ export function ExternalIcon(props: IconProps) {
     </Svg>
   );
 }
+
+/** A QR code: three corner squares and a few modules (the share / QR button). */
+export function QrIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="4" y="4" width="6" height="6" rx="1" />
+      <rect x="14" y="4" width="6" height="6" rx="1" />
+      <rect x="4" y="14" width="6" height="6" rx="1" />
+      <path d="M14 14h2v2M20 14v.01M14 20h.01M17 17v3h3" />
+    </Svg>
+  );
+}
+
+/** A box with an arrow out of it (the phone's share sheet). */
+export function ShareIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 15V3" />
+      <path d="M7 8l5-5 5 5" />
+      <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
+    </Svg>
+  );
+}
+
+/** Two overlapping sheets (copy the link). */
+export function CopyIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect x="9" y="9" width="11" height="11" rx="2" />
+      <path d="M5 15V6a2 2 0 0 1 2-2h8" />
+    </Svg>
+  );
+}

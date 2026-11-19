@@ -1,0 +1,4 @@
+{
+  "_help": "The address the QR code on /qr and in public/files/resume-qr.* points to. After changing it, run `npm run qr` (it also runs before every build) and `npm test` (decodes the QR to check it).",
+  "url": "https://my-resume-pied-tau.vercel.app/"
+}

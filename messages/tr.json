@@ -273,5 +273,19 @@
     "translated": "Kolaylık için çevrilmiştir. Çalışma dilleri: {languages}.",
     "roleAt": "{role}, {company}",
     "place": "{city}, {country}"
+  },
+  "qr": {
+    "metaTitle": "QR kodu",
+    "metaDescription": "{name} adlı kişinin özgeçmişini ve projelerini açmak için tarayın.",
+    "scan": "Özgeçmişim ve projelerim için tarayın",
+    "download": "QR kodunu indir",
+    "open": "QR kodunu göster",
+    "dialogLabel": "Bu sitenin QR kodu",
+    "close": "Kapat",
+    "share": "Paylaş",
+    "copy": "Bağlantıyı kopyala",
+    "copied": "Bağlantı kopyalandı",
+    "fullScreen": "Tam sayfa aç",
+    "imageAlt": "{url} için QR kodu"
   }
 }

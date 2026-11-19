@@ -233,6 +233,15 @@
 
 /* Phones: logo + actions on the first row, section links on the second. */
 @media (max-width: 640px) {
+  /* Tighter spacing so the logo and the four buttons share one row. */
+  .bar {
+    column-gap: 16px;
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
   .nav {
     order: 3;
     width: 100%;
@@ -244,5 +253,16 @@
   .links {
     justify-content: flex-start;
     gap: 0 18px;
+  }
+}
+
+/* Narrow phones (360px): a little tighter still, so the row does not wrap. */
+@media (max-width: 380px) {
+  .bar {
+    column-gap: 8px;
+  }
+
+  .actions {
+    gap: 8px;
   }
 }

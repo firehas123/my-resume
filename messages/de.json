@@ -273,5 +273,19 @@
     "translated": "Zur besseren Lesbarkeit übersetzt. Arbeitssprachen: {languages}.",
     "roleAt": "{role}, {company}",
     "place": "{city}, {country}"
+  },
+  "qr": {
+    "metaTitle": "QR-Code",
+    "metaDescription": "Scannen, um Lebenslauf und Projekte von {name} zu öffnen.",
+    "scan": "Scannen für Lebenslauf & Projekte",
+    "download": "QR-Code herunterladen",
+    "open": "QR-Code zeigen",
+    "dialogLabel": "QR-Code dieser Website",
+    "close": "Schließen",
+    "share": "Teilen",
+    "copy": "Link kopieren",
+    "copied": "Link kopiert",
+    "fullScreen": "Als ganze Seite öffnen",
+    "imageAlt": "QR-Code für {url}"
   }
 }

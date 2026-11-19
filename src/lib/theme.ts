@@ -6,7 +6,8 @@
 //   1. marks <html> with the class "js" (lets CSS know JavaScript is running),
 //   2. sets data-theme to the saved choice, or else to the system setting,
 //   3. decides whether to play the intro (first visit in this browser session,
-//      and the visitor has not asked for reduced motion).
+//      and the visitor has not asked for reduced motion). Never on the QR page
+//      (/<language>/qr): it is opened to be scanned, so it shows at once.
 
 export type Theme = "dark" | "light";
 
@@ -33,7 +34,8 @@ export const PRE_PAINT_SCRIPT = `(function () {
   if (meta) meta.setAttribute("content", theme === "light" ? "${THEME_COLORS.light}" : "${THEME_COLORS.dark}");
   try {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduce && !sessionStorage.getItem("${INTRO_STORAGE_KEY}")) {
+    var qrPage = /^\\/[^/]+\\/qr\\/?$/.test(location.pathname);
+    if (!reduce && !qrPage && !sessionStorage.getItem("${INTRO_STORAGE_KEY}")) {
       sessionStorage.setItem("${INTRO_STORAGE_KEY}", "1");
       root.setAttribute("data-intro", "play");
     }

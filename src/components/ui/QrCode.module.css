@@ -1,0 +1,16 @@
+.qr {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  /* Rounded like the site's cards; the corners only cut into the quiet zone. */
+  border-radius: 20px;
+}
+
+.light {
+  fill: var(--qr-light);
+}
+
+.dark {
+  fill: var(--qr-dark);
+}

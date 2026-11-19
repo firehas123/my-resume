@@ -273,5 +273,19 @@
     "translated": "Tradotto per comodità. Lingue di lavoro: {languages}.",
     "roleAt": "{role}, {company}",
     "place": "{city}, {country}"
+  },
+  "qr": {
+    "metaTitle": "Codice QR",
+    "metaDescription": "Scansiona per aprire il CV e i progetti di {name}.",
+    "scan": "Scansiona per il mio CV e i progetti",
+    "download": "Scarica il codice QR",
+    "open": "Mostra il codice QR",
+    "dialogLabel": "Codice QR di questo sito",
+    "close": "Chiudi",
+    "share": "Condividi",
+    "copy": "Copia link",
+    "copied": "Link copiato",
+    "fullScreen": "Apri a pagina intera",
+    "imageAlt": "Codice QR per {url}"
   }
 }

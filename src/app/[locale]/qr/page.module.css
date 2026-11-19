@@ -1,0 +1,78 @@
+.page {
+  background: var(--bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding-block: 32px 64px;
+  text-align: center;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: clamp(26px, 6vw, 40px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: clamp(17px, 3.6vw, 22px);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Most of a phone's width; on large screens no taller than ~60% of the window. */
+.qr {
+  width: min(100%, 520px, 60svh);
+  margin-block: 8px;
+}
+
+.scan {
+  font-size: clamp(19px, 4.4vw, 24px);
+  font-weight: 700;
+}
+
+.url {
+  margin-top: -8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.downloads {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 12px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.downloads a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text);
+}
+
+@media (min-width: 900px) {
+  .inner {
+    padding-block: 48px 80px;
+  }
+}

@@ -273,5 +273,19 @@
     "translated": "Translated for convenience. Working languages: {languages}.",
     "roleAt": "{role}, {company}",
     "place": "{city}, {country}"
+  },
+  "qr": {
+    "metaTitle": "QR code",
+    "metaDescription": "Scan to open {name}’s CV and projects.",
+    "scan": "Scan for my CV & projects",
+    "download": "Download QR",
+    "open": "Show QR code",
+    "dialogLabel": "QR code for this site",
+    "close": "Close",
+    "share": "Share",
+    "copy": "Copy link",
+    "copied": "Link copied",
+    "fullScreen": "Open full page",
+    "imageAlt": "QR code for {url}"
   }
 }
