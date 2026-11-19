@@ -10,6 +10,11 @@
 // Arabic letters correctly but does not order the words of right-to-left
 // text, so such text is laid out word by word (see T() and scripts/lib/rtl.mjs).
 //
+// Each job shows its tech stack ("stack" in profile.json) as a line of small
+// chips under its title, and the first mention of each stack term in the
+// job's bullets is bold in the accent colour (scripts/lib/stack.mjs). All of
+// it stays real text, so applicant-tracking systems can read it.
+//
 // On purpose the PDF contains no phone number. It shows an email address
 // only when "cvShowEmail" is true in profile.json, and the photo only when
 // "cvShowPhoto" is true. The section titles and the few fixed words come from
@@ -25,6 +30,7 @@ import React from "react";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View, renderToFile } from "@react-pdf/renderer";
 import { localize, mergeMessages } from "./lib/i18n.mjs";
 import { hasRtl, rtlWords } from "./lib/rtl.mjs";
+import { findTerm, highlightPlan, markTerms } from "./lib/stack.mjs";
 
 const h = React.createElement;
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -166,6 +172,14 @@ function buildCv(code) {
     bullet: { flexDirection: row, marginBottom: 1 },
     dot: { width: 10, color: COLOR.accent, textAlign: align },
     bulletText: { flex: 1 },
+    // A stack term in a bullet: bold, in the accent colour.
+    mark: { fontWeight: 700, color: COLOR.accent },
+    // "Stack:" and the chips, on one line under the job's place (wrapping if needed).
+    stack: { flexDirection: row, flexWrap: "wrap", alignItems: "center", columnGap: 3, rowGap: 2, marginTop: 2.5 },
+    stackLabel: { fontSize: 7.5, lineHeight: 1.25, paddingTop: 0.3, fontWeight: 700, color: COLOR.muted, marginRight: rtl ? 0 : 1, marginLeft: rtl ? 1 : 0 },
+    // A rounded outline chip: accent text and border on white (prints well in black and white).
+    chip: { borderWidth: 0.6, borderColor: COLOR.accent, borderRadius: 5, paddingHorizontal: 4, paddingTop: 0, paddingBottom: 0.8 },
+    chipText: { fontSize: 7, lineHeight: 1.25, fontWeight: 700, color: COLOR.accent },
     columns: { flexDirection: row, gap: 24 },
     column: { flex: 1 },
     item: { marginBottom: 3 },
@@ -177,12 +191,25 @@ function buildCv(code) {
   const github = profile.links.find((l) => l.id === "github" && l.show);
   const siteForLanguage = `${SITE_URL}/${code}`;
 
+  /** A text with the given terms marked (see s.mark): plain strings and nested <Text>s. */
+  const marked = (text, terms) =>
+    terms.length ? markTerms(text, terms).map((piece, i) => (piece.mark ? h(Text, { key: i, style: s.mark }, piece.text) : piece.text)) : text;
+
   /**
    * A text. Right-to-left text becomes a row of words placed from the right,
    * wrapping like a paragraph; everything else is a normal <Text>.
+   * `terms`: stack terms to mark, each at its first match.
    */
-  function T(style, text, props = {}) {
-    if (!rtl || !hasRtl(text)) return h(Text, { ...props, style }, text);
+  function T(style, text, props = {}, terms = []) {
+    if (!rtl || !hasRtl(text)) return h(Text, { ...props, style }, marked(text, terms));
+    // The terms are Latin, so each lies inside one left-to-right piece; the
+    // pieces come in reading order, so the first match is marked.
+    const pending = new Set(terms);
+    const markRun = (runText) => {
+      const here = [...pending].filter((term) => findTerm(runText, term) !== -1);
+      for (const term of here) pending.delete(term);
+      return marked(runText, here);
+    };
     const flat = [].concat(style ?? []);
     return h(
       View,
@@ -192,7 +219,7 @@ function buildCv(code) {
           View,
           { key: i, style: { flexDirection: "row-reverse" } },
           ...word.flatMap((run, j) => [
-            h(Text, { key: `t${j}`, style: textOnly(flat) }, run.text),
+            h(Text, { key: `t${j}`, style: textOnly(flat) }, run.rtl ? run.text : markRun(run.text)),
             // In right-to-left text the punctuation sits to the left of its word.
             run.punctuation ? h(Text, { key: `p${j}`, style: textOnly(flat) }, run.punctuation) : null,
           ]),
@@ -206,13 +233,30 @@ function buildCv(code) {
     return h(View, { style: s.section }, T(s.heading, title, { minPresenceAhead: 40 }), ...children);
   }
 
-  function Bullets(items) {
+  /** Bullets; `plan[i]` lists the stack terms to mark in bullet i. */
+  function Bullets(items, plan = []) {
     return h(
       View,
       { style: s.bullets },
       ...items.map((text, i) =>
-        h(View, { key: i, style: s.bullet, wrap: false }, h(Text, { style: s.dot }, "•"), h(View, { style: s.bulletText }, T(null, text))),
+        h(
+          View,
+          { key: i, style: s.bullet, wrap: false },
+          h(Text, { style: s.dot }, "•"),
+          h(View, { style: s.bulletText }, T(null, text, {}, plan[i] ?? [])),
+        ),
       ),
+    );
+  }
+
+  /** "Stack:" followed by one chip per technology (mirrored in right-to-left languages). */
+  function Stack(names) {
+    if (!names?.length) return null;
+    return h(
+      View,
+      { style: s.stack },
+      T(s.stackLabel, words.stack),
+      ...names.map((name, i) => h(View, { key: i, style: s.chip }, h(Text, { style: s.chipText }, name))),
     );
   }
 
@@ -275,8 +319,9 @@ function buildCv(code) {
             T(s.meta, range(job.start, job.end)),
           ),
           T(s.sub, fill(words.place, { city: job.city, country: job.country })),
+          Stack(job.stack),
         ),
-        Bullets(job.highlights),
+        Bullets(job.highlights, highlightPlan(job.highlights, job.stack)),
       ),
     ),
   );

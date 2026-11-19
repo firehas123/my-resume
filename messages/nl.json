@@ -53,7 +53,8 @@
   "experience": {
     "title": "Waar ik heb gewerkt.",
     "showDetails": "Details tonen",
-    "hideDetails": "Details verbergen"
+    "hideDetails": "Details verbergen",
+    "stack": "Techstack"
   },
   "projects": {
     "title": "Wat ik heb gebouwd.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Vertaald voor het gemak. Werktalen: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Techstack:"
   },
   "qr": {
     "metaTitle": "QR-code",

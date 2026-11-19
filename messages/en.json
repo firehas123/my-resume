@@ -53,7 +53,8 @@
   "experience": {
     "title": "Where I’ve worked.",
     "showDetails": "Show details",
-    "hideDetails": "Hide details"
+    "hideDetails": "Hide details",
+    "stack": "Tech stack"
   },
   "projects": {
     "title": "Things I’ve built.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Translated for convenience. Working languages: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Stack:"
   },
   "qr": {
     "metaTitle": "QR code",

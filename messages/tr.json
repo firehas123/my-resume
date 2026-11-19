@@ -53,7 +53,8 @@
   "experience": {
     "title": "Çalıştığım yerler.",
     "showDetails": "Ayrıntıları göster",
-    "hideDetails": "Ayrıntıları gizle"
+    "hideDetails": "Ayrıntıları gizle",
+    "stack": "Teknolojiler"
   },
   "projects": {
     "title": "Geliştirdiklerim.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Kolaylık için çevrilmiştir. Çalışma dilleri: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Teknolojiler:"
   },
   "qr": {
     "metaTitle": "QR kodu",

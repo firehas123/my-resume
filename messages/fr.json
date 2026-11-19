@@ -53,7 +53,8 @@
   "experience": {
     "title": "Mon parcours.",
     "showDetails": "Voir les détails",
-    "hideDetails": "Masquer les détails"
+    "hideDetails": "Masquer les détails",
+    "stack": "Technologies"
   },
   "projects": {
     "title": "Mes réalisations.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Traduit pour plus de commodité. Langues de travail\u00a0: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Technologies\u00a0:"
   },
   "qr": {
     "metaTitle": "Code QR",

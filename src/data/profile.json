@@ -145,6 +145,7 @@
       "country": { "en": "Germany", "de": "Deutschland", "fr": "Allemagne", "es": "Alemania", "it": "Germania", "nl": "Duitsland", "tr": "Almanya", "ar": "ألمانيا" },
       "start": "2024-12",
       "end": null,
+      "stack": ["Java", "Spring MVC", "JPA/Hibernate", "PostgreSQL", "Liquibase", "JUnit", "Cucumber", "Docker"],
       "summary": {
         "en": "Java and Spring developer on the Z1 SecureMail Gateway, an enterprise S/MIME and PGP email encryption product.",
         "de": "Java- und Spring-Entwickler für das Z1 SecureMail Gateway, ein Enterprise-Produkt für E-Mail-Verschlüsselung mit S/MIME und PGP.",
@@ -222,6 +223,7 @@
       "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2023-12",
       "end": "2024-04",
+      "stack": ["Postgres", "OAuth/JWT", "Docker", "AWS", "GitHub Actions", "Grafana", "Kibana", "OpenTelemetry"],
       "summary": {
         "en": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
         "de": "Entwickelte einen REST-Microservice für die Careem Super App mit Vektor-Postgres und JWT-basiertem OAuth, bereitgestellt mit GitHub Actions und Docker auf AWS.",
@@ -299,6 +301,7 @@
       "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2022-07",
       "end": "2023-12",
+      "stack": ["Spring Boot", "Kafka", "Maven", "Docker", "Bash", "UFT", "ISO 8583"],
       "summary": {
         "en": "Moved payment services to an event-driven microservices architecture with Spring Boot and Kafka, and worked with the ISO 8583 standard.",
         "de": "Überführte Zahlungsdienste in eine ereignisgesteuerte Microservices-Architektur mit Spring Boot und Kafka und arbeitete mit dem Standard ISO 8583.",
@@ -393,6 +396,7 @@
       "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2021-07",
       "end": "2021-09",
+      "stack": ["Java", "JavaFX"],
       "summary": {
         "en": "Backend development with Java and JavaFX, working closely with the QA team.",
         "de": "Backend-Entwicklung mit Java und JavaFX in enger Zusammenarbeit mit dem QA-Team.",

@@ -53,7 +53,8 @@
   "experience": {
     "title": "Meine Stationen.",
     "showDetails": "Details anzeigen",
-    "hideDetails": "Details ausblenden"
+    "hideDetails": "Details ausblenden",
+    "stack": "Tech-Stack"
   },
   "projects": {
     "title": "Was ich gebaut habe.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Zur besseren Lesbarkeit übersetzt. Arbeitssprachen: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Tech-Stack:"
   },
   "qr": {
     "metaTitle": "QR-Code",

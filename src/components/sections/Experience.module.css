@@ -65,6 +65,34 @@
   color: var(--muted);
 }
 
+/* Stack terms in the summary and bullets: bold, in the main text colour. */
+.summary strong,
+.details li strong {
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap; /* keeps "ISO 8583" or "Spring Boot" on one line */
+}
+
+/* Tech stack chips: small outlined pills in the accent colour (as in the CV). */
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chip {
+  padding: 3px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--accent);
+}
+
 .details {
   margin-top: auto;
   padding-top: 8px;

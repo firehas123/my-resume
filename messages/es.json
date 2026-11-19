@@ -53,7 +53,8 @@
   "experience": {
     "title": "Dónde he trabajado.",
     "showDetails": "Ver detalles",
-    "hideDetails": "Ocultar detalles"
+    "hideDetails": "Ocultar detalles",
+    "stack": "Tecnologías"
   },
   "projects": {
     "title": "Lo que he construido.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "Traducido para su comodidad. Idiomas de trabajo: {languages}.",
     "roleAt": "{role}, {company}",
-    "place": "{city}, {country}"
+    "place": "{city}, {country}",
+    "stack": "Tecnologías:"
   },
   "qr": {
     "metaTitle": "Código QR",

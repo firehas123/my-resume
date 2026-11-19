@@ -30,6 +30,8 @@ export type Job = {
   country: string;
   start: string; // "YYYY-MM"
   end: string | null; // null means "present"
+  /** Technologies used in this job, most important first; the same in every language. */
+  stack?: string[];
   summary: string;
   highlights: string[];
 };

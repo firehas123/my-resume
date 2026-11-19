@@ -53,7 +53,8 @@
   "experience": {
     "title": "أين عملت.",
     "showDetails": "عرض التفاصيل",
-    "hideDetails": "إخفاء التفاصيل"
+    "hideDetails": "إخفاء التفاصيل",
+    "stack": "التقنيات"
   },
   "projects": {
     "title": "ما قمت ببنائه.",
@@ -272,7 +273,8 @@
     "range": "{start} – {end}",
     "translated": "مترجمة للتيسير. لغات العمل: {languages}.",
     "roleAt": "{role}، {company}",
-    "place": "{city}، {country}"
+    "place": "{city}، {country}",
+    "stack": "التقنيات:"
   },
   "qr": {
     "metaTitle": "رمز QR",
