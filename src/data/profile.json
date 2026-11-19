@@ -146,71 +146,63 @@
       "start": "2024-12",
       "end": null,
       "summary": {
-        "en": "Develops the Z1 SecureMail Gateway, an enterprise S/MIME and PGP email encryption gateway, in Java and Spring, from telemetry and certificate handling to the admin UI and release automation.",
-        "de": "Entwickelt das Z1 SecureMail Gateway, ein Enterprise-Gateway für E-Mail-Verschlüsselung mit S/MIME und PGP, in Java und Spring: von Telemetrie und Zertifikatsverwaltung bis zur Admin-Oberfläche und Release-Automatisierung.",
-        "fr": "Développe le Z1 SecureMail Gateway, une passerelle de chiffrement des e-mails S/MIME et PGP pour les entreprises, en Java et Spring, de la télémétrie et la gestion des certificats jusqu’à l’interface d’administration et l’automatisation des releases.",
-        "es": "Desarrolla Z1 SecureMail Gateway, una pasarela empresarial de cifrado de correo electrónico con S/MIME y PGP, en Java y Spring, desde la telemetría y la gestión de certificados hasta la interfaz de administración y la automatización de releases.",
-        "it": "Sviluppa Z1 SecureMail Gateway, un gateway enterprise di cifratura email con S/MIME e PGP, in Java e Spring, dalla telemetria e dalla gestione dei certificati fino all’interfaccia di amministrazione e all’automazione dei rilasci.",
-        "nl": "Ontwikkelt de Z1 SecureMail Gateway, een enterprise-gateway voor e-mailversleuteling met S/MIME en PGP, in Java en Spring, van telemetrie en certificaatbeheer tot de beheerinterface en release-automatisering.",
-        "tr": "Kurumsal bir S/MIME ve PGP e-posta şifreleme ağ geçidi olan Z1 SecureMail Gateway'i Java ve Spring ile geliştirir; telemetri ve sertifika yönetiminden yönetim arayüzüne ve sürüm otomasyonuna kadar.",
-        "ar": "يطوّر Z1 SecureMail Gateway، وهي بوابة مؤسسية لتشفير البريد الإلكتروني بـ S/MIME وPGP، باستخدام Java وSpring، من نظام Telemetry وإدارة الشهادات إلى واجهة الإدارة وأتمتة الإصدارات."
+        "en": "Java and Spring developer on the Z1 SecureMail Gateway, an enterprise S/MIME and PGP email encryption product.",
+        "de": "Java- und Spring-Entwickler für das Z1 SecureMail Gateway, ein Enterprise-Produkt für E-Mail-Verschlüsselung mit S/MIME und PGP.",
+        "fr": "Développeur Java et Spring sur le Z1 SecureMail Gateway, un produit de chiffrement des e-mails S/MIME et PGP pour les entreprises.",
+        "es": "Desarrollador Java y Spring en Z1 SecureMail Gateway, un producto empresarial de cifrado de correo electrónico con S/MIME y PGP.",
+        "it": "Sviluppatore Java e Spring su Z1 SecureMail Gateway, un prodotto enterprise di cifratura email con S/MIME e PGP.",
+        "nl": "Java- en Spring-ontwikkelaar aan de Z1 SecureMail Gateway, een enterprise-product voor e-mailversleuteling met S/MIME en PGP.",
+        "tr": "Kurumsal bir S/MIME ve PGP e-posta şifreleme ürünü olan Z1 SecureMail Gateway üzerinde çalışan Java ve Spring geliştiricisi.",
+        "ar": "مطوّر Java وSpring في Z1 SecureMail Gateway، وهو منتج مؤسسي لتشفير البريد الإلكتروني بـ S/MIME وPGP."
       },
       "highlights": {
         "en": [
-          "Designed and built product telemetry for the gateway: daily reporting of CA connector and feature usage, and a high-volume report use case with a new JPA data model and Liquibase migrations.",
-          "Improved certificate and CA integration: fixed certificate request counting, added back-off for failed CA reloads and introduced time-ordered UUID v7 IDs for tenants, including a migration of existing data.",
-          "Built admin UI features with Spring MVC and JSP, including custom Bean Validation, protection of directory-synchronised accounts against bulk changes, and clearer validation and warnings.",
-          "Extended a Spring-based release-notes service that publishes the release history through an OAuth-secured REST API, and linked it from the admin interfaces of four products.",
-          "Fixed production issues such as UTF-8 header encoding, alert timing, an integer overflow and timestamp handling, and covered changes with JUnit, Mockito and Cucumber/Selenium tests."
+          "Built product telemetry for usage and high-volume reporting with JPA and Liquibase.",
+          "Improved certificate and CA integration, including request counting, retry back-off and UUID v7 tenant IDs.",
+          "Built admin UI features with Spring MVC and JSP, including validation and bulk-change protection.",
+          "Extended the release-notes service with an OAuth-secured REST API and covered changes with JUnit and Cucumber tests."
         ],
         "de": [
-          "Konzeption und Entwicklung der Produkttelemetrie für das Gateway: tägliches Reporting zur Nutzung von CA-Connectoren und Funktionen sowie ein Report-Use-Case für große Datenmengen mit neuem JPA-Datenmodell und Liquibase-Migrationen.",
-          "Verbesserung der Zertifikats- und CA-Integration: korrekte Zählung von Zertifikatsanfragen, Back-off bei fehlgeschlagenen CA-Reloads und zeitlich sortierbare UUID-v7-IDs für Mandanten, einschließlich Migration der Bestandsdaten.",
-          "Entwicklung von Funktionen für die Admin-Oberfläche mit Spring MVC und JSP, darunter eigene Bean-Validation-Regeln, Schutz verzeichnissynchronisierter Konten vor Massenänderungen sowie klarere Validierungen und Warnungen.",
-          "Erweiterung eines Spring-basierten Release-Notes-Service, der die Release-Historie über eine mit OAuth gesicherte REST-API bereitstellt, und Verlinkung aus den Admin-Oberflächen von vier Produkten.",
-          "Behebung von Produktionsfehlern, etwa bei der UTF-8-Kodierung von Headern, beim Timing von Alerts, einem Integer-Overflow und bei Zeitstempeln; Absicherung der Änderungen mit JUnit-, Mockito- und Cucumber/Selenium-Tests."
+          "Entwicklung der Produkttelemetrie für Nutzungs- und Massendaten-Reports mit JPA und Liquibase.",
+          "Verbesserung der Zertifikats- und CA-Integration, u. a. Zählung von Anfragen, Retry-Back-off und UUID-v7-IDs für Mandanten.",
+          "Entwicklung von Funktionen für die Admin-Oberfläche mit Spring MVC und JSP, u. a. Validierung und Schutz vor Massenänderungen.",
+          "Erweiterung des Release-Notes-Service um eine mit OAuth gesicherte REST-API; Absicherung der Änderungen mit JUnit- und Cucumber-Tests."
         ],
         "fr": [
-          "Conception et développement de la télémétrie produit de la passerelle : rapport quotidien sur l’utilisation des connecteurs CA et des fonctionnalités, et un cas d’usage de rapports à fort volume avec un nouveau modèle de données JPA et des migrations Liquibase.",
-          "Amélioration de l’intégration des certificats et des CA : correction du comptage des demandes de certificats, back-off en cas d’échec du rechargement des CA et identifiants UUID v7 ordonnés dans le temps pour les tenants, avec migration des données existantes.",
-          "Développement de fonctionnalités pour l’interface d’administration avec Spring MVC et JSP, dont une Bean Validation personnalisée, la protection des comptes synchronisés avec l’annuaire contre les modifications en masse, et des validations et avertissements plus clairs.",
-          "Extension d’un service de release notes basé sur Spring, qui publie l’historique des versions via une API REST sécurisée par OAuth, et ajout de liens depuis les interfaces d’administration de quatre produits.",
-          "Correction d’incidents en production, comme l’encodage UTF-8 des en-têtes, le déclenchement des alertes, un dépassement d’entier et la gestion des horodatages, avec des tests JUnit, Mockito et Cucumber/Selenium pour couvrir les changements."
+          "Développement de la télémétrie produit pour les rapports d’utilisation et à fort volume avec JPA et Liquibase.",
+          "Amélioration de l’intégration des certificats et des CA, dont le comptage des demandes, le back-off des nouvelles tentatives et des identifiants UUID v7 pour les tenants.",
+          "Développement de fonctionnalités de l’interface d’administration avec Spring MVC et JSP, dont la validation et la protection contre les modifications en masse.",
+          "Extension du service de release notes avec une API REST sécurisée par OAuth, et changements couverts par des tests JUnit et Cucumber."
         ],
         "es": [
-          "Diseño y desarrollo de la telemetría de producto de la pasarela: informes diarios sobre el uso de los conectores de CA y de las funcionalidades, y un caso de uso de informes de alto volumen con un nuevo modelo de datos JPA y migraciones de Liquibase.",
-          "Mejora de la integración de certificados y CA: corrección del recuento de solicitudes de certificados, back-off ante recargas fallidas de CA e identificadores UUID v7 ordenados en el tiempo para los tenants, con migración de los datos existentes.",
-          "Desarrollo de funcionalidades de la interfaz de administración con Spring MVC y JSP, como Bean Validation personalizada, protección de las cuentas sincronizadas con el directorio frente a cambios masivos y validaciones y avisos más claros.",
-          "Ampliación de un servicio de release notes basado en Spring que publica el historial de versiones mediante una API REST protegida con OAuth, enlazado desde las interfaces de administración de cuatro productos.",
-          "Corrección de incidencias en producción, como la codificación UTF-8 de cabeceras, la temporización de alertas, un desbordamiento de enteros y el manejo de marcas de tiempo, con cambios cubiertos por pruebas de JUnit, Mockito y Cucumber/Selenium."
+          "Desarrollo de la telemetría de producto para informes de uso y de alto volumen con JPA y Liquibase.",
+          "Mejora de la integración de certificados y CA, como el recuento de solicitudes, el back-off de reintentos y los identificadores UUID v7 para tenants.",
+          "Desarrollo de funcionalidades de la interfaz de administración con Spring MVC y JSP, como la validación y la protección frente a cambios masivos.",
+          "Ampliación del servicio de release notes con una API REST protegida con OAuth y cambios cubiertos por pruebas de JUnit y Cucumber."
         ],
         "it": [
-          "Progettazione e sviluppo della telemetria di prodotto del gateway: report giornaliero sull’uso dei connettori CA e delle funzionalità, e un caso d’uso di reportistica ad alto volume con un nuovo modello dati JPA e migrazioni Liquibase.",
-          "Miglioramento dell’integrazione di certificati e CA: correzione del conteggio delle richieste di certificato, back-off per i ricaricamenti CA non riusciti e ID UUID v7 ordinati nel tempo per i tenant, con migrazione dei dati esistenti.",
-          "Sviluppo di funzionalità per l’interfaccia di amministrazione con Spring MVC e JSP, tra cui Bean Validation personalizzata, protezione degli account sincronizzati dalla directory contro le modifiche massive e validazioni e avvisi più chiari.",
-          "Estensione di un servizio di release notes basato su Spring che pubblica la cronologia dei rilasci tramite un’API REST protetta con OAuth, con collegamenti dalle interfacce di amministrazione di quattro prodotti.",
-          "Correzione di problemi in produzione come la codifica UTF-8 delle intestazioni, la tempistica degli alert, un integer overflow e la gestione dei timestamp, con modifiche coperte da test JUnit, Mockito e Cucumber/Selenium."
+          "Sviluppo della telemetria di prodotto per report di utilizzo e ad alto volume con JPA e Liquibase.",
+          "Miglioramento dell’integrazione di certificati e CA, tra cui il conteggio delle richieste, il back-off dei tentativi e ID UUID v7 per i tenant.",
+          "Sviluppo di funzionalità per l’interfaccia di amministrazione con Spring MVC e JSP, tra cui validazione e protezione dalle modifiche massive.",
+          "Estensione del servizio di release notes con un’API REST protetta con OAuth, con modifiche coperte da test JUnit e Cucumber."
         ],
         "nl": [
-          "Ontwerp en bouw van producttelemetrie voor de gateway: dagelijkse rapportage over het gebruik van CA-connectors en functies, en een rapportage-use-case voor grote datavolumes met een nieuw JPA-datamodel en Liquibase-migraties.",
-          "Verbetering van de certificaat- en CA-integratie: correcte telling van certificaataanvragen, back-off bij mislukte CA-reloads en in de tijd geordende UUID v7-ID's voor tenants, inclusief migratie van bestaande data.",
-          "Ontwikkeling van functies voor de beheerinterface met Spring MVC en JSP, waaronder eigen Bean Validation, bescherming van met de directory gesynchroniseerde accounts tegen bulkwijzigingen en duidelijkere validatie en waarschuwingen.",
-          "Uitbreiding van een op Spring gebaseerde release-notes-service die de releasegeschiedenis publiceert via een met OAuth beveiligde REST-API, met links vanuit de beheerinterfaces van vier producten.",
-          "Oplossen van productieproblemen zoals UTF-8-headercodering, timing van alerts, een integer overflow en verwerking van tijdstempels, met JUnit-, Mockito- en Cucumber/Selenium-tests voor de wijzigingen."
+          "Bouw van producttelemetrie voor gebruiks- en grootvolume-rapportages met JPA en Liquibase.",
+          "Verbetering van de certificaat- en CA-integratie, waaronder telling van aanvragen, retry-back-off en UUID v7-ID's voor tenants.",
+          "Ontwikkeling van functies voor de beheerinterface met Spring MVC en JSP, waaronder validatie en bescherming tegen bulkwijzigingen.",
+          "Uitbreiding van de release-notes-service met een met OAuth beveiligde REST-API, met JUnit- en Cucumber-tests voor de wijzigingen."
         ],
         "tr": [
-          "Ağ geçidi için ürün telemetrisinin tasarlanıp geliştirilmesi; CA connector ve özellik kullanımının günlük raporlanması, yeni bir JPA veri modeli ve Liquibase migration'larıyla yüksek hacimli bir rapor kullanım senaryosu.",
-          "Sertifika ve CA entegrasyonunun iyileştirilmesi; sertifika talebi sayımının düzeltilmesi, başarısız CA yeniden yüklemeleri için back-off ve mevcut verilerin taşınmasıyla birlikte tenant'lar için zaman sıralı UUID v7 kimlikleri.",
-          "Spring MVC ve JSP ile yönetim arayüzü özelliklerinin geliştirilmesi; özel Bean Validation kuralları, dizinle senkronize hesapların toplu değişikliklere karşı korunması, daha anlaşılır doğrulama ve uyarılar.",
-          "Sürüm geçmişini OAuth ile korunan bir REST API üzerinden yayınlayan Spring tabanlı release notes servisinin genişletilmesi ve dört ürünün yönetim arayüzlerinden bağlantı verilmesi.",
-          "UTF-8 başlık kodlaması, uyarı zamanlaması, bir integer overflow ve zaman damgası işleme gibi canlı ortam hatalarının giderilmesi; değişikliklerin JUnit, Mockito ve Cucumber/Selenium testleriyle kapsanması."
+          "JPA ve Liquibase ile kullanım ve yüksek hacimli raporlama için ürün telemetrisinin geliştirilmesi.",
+          "Sertifika ve CA entegrasyonunun iyileştirilmesi; talep sayımı, yeniden deneme back-off'u ve tenant'lar için UUID v7 kimlikleri.",
+          "Spring MVC ve JSP ile yönetim arayüzü özelliklerinin geliştirilmesi; doğrulama ve toplu değişikliklere karşı koruma.",
+          "Release notes servisinin OAuth ile korunan bir REST API ile genişletilmesi ve değişikliklerin JUnit ve Cucumber testleriyle kapsanması."
         ],
         "ar": [
-          "تصميم وبناء نظام Telemetry للمنتج في البوابة: تقارير يومية عن استخدام موصلات CA والميزات، وحالة استخدام لتقارير عالية الحجم بنموذج بيانات JPA جديد وعمليات ترحيل Liquibase.",
-          "تحسين تكامل الشهادات وCA: إصلاح عدّ طلبات الشهادات، وإضافة back-off عند فشل إعادة تحميل CA، واعتماد معرّفات UUID v7 مرتبة زمنيًا للمستأجرين، مع ترحيل البيانات الحالية.",
-          "بناء ميزات لواجهة الإدارة باستخدام Spring MVC وJSP، منها Bean Validation مخصص، وحماية الحسابات المتزامنة مع الدليل من التغييرات الجماعية، ورسائل تحقق وتحذيرات أوضح.",
-          "توسيع خدمة release notes مبنية على Spring تنشر سجل الإصدارات عبر REST API محمية بـ OAuth، وربطها من واجهات الإدارة لأربعة منتجات.",
-          "إصلاح مشكلات في بيئة الإنتاج مثل ترميز الترويسات بـ UTF-8، وتوقيت التنبيهات، وتجاوز سعة الأعداد الصحيحة، ومعالجة الطوابع الزمنية، وتغطية التغييرات باختبارات JUnit وMockito وCucumber/Selenium."
+          "بناء نظام Telemetry للمنتج لتقارير الاستخدام والتقارير عالية الحجم باستخدام JPA وLiquibase.",
+          "تحسين تكامل الشهادات وCA، بما في ذلك عدّ الطلبات وback-off لإعادة المحاولة ومعرّفات UUID v7 للمستأجرين.",
+          "بناء ميزات لواجهة الإدارة باستخدام Spring MVC وJSP، منها التحقق من المدخلات والحماية من التغييرات الجماعية.",
+          "توسيع خدمة release notes بـ REST API محمية بـ OAuth، وتغطية التغييرات باختبارات JUnit وCucumber."
         ]
       }
     },
