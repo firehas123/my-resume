@@ -7,12 +7,20 @@
 // names are the same in every language. A name with "/" is one chip but
 // several terms to look for in the text: "JPA/Hibernate" -> "JPA", "Hibernate".
 
-/** The terms a stack name stands for: "JPA/Hibernate" -> ["JPA", "Hibernate"]. */
+// Other spellings to look for in the text, by stack name: the chip says "LLMs",
+// but the text may say "LLM-powered".
+const ALIASES = { LLMs: ["LLM"] };
+
+/**
+ * The terms a stack name stands for: "JPA/Hibernate" -> ["JPA", "Hibernate"],
+ * "LLMs" -> ["LLMs", "LLM"] (its aliases come last).
+ */
 export function stackTerms(name) {
-  return name
+  const parts = name
     .split("/")
     .map((part) => part.trim())
     .filter(Boolean);
+  return [...parts, ...(ALIASES[name] ?? [])];
 }
 
 // A Latin letter or digit (accented ones included). Only these count as "part
@@ -92,7 +100,8 @@ export const STACK_GROUPS = [
   { id: "security", label: "Security and protocols", color: "#1d4ed8",
     dark: "#60a5fa", names: ["OAuth/JWT", "ISO 8583"] },
   { id: "testing", label: "Testing", color: "#475569",
-    dark: "#94a3b8", names: ["Cucumber", "UFT"] },
+    dark: "#94a3b8", names: ["Cucumber", "UFT"] },  { id: "ai", label: "AI", color: "#be185d",
+    dark: "#f472b6", names: ["LLMs"] },
 ];
 
 /**

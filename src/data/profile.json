@@ -223,7 +223,7 @@
       "country": { "en": "Pakistan", "de": "Pakistan", "fr": "Pakistan", "es": "Pakistán", "it": "Pakistan", "nl": "Pakistan", "tr": "Pakistan", "ar": "باكستان" },
       "start": "2023-12",
       "end": "2024-04",
-      "stack": ["Postgres", "OAuth/JWT", "Docker", "AWS", "GitHub Actions", "Grafana", "Kibana", "OpenTelemetry"],
+      "stack": ["LLMs", "Postgres", "OAuth/JWT", "Docker", "AWS", "GitHub Actions", "Grafana", "Kibana", "OpenTelemetry"],
       "summary": {
         "en": "Built a REST microservice for the Careem Super App with vector Postgres and JWT-based OAuth, deployed with GitHub Actions and Docker on AWS.",
         "de": "Entwickelte einen REST-Microservice für die Careem Super App mit Vektor-Postgres und JWT-basiertem OAuth, bereitgestellt mit GitHub Actions und Docker auf AWS.",
@@ -239,49 +239,49 @@
           "Developed a scalable REST microservice for the Careem Super App, using vector Postgres for efficient data management and JWT-based OAuth for secure authentication.",
           "Kept the service running reliably with Grafana for monitoring, Kibana for logging and Jaeger for request tracing with OpenTelemetry.",
           "Managed CI/CD pipelines with GitHub Actions, deploying the dockerised service on AWS.",
-          "Refined prompts to improve the accuracy of results from large language models such as GPT."
+          "Co-built an LLM-powered English-to-Arabic localization service that raised translation accuracy by 10% and translation efficiency by 97%."
         ],
         "de": [
           "Entwicklung eines skalierbaren REST-Microservice für die Careem Super App, mit Vektor-Postgres für effizientes Datenmanagement und JWT-basiertem OAuth für sichere Authentifizierung.",
           "Zuverlässiger Betrieb des Service mit Grafana für Monitoring, Kibana für Logging und Jaeger für Request-Tracing mit OpenTelemetry.",
           "Verwaltung der CI/CD-Pipelines mit GitHub Actions und Deployment des mit Docker containerisierten Service auf AWS.",
-          "Optimierung von Prompts für genauere Ergebnisse großer Sprachmodelle wie GPT."
+          "Mitentwicklung eines LLM-gestützten Lokalisierungsservice von Englisch nach Arabisch, der die Übersetzungsgenauigkeit um 10 % und die Übersetzungseffizienz um 97 % steigerte."
         ],
         "fr": [
           "Développement d’un microservice REST évolutif pour la Careem Super App, avec Postgres vectoriel pour une gestion efficace des données et OAuth basé sur JWT pour une authentification sécurisée.",
           "Fonctionnement fiable du service grâce à Grafana pour la supervision, Kibana pour les journaux et Jaeger pour le traçage des requêtes avec OpenTelemetry.",
           "Gestion des pipelines CI/CD avec GitHub Actions et déploiement du service conteneurisé avec Docker sur AWS.",
-          "Affinage des prompts pour améliorer la précision des résultats de grands modèles de langage comme GPT."
+          "Co-développement d’un service de localisation de l’anglais vers l’arabe basé sur des LLM, qui a augmenté la précision des traductions de 10 % et l’efficacité des traductions de 97 %."
         ],
         "es": [
           "Desarrollo de un microservice REST escalable para la Careem Super App, con Postgres vectorial para una gestión eficiente de los datos y OAuth basado en JWT para una autenticación segura.",
           "Funcionamiento fiable del servicio con Grafana para la monitorización, Kibana para los logs y Jaeger para el trazado de peticiones con OpenTelemetry.",
           "Gestión de los pipelines de CI/CD con GitHub Actions y despliegue del servicio en contenedores Docker en AWS.",
-          "Ajuste de prompts para mejorar la precisión de los resultados de grandes modelos de lenguaje como GPT."
+          "Codesarrollo de un servicio de localización del inglés al árabe basado en LLM, que aumentó la precisión de la traducción en un 10 % y la eficiencia de la traducción en un 97 %."
         ],
         "it": [
           "Sviluppo di un microservice REST scalabile per la Careem Super App, con Postgres vettoriale per una gestione efficiente dei dati e OAuth basato su JWT per un’autenticazione sicura.",
           "Funzionamento affidabile del servizio con Grafana per il monitoraggio, Kibana per i log e Jaeger per il tracciamento delle richieste con OpenTelemetry.",
           "Gestione delle pipeline CI/CD con GitHub Actions e rilascio del servizio containerizzato con Docker su AWS.",
-          "Affinamento dei prompt per migliorare l’accuratezza dei risultati di grandi modelli linguistici come GPT."
+          "Co-sviluppo di un servizio di localizzazione dall’inglese all’arabo basato su LLM, che ha aumentato l’accuratezza della traduzione del 10% e l’efficienza della traduzione del 97%."
         ],
         "nl": [
           "Ontwikkeling van een schaalbare REST-microservice voor de Careem Super App, met vector-Postgres voor efficiënt databeheer en OAuth op basis van JWT voor veilige authenticatie.",
           "Betrouwbare werking van de service met Grafana voor monitoring, Kibana voor logging en Jaeger voor request tracing met OpenTelemetry.",
           "Beheer van CI/CD-pipelines met GitHub Actions en uitrol van de met Docker gecontaineriseerde service op AWS.",
-          "Verfijnen van prompts voor nauwkeurigere resultaten van grote taalmodellen zoals GPT."
+          "Mede-ontwikkeling van een LLM-gestuurde lokalisatieservice van Engels naar Arabisch, die de vertaalnauwkeurigheid met 10% en de vertaalefficiëntie met 97% verhoogde."
         ],
         "tr": [
           "Careem Super App için ölçeklenebilir bir REST microservice geliştirilmesi; verimli veri yönetimi için vektör Postgres, güvenli kimlik doğrulama için JWT tabanlı OAuth.",
           "Servisin güvenilir çalışmasının sağlanması: izleme için Grafana, loglama için Kibana, OpenTelemetry ile istek takibi için Jaeger.",
           "GitHub Actions ile CI/CD pipeline'larının yönetilmesi ve Docker ile paketlenen servisin AWS'ye dağıtılması.",
-          "GPT gibi büyük dil modellerinden alınan sonuçların doğruluğunu artırmak için prompt'ların iyileştirilmesi."
+          "Çeviri doğruluğunu %10, çeviri verimliliğini %97 artıran, LLM destekli bir İngilizceden Arapçaya yerelleştirme servisinin birlikte geliştirilmesi."
         ],
         "ar": [
           "تطوير Microservice قابل للتوسع من نوع REST لتطبيق Careem Super App، باستخدام Postgres المتجهي لإدارة البيانات بكفاءة وOAuth القائم على JWT للمصادقة الآمنة.",
           "الحفاظ على تشغيل الخدمة بموثوقية باستخدام Grafana للمراقبة وKibana للسجلات وJaeger لتتبع الطلبات مع OpenTelemetry.",
           "إدارة مسارات CI/CD باستخدام GitHub Actions ونشر الخدمة المعبأة بـ Docker على AWS.",
-          "تحسين الـ prompts لرفع دقة نتائج النماذج اللغوية الكبيرة مثل GPT."
+          "المشاركة في بناء خدمة توطين من الإنجليزية إلى العربية مدعومة بـ LLM، رفعت دقة الترجمة بنسبة 10% وكفاءة الترجمة بنسبة 97%."
         ]
       }
     },

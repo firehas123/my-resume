@@ -11,6 +11,15 @@ test("a name with a slash stands for several terms", () => {
   assert.deepEqual(stackTerms("Kafka"), ["Kafka"]);
 });
 
+test("a stack name can have other spellings: LLMs is also found as LLM", () => {
+  assert.deepEqual(stackTerms("LLMs"), ["LLMs", "LLM"]);
+  const text = "Co-built an LLM-powered service.";
+  const pieces = markTerms(text, stackTerms("LLMs"));
+  assert.deepEqual(pieces.filter((p) => p.mark).map((p) => p.text), ["LLM"]);
+  // Where both match, the longer one wins.
+  assert.deepEqual(markTerms("uses LLMs", stackTerms("LLMs")).filter((p) => p.mark).map((p) => p.text), ["LLMs"]);
+});
+
 test("only whole words match, case-sensitive", () => {
   assert.equal(findTerm("Java and JavaFX", "Java"), 0);
   assert.equal(findTerm("in JavaFX only", "Java"), -1);
@@ -62,6 +71,9 @@ test("every term in any job's stack has a colour group", () => {
 test("groups and colours", () => {
   assert.equal(stackGroup("Hibernate").id, "java");
   assert.equal(stackGroup("JWT").id, "security");
+  assert.equal(stackGroup("LLMs").id, "ai");
+  assert.equal(stackGroup("LLM").id, "ai");
+  assert.equal(colorOf("LLM", "#000"), "#be185d");
   assert.equal(colorOf("Kafka", "#000"), "#047857");
   assert.equal(colorOf("Rust", "#0b7a54"), "#0b7a54");
   assert.equal(stackGroup("Rust"), null);

@@ -143,7 +143,7 @@ function buildCv(code) {
   const align = rtl ? "right" : "left";
 
   const s = StyleSheet.create({
-    page: { fontFamily: family, fontSize: 8.7, lineHeight: joined ? 1.45 : 1.32, color: COLOR.text, paddingVertical: 28, paddingHorizontal: 36, textAlign: align },
+    page: { fontFamily: family, fontSize: 8.7, lineHeight: joined ? 1.45 : 1.32, color: COLOR.text, paddingVertical: 26, paddingHorizontal: 36, textAlign: align },
     docHeading: { fontSize: 7.5, fontWeight: 700, letterSpacing: joined ? 0 : 1.4, textTransform: joined ? "none" : "uppercase", color: COLOR.muted, marginBottom: 4 },
     headerRow: { flexDirection: row, justifyContent: "space-between", alignItems: "flex-start" },
     name: { fontSize: 22, lineHeight: 1.15, fontWeight: 800, letterSpacing: joined ? 0 : -0.4 },
