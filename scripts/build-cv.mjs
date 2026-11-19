@@ -15,6 +15,10 @@
 // job's bullets is bold in the accent colour (scripts/lib/stack.mjs). All of
 // it stays real text, so applicant-tracking systems can read it.
 //
+// Every CV must fit on one A4 page, so it has no profile summary (the
+// website shows that) and the spacing below is tight on purpose; the build
+// prints a warning if a language needs a second page.
+//
 // On purpose the PDF contains no phone number. It shows an email address
 // only when "cvShowEmail" is true in profile.json, and the photo only when
 // "cvShowPhoto" is true. The section titles and the few fixed words come from
@@ -138,7 +142,7 @@ function buildCv(code) {
   const align = rtl ? "right" : "left";
 
   const s = StyleSheet.create({
-    page: { fontFamily: family, fontSize: 8.7, lineHeight: joined ? 1.55 : 1.4, color: COLOR.text, paddingVertical: 28, paddingHorizontal: 42, textAlign: align },
+    page: { fontFamily: family, fontSize: 8.7, lineHeight: joined ? 1.45 : 1.32, color: COLOR.text, paddingVertical: 28, paddingHorizontal: 36, textAlign: align },
     docHeading: { fontSize: 7.5, fontWeight: 700, letterSpacing: joined ? 0 : 1.4, textTransform: joined ? "none" : "uppercase", color: COLOR.muted, marginBottom: 4 },
     headerRow: { flexDirection: row, justifyContent: "space-between", alignItems: "flex-start" },
     name: { fontSize: 22, lineHeight: 1.15, fontWeight: 800, letterSpacing: joined ? 0 : -0.4 },
@@ -147,20 +151,20 @@ function buildCv(code) {
     separator: { color: COLOR.line, marginHorizontal: 6 },
     link: { color: COLOR.muted, textDecoration: "none" },
     photo: { width: 64, height: 64, borderRadius: 32, objectFit: "cover" },
-    translated: { marginTop: 8, paddingTop: 5, borderTopWidth: 1, borderTopColor: COLOR.line, fontSize: 8, color: COLOR.muted },
-    section: { marginTop: 11 },
+    translated: { marginTop: 6, paddingTop: 4, borderTopWidth: 1, borderTopColor: COLOR.line, fontSize: 8, color: COLOR.muted },
+    section: { marginTop: 7 },
     heading: {
       fontSize: 8,
       fontWeight: 800,
       letterSpacing: joined ? 0 : 1.2,
       textTransform: joined ? "none" : "uppercase",
       color: COLOR.accent,
-      paddingBottom: 3,
-      marginBottom: 6,
+      paddingBottom: 2,
+      marginBottom: 4,
       borderBottomWidth: 1,
       borderBottomColor: COLOR.line,
     },
-    entry: { marginBottom: 6 },
+    entry: { marginBottom: 4 },
     row: { flexDirection: row, justifyContent: "space-between", alignItems: "baseline" },
     rowMain: { flex: 1, paddingRight: rtl ? 0 : 10, paddingLeft: rtl ? 10 : 0 },
     title: { fontSize: 10.5, fontWeight: 700 },
@@ -168,8 +172,8 @@ function buildCv(code) {
     // Dates never wrap: "12/2023 – 04/2024" stays on one line in every language.
     meta: { color: COLOR.muted, fontWeight: 600, flexShrink: 0, flexWrap: "nowrap" },
     sub: { fontWeight: 600, color: COLOR.muted, marginTop: 1 },
-    bullets: { marginTop: 3 },
-    bullet: { flexDirection: row, marginBottom: 1 },
+    bullets: { marginTop: 2 },
+    bullet: { flexDirection: row, marginBottom: 0.5 },
     dot: { width: 10, color: COLOR.accent, textAlign: align },
     bulletText: { flex: 1 },
     // A stack term in a bullet: bold, in the accent colour.
@@ -300,7 +304,8 @@ function buildCv(code) {
       ),
   );
 
-  const profileSection = Section(words.profile, T(null, profile.cvProfile));
+  // No profile summary in the PDF: the CV must fit on one A4 page. The
+  // website still shows it (cvProfile stays in profile.json).
 
   const experience = Section(
     words.experience,
@@ -380,7 +385,7 @@ function buildCv(code) {
       creator: "scripts/build-cv.mjs",
       producer: "react-pdf",
     },
-    h(Page, { size: "A4", style: s.page }, header, profileSection, experience, lower),
+    h(Page, { size: "A4", style: s.page }, header, experience, lower),
   );
 }
 
@@ -399,6 +404,6 @@ for (const code of config.languages) {
   await renderToFile(buildCv(code), output);
   // A rough page count: one "/Type /Page" object per page.
   const pages = (readFileSync(output, "latin1").match(/\/Type \/Page\b/g) ?? []).length;
-  const note = pages > 2 ? `  WARNING: ${pages} pages; the CV should fit on one or two` : "";
+  const note = pages > 1 ? `  WARNING: ${pages} pages; the CV should fit on one A4 page` : "";
   console.log(`CV written to public/files/cv-${code}.pdf (${pages} page${pages === 1 ? "" : "s"})${note}`);
 }
