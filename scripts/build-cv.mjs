@@ -12,7 +12,8 @@
 //
 // Each job shows its tech stack ("stack" in profile.json) as a line of small
 // chips under its title, and the first mention of each stack term in the
-// job's bullets is bold in the accent colour (scripts/lib/stack.mjs). All of
+// job's bullets is bold; chips and bold terms are coloured by their group
+// (Java, data, DevOps, security, testing; colorOf() in scripts/lib/stack.mjs). All of
 // it stays real text, so applicant-tracking systems can read it.
 //
 // Every CV must fit on one A4 page, so it has no profile summary (the
@@ -34,7 +35,7 @@ import React from "react";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View, renderToFile } from "@react-pdf/renderer";
 import { localize, mergeMessages } from "./lib/i18n.mjs";
 import { hasRtl, rtlWords } from "./lib/rtl.mjs";
-import { findTerm, highlightPlan, markTerms } from "./lib/stack.mjs";
+import { colorOf, findTerm, highlightPlan, markTerms } from "./lib/stack.mjs";
 
 const h = React.createElement;
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -176,12 +177,12 @@ function buildCv(code) {
     bullet: { flexDirection: row, marginBottom: 0.5 },
     dot: { width: 10, color: COLOR.accent, textAlign: align },
     bulletText: { flex: 1 },
-    // A stack term in a bullet: bold, in the accent colour.
+    // A stack term in a bullet: bold, in its group's colour (see marked()).
     mark: { fontWeight: 700, color: COLOR.accent },
     // "Stack:" and the chips, on one line under the job's place (wrapping if needed).
     stack: { flexDirection: row, flexWrap: "wrap", alignItems: "center", columnGap: 3, rowGap: 2, marginTop: 2.5 },
     stackLabel: { fontSize: 7.5, lineHeight: 1.25, paddingTop: 0.3, fontWeight: 700, color: COLOR.muted, marginRight: rtl ? 0 : 1, marginLeft: rtl ? 1 : 0 },
-    // A rounded outline chip: accent text and border on white (prints well in black and white).
+    // A rounded outline chip: text and border in the group's colour on white (see Stack()).
     chip: { borderWidth: 0.6, borderColor: COLOR.accent, borderRadius: 5, paddingHorizontal: 4, paddingTop: 0, paddingBottom: 0.8 },
     chipText: { fontSize: 7, lineHeight: 1.25, fontWeight: 700, color: COLOR.accent },
     columns: { flexDirection: row, gap: 24 },
@@ -197,7 +198,7 @@ function buildCv(code) {
 
   /** A text with the given terms marked (see s.mark): plain strings and nested <Text>s. */
   const marked = (text, terms) =>
-    terms.length ? markTerms(text, terms).map((piece, i) => (piece.mark ? h(Text, { key: i, style: s.mark }, piece.text) : piece.text)) : text;
+    terms.length ? markTerms(text, terms).map((piece, i) => (piece.mark ? h(Text, { key: i, style: [s.mark, { color: colorOf(piece.text, COLOR.accent) }] }, piece.text) : piece.text)) : text;
 
   /**
    * A text. Right-to-left text becomes a row of words placed from the right,
@@ -260,7 +261,11 @@ function buildCv(code) {
       View,
       { style: s.stack },
       T(s.stackLabel, words.stack),
-      ...names.map((name, i) => h(View, { key: i, style: s.chip }, h(Text, { style: s.chipText }, name))),
+      ...names.map((name, i) => {
+        // Only the colour changes per group, so the layout stays the same.
+        const color = colorOf(name, COLOR.accent);
+        return h(View, { key: i, style: [s.chip, { borderColor: color }] }, h(Text, { style: [s.chipText, { color }] }, name));
+      }),
     );
   }
 

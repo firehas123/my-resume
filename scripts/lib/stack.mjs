@@ -62,3 +62,52 @@ export function markTerms(text, terms) {
   if (at < text.length || pieces.length === 0) pieces.push({ text: text.slice(at), mark: false });
   return pieces;
 }
+
+// ---------------------------------------------------------------------------
+// Colour groups: each technology is coloured by its group, in the CV chips and
+// highlighted terms and on the website (globals.css has one variable per group,
+// --stack-<id>, with a lighter variant for dark surfaces). A name that is in no
+// group keeps the accent colour. `color` is the light-theme / PDF colour,
+// `dark` the variant for dark surfaces (both pass WCAG AA, 4.5:1, on their
+// backgrounds). scripts/stack.test.mjs checks that globals.css uses these values.
+// ---------------------------------------------------------------------------
+
+export const STACK_GROUPS = [
+  {
+    id: "java",
+    label: "Java ecosystem",
+    color: "#c2410c",
+    dark: "#fb923c",
+    names: ["Java", "Spring MVC", "Spring Boot", "JPA/Hibernate", "JUnit", "Maven", "JavaFX"],
+  },
+  { id: "data", label: "Data and messaging", color: "#047857",
+    dark: "#34d399", names: ["PostgreSQL", "Postgres", "Liquibase", "Kafka"] },
+  {
+    id: "devops",
+    label: "DevOps and monitoring",
+    color: "#6d28d9",
+    dark: "#a78bfa",
+    names: ["Docker", "AWS", "GitHub Actions", "Bash", "Grafana", "Kibana", "OpenTelemetry"],
+  },
+  { id: "security", label: "Security and protocols", color: "#1d4ed8",
+    dark: "#60a5fa", names: ["OAuth/JWT", "ISO 8583"] },
+  { id: "testing", label: "Testing", color: "#475569",
+    dark: "#94a3b8", names: ["Cucumber", "UFT"] },
+];
+
+/**
+ * The group of a stack name or of one of its terms ("JPA/Hibernate", "JPA"
+ * and "Hibernate" are all in the Java group), or null if it has none.
+ */
+export function stackGroup(nameOrTerm) {
+  return (
+    STACK_GROUPS.find((group) =>
+      group.names.some((name) => name === nameOrTerm || stackTerms(name).includes(nameOrTerm)),
+    ) ?? null
+  );
+}
+
+/** The PDF / light-theme colour of a stack name or term, or `fallback` (the accent). */
+export function colorOf(nameOrTerm, fallback) {
+  return stackGroup(nameOrTerm)?.color ?? fallback;
+}

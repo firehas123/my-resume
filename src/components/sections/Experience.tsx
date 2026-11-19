@@ -7,12 +7,27 @@ import { getProfile } from "@/lib/profile";
 import styles from "./Experience.module.css";
 import { RevealText } from "@/components/motion/RevealText";
 import { Timeline } from "@/components/motion/Timeline";
-import { highlightPlan, markTerms } from "../../../scripts/lib/stack.mjs";
+import { highlightPlan, markTerms, stackGroup } from "../../../scripts/lib/stack.mjs";
 
-/** A text with the given stack terms in bold (their first mention in the job; see scripts/lib/stack.mjs). */
+/**
+ * Style that colours a chip or term by its stack group (Java, data, DevOps ...),
+ * through the --stack-<group> variables in globals.css. No group: the accent.
+ */
+function groupStyle(nameOrTerm: string) {
+  const group = stackGroup(nameOrTerm);
+  return group ? ({ "--stack-color": `var(--stack-${group.id})` } as React.CSSProperties) : undefined;
+}
+
+/** A text with the given stack terms in bold, in their group's colour (first mention in the job; see scripts/lib/stack.mjs). */
 function Marked({ text, terms }: { text: string; terms: string[] }) {
   if (!terms.length) return text;
-  return markTerms(text, terms).map((piece, i) => (piece.mark ? <strong key={i}>{piece.text}</strong> : piece.text));
+  return markTerms(text, terms).map((piece, i) => (piece.mark ? (
+      <strong key={i} style={groupStyle(piece.text)}>
+        {piece.text}
+      </strong>
+    ) : (
+      piece.text
+    )));
 }
 
 // The one light band of the page (in both themes).
@@ -47,7 +62,7 @@ export async function Experience() {
                     // The same chips as in the CV. Real text, read out as a list.
                     <ul className={styles.stack} aria-label={t("stack")}>
                       {job.stack.map((name) => (
-                        <li key={name} className={styles.chip}>
+                        <li key={name} className={styles.chip} style={groupStyle(name)}>
                           {name}
                         </li>
                       ))}

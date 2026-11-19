@@ -65,15 +65,16 @@
   color: var(--muted);
 }
 
-/* Stack terms in the summary and bullets: bold, in the main text colour. */
+/* Stack terms in the summary and bullets: bold, in their group's colour
+   (--stack-color is set per term in Experience.tsx; the accent if none). */
 .summary strong,
 .details li strong {
   font-weight: 700;
-  color: var(--text);
+  color: var(--stack-color, var(--accent));
   white-space: nowrap; /* keeps "ISO 8583" or "Spring Boot" on one line */
 }
 
-/* Tech stack chips: small outlined pills in the accent colour (as in the CV). */
+/* Tech stack chips: small outlined pills in their group's colour (as in the CV). */
 .stack {
   display: flex;
   flex-wrap: wrap;
@@ -85,12 +86,12 @@
 
 .chip {
   padding: 3px 12px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--stack-color, var(--accent));
   border-radius: 999px;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.4;
-  color: var(--accent);
+  color: var(--stack-color, var(--accent));
 }
 
 .details {

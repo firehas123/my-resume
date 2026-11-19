@@ -68,6 +68,13 @@
   --media-bg: #1b1b20;
   --error: #ff9a8f;
   --lift-shadow: 0 16px 40px rgb(0 0 0 / 0.45);
+  /* Tech stack groups (chips and highlighted terms), lighter for dark surfaces.
+     The values come from STACK_GROUPS in scripts/lib/stack.mjs (a test checks). */
+  --stack-java: #fb923c;
+  --stack-data: #34d399;
+  --stack-devops: #a78bfa;
+  --stack-security: #60a5fa;
+  --stack-testing: #94a3b8;
 }
 
 :root[data-theme="light"] {
@@ -91,6 +98,12 @@
   --media-bg: #ededf0;
   --error: #b42318;
   --lift-shadow: 0 16px 40px rgb(11 11 13 / 0.07);
+  /* Tech stack groups, the same colours as in the CV (scripts/lib/stack.mjs). */
+  --stack-java: #c2410c;
+  --stack-data: #047857;
+  --stack-devops: #6d28d9;
+  --stack-security: #1d4ed8;
+  --stack-testing: #475569;
 }
 
 /* Background of the closing "Get in touch" band and the footer. Kept out of
@@ -132,6 +145,12 @@
   --btn-text: #ffffff;
   --btn-outline: #c4c4cc;
   --lift-shadow: 0 16px 40px rgb(10 10 12 / 0.07);
+  /* Tech stack groups, the same colours as in the CV (scripts/lib/stack.mjs). */
+  --stack-java: #c2410c;
+  --stack-data: #047857;
+  --stack-devops: #6d28d9;
+  --stack-security: #1d4ed8;
+  --stack-testing: #475569;
 }
 
 /* Hover shade of the accent, derived so it follows the accent automatically. */
