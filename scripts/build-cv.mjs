@@ -351,7 +351,10 @@ function buildCv(code) {
   // A no-break space keeps each "·" with the word before it when lines wrap.
   // wrap: false keeps the short skills list with its heading on one page
   // (minPresenceAhead alone could leave the heading alone at a page bottom).
-  const skills = h(View, { wrap: false }, Section(words.skills, T(null, profile.skills.map((skill) => skill.name).join("\u00a0· "))));
+  // Skills with "cv": false in profile.json are shown on the website only
+  // (the CV has to stay on one A4 page in every language).
+  const cvSkills = profile.skills.filter((skill) => skill.cv !== false);
+  const skills = h(View, { wrap: false }, Section(words.skills, T(null, cvSkills.map((skill) => skill.name).join("\u00a0· "))));
 
   const certifications = Section(
     words.certifications,

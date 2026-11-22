@@ -16,3 +16,17 @@ website; the site uses neutral, true wording until an item is done.
   shows none of them. Email and photo are switches in `src/data/profile.json`
   (`cvShowEmail` with `cvEmail`, `cvShowPhoto`); a phone number is not supported on
   purpose. Note that `profile.json` is public on GitHub, so an email typed there is too.
+- **Add the game's store links when they exist.** `src/data/overrides.json`, entry
+  `"air-traffic-control"` → `"stores"`: replace `null` after `"appStore"` (line 29) or
+  `"googlePlay"` (line 30) with the store page URL. The link then shows on the project
+  card and page.
+- **Check the machine-translated texts from 22 Nov 2026** (fr, es, it, nl, tr, ar; German
+  too, as part of the native-speaker read): the skill names "Android development" and
+  "Apple iOS development" (`src/data/profile.json`), the game's summary
+  (`src/data/overrides.json`, `"air-traffic-control"`), and `projects.by`,
+  `projects.platforms`, `projects.storeHidden` in `messages/<code>.json`.
+- **Decide whether Android, iOS, C# and Unity go into the CV PDFs.** They are on the
+  website only (`"cv": false` in `src/data/profile.json`), because the French and
+  Spanish CVs are already a full A4 page: one more skill pushes them onto a second page.
+  To add them, remove `"cv": false` and make room in the CV (for example shorter
+  bullets in French and Spanish).

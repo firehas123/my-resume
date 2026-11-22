@@ -597,11 +597,43 @@
     { "name": "Java", "size": 3, "logos": ["java-plain"] },
     { "name": "Python", "size": 3, "logos": ["python-plain"] },
     { "name": "C/C++", "size": 3, "logos": ["c-original", "cplusplus-plain"] },
+    { "name": "C#", "size": 1, "logos": ["csharp-plain"], "cv": false },
     { "name": "JavaScript", "size": 2, "logos": ["javascript-plain"] },
     { "name": "Spring Boot", "size": 3, "logos": ["spring-original"] },
     { "name": "Hibernate/JPA", "size": 2, "logos": ["hibernate-plain"] },
     { "name": "FastAPI", "size": 2, "logos": ["fastapi-plain"] },
     { "name": "React.js", "size": 2, "logos": ["react-original"] },
+    {
+      "name": {
+        "en": "Android development",
+        "de": "Android-Entwicklung",
+        "fr": "Développement Android",
+        "es": "Desarrollo para Android",
+        "it": "Sviluppo Android",
+        "nl": "Android-ontwikkeling",
+        "tr": "Android geliştirme",
+        "ar": "تطوير تطبيقات Android"
+      },
+      "size": 2,
+      "logos": ["android-plain"],
+      "cv": false
+    },
+    {
+      "name": {
+        "en": "Apple iOS development",
+        "de": "Apple-iOS-Entwicklung",
+        "fr": "Développement Apple iOS",
+        "es": "Desarrollo para Apple iOS",
+        "it": "Sviluppo Apple iOS",
+        "nl": "Apple iOS-ontwikkeling",
+        "tr": "Apple iOS geliştirme",
+        "ar": "تطوير تطبيقات Apple iOS"
+      },
+      "size": 2,
+      "logos": ["apple-original"],
+      "cv": false
+    },
+    { "name": "Unity", "size": 1, "logos": ["unity-plain"], "cv": false },
     { "name": "JavaFX", "size": 1 },
     { "name": "Apache Kafka", "size": 3, "logos": ["apachekafka-original"] },
     { "name": "Docker", "size": 3, "logos": ["docker-plain"] },

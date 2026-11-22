@@ -47,6 +47,13 @@
   color: var(--muted);
 }
 
+/* "by MHC Studio" under the project title. */
+.byline {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
 .meta {
   font-size: 15px;
   font-weight: 700;

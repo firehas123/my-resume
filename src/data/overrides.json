@@ -1,5 +1,5 @@
 {
-  "_help": "Manual changes per GitHub repo name. Keys starting with _ are ignored. Fields (all optional): hide (true keeps the repo off the site; for a fork, also skipped by npm run sync), include (true always shows a fork, even without commits of my own; run npm run sync after changing it), title, summary, group (any tab name, e.g. 'Python' or 'C / C++'; always wins over the automatic group), demo (URL, or null to remove), featured (true/false), order (number, lower comes first). Overrides always win over the synced data.",
+  "_help": "Manual changes per GitHub repo name. Keys starting with _ are ignored. Fields (all optional): hide (true keeps the repo off the site; for a fork, also skipped by npm run sync), include (true always shows a fork, even without commits of my own; run npm run sync after changing it), title, summary, group (any tab name, e.g. 'Python' or 'C / C++'; always wins over the automatic group), demo (URL, or null to remove), featured (true/false), order (number, lower comes first), studio (shows 'by <studio>'), platforms (list: 'android', 'ios'; shown as marks, see scripts/lib/platforms.mjs), stores ({ appStore, googlePlay }: store page URLs, or null for none). Overrides always win over the synced data.",
   "_example-repo-name": {
     "title": "A nicer title",
     "summary": "One line about what it does.",
@@ -8,6 +8,27 @@
     "featured": true,
     "order": 1,
     "hide": false
+  },
+  "air-traffic-control": {
+    "title": "Air Traffic Control",
+    "summary": {
+      "en": "An original top-down 2D game (working title): draw flight paths to land aircraft safely. Built with Unity and C# for iPad, iPhone and Android. In development: running on iPad, Android testing comes later.",
+      "de": "Ein eigenes 2D-Spiel in der Draufsicht (Arbeitstitel): Flugrouten zeichnen und Flugzeuge sicher landen lassen. Gebaut mit Unity und C# für iPad, iPhone und Android. In Entwicklung: läuft auf dem iPad, Tests auf Android folgen später.",
+      "fr": "Un jeu 2D original en vue de dessus (titre provisoire) : tracez les trajectoires pour faire atterrir les avions en toute sécurité. Réalisé avec Unity et C# pour iPad, iPhone et Android. En développement : il tourne sur iPad, les tests sur Android viendront plus tard.",
+      "es": "Un juego 2D original con vista cenital (título provisional): dibuja rutas de vuelo para que los aviones aterricen con seguridad. Hecho con Unity y C# para iPad, iPhone y Android. En desarrollo: ya funciona en iPad; las pruebas en Android llegarán más adelante.",
+      "it": "Un gioco 2D originale con visuale dall’alto (titolo provvisorio): traccia le rotte per far atterrare gli aerei in sicurezza. Realizzato con Unity e C# per iPad, iPhone e Android. In sviluppo: gira su iPad, i test su Android arriveranno più avanti.",
+      "nl": "Een eigen 2D-spel van bovenaf gezien (werktitel): teken vliegroutes om vliegtuigen veilig te laten landen. Gebouwd met Unity en C# voor iPad, iPhone en Android. In ontwikkeling: draait op de iPad, testen op Android volgt later.",
+      "tr": "Özgün, yukarıdan bakışlı bir 2D oyun (çalışma adı): uçuş rotaları çizerek uçakları güvenle indirin. iPad, iPhone ve Android için Unity ve C# ile geliştiriliyor. Geliştirme aşamasında: iPad’de çalışıyor, Android testleri daha sonra yapılacak.",
+      "ar": "لعبة ثنائية الأبعاد أصلية بمنظور علوي (اسم مبدئي): ارسم مسارات الطيران لتهبط الطائرات بأمان. تُطوَّر باستخدام Unity وC# لأجهزة iPad وiPhone وAndroid. قيد التطوير: تعمل على iPad، واختبارها على Android لاحقًا."
+    },
+    "group": "C#",
+    "studio": "MHC Studio",
+    "platforms": ["android", "ios"],
+    "_stores": "Store links for the game. When the game is in a store, replace null with the store page URL (one line each); the link then appears on the project card and page. null = no link shown.",
+    "stores": {
+      "appStore": null,
+      "googlePlay": null
+    }
   },
   "my-resume": {
     "summary": {

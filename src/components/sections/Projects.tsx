@@ -1,6 +1,6 @@
 import { getLocale, getTranslations } from "next-intl/server";
 import { findLink } from "@/lib/profile";
-import { getGroups, getProjects } from "@/lib/projects";
+import { getGroups, getProjects, STORES } from "@/lib/projects";
 import { ProjectTabs, type ProjectCardData } from "./ProjectTabs";
 import styles from "./Projects.module.css";
 import { RevealText } from "@/components/motion/RevealText";
@@ -20,6 +20,9 @@ export async function Projects() {
     codeUrl: p.codeUrl,
     demoUrl: p.demoUrl,
     image: p.image,
+    studio: p.studio,
+    platforms: p.platforms,
+    stores: p.stores.map((s) => ({ id: s.id, name: STORES[s.id], url: s.url })),
   }));
   const github = findLink("github");
 

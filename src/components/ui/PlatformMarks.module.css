@@ -1,0 +1,36 @@
+/* Same look as the language labels on the project cards, with a mark in front. */
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--media-bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.large li {
+  font-size: 14px;
+}
+
+/* The logo as a mask filled with the text colour (as in the skills cloud),
+   so it reads in both themes without changing the logo's shape. */
+.mark {
+  display: block;
+  height: 1.15em;
+  width: calc(1.15em * var(--aspect, 1));
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}

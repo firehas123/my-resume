@@ -8,6 +8,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useState, useSyncExternalStore, ViewTransition } from "react";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ProjectTile } from "@/components/ui/ProjectTile";
+import { PlatformMarks, type PlatformMark } from "@/components/ui/PlatformMarks";
 import { Reveal } from "@/components/ui/Reveal";
 import styles from "./Projects.module.css";
 
@@ -23,6 +24,9 @@ export type ProjectCardData = {
   codeUrl: string;
   demoUrl: string | null;
   image: string | null;
+  studio: string | null; // shown as "by <studio>"
+  platforms: PlatformMark[];
+  stores: { id: string; name: string; url: string }[];
 };
 
 type ProjectTabsProps = {
@@ -173,6 +177,7 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
             {project.title}
           </h3>
         </ViewTransition>
+        {project.studio && <p className={styles.byline}>{t("by", { studio: project.studio })}</p>}
         {project.summary && (
           <p className={styles.summary}>
             <span lang={project.summaryInEnglish ? "en" : undefined}>{project.summary}</span>
@@ -189,6 +194,7 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
             ))}
           </ul>
         )}
+        <PlatformMarks platforms={project.platforms} label={t("platforms")} />
         <div className={styles.links}>
           <Link href={{ pathname: "/projects/[slug]", params: { slug: project.slug } }} className="u-link">
             {t("details")}
@@ -204,6 +210,12 @@ function ProjectCard({ project }: { project: ProjectCardData }) {
               <span className="visually-hidden"> {t("liveDemoHidden", { title: project.title })}</span>
             </a>
           )}
+          {project.stores.map((store) => (
+            <a key={store.id} href={store.url} className="u-link" target="_blank" rel="noopener noreferrer">
+              {store.name}
+              <span className="visually-hidden"> {t("storeHidden", { title: project.title })}</span>
+            </a>
+          ))}
         </div>
       </div>
     </TiltCard>

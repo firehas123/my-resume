@@ -73,6 +73,9 @@
     "codeHidden": "van {title} op GitHub",
     "liveDemo": "Live demo",
     "liveDemoHidden": "van {title}",
+    "storeHidden": "pagina van {title}",
+    "by": "door {studio}",
+    "platforms": "Platforms",
     "groups": {
       "Other": "Overig"
     }

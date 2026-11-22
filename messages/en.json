@@ -73,6 +73,9 @@
     "codeHidden": "of {title} on GitHub",
     "liveDemo": "Live demo",
     "liveDemoHidden": "of {title}",
+    "storeHidden": "page of {title}",
+    "by": "by {studio}",
+    "platforms": "Platforms",
     "groups": {
       "Other": "Other"
     }

@@ -53,6 +53,8 @@ export type Skill = {
   size: 1 | 2 | 3;
   /** Devicon logo names, e.g. ["java-plain"]. Left out when no logo exists. */
   logos?: string[];
+  /** false = shown on the website only, not in the CV PDFs (they must stay one page). */
+  cv?: boolean;
 };
 
 /** The profile in one language: every text is a plain string here. */

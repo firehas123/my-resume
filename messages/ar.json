@@ -73,6 +73,9 @@
     "codeHidden": "الخاصة بـ {title} على GitHub",
     "liveDemo": "عرض مباشر",
     "liveDemoHidden": "لـ {title}",
+    "storeHidden": "صفحة {title}",
+    "by": "من {studio}",
+    "platforms": "المنصات",
     "groups": {
       "Other": "أخرى"
     }

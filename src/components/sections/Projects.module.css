@@ -143,6 +143,14 @@
   overflow-wrap: anywhere;
 }
 
+/* "by MHC Studio" under a project title. */
+.byline {
+  margin-top: -4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
 .summary {
   font-size: 17px;
   color: var(--muted);

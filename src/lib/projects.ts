@@ -21,6 +21,8 @@ import { CATALOG_CODES, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { isLocalized } from "../../scripts/lib/i18n.mjs";
 // The same grouping code the sync script uses, so the tab order is defined once.
 import { createGrouping, formatShare } from "../../scripts/lib/grouping.mjs";
+import { PLATFORMS } from "../../scripts/lib/platforms.mjs";
+import { skillIcon, type SkillIcon } from "@/lib/skillIcons";
 
 type LanguageShare = { name: string; share: number }; // share in % of the repo's code
 
@@ -52,7 +54,18 @@ type Override = {
   demo?: string | null;
   featured?: boolean;
   order?: number;
+  studio?: string; // shown as "by <studio>", e.g. "MHC Studio"
+  platforms?: PlatformId[]; // shown as platform marks
+  stores?: Partial<Record<StoreId, string | null>>; // store page URLs; null = none yet
 };
+
+type PlatformId = keyof typeof PLATFORMS;
+
+/** Store links, in the order they are shown. The names are brands, so they are not translated. */
+export const STORES = { appStore: "App Store", googlePlay: "Google Play" } as const;
+export type StoreId = keyof typeof STORES;
+
+export type Platform = { id: string; label: string; icon: SkillIcon };
 
 export type Project = {
   name: string; // the GitHub repo name
@@ -71,6 +84,9 @@ export type Project = {
   featured: boolean;
   order: number;
   image: string | null; // manual screenshot, else README image; null = generated tile
+  studio: string | null; // "MHC Studio" -> shown as "by MHC Studio"
+  platforms: Platform[]; // e.g. Android and iOS, with their marks
+  stores: { id: StoreId; url: string }[]; // only stores that have a URL
 };
 
 const ROOT = process.cwd();
@@ -146,6 +162,9 @@ function toProject(repo: SyncedRepo, locale: Locale): Project {
     featured: o.featured ?? false,
     order: o.order ?? Number.MAX_SAFE_INTEGER,
     image: findImage(repo.name) ?? repo.readmeImage,
+    studio: o.studio?.trim() || null,
+    platforms: (o.platforms ?? []).map((id) => ({ id, label: PLATFORMS[id].label, icon: skillIcon(PLATFORMS[id].logo) })),
+    stores: (Object.keys(STORES) as StoreId[]).flatMap((id) => (o.stores?.[id] ? [{ id, url: o.stores[id] }] : [])),
   };
 }
 

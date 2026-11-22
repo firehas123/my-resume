@@ -7,10 +7,11 @@ import { ViewTransition } from "react";
 import { ArrowLeftIcon, ExternalIcon } from "@/components/ui/icons";
 import { PillLink } from "@/components/ui/PillLink";
 import { ProjectTile } from "@/components/ui/ProjectTile";
+import { PlatformMarks } from "@/components/ui/PlatformMarks";
 import { languageInfo } from "@/i18n/config";
 import { Link } from "@/i18n/navigation";
 import { profileFor } from "@/lib/profile";
-import { formatLanguage, getProject, getProjects, getWriteupHtml } from "@/lib/projects";
+import { formatLanguage, getProject, getProjects, getWriteupHtml, STORES } from "@/lib/projects";
 import { alternates } from "@/lib/seo";
 import styles from "./page.module.css";
 import { PageTransition } from "@/components/motion/PageTransition";
@@ -76,6 +77,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
                 {project.title}
               </h1>
             </ViewTransition>
+            {project.studio && <p className={styles.byline}>{tProjects("by", { studio: project.studio })}</p>}
             {project.summary && (
               <p className={styles.summary}>
                 <span lang={project.summaryInEnglish ? "en" : undefined}>{project.summary}</span>
@@ -96,6 +98,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
                 ))}
               </ul>
             )}
+            <PlatformMarks platforms={project.platforms} label={tProjects("platforms")} size="large" />
             {project.topics.length > 0 && (
               <ul className={styles.topics} aria-label={t("topics")}>
                 {project.topics.map((topic) => (
@@ -116,6 +119,12 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/proje
                   <ExternalIcon size={18} />
                 </PillLink>
               )}
+              {project.stores.map((store) => (
+                <PillLink key={store.id} href={store.url} variant="outline">
+                  {STORES[store.id]}
+                  <ExternalIcon size={18} />
+                </PillLink>
+              ))}
             </div>
           </header>
 

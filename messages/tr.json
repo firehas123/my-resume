@@ -73,6 +73,9 @@
     "codeHidden": "{title} için GitHub’da",
     "liveDemo": "Canlı demo",
     "liveDemoHidden": "{title} için",
+    "storeHidden": "{title} sayfası",
+    "by": "{studio} tarafından",
+    "platforms": "Platformlar",
     "groups": {
       "Other": "Diğer"
     }
