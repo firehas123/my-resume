@@ -38,19 +38,19 @@
     "languages": [
       {
         "name": "TypeScript",
-        "share": 53.8
+        "share": 53.9
       },
       {
         "name": "JavaScript",
-        "share": 23.8
+        "share": 23.7
       },
       {
         "name": "CSS",
-        "share": 14.7
+        "share": 14.8
       },
       {
         "name": "HTML",
-        "share": 7.7
+        "share": 7.6
       }
     ],
     "readmeSummary": "My personal site, built with Next.js (App Router, TypeScript), plain CSS Modules with CSS variables, Motion for scroll and hover animation, and a canvas dot field in the hero.",
