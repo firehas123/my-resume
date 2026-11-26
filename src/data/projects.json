@@ -6,19 +6,19 @@
     "languages": [
       {
         "name": "C#",
-        "share": 96.8
+        "share": 98
       },
       {
         "name": "HTML",
-        "share": 2.7
+        "share": 1.7
       },
       {
         "name": "ShaderLab",
-        "share": 0.3
+        "share": 0.2
       },
       {
         "name": "Objective-C++",
-        "share": 0.2
+        "share": 0.1
       }
     ],
     "readmeSummary": "Developed by MHC Studio. © 2026 MHC Studio. All rights reserved.",
